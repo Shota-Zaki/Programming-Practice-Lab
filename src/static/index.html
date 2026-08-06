@@ -3,339 +3,237 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="作りたい成果物から必要な技術を学ぶ、実践型プログラミング学習サイト"
-    />
+    <meta name="description" content="作りたい成果物から必要な技術を学ぶ、実践型プログラミング学習サイト" />
     <title>Programming Practice Lab</title>
     <link rel="stylesheet" href="./styles.css" />
     <script type="module" src="./app.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">本文へ移動</a>
-
-    <header class="site-header">
-      <a class="brand" href="#home" data-view-link="home" aria-label="トップへ移動">
-        <span class="brand-mark" aria-hidden="true">P</span>
-        <span>
-          <strong>Programming Practice Lab</strong>
-          <small>Project-based learning</small>
-        </span>
-      </a>
-
-      <button
-        class="menu-button"
-        type="button"
-        aria-expanded="false"
-        aria-controls="primary-navigation"
-      >
-        メニュー
-      </button>
-
-      <nav id="primary-navigation" class="primary-navigation" aria-label="主要メニュー">
-        <button type="button" data-view="home" aria-current="page">プロジェクト</button>
-        <button type="button" data-view="roadmap">学習工程</button>
-        <button type="button" data-view="exercise">演習</button>
-      </nav>
-
-      <div class="header-progress" aria-label="現在の進捗">
-        <span>現在のプロジェクト</span>
-        <strong>18%</strong>
-      </div>
-    </header>
-
-    <main id="main-content">
-      <section class="view is-active" data-view-panel="home" aria-labelledby="home-title">
-        <div class="hero section-shell">
-          <div class="hero-copy">
-            <p class="eyebrow">PROJECT-BASED LEARNING</p>
-            <h1 id="home-title">作りたいものから、必要な技術を学ぶ。</h1>
-            <p class="hero-lead">
-              文法だけを順番に暗記するのではなく、完成させたいWebアプリを選び、設計、実装、テスト、公開までを一つの流れで進めます。
-            </p>
-            <div class="hero-actions">
-              <button class="primary-action" type="button" data-view="roadmap">
-                続きから始める
-              </button>
-              <a class="secondary-action" href="#projects">プロジェクトを選ぶ</a>
-            </div>
-            <ul class="hero-facts" aria-label="学習方式">
-              <li><strong>Browser</strong><span>短い演習</span></li>
-              <li><strong>Local</strong><span>実務構成</span></li>
-              <li><strong>Cloud</strong><span>公開と運用</span></li>
-            </ul>
-          </div>
-
-          <article class="active-project-card" aria-labelledby="active-project-title">
-            <div class="project-window" aria-hidden="true">
-              <div class="window-bar"><span></span><span></span><span></span></div>
-              <div class="window-body">
-                <aside>
-                  <i></i><i></i><i></i><i></i>
-                </aside>
-                <div>
-                  <b></b>
-                  <div class="mock-task"><span></span><em></em></div>
-                  <div class="mock-task"><span></span><em></em></div>
-                  <div class="mock-task"><span></span><em></em></div>
-                </div>
-              </div>
-            </div>
-            <p class="card-label">進行中</p>
-            <h2 id="active-project-title">タスク管理画面を作る</h2>
-            <p>状態を持つ画面を設計し、追加・完了・削除を実装します。</p>
-            <div class="technology-list" aria-label="使用技術">
-              <span>HTML</span><span>CSS</span><span>TypeScript</span><span>React</span>
-            </div>
-            <div class="progress-block">
-              <div><span>全体進捗</span><strong>18%</strong></div>
-              <div class="progress-track" aria-hidden="true"><span style="width: 18%"></span></div>
-            </div>
-          </article>
-        </div>
-
-        <section id="projects" class="project-section section-shell" aria-labelledby="project-title">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">CHOOSE A PROJECT</p>
-              <h2 id="project-title">完成させたいものを選ぶ</h2>
-            </div>
-            <p>必要な技術はプロジェクトの中で段階的に学びます。</p>
-          </div>
-
-          <div class="project-grid">
-            <article class="project-card is-current">
-              <div class="project-card-top">
-                <span class="project-number">01</span>
-                <span class="project-status">進行中</span>
-              </div>
-              <h3>タスク管理画面</h3>
-              <p>コンポーネント、状態管理、フォーム、一覧表示を実装します。</p>
-              <dl>
-                <div><dt>難易度</dt><dd>入門〜初級</dd></div>
-                <div><dt>方式</dt><dd>Browser / Local</dd></div>
-                <div><dt>目安</dt><dd>8〜12時間</dd></div>
-              </dl>
-              <div class="technology-list"><span>TypeScript</span><span>React</span><span>Test</span></div>
-              <button type="button" data-view="roadmap">工程を確認する</button>
-            </article>
-
-            <article class="project-card">
-              <div class="project-card-top">
-                <span class="project-number">02</span>
-                <span class="project-status is-next">次の候補</span>
-              </div>
-              <h3>商品管理API</h3>
-              <p>登録、更新、検索、削除を備えた業務向けAPIを構築します。</p>
-              <dl>
-                <div><dt>難易度</dt><dd>初級〜中級</dd></div>
-                <div><dt>方式</dt><dd>Local</dd></div>
-                <div><dt>目安</dt><dd>16〜24時間</dd></div>
-              </dl>
-              <div class="technology-list"><span>Java</span><span>Spring</span><span>SQL</span></div>
-              <button type="button" disabled>準備中</button>
-            </article>
-
-            <article class="project-card">
-              <div class="project-card-top">
-                <span class="project-number">03</span>
-                <span class="project-status is-next">発展</span>
-              </div>
-              <h3>クラウド公開</h3>
-              <p>アプリをコンテナ化し、権限、監視、削除まで含めて公開します。</p>
-              <dl>
-                <div><dt>難易度</dt><dd>中級</dd></div>
-                <div><dt>方式</dt><dd>Local / Cloud</dd></div>
-                <div><dt>目安</dt><dd>12〜20時間</dd></div>
-              </dl>
-              <div class="technology-list"><span>Docker</span><span>AWS</span><span>CI/CD</span></div>
-              <button type="button" disabled>準備中</button>
-            </article>
-          </div>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="サイトナビゲーション">
+        <a class="brand" href="#home" data-view-link="home" aria-label="ホームへ移動">
+          <span class="brand-mark" aria-hidden="true">P</span>
+          <span class="brand-copy"><strong>Programming Practice Lab</strong><small>Build. Test. Ship.</small></span>
+        </a>
+        <nav class="sidebar-navigation" aria-label="主要メニュー">
+          <p class="nav-label">学習</p>
+          <button type="button" data-view="home" aria-current="page"><span class="nav-icon">⌂</span>ホーム</button>
+          <button type="button" data-view="projects"><span class="nav-icon">◇</span>プロジェクト</button>
+          <button type="button" data-view="roadmap"><span class="nav-icon">↗</span>学習工程</button>
+          <button type="button" data-view="review"><span class="nav-icon">↻</span>復習<span class="nav-count">4</span></button>
+          <p class="nav-label">記録と準備</p>
+          <button type="button" data-view="history"><span class="nav-icon">▥</span>学習履歴</button>
+          <button type="button" data-view="environment"><span class="nav-icon">&gt;_</span>開発環境</button>
+        </nav>
+        <section class="sidebar-project" aria-labelledby="sidebar-project-title">
+          <div class="sidebar-project-heading"><span>進行中</span><strong>18%</strong></div>
+          <h2 id="sidebar-project-title">タスク管理画面</h2>
+          <p>Phase 02 / 状態管理</p>
+          <div class="progress-track"><span style="width:18%"></span></div>
+          <button type="button" data-view="exercise">演習を再開</button>
         </section>
+        <div class="sidebar-footer"><span class="avatar">Z</span><div><strong>学習者</strong><span>この端末に保存中</span></div></div>
+      </aside>
 
-        <section class="learning-cycle section-shell" aria-labelledby="cycle-title">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">LEARNING CYCLE</p>
-              <h2 id="cycle-title">完成までの学習循環</h2>
-            </div>
+      <div class="app-main">
+        <header class="topbar">
+          <button class="menu-button" type="button" aria-expanded="false" aria-controls="sidebar"><span>☰</span>メニュー</button>
+          <div class="topbar-context"><span id="view-kicker">PROJECT LEARNING</span><strong id="view-title">ホーム</strong></div>
+          <div class="topbar-actions">
+            <button class="quiet-button" type="button" data-view="environment">環境を確認</button>
+            <button class="primary-compact" type="button" data-view="exercise">続きから</button>
           </div>
-          <ol>
-            <li><span>1</span><div><h3>理解</h3><p>必要な知識と完成条件を確認する。</p></div></li>
-            <li><span>2</span><div><h3>入力</h3><p>短いコードを実際に打って挙動を見る。</p></div></li>
-            <li><span>3</span><div><h3>実装</h3><p>複数ファイルのプロジェクトへ組み込む。</p></div></li>
-            <li><span>4</span><div><h3>検証</h3><p>テストとレビューで不足を修正する。</p></div></li>
-            <li><span>5</span><div><h3>公開</h3><p>環境へ配置し、運用と削除まで確認する。</p></div></li>
-          </ol>
-        </section>
-      </section>
-
-      <section class="view" data-view-panel="roadmap" aria-labelledby="roadmap-title" hidden>
-        <div class="roadmap-hero section-shell">
-          <div>
-            <p class="eyebrow">PROJECT 01</p>
-            <h1 id="roadmap-title">タスク管理画面を作る</h1>
-            <p>利用者がタスクを追加し、状態を変更し、不要な項目を削除できる画面を完成させます。</p>
-          </div>
-          <div class="roadmap-summary">
-            <div><span>完了工程</span><strong>1 / 5</strong></div>
-            <div><span>推定残り</span><strong>7時間</strong></div>
-            <div><span>保存状態</span><strong>この端末</strong></div>
-          </div>
-        </div>
-
-        <div class="roadmap-layout section-shell">
-          <aside class="completion-card">
-            <p class="card-label">完成条件</p>
-            <h2>利用者が迷わず操作できるタスク画面</h2>
-            <ul>
-              <li>タスクを入力して追加できる</li>
-              <li>未完了と完了を切り替えられる</li>
-              <li>削除前に意図を確認できる</li>
-              <li>再読込後も状態を復元できる</li>
-              <li>主要操作をキーボードで実行できる</li>
-            </ul>
-            <div class="technology-list"><span>HTML</span><span>CSS</span><span>TypeScript</span><span>React</span></div>
-          </aside>
-
-          <ol class="phase-list">
-            <li class="phase-card is-complete">
-              <div class="phase-index">01</div>
-              <div class="phase-content">
-                <div class="phase-title"><span>準備</span><b>完了</b></div>
-                <h2>画面構造と開発環境</h2>
-                <p>完成条件、ファイル構成、コンポーネントの役割を整理します。</p>
-                <ul><li>画面の責務</li><li>開発環境の確認</li><li>Gitの初期操作</li></ul>
-              </div>
-            </li>
-
-            <li class="phase-card is-current">
-              <div class="phase-index">02</div>
-              <div class="phase-content">
-                <div class="phase-title"><span>基礎実装</span><b>進行中</b></div>
-                <h2>入力値を状態として保持する</h2>
-                <p>フォーム入力と状態更新を短いコード演習から実装します。</p>
-                <ul><li>イベント</li><li>状態管理</li><li>型定義</li></ul>
-                <button type="button" data-view="exercise">演習を開く</button>
-              </div>
-            </li>
-
-            <li class="phase-card">
-              <div class="phase-index">03</div>
-              <div class="phase-content">
-                <div class="phase-title"><span>機能実装</span><b>未着手</b></div>
-                <h2>追加・完了・削除を組み立てる</h2>
-                <p>複数の状態変更をコンポーネントへ分割して実装します。</p>
-                <ul><li>配列操作</li><li>Props</li><li>コンポーネント分割</li></ul>
-              </div>
-            </li>
-
-            <li class="phase-card">
-              <div class="phase-index">04</div>
-              <div class="phase-content">
-                <div class="phase-title"><span>品質確認</span><b>未着手</b></div>
-                <h2>テストと利用しやすさを確認する</h2>
-                <p>失敗しやすい操作をテストし、表示と操作の問題を修正します。</p>
-                <ul><li>単体テスト</li><li>エラー表示</li><li>アクセシビリティ</li></ul>
-              </div>
-            </li>
-
-            <li class="phase-card">
-              <div class="phase-index">05</div>
-              <div class="phase-content">
-                <div class="phase-title"><span>公開</span><b>未着手</b></div>
-                <h2>ビルドして公開状態を確認する</h2>
-                <p>公開用ファイルを生成し、URLから成果物を確認します。</p>
-                <ul><li>ビルド</li><li>CI</li><li>公開確認</li></ul>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section class="view exercise-view" data-view-panel="exercise" aria-labelledby="exercise-title" hidden>
-        <header class="exercise-header">
-          <button type="button" data-view="roadmap">← 工程へ戻る</button>
-          <div>
-            <p>PROJECT 01 / PHASE 02 / EXERCISE 03</p>
-            <h1 id="exercise-title">入力値を状態として保持する</h1>
-          </div>
-          <span>3 / 8</span>
         </header>
 
-        <div class="exercise-layout">
-          <section class="instruction-panel" aria-labelledby="instruction-title">
-            <div class="panel-heading">
-              <span>課題</span>
-              <b>Browser</b>
+        <main id="main-content" tabindex="-1">
+          <section class="view is-active" data-view-panel="home" aria-labelledby="home-title">
+            <div class="page-shell">
+              <section class="home-hero">
+                <div class="home-hero-copy">
+                  <p class="eyebrow">CURRENT BUILD</p>
+                  <h1 id="home-title">コードを覚えるのではなく、<br />完成させながら身につける。</h1>
+                  <p class="lead">画面設計、実装、テスト、公開までを一つのプロジェクトで経験します。必要な文法とツールは、使う直前に短く学びます。</p>
+                  <div class="current-step">
+                    <div><span class="step-index">02</span><div><small>現在の工程</small><strong>入力値を状態として保持する</strong></div></div>
+                    <button type="button" data-view="exercise">演習を再開する</button>
+                  </div>
+                  <dl class="hero-stats"><div><dt>連続学習</dt><dd>7日</dd></div><div><dt>今週の実装</dt><dd>3時間40分</dd></div><div><dt>コード実行</dt><dd>28回</dd></div></dl>
+                </div>
+                <div class="product-preview" aria-label="作成中のタスク管理画面プレビュー">
+                  <div class="preview-toolbar"><span></span><span></span><span></span><b>task-board.local</b></div>
+                  <div class="preview-app">
+                    <header><div><small>MY WORK</small><strong>今日のタスク</strong></div><span>3 / 7 完了</span></header>
+                    <div class="preview-input"><span>新しいタスクを入力</span><b>追加</b></div>
+                    <div class="preview-filter"><b>すべて</b><span>未完了</span><span>完了</span></div>
+                    <ul><li><i></i><span>フォームの状態を実装する</span><em>•••</em></li><li class="done"><i>✓</i><span>画面構造を設計する</span><em>•••</em></li><li><i></i><span>コンポーネントを分割する</span><em>•••</em></li><li><i></i><span>操作テストを追加する</span><em>•••</em></li></ul>
+                  </div>
+                </div>
+              </section>
+
+              <section class="section-block" aria-labelledby="next-builds-title">
+                <div class="section-heading"><div><p class="eyebrow">BUILD NEXT</p><h2 id="next-builds-title">次に作れる成果物</h2></div><button class="text-button" type="button" data-view="projects">すべて見る →</button></div>
+                <div class="build-list">
+                  <article class="build-row"><div class="build-number">01</div><div class="build-visual visual-task"><span></span><span></span><span></span></div><div class="build-copy"><div class="build-meta"><span>入門〜初級</span><span>Browser / Local</span></div><h3>タスク管理画面</h3><p>状態管理、フォーム、一覧更新、保存を一つの画面で実装します。</p><div class="technology-list"><span>TypeScript</span><span>React</span><span>Test</span></div></div><button type="button" data-view="project-detail">詳細を見る</button></article>
+                  <article class="build-row"><div class="build-number">02</div><div class="build-visual visual-api"><b>GET</b><span>/products</span><em>200</em></div><div class="build-copy"><div class="build-meta"><span>初級〜中級</span><span>Local</span></div><h3>商品管理API</h3><p>登録、検索、更新、削除を備えた業務向けAPIを構築します。</p><div class="technology-list"><span>Java</span><span>Spring</span><span>SQL</span></div></div><button type="button" data-view="projects">一覧で確認</button></article>
+                  <article class="build-row"><div class="build-number">03</div><div class="build-visual visual-cloud"><i></i><i></i><i></i></div><div class="build-copy"><div class="build-meta"><span>中級</span><span>Local / Cloud</span></div><h3>クラウド公開パイプライン</h3><p>コンテナ、CI、権限、監視、削除まで含めて安全に公開します。</p><div class="technology-list"><span>Docker</span><span>Cloud</span><span>CI/CD</span></div></div><button type="button" data-view="projects">一覧で確認</button></article>
+                </div>
+              </section>
+
+              <section class="dashboard-grid">
+                <article class="momentum-panel"><div class="section-heading compact"><div><p class="eyebrow">THIS WEEK</p><h2>学習の流れ</h2></div><strong>目標 5時間</strong></div><div class="bar-chart" aria-label="今週の学習時間"><div><span style="height:32%"></span><small>月</small></div><div><span style="height:62%"></span><small>火</small></div><div><span style="height:44%"></span><small>水</small></div><div><span style="height:78%"></span><small>木</small></div><div class="today"><span style="height:55%"></span><small>金</small></div><div><span style="height:0%"></span><small>土</small></div><div><span style="height:0%"></span><small>日</small></div></div><p>現在 3時間40分。あと1時間20分で今週の目標です。</p></article>
+                <article class="skill-panel"><div class="section-heading compact"><div><p class="eyebrow">SKILLS IN USE</p><h2>このプロジェクトで伸ばす力</h2></div></div><ul class="skill-progress-list"><li><div><span>TypeScript</span><strong>58%</strong></div><div class="progress-track"><span style="width:58%"></span></div></li><li><div><span>React</span><strong>34%</strong></div><div class="progress-track"><span style="width:34%"></span></div></li><li><div><span>テスト</span><strong>18%</strong></div><div class="progress-track"><span style="width:18%"></span></div></li></ul></article>
+              </section>
             </div>
-            <h2 id="instruction-title">入力欄の値を更新する</h2>
-            <p>
-              入力イベントから値を受け取り、`setTitle`を使って状態を更新してください。
-            </p>
-            <div class="requirement-box">
-              <h3>確認条件</h3>
-              <ul>
-                <li>`useState`を使用している</li>
-                <li>文字列型の状態を作成している</li>
-                <li>入力時に`setTitle`を呼び出している</li>
-              </ul>
-            </div>
-            <details>
-              <summary>ヒントを表示</summary>
-              <p>`onChange`のイベントから`event.target.value`を取得します。</p>
-            </details>
           </section>
 
-          <section class="editor-panel" aria-labelledby="editor-title">
-            <div class="panel-heading">
-              <span id="editor-title">TaskInput.tsx</span>
-              <b>TypeScript / React</b>
+          <section class="view" data-view-panel="projects" aria-labelledby="projects-title" hidden>
+            <div class="page-shell">
+              <header class="page-heading large"><div><p class="eyebrow">PROJECT CATALOG</p><h1 id="projects-title">作りたい成果物を選ぶ</h1><p>技術名からではなく、完成させたいものと実務で経験したい工程から選びます。</p></div><div class="catalog-summary"><strong>6</strong><span>公開・計画中</span></div></header>
+              <div class="catalog-toolbar"><label class="search-field">検索<input id="project-search" placeholder="成果物・技術で検索" /></label><div class="filter-group" aria-label="分類"><button type="button" data-project-filter="all" aria-pressed="true">すべて</button><button type="button" data-project-filter="frontend" aria-pressed="false">画面</button><button type="button" data-project-filter="backend" aria-pressed="false">API</button><button type="button" data-project-filter="cloud" aria-pressed="false">クラウド</button></div></div>
+              <div class="catalog-list">
+                <article class="catalog-item featured" data-project-tags="frontend typescript react test task"><div class="catalog-index"><span>01</span><small>進行中</small></div><div class="catalog-illustration illustration-board"><i></i><i></i><i></i><i></i></div><div class="catalog-copy"><div class="build-meta"><span>入門〜初級</span><span>8〜12時間</span><span>Browser / Local</span></div><h2>タスク管理画面</h2><p>状態、フォーム、一覧更新、保存、操作テストを一つの成果物で学びます。</p><div class="technology-list"><span>HTML</span><span>CSS</span><span>TypeScript</span><span>React</span></div></div><div class="catalog-actions"><strong>18%</strong><button type="button" data-view="project-detail">詳細を見る</button></div></article>
+                <article class="catalog-item" data-project-tags="frontend dashboard typescript react chart"><div class="catalog-index"><span>02</span><small>利用可能</small></div><div class="catalog-illustration illustration-dashboard"><b></b><i></i><i></i><i></i></div><div class="catalog-copy"><div class="build-meta"><span>初級</span><span>10〜16時間</span><span>Browser / Local</span></div><h2>売上ダッシュボード</h2><p>表、集計、グラフ、期間切替、空状態を含む管理画面を作ります。</p><div class="technology-list"><span>TypeScript</span><span>React</span><span>Chart</span></div></div><div class="catalog-actions"><span>未開始</span><button type="button" data-view="project-detail">概要を見る</button></div></article>
+                <article class="catalog-item" data-project-tags="backend java spring sql api"><div class="catalog-index"><span>03</span><small>計画中</small></div><div class="catalog-illustration illustration-api"><span>POST /items</span><span>GET /items</span><span>DELETE /items/:id</span></div><div class="catalog-copy"><div class="build-meta"><span>初級〜中級</span><span>16〜24時間</span><span>Local</span></div><h2>商品管理API</h2><p>登録、更新、検索、削除、入力検証、例外処理を備えたAPIを構築します。</p><div class="technology-list"><span>Java</span><span>Spring</span><span>PostgreSQL</span></div></div><div class="catalog-actions"><span>準備中</span><button type="button" disabled>未公開</button></div></article>
+                <article class="catalog-item" data-project-tags="frontend backend auth fullstack"><div class="catalog-index"><span>04</span><small>計画中</small></div><div class="catalog-illustration illustration-auth"><i></i><b>Sign in</b></div><div class="catalog-copy"><div class="build-meta"><span>中級</span><span>20〜30時間</span><span>Local</span></div><h2>認証付き投稿アプリ</h2><p>認証、権限、投稿、編集、削除、画像添付を組み合わせます。</p><div class="technology-list"><span>React</span><span>API</span><span>Auth</span></div></div><div class="catalog-actions"><span>準備中</span><button type="button" disabled>未公開</button></div></article>
+                <article class="catalog-item" data-project-tags="cloud docker ci cd deploy"><div class="catalog-index"><span>05</span><small>計画中</small></div><div class="catalog-illustration illustration-cloud"><i></i><i></i><i></i></div><div class="catalog-copy"><div class="build-meta"><span>中級</span><span>12〜20時間</span><span>Local / Cloud</span></div><h2>公開パイプライン</h2><p>コンテナ化、テスト、自動デプロイ、監視、削除までを経験します。</p><div class="technology-list"><span>Docker</span><span>CI/CD</span><span>Cloud</span></div></div><div class="catalog-actions"><span>準備中</span><button type="button" disabled>未公開</button></div></article>
+                <article class="catalog-item" data-project-tags="cloud infrastructure code terraform"><div class="catalog-index"><span>06</span><small>発展</small></div><div class="catalog-illustration illustration-infra"><span></span><span></span><span></span><span></span></div><div class="catalog-copy"><div class="build-meta"><span>中級〜上級</span><span>18〜30時間</span><span>Cloud</span></div><h2>コードで作るクラウド構成</h2><p>ネットワーク、権限、実行環境、データベースをコードで構築・削除します。</p><div class="technology-list"><span>IaC</span><span>Network</span><span>Cloud</span></div></div><div class="catalog-actions"><span>準備中</span><button type="button" disabled>未公開</button></div></article>
+              </div>
+              <p id="catalog-empty" class="empty-state" hidden>条件に一致するプロジェクトはありません。</p>
             </div>
-            <label class="visually-hidden" for="code-editor">コード入力</label>
-            <textarea id="code-editor" spellcheck="false">import { useState } from "react";
+          </section>
+
+          <section class="view" data-view-panel="project-detail" aria-labelledby="project-detail-title" hidden>
+            <div class="page-shell">
+              <nav class="breadcrumb"><button type="button" data-view="projects">プロジェクト</button><span>/</span><span>タスク管理画面</span></nav>
+              <section class="project-detail-hero">
+                <div class="project-detail-copy"><div class="detail-status"><b>進行中</b><span>PROJECT 01</span></div><h1 id="project-detail-title">タスク管理画面を<br />完成させる</h1><p>入力、追加、完了、削除、保存を備えた画面を、設計からテストまで段階的に実装します。</p><div class="detail-actions"><button class="primary-action" type="button" data-view="roadmap">工程を再開</button><button class="secondary-action" type="button" data-view="environment">環境を確認</button></div><dl class="project-facts"><div><dt>難易度</dt><dd>入門〜初級</dd></div><div><dt>目安</dt><dd>8〜12時間</dd></div><div><dt>方式</dt><dd>Browser / Local</dd></div><div><dt>進捗</dt><dd>18%</dd></div></dl></div>
+                <div class="detail-preview"><div class="preview-toolbar"><span></span><span></span><span></span><b>完成イメージ</b></div><div class="detail-preview-body"><aside class="detail-preview-sidebar"><i></i><i></i><i></i></aside><div class="detail-preview-content"><header><strong>Task Board</strong><span>3 tasks</span></header><div class="preview-input"><span>タスクを入力</span><b>Add</b></div><div class="detail-preview-columns"><section><small>TODO</small><p></p><p></p></section><section><small>DONE</small><p></p></section></div></div></div></div>
+              </section>
+              <div class="detail-content-grid">
+                <div class="detail-main">
+                  <section class="content-section"><p class="eyebrow">OUTCOMES</p><h2>完成時にできること</h2><ul class="outcome-list"><li><span>01</span><div><strong>状態を型付きで管理する</strong><p>入力値とタスク一覧を安全に更新します。</p></div></li><li><span>02</span><div><strong>コンポーネントを分割する</strong><p>責務とデータの流れを整理します。</p></div></li><li><span>03</span><div><strong>操作をテストする</strong><p>追加、完了、削除の失敗を検出します。</p></div></li><li><span>04</span><div><strong>公開状態を確認する</strong><p>ビルドと公開後の動作まで確認します。</p></div></li></ul></section>
+                  <section class="content-section"><p class="eyebrow">PHASES</p><h2>5つの工程</h2><ol class="detail-phase-list"><li class="done"><span>✓</span><div><strong>準備</strong><p>完成条件と環境を確認</p></div><b>完了</b></li><li class="current"><span>02</span><div><strong>基礎実装</strong><p>フォームと状態管理</p></div><b>進行中</b></li><li><span>03</span><div><strong>機能実装</strong><p>追加・完了・削除</p></div><b>未着手</b></li><li><span>04</span><div><strong>品質確認</strong><p>テストと操作性</p></div><b>未着手</b></li><li><span>05</span><div><strong>公開</strong><p>ビルドと公開確認</p></div><b>未着手</b></li></ol></section>
+                </div>
+                <aside class="detail-aside"><section><p class="eyebrow">TECH STACK</p><h2>使用する技術</h2><ul class="stack-list"><li><span>TS</span><div><strong>TypeScript</strong><small>型とイベント</small></div></li><li><span>RE</span><div><strong>React</strong><small>状態と部品</small></div></li><li><span>GT</span><div><strong>Git</strong><small>変更管理</small></div></li><li><span>TE</span><div><strong>Test</strong><small>操作検証</small></div></li></ul></section><section><p class="eyebrow">PREREQUISITES</p><h2>開始前の確認</h2><ul class="check-list"><li class="checked">ブラウザ演習を利用できる</li><li class="checked">HTMLの基本構造が分かる</li><li>Node.jsを確認する</li><li>Gitを実行できる</li></ul><button type="button" data-view="environment">環境画面を開く</button></section></aside>
+              </div>
+            </div>
+          </section>
+
+          <section class="view" data-view-panel="roadmap" aria-labelledby="roadmap-title" hidden>
+            <div class="page-shell">
+              <header class="page-heading"><div><p class="eyebrow">PROJECT 01 / ROADMAP</p><h1 id="roadmap-title">タスク管理画面</h1><p>現在位置と、次に必要な教材・演習・節目課題を確認します。</p></div><button class="secondary-action" type="button" data-view="project-detail">プロジェクト詳細</button></header>
+              <section class="roadmap-overview"><div class="roadmap-progress"><span>全体進捗</span><strong>18%</strong><div class="progress-track"><span style="width:18%"></span></div></div><dl><div><dt>完了</dt><dd>4 / 22</dd></div><div><dt>現在</dt><dd>Phase 02</dd></div><div><dt>残り目安</dt><dd>7時間</dd></div><div><dt>保存</dt><dd>この端末</dd></div></dl></section>
+              <div class="roadmap-grid">
+                <nav class="phase-navigation" aria-label="工程"><button class="complete" type="button"><span>✓</span><div><strong>準備</strong><small>3 / 3</small></div></button><button class="active" type="button"><span>02</span><div><strong>基礎実装</strong><small>1 / 5</small></div></button><button type="button"><span>03</span><div><strong>機能実装</strong><small>0 / 6</small></div></button><button type="button"><span>04</span><div><strong>品質確認</strong><small>0 / 5</small></div></button><button type="button"><span>05</span><div><strong>公開</strong><small>0 / 3</small></div></button></nav>
+                <section class="lesson-sequence"><header><div><p class="eyebrow">PHASE 02</p><h2>フォームと状態管理</h2><p>入力値を読み取り、型付きの状態として保持します。</p></div><span>約1時間40分</span></header><ol><li class="complete"><span class="lesson-status">✓</span><div><small>LESSON · 12分</small><strong>イベントと入力値を読む</strong><p>入力欄から値が渡る仕組みを確認</p></div><button type="button" data-view="lesson">見直す</button></li><li class="current"><span class="lesson-status">02</span><div><small>EXERCISE · 15分</small><strong>入力値を状態として保持する</strong><p>型指定と更新関数を実装</p></div><button type="button" data-view="exercise">開く</button></li><li><span class="lesson-status">03</span><div><small>LESSON · 10分</small><strong>フォーム送信を扱う</strong><p>既定動作と送信処理</p></div></li><li><span class="lesson-status">04</span><div><small>EXERCISE · 20分</small><strong>タスクを一覧へ追加する</strong><p>配列状態を安全に更新</p></div></li><li><span class="lesson-status">05</span><div><small>MILESTONE · 35分</small><strong>入力フォームを完成させる</strong><p>ローカルプロジェクトへ統合</p></div></li></ol></section>
+                <aside class="roadmap-side"><section><p class="eyebrow">PHASE GOAL</p><h2>工程の完成条件</h2><ul class="check-list small"><li class="checked">イベントから入力値を取得</li><li>型付きの状態へ保存</li><li>送信時に一覧へ追加</li></ul></section><section><p class="eyebrow">NEED HELP?</p><h2>詰まったとき</h2><ol class="help-steps"><li>教材へ戻る</li><li>段階的ヒントを見る</li><li>テスト結果を確認する</li></ol><button type="button" data-view="lesson">教材を開く</button></section></aside>
+              </div>
+            </div>
+          </section>
+
+          <section class="view" data-view-panel="lesson" aria-labelledby="lesson-title" hidden>
+            <div class="lesson-shell">
+              <header class="lesson-header"><button type="button" data-view="roadmap">← 学習工程へ</button><div><p>PROJECT 01 / PHASE 02</p><span>教材 1 / 5</span></div></header>
+              <div class="lesson-layout">
+                <aside class="lesson-outline"><p class="eyebrow">CONTENTS</p><nav><a class="active" href="#lesson-purpose">目的</a><a href="#lesson-flow">処理の流れ</a><a href="#lesson-code">コード例</a><a href="#lesson-check">理解確認</a></nav><div class="lesson-note"><strong>この教材の役割</strong><p>次の演習で必要な概念だけを扱います。</p></div></aside>
+                <article class="lesson-article">
+                  <section id="lesson-purpose"><p class="eyebrow">LESSON 01</p><h1 id="lesson-title">入力イベントから値を受け取る</h1><p class="article-lead">入力欄で起きた変更を受け取り、現在の文字列を状態へ渡す流れを理解します。</p><div class="objective-strip"><span>学習後にできること</span><strong>イベントから入力値を取得し、更新関数へ渡せる</strong></div></section>
+                  <section id="lesson-flow"><p class="eyebrow">CONCEPT</p><h2>値が更新されるまでの流れ</h2><p>入力欄の変更イベントを受け取り、その時点の値を状態更新関数へ渡します。</p><div class="concept-flow"><div><span>01</span><strong>入力する</strong><small>利用者が文字を入力</small></div><i>→</i><div><span>02</span><strong>イベント発生</strong><small>変更を受け取る</small></div><i>→</i><div><span>03</span><strong>状態を更新</strong><small>画面が再描画</small></div></div><div class="callout"><strong>実務上の注意</strong><p>入力値を無条件に信頼せず、必要に応じて長さや形式を検証します。</p></div></section>
+                  <section id="lesson-code"><p class="eyebrow">CODE</p><h2>型を付けた変更処理</h2><div class="code-sample"><header><span>TaskInput.tsx</span><button type="button" data-copy-code>コピー</button></header><pre><code>const [title, setTitle] = useState&lt;string&gt;(&quot;&quot;);
+
+function handleChange(
+  event: ChangeEvent&lt;HTMLInputElement&gt;,
+) {
+  setTitle(event.target.value);
+}</code></pre></div><dl class="code-explanation"><div><dt>title</dt><dd>現在の入力値</dd></div><div><dt>setTitle</dt><dd>状態更新関数</dd></div><div><dt>event.target.value</dt><dd>入力欄の現在値</dd></div></dl></section>
+                  <section id="lesson-check"><p class="eyebrow">CHECK</p><h2>理解を確認する</h2><fieldset class="knowledge-check"><legend>入力欄の現在値を取得する式はどれですか。</legend><label><input type="radio" name="knowledge" value="wrong1" /> event.value</label><label><input type="radio" name="knowledge" value="correct" /> event.target.value</label><label><input type="radio" name="knowledge" value="wrong2" /> event.current</label><button type="button" id="check-knowledge">回答を確認</button><p id="knowledge-result" role="status"></p></fieldset></section>
+                  <footer class="lesson-footer"><div><span>次の学習</span><strong>入力値を状態として保持する</strong></div><button type="button" data-view="exercise">演習へ進む →</button></footer>
+                </article>
+                <aside class="lesson-progress"><div class="progress-ring" style="--progress:38"><strong>38%</strong><span>教材進捗</span></div><p>推定残り<br />8分</p></aside>
+              </div>
+            </div>
+          </section>
+
+          <section class="view workspace-view" data-view-panel="exercise" aria-labelledby="exercise-title" hidden>
+            <header class="workspace-header"><button type="button" data-view="roadmap">← 工程へ戻る</button><div><p>PROJECT 01 / PHASE 02 / EXERCISE 03</p><h1 id="exercise-title">入力値を状態として保持する</h1></div><div class="workspace-progress"><span>3 / 8</span><div class="progress-track"><span style="width:38%"></span></div></div></header>
+            <nav class="workspace-tabs" role="tablist" aria-label="演習画面"><button type="button" data-workspace-tab="task" aria-selected="true">課題</button><button type="button" data-workspace-tab="code" aria-selected="false">コード</button><button type="button" data-workspace-tab="result" aria-selected="false">結果</button></nav>
+            <div class="workspace-layout">
+              <section class="workspace-panel task-panel" data-workspace-panel="task"><div class="panel-scroll"><p class="eyebrow">TASK</p><h2>入力値を文字列の状態へ保存する</h2><p>未完成の変更処理へ型と状態更新を追加してください。</p><div class="acceptance"><h3>確認条件</h3><ul><li><span>01</span><p><code>useState&lt;string&gt;</code>で文字列型を指定する</p></li><li><span>02</span><p><code>setTitle</code>を呼び出す</p></li><li><span>03</span><p><code>event.target.value</code>を渡す</p></li></ul></div><details class="hint"><summary>ヒント1を見る</summary><p>入力欄の現在値はイベントのtargetから取得します。</p></details><details class="hint"><summary>ヒント2を見る</summary><p><code>setTitle(event.target.value)</code>の形を確認してください。</p></details><div class="task-actions"><button type="button" data-view="lesson">教材へ戻る</button><button type="button" id="save-code">下書き保存</button></div></div></section>
+              <section class="workspace-panel editor-panel" data-workspace-panel="code"><header class="editor-toolbar"><div><span class="active">TaskInput.tsx</span><span>TaskInput.test.tsx</span></div><b>TypeScript</b></header><div class="editor-body"><pre class="line-numbers" aria-hidden="true">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</pre><textarea id="code-editor" spellcheck="false" aria-label="コード入力">import { ChangeEvent, useState } from &quot;react&quot;;
 
 export function TaskInput() {
-  const [title, setTitle] = useState&lt;string&gt;(&quot;&quot;);
+  const [title, setTitle] = useState(&quot;&quot;);
 
-  return (
-    &lt;input
-      value={title}
-      onChange={(event) =&gt; {
-        // ここで入力値を状態へ反映する
-      }}
-    /&gt;
-  );
-}</textarea>
-            <div class="editor-actions">
-              <button class="secondary-action" id="reset-code" type="button">初期状態へ戻す</button>
-              <button class="primary-action" id="run-code" type="button">実行・採点</button>
+  function handleChange(
+    event: ChangeEvent&lt;HTMLInputElement&gt;,
+  ) {
+    // 入力値を状態へ保存する
+  }
+
+  return &lt;input value={title} onChange={handleChange} /&gt;;
+}</textarea></div><footer class="editor-footer"><button type="button" id="reset-code">初期状態に戻す</button><div><span id="save-status">自動保存</span><button class="run-button" type="button" id="run-code">実行・採点 Ctrl+Enter</button></div></footer></section>
+              <section class="workspace-panel result-panel" data-workspace-panel="result"><header><div><span class="result-indicator"></span><strong id="result-status">未実行</strong></div><button type="button" data-view="result">詳細結果</button></header><p id="result-message">コードを実行すると、条件ごとの結果が表示されます。</p><ul class="test-list"><li data-test="state"><span>○</span><div><strong>文字列型の状態</strong><small>useState&lt;string&gt;を確認</small></div></li><li data-test="setter"><span>○</span><div><strong>更新関数の呼び出し</strong><small>setTitleを確認</small></div></li><li data-test="value"><span>○</span><div><strong>入力値を渡す</strong><small>event.target.valueを確認</small></div></li></ul><section class="console-output"><header><span>OUTPUT</span><button type="button" id="clear-output">消去</button></header><pre id="console-output">実行待ち...</pre></section></section>
             </div>
           </section>
 
-          <section class="result-panel" aria-labelledby="result-title" aria-live="polite">
-            <div class="panel-heading">
-              <span id="result-title">テスト結果</span>
-              <b id="result-status">未実行</b>
+          <section class="view" data-view-panel="result" aria-labelledby="result-title" hidden>
+            <div class="page-shell result-page">
+              <header class="result-hero"><div class="score-mark"><span>2 / 3</span><strong>TESTS PASSED</strong></div><div><p class="eyebrow">EXERCISE RESULT</p><h1 id="result-title">あと1条件で完了です</h1><p>状態更新はできています。型を明示して、意図しない値が入らないようにします。</p></div><button class="secondary-action" type="button" data-view="exercise">コードを修正</button></header>
+              <div class="result-grid">
+                <section class="result-tests"><div class="section-heading compact"><div><p class="eyebrow">TEST DETAILS</p><h2>条件別の結果</h2></div></div><ul><li class="fail"><span>×</span><div><strong>文字列型を明示する</strong><p>useStateの型引数がありません。</p></div><b>未達成</b></li><li class="pass"><span>✓</span><div><strong>更新関数を呼び出す</strong><p>setTitleを確認しました。</p></div><b>通過</b></li><li class="pass"><span>✓</span><div><strong>入力値を渡す</strong><p>event.target.valueを確認しました。</p></div><b>通過</b></li></ul></section>
+                <section class="feedback-panel"><p class="eyebrow">FEEDBACK</p><h2>修正する箇所</h2><div class="feedback-code"><span>現在</span><code>useState(&quot;&quot;)</code></div><div class="feedback-code recommended"><span>推奨</span><code>useState&lt;string&gt;(&quot;&quot;)</code></div><p>初期値から推論できますが、教材では状態の意図を明確にするため型を指定します。</p></section>
+                <section class="learning-reflection"><p class="eyebrow">REFLECTION</p><h2>理解度を記録</h2><div class="reflection-options"><button type="button" data-reflection="easy">理解できた</button><button type="button" data-reflection="normal">少し迷った</button><button type="button" data-reflection="hard">復習したい</button></div><p id="reflection-status" role="status">選択すると復習予定へ反映します。</p></section>
+                <section class="next-step-panel"><p class="eyebrow">NEXT</p><h2>完了までの手順</h2><ol><li><span>1</span><p>型引数を追加する</p></li><li><span>2</span><p>再度テストを実行する</p></li><li><span>3</span><p>次の教材へ進む</p></li></ol><button type="button" data-view="exercise">演習へ戻る</button></section>
+              </div>
             </div>
-            <p id="result-message">コードを実行すると、条件ごとの結果が表示されます。</p>
-            <ul class="test-list">
-              <li data-test="state"><span>○</span>文字列型の状態を定義</li>
-              <li data-test="setter"><span>○</span>状態更新関数を呼び出す</li>
-              <li data-test="value"><span>○</span>入力値を更新に使用</li>
-            </ul>
-            <p class="prototype-note">
-              現在は正式UIの確認用判定です。安全なコード実行エンジンは次タスクで実装します。
-            </p>
           </section>
-        </div>
-      </section>
-    </main>
 
-    <footer class="site-footer">
-      <span>Programming Practice Lab</span>
-      <p>実際に入力し、実装し、公開まで経験する学習環境。</p>
-    </footer>
+          <section class="view" data-view-panel="review" aria-labelledby="review-title" hidden>
+            <div class="page-shell">
+              <header class="page-heading large"><div><p class="eyebrow">REVIEW QUEUE</p><h1 id="review-title">迷ったところを、短く解き直す</h1><p>間違い、時間がかかった内容、自己記録を基に優先順位を付けます。</p></div><div class="review-count"><strong>4</strong><span>今日の復習</span></div></header>
+              <div class="review-layout"><section class="review-queue"><div class="section-heading compact"><div><p class="eyebrow">TODAY</p><h2>優先する復習</h2></div><div class="filter-group small"><button type="button" aria-pressed="true">すべて</button><button type="button" aria-pressed="false">間違い</button><button type="button" aria-pressed="false">見直し</button></div></div><article class="review-item urgent"><span class="review-type">間違い</span><div><small>TypeScript / 状態管理</small><h3>状態の型を明示する</h3><p>前回 2 / 3通過。型引数で停止。</p></div><span>約5分</span><button type="button" data-view="exercise">解き直す</button></article><article class="review-item"><span class="review-type">見直し</span><div><small>React / イベント</small><h3>入力イベントの型を選ぶ</h3><p>自己記録「少し迷った」</p></div><span>約4分</span><button type="button" data-view="lesson">教材を見る</button></article><article class="review-item"><span class="review-type">基礎</span><div><small>JavaScript / 配列</small><h3>既存配列を変更せず追加する</h3><p>3日経過。短い確認問題。</p></div><span>約6分</span><button type="button" data-view="exercise">開始</button></article><article class="review-item"><span class="review-type">見直し</span><div><small>Git / 変更確認</small><h3>差分を確認してから記録する</h3><p>前回の操作時間が長めでした。</p></div><span>約5分</span><button type="button" data-view="environment">手順を見る</button></article></section>
+              <aside class="review-insights"><section><p class="eyebrow">WEAK POINTS</p><h2>現在の苦手傾向</h2><ul class="weakness-list"><li><div><span>型指定</span><strong>要復習</strong></div><div class="progress-track danger"><span style="width:36%"></span></div></li><li><div><span>配列更新</span><strong>練習中</strong></div><div class="progress-track warning"><span style="width:58%"></span></div></li><li><div><span>イベント</span><strong>安定</strong></div><div class="progress-track"><span style="width:78%"></span></div></li></ul></section><section><p class="eyebrow">REVIEW RHYTHM</p><h2>次の復習予定</h2><dl class="review-schedule"><div><dt>今日</dt><dd>4件</dd></div><div><dt>明日</dt><dd>2件</dd></div><div><dt>7日以内</dt><dd>6件</dd></div></dl></section></aside></div>
+            </div>
+          </section>
+
+          <section class="view" data-view-panel="history" aria-labelledby="history-title" hidden>
+            <div class="page-shell">
+              <header class="page-heading large"><div><p class="eyebrow">LEARNING HISTORY</p><h1 id="history-title">積み上げた実装を確認する</h1><p>時間だけでなく、完成した工程、通過したテスト、使った技術で振り返ります。</p></div><select aria-label="表示期間"><option>過去30日</option><option>過去7日</option><option>すべて</option></select></header>
+              <dl class="history-summary"><div><dt>学習時間</dt><dd>12時間40分</dd><span>前月比 +18%</span></div><div><dt>完了教材</dt><dd>18</dd><span>演習 11 / 教材 7</span></div><div><dt>コード実行</dt><dd>128</dd><span>成功率 74%</span></div><div><dt>完成工程</dt><dd>1 / 5</dd><span>Project 01</span></div></dl>
+              <div class="history-grid"><section class="activity-timeline"><div class="section-heading compact"><div><p class="eyebrow">ACTIVITY</p><h2>最近の学習</h2></div></div><ol><li><span class="timeline-date">今日</span><div class="timeline-dot"></div><article><small>14:18 · 演習</small><h3>入力値を状態として保持する</h3><p>2 / 3テスト通過。型指定を復習へ追加。</p></article></li><li><span class="timeline-date">昨日</span><div class="timeline-dot complete"></div><article><small>21:42 · 工程完了</small><h3>画面構造と開発環境</h3><p>Phase 01を完了。Git操作4件を実行。</p></article></li><li><span class="timeline-date">8/4</span><div class="timeline-dot"></div><article><small>19:10 · 教材</small><h3>フォームイベントを読む</h3><p>理解確認を1回で通過。</p></article></li><li><span class="timeline-date">8/3</span><div class="timeline-dot"></div><article><small>16:25 · 環境</small><h3>ローカル開発環境を確認</h3><p>Git、Node.js、Dockerの状態を記録。</p></article></li></ol></section>
+                <section class="skill-matrix"><div class="section-heading compact"><div><p class="eyebrow">SKILL MAP</p><h2>技術別の経験</h2></div></div><div class="matrix-table"><div class="matrix-row header"><span>技術</span><span>理解</span><span>演習</span><span>実装</span></div><div class="matrix-row"><strong>HTML / CSS</strong><i class="level-3"></i><i class="level-3"></i><i class="level-2"></i></div><div class="matrix-row"><strong>JavaScript</strong><i class="level-3"></i><i class="level-2"></i><i class="level-2"></i></div><div class="matrix-row"><strong>TypeScript</strong><i class="level-2"></i><i class="level-2"></i><i class="level-1"></i></div><div class="matrix-row"><strong>React</strong><i class="level-2"></i><i class="level-1"></i><i class="level-1"></i></div><div class="matrix-row"><strong>Git</strong><i class="level-2"></i><i class="level-2"></i><i class="level-1"></i></div></div><p class="matrix-legend"><span><i class="level-1"></i>開始</span><span><i class="level-2"></i>経験</span><span><i class="level-3"></i>安定</span></p></section>
+                <section class="project-history"><div class="section-heading compact"><div><p class="eyebrow">PROJECTS</p><h2>成果物の記録</h2></div></div><article><div class="mini-project-preview"><i></i><i></i><i></i></div><div><small>進行中 · 18%</small><h3>タスク管理画面</h3><p>最終更新：今日 14:18</p></div><button type="button" data-view="roadmap">開く</button></article></section></div>
+            </div>
+          </section>
+
+          <section class="view" data-view-panel="environment" aria-labelledby="environment-title" hidden>
+            <div class="page-shell">
+              <header class="page-heading large"><div><p class="eyebrow">LOCAL ENVIRONMENT</p><h1 id="environment-title">実務演習を始める準備</h1><p>ブラウザ演習の次は、自分のPCで複数ファイルのプロジェクトを動かします。</p></div><div class="environment-state"><span class="status-dot"></span><strong>3 / 5確認済み</strong></div></header>
+              <div class="os-switcher" role="tablist" aria-label="OS"><button type="button" data-os="windows" aria-selected="true">Windows</button><button type="button" data-os="macos" aria-selected="false">macOS</button><button type="button" data-os="linux" aria-selected="false">Linux</button></div>
+              <div class="environment-layout"><aside class="setup-steps"><p class="eyebrow">SETUP STEPS</p><ol><li class="complete"><span>✓</span><div><strong>基本環境</strong><small>ターミナルとエディタ</small></div></li><li class="complete"><span>✓</span><div><strong>Git</strong><small>変更履歴の管理</small></div></li><li class="current"><span>3</span><div><strong>Node.js</strong><small>実行と依存関係</small></div></li><li><span>4</span><div><strong>Docker</strong><small>環境の統一</small></div></li><li><span>5</span><div><strong>教材プロジェクト</strong><small>取得と起動</small></div></li></ol></aside>
+                <section class="setup-content"><div class="setup-heading"><div><p class="eyebrow">STEP 03</p><h2>Node.jsの状態を確認する</h2></div><span>Windows</span></div><p class="setup-lead">実務演習では、指定されたバージョンのNode.jsを使用します。既存環境を壊さないよう、バージョン管理ツールの利用を推奨します。</p><div class="requirement-table"><div><span>必要項目</span><span>推奨</span><span>現在</span><span>状態</span></div><div><strong>Node.js</strong><span>24.x</span><span id="node-version">未確認</span><b class="pending">確認待ち</b></div><div><strong>npm</strong><span>11.x</span><span id="npm-version">未確認</span><b class="pending">確認待ち</b></div></div><section class="command-section"><header><div><span>1</span><strong>ターミナルでバージョンを確認</strong></div><button type="button" data-copy-command>コピー</button></header><pre><code>node --version
+npm --version</code></pre></section><section class="verification-form"><h3>確認結果を入力</h3><div><label>Node.js<input id="node-input" placeholder="例: v24.5.0" /></label><label>npm<input id="npm-input" placeholder="例: 11.5.1" /></label></div><button type="button" id="verify-environment">環境を確認する</button><p id="environment-result" role="status"></p></section><section class="terminal-preview"><header><span>ENVIRONMENT CHECK</span><b>local</b></header><pre id="environment-log">$ 確認待ち...</pre></section></section>
+                <aside class="setup-aside"><section><p class="eyebrow">CHECKLIST</p><h2>この端末の準備</h2><label><input type="checkbox" data-env-check="terminal" checked /> ターミナルを開ける</label><label><input type="checkbox" data-env-check="git" checked /> Gitを実行できる</label><label><input type="checkbox" data-env-check="node" /> Node.jsを確認</label><label><input type="checkbox" data-env-check="docker" /> Dockerを起動</label><label><input type="checkbox" data-env-check="project" /> 教材を起動</label></section><section class="risk-note"><p class="eyebrow">IMPORTANT</p><h2>既存環境を上書きしない</h2><p>業務や他の学習で使用しているバージョンがある場合、直接更新せず分離して管理します。</p></section></aside></div>
+            </div>
+          </section>
+        </main>
+
+        <nav class="mobile-navigation" aria-label="モバイルメニュー"><button type="button" data-view="home" aria-current="page"><span>⌂</span>ホーム</button><button type="button" data-view="projects"><span>◇</span>作る</button><button type="button" data-view="roadmap"><span>↗</span>工程</button><button type="button" data-view="review"><span>↻</span>復習</button></nav>
+      </div>
+    </div>
   </body>
 </html>
