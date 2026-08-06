@@ -1,0 +1,11 @@
+{
+  "name": "programming-practice-lab",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check:pages": "node scripts/check-pages.mjs",
+    "verify": "npm run build && npm run check:pages && git diff --exit-code -- docs"
+  }
+}
