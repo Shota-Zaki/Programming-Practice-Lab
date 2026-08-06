@@ -2,9 +2,9 @@
 
 ## Metadata
 
-- currentTask: `PPL-INIT-001`
-- currentPhase: `公開基盤初期化`
-- currentStatus: `completed`
+- currentTask: `PPL-DESIGN-001`
+- currentPhase: `UI方向性の比較・選定`
+- currentStatus: `awaiting_user_selection`
 - baseBranch: `main`
 - workBranch: `work`
 - pagesSource: `main/docs`
@@ -29,12 +29,49 @@
 - 公開元: `main/docs`
 - 検証コマンド: `npm run verify`
 
-## 次タスク候補
+## PPL-DESIGN-001 UI方向性の比較・選定
 
-`PPL-DESIGN-001` UI方向性の比較・選定
+状態: `ユーザー選定待ち`
 
-開始条件:
+### 目的
 
-- トップ画面、コース画面、演習画面について複数の方向性を比較する。
-- ユーザーが採用方向または組み合わせを選択する。
-- 選定結果を`DESIGN.md`へ反映してから実装を開始する。
+トップ画面、コース画面、演習画面について複数の設計方向を比較し、Programming Practice Labの正式なUI方針を確定する。
+
+### 比較案
+
+- A: 学習ガイド型
+- B: 開発環境型
+- C: プロジェクト型
+
+各案は公開プロトタイプ内でトップ、コース、演習を切り替えて確認できる。
+
+### 完了条件
+
+- [x] 3つの方向案を作成する。
+- [x] 各案にトップ画面を含める。
+- [x] 各案にコース画面を含める。
+- [x] 各案に演習画面を含める。
+- [x] 375px、768px、1280pxを考慮したレスポンシブ構造にする。
+- [x] 各案の利点とリスクを`DESIGN.md`へ記録する。
+- [ ] ユーザーが採用案または組み合わせを選定する。
+- [ ] 選定結果を`DESIGN.md`の正式方針へ反映する。
+- [ ] 次の実装タスクを確定する。
+
+### 検証対象
+
+- 方向案切替: A、B、C
+- 画面切替: トップ、コース、演習
+- 表示幅: 375px、768px、1280px
+- キーボードフォーカス
+- 長いコード、説明文、コース名の表示
+
+### 証拠
+
+- 比較用公開URL: `https://shota-zaki.github.io/Programming-Practice-Lab/`
+- 編集元: `src/static/`
+- 公開物: `docs/`
+- 設計記録: `DESIGN.md`
+
+## 次工程
+
+ユーザーの選定後、採用方向を正式なデザイン方針へ変換し、情報設計、コンポーネント、レスポンシブ挙動、アクセシビリティ要件を確定する。

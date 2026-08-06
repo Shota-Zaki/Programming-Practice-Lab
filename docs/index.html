@@ -5,42 +5,234 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="実際にコードを入力し、実行・検証しながら学ぶプログラミング学習サイト"
+      content="実際にコードを入力し、実行・検証しながら学ぶプログラミング学習サイトのUI比較案"
     />
-    <title>Programming Practice Lab</title>
+    <title>Programming Practice Lab | UI方向性比較</title>
     <link rel="stylesheet" href="./styles.css" />
     <script type="module" src="./app.js"></script>
   </head>
   <body>
-    <main class="page-shell">
-      <section class="status-panel" aria-labelledby="page-title">
-        <p class="eyebrow">Development status</p>
-        <h1 id="page-title">Programming Practice Lab</h1>
-        <p class="lead">
-          実際にコードを入力し、実行・検証しながら学ぶための環境を準備しています。
+    <header class="comparison-header">
+      <div>
+        <p class="comparison-kicker">PPL-DESIGN-001</p>
+        <h1>Programming Practice Lab</h1>
+        <p class="comparison-lead">
+          トップ・コース・演習の3画面を、異なる設計思想で比較するための公開プロトタイプです。
         </p>
-        <div class="status-row" role="status" aria-live="polite">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span>GitHub Pages公開基盤は稼働中です</span>
+      </div>
+      <div class="comparison-status" role="status">
+        <span class="status-dot" aria-hidden="true"></span>
+        UI方向性を比較中
+      </div>
+    </header>
+
+    <nav class="option-switcher" aria-label="UI方向案">
+      <button class="option-button" type="button" data-option="a" aria-selected="true">
+        <span>A</span>
+        学習ガイド型
+      </button>
+      <button class="option-button" type="button" data-option="b" aria-selected="false">
+        <span>B</span>
+        開発環境型
+      </button>
+      <button class="option-button" type="button" data-option="c" aria-selected="false">
+        <span>C</span>
+        プロジェクト型
+      </button>
+    </nav>
+
+    <main class="comparison-main">
+      <section class="option-panel theme-a" data-option-panel="a">
+        <div class="option-summary">
+          <div>
+            <p class="option-label">Direction A</p>
+            <h2>学習ガイド型</h2>
+            <p>迷わず順番に進めることを優先。初学者向けの説明、進捗、次の行動を明確にします。</p>
+          </div>
+          <dl>
+            <div><dt>強み</dt><dd>開始しやすい</dd></div>
+            <div><dt>向く層</dt><dd>初学者</dd></div>
+            <div><dt>密度</dt><dd>低〜中</dd></div>
+          </dl>
         </div>
-        <dl class="project-state">
-          <div>
-            <dt>現在</dt>
-            <dd>公開構成と開発運用の初期化</dd>
+
+        <div class="prototype-shell app-a">
+          <aside class="a-sidebar">
+            <a class="brand-mark" href="#">PPL</a>
+            <nav aria-label="案Aメニュー">
+              <a class="active" href="#">ホーム</a>
+              <a href="#">コース</a>
+              <a href="#">演習</a>
+              <a href="#">復習</a>
+              <a href="#">学習履歴</a>
+            </nav>
+            <div class="mini-profile"><span>7日</span>連続学習中</div>
+          </aside>
+          <div class="prototype-content">
+            <div class="screen-tabs" role="tablist" aria-label="案Aの画面">
+              <button type="button" data-screen="home" aria-selected="true">トップ</button>
+              <button type="button" data-screen="course" aria-selected="false">コース</button>
+              <button type="button" data-screen="exercise" aria-selected="false">演習</button>
+            </div>
+
+            <article class="prototype-screen" data-screen-panel="home">
+              <div class="a-topbar"><span>おはようございます</span><button type="button">学習設定</button></div>
+              <section class="a-hero">
+                <p>前回の続き</p>
+                <h3>TypeScript：関数の型定義</h3>
+                <div class="progress-track"><span style="width: 62%"></span></div>
+                <button type="button">学習を再開</button>
+              </section>
+              <div class="a-section-title"><h3>目的から選ぶ</h3><a href="#">すべて見る</a></div>
+              <div class="a-course-grid">
+                <article><span>01</span><h4>Web画面を作る</h4><p>基礎からUI開発まで</p></article>
+                <article><span>02</span><h4>APIを作る</h4><p>データ処理と設計</p></article>
+                <article><span>03</span><h4>クラウドへ公開</h4><p>構築から運用まで</p></article>
+              </div>
+            </article>
+
+            <article class="prototype-screen" data-screen-panel="course" hidden>
+              <div class="a-breadcrumb">コース / TypeScript基礎</div>
+              <div class="a-course-head">
+                <div><span>基礎コース</span><h3>TypeScript</h3><p>型を使って、安全に保守できるコードを学びます。</p></div>
+                <div class="ring-progress"><strong>48%</strong><span>完了</span></div>
+              </div>
+              <div class="a-lesson-list">
+                <article class="done"><span>✓</span><div><small>LESSON 01</small><h4>型の基本</h4></div><b>完了</b></article>
+                <article class="current"><span>2</span><div><small>LESSON 02</small><h4>関数の型定義</h4></div><button type="button">続ける</button></article>
+                <article><span>3</span><div><small>LESSON 03</small><h4>オブジェクトと型</h4></div><b>20分</b></article>
+              </div>
+            </article>
+
+            <article class="prototype-screen" data-screen-panel="exercise" hidden>
+              <div class="a-exercise-head"><div><small>TypeScript / Lesson 02</small><h3>戻り値の型を指定する</h3></div><span>2 / 8</span></div>
+              <div class="a-exercise-grid">
+                <section class="instruction-card"><h4>課題</h4><p>2つの数値を受け取り、合計を返す関数に適切な型を追加してください。</p><h4>確認条件</h4><ul><li>引数は数値型</li><li>戻り値も数値型</li></ul><button type="button">ヒントを表示</button></section>
+                <section class="editor-card"><div class="editor-tabs"><span>solution.ts</span><b>TypeScript</b></div><pre><code><span>1</span> function add(a, b) {
+<span>2</span>   return a + b;
+<span>3</span> }</code></pre><div class="editor-actions"><button type="button">リセット</button><button type="button">実行・採点</button></div></section>
+                <section class="result-card"><div><span class="result-ready">●</span> 実行結果</div><p>コードを実行すると、結果と改善点がここに表示されます。</p></section>
+              </div>
+            </article>
           </div>
+        </div>
+      </section>
+
+      <section class="option-panel theme-b" data-option-panel="b" hidden>
+        <div class="option-summary">
           <div>
-            <dt>次工程</dt>
-            <dd>UI方向性の比較・選定</dd>
+            <p class="option-label">Direction B</p>
+            <h2>開発環境型</h2>
+            <p>実際の開発ツールに近い操作感を優先。コード、出力、ファイル、課題情報を高密度に配置します。</p>
           </div>
+          <dl>
+            <div><dt>強み</dt><dd>実務感が高い</dd></div>
+            <div><dt>向く層</dt><dd>経験者・転職層</dd></div>
+            <div><dt>密度</dt><dd>高</dd></div>
+          </dl>
+        </div>
+
+        <div class="prototype-shell app-b">
+          <header class="b-titlebar"><b>&gt;_ PPL</b><nav><a class="active" href="#">Workspace</a><a href="#">Courses</a><a href="#">Projects</a></nav><span>環境: Browser</span></header>
+          <div class="screen-tabs dark-tabs" role="tablist" aria-label="案Bの画面">
+            <button type="button" data-screen="home" aria-selected="true">トップ</button>
+            <button type="button" data-screen="course" aria-selected="false">コース</button>
+            <button type="button" data-screen="exercise" aria-selected="false">演習</button>
+          </div>
+
+          <article class="prototype-screen" data-screen-panel="home">
+            <div class="b-dashboard">
+              <aside class="b-rail"><button type="button">⌂</button><button type="button">⌘</button><button type="button">◇</button><button type="button">✓</button></aside>
+              <main class="b-workspace">
+                <div class="b-welcome"><div><small>LEARNING WORKSPACE</small><h3>次のスキルを実装する。</h3><p>読むだけでなく、コードと環境を操作して習得します。</p></div><button type="button">前回の演習を開く →</button></div>
+                <div class="b-metrics"><article><small>PROGRESS</small><strong>24%</strong><span>全コース</span></article><article><small>STREAK</small><strong>07</strong><span>days</span></article><article><small>CODE RUNS</small><strong>128</strong><span>今月</span></article><article><small>PROJECTS</small><strong>02</strong><span>completed</span></article></div>
+                <div class="b-panels"><section><header><b>ACTIVE MODULES</b><a href="#">VIEW ALL</a></header><article><i>TS</i><div><h4>型安全な関数設計</h4><div class="progress-track"><span style="width: 62%"></span></div></div><b>62%</b></article><article><i>RE</i><div><h4>コンポーネント設計</h4><div class="progress-track"><span style="width: 31%"></span></div></div><b>31%</b></article></section><section><header><b>ACTIVITY.LOG</b></header><pre>10:42  test passed
+10:38  code executed
+10:21  lesson resumed
+09:55  environment ready</pre></section></div>
+              </main>
+            </div>
+          </article>
+
+          <article class="prototype-screen" data-screen-panel="course" hidden>
+            <div class="b-course-layout">
+              <aside><small>COURSE EXPLORER</small><input aria-label="コースを検索" placeholder="Search modules..." /><nav><a class="active" href="#">TypeScript</a><a href="#">React</a><a href="#">API Development</a><a href="#">Database</a><a href="#">Container</a><a href="#">Cloud</a></nav></aside>
+              <main><div class="b-course-title"><div><small>TRACK / FRONTEND</small><h3>TypeScript Engineering</h3><p>型設計、モジュール、非同期処理、テストまでを実装します。</p></div><button type="button">RESUME MODULE</button></div><div class="b-module-table"><div class="table-head"><span>MODULE</span><span>TYPE</span><span>STATUS</span><span>SCORE</span></div><article><span>01 / Type System</span><span>Browser</span><b>COMPLETE</b><strong>100</strong></article><article class="active"><span>02 / Function Design</span><span>Browser</span><b>ACTIVE</b><strong>68</strong></article><article><span>03 / Object Modeling</span><span>Local</span><b>LOCKED</b><strong>--</strong></article><article><span>04 / Async Flow</span><span>Local</span><b>LOCKED</b><strong>--</strong></article></div></main>
+            </div>
+          </article>
+
+          <article class="prototype-screen" data-screen-panel="exercise" hidden>
+            <div class="b-ide">
+              <aside class="b-files"><b>EXPLORER</b><span>▼ exercise-02</span><a class="active" href="#">ƒ solution.ts</a><a href="#">◇ solution.test.ts</a><a href="#">≡ README.md</a></aside>
+              <main class="b-code"><div class="b-editor-tab">solution.ts <span>×</span></div><pre><code><span>1</span> type User = {
+<span>2</span>   name: string;
+<span>3</span>   score: number;
+<span>4</span> };
+<span>5</span>
+<span>6</span> export function getLabel(user) {
+<span>7</span>   return `${user.name}: ${user.score}`;
+<span>8</span> }</code></pre><div class="b-terminal"><header><span>PROBLEMS</span><b>TERMINAL</b><span>OUTPUT</span><button type="button">RUN TESTS ▶</button></header><pre>$ npm test
+Waiting for implementation...</pre></div></main>
+              <aside class="b-task"><small>TASK 02-04</small><h3>引数に型を設定する</h3><p><code>getLabel</code>が<code>User</code>型のみを受け取るように修正します。</p><h4>ACCEPTANCE</h4><label><input type="checkbox" checked disabled /> User型を使用</label><label><input type="checkbox" disabled /> テストを通過</label><button type="button">SUBMIT</button></aside>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="option-panel theme-c" data-option-panel="c" hidden>
+        <div class="option-summary">
           <div>
-            <dt>公開元</dt>
-            <dd>main / docs</dd>
+            <p class="option-label">Direction C</p>
+            <h2>プロジェクト型</h2>
+            <p>「何を作れるようになるか」を先に提示。技術を横断したミッションと成果物を中心に進めます。</p>
           </div>
-        </dl>
-        <p class="note">
-          この画面は公開確認用の仮画面です。最終デザインではありません。
-        </p>
+          <dl>
+            <div><dt>強み</dt><dd>目的が明確</dd></div>
+            <div><dt>向く層</dt><dd>継続重視</dd></div>
+            <div><dt>密度</dt><dd>中</dd></div>
+          </dl>
+        </div>
+
+        <div class="prototype-shell app-c">
+          <header class="c-header"><a href="#"><span>P</span>Practice Lab</a><nav><a class="active" href="#">ミッション</a><a href="#">スキル</a><a href="#">成果物</a></nav><button type="button">マイページ</button></header>
+          <div class="screen-tabs c-tabs" role="tablist" aria-label="案Cの画面">
+            <button type="button" data-screen="home" aria-selected="true">トップ</button>
+            <button type="button" data-screen="course" aria-selected="false">コース</button>
+            <button type="button" data-screen="exercise" aria-selected="false">演習</button>
+          </div>
+
+          <article class="prototype-screen" data-screen-panel="home">
+            <section class="c-hero"><div><span>BUILD TO LEARN</span><h3>作りながら、<br />現場の技術を身につける。</h3><p>小さな実装から公開まで。完成した成果物が、次のスキルを証明します。</p><button type="button">最初のミッションを選ぶ</button></div><div class="c-code-window"><header><i></i><i></i><i></i><b>task-board.tsx</b></header><pre><code>export function TaskBoard() {
+  const [tasks, setTasks] = useState([])
+
+  return &lt;Board tasks={tasks} /&gt;
+}</code></pre><footer><span>✓ Build passed</span><b>Deploy ready</b></footer></div></section>
+            <section class="c-paths"><div class="c-section-title"><div><small>CHOOSE YOUR GOAL</small><h3>作りたいものから始める</h3></div><a href="#">ミッション一覧 →</a></div><div class="c-card-grid"><article class="coral"><span>01</span><small>FRONTEND</small><h4>操作できるWeb画面</h4><p>UI、状態管理、API連携</p><b>12 missions</b></article><article class="blue"><span>02</span><small>BACKEND</small><h4>データを扱うAPI</h4><p>設計、認証、データベース</p><b>10 missions</b></article><article class="green"><span>03</span><small>DEPLOY</small><h4>サービスを公開する</h4><p>コンテナ、クラウド、CI</p><b>8 missions</b></article></div></section>
+          </article>
+
+          <article class="prototype-screen" data-screen-panel="course" hidden>
+            <div class="c-project-head"><span>MISSION PATH 01</span><h3>タスク管理サービスを完成させる</h3><p>5つの成果物を作りながら、画面設計から公開までを一周します。</p><div><b>進捗 2 / 5</b><div class="progress-track"><span style="width: 40%"></span></div></div></div>
+            <div class="c-roadmap"><article class="complete"><span>✓</span><div><small>STEP 01</small><h4>一覧画面の構築</h4><p>コンポーネントとデータ表示</p></div><b>完成</b></article><i></i><article class="complete"><span>✓</span><div><small>STEP 02</small><h4>状態管理の追加</h4><p>追加・更新・削除操作</p></div><b>完成</b></article><i></i><article class="current"><span>3</span><div><small>STEP 03</small><h4>APIとの接続</h4><p>非同期通信とエラー処理</p></div><button type="button">開始</button></article><i></i><article><span>4</span><div><small>STEP 04</small><h4>テストと品質確認</h4><p>自動テストと修正</p></div><b>未開始</b></article></div>
+          </article>
+
+          <article class="prototype-screen" data-screen-panel="exercise" hidden>
+            <div class="c-exercise-head"><a href="#">← ミッションへ戻る</a><div><span>STEP 03 / TASK 02</span><h3>取得失敗時の表示を実装する</h3></div><b>45 XP</b></div>
+            <div class="c-exercise-layout"><section class="c-brief"><span class="mission-badge">MISSION BRIEF</span><h4>ユーザーが原因を理解し、再試行できる画面にします。</h4><div class="c-user-story"><small>USER STORY</small><p>通信に失敗したとき、状況と次の操作を確認したい。</p></div><h5>完了条件</h5><label><input type="checkbox" checked disabled /> エラー文を表示する</label><label><input type="checkbox" disabled /> 再試行ボタンを設置する</label><label><input type="checkbox" disabled /> テストを通過する</label></section><section class="c-editor"><header><span>App.tsx</span><b>Browser Lab</b></header><pre><code>if (error) {
+  return (
+    &lt;section&gt;
+      &lt;p&gt;読み込みに失敗しました&lt;/p&gt;
+      {/* 再試行を追加 */}
+    &lt;/section&gt;
+  )
+}</code></pre><footer><button type="button">プレビュー</button><button type="button">テストして提出</button></footer></section></div>
+          </article>
+        </div>
       </section>
     </main>
+
+    <footer class="comparison-footer">
+      <div><strong>選択方法</strong><p>A・B・Cのいずれか、または「Aのトップ＋Bの演習」のような組み合わせを指定してください。</p></div>
+      <p>375px・768px・1280pxで比較できるように調整しています。</p>
+    </footer>
   </body>
 </html>
