@@ -5,11 +5,12 @@
 - currentTask: `PPL-FOUNDATION-001`
 - currentPhase: `Web開発基礎講座`
 - currentStatus: `in_progress`
+- completionPercentage: `59%`（初期カリキュラム17項目中10項目完了）
 - baseBranch: `main`
 - workBranch: `work`
 - pagesSource: `main/docs`
 - selectedDesign: `foundation-first + project-based`
-- updatedAt: `2026-08-06`
+- updatedAt: `2026-09-01`
 
 ## PPL-INIT-001 GitHub Pages公開基盤
 
@@ -119,3 +120,12 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 ## 次の行動
 
 `PPL-FOUNDATION-001`として、HTML第1章を教材データへ分離し、4レッスンを順番に完了できる状態へ進める。
+
+## Repository operation policy — 2026-09-01
+
+- GitHub Actionsは使用しない。
+- `work`へのcommit / push / scope内mergeは都度確認なしで実行可能。
+- `main`へのmergeは必ず実行直前にユーザー確認を行う。
+- READMEへ現在TaskやHEAD等のlive値を記録しない。
+- **すべての作業で、このファイルと`NEXT_WORK.md`を必ず更新する。**
+- 検証方法・既存検証コマンドはこの運用統一では変更しない。
