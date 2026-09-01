@@ -10,11 +10,13 @@
 ## Repository運用
 
 - 恒久作業ブランチは `work` の1本だけを使用する。
-- `main` への直接実装は行わず、`work` からPull Requestで統合する。
+- `main` への直接実装は行わない。
+- `main`へのmergeはユーザーの明示承認後に行う。
+- GitHub Actionsは使用しない。
 - 公開用の `/docs` と、設計文書用の `/project-docs` を分離する。
 - `/docs` は生成物であり、原則として直接編集しない。
-- ソース変更時は `npm run build` を実行し、更新された `/docs` を同じ変更へ含める。
-- `main/docs` に統合された内容がGitHub Pagesへ公開される。
+- ソース変更時は既存Repository規約に従って生成・検証し、必要な `/docs` 差分を同じ変更へ含める。
+- `main/docs` に統合された内容がGitHub Pagesの公開元となる。
 
 ## ローカル確認
 
@@ -25,7 +27,7 @@ python -m http.server 4173 --directory docs
 
 ブラウザで `http://localhost:4173/` を開きます。
 
-## 現在の構成
+## Repository構成
 
 ```text
 Programming-Practice-Lab/
@@ -33,10 +35,12 @@ Programming-Practice-Lab/
 ├─ scripts/             ビルド・公開検証
 ├─ docs/                GitHub Pages公開物
 ├─ project-docs/        設計・運用文書
-├─ .github/workflows/   自動検証
 ├─ DESIGN.md            UI・体験設計の正本
 ├─ task-list.md         進捗管理の正本
+├─ NEXT_WORK.md         次に行う1工程
 └─ AGENTS.md            作業規約
 ```
 
-現在はGitHub Pages公開基盤のみを初期化しています。最終UIはデザイン方針の選定後に実装し、その段階でReact・TypeScriptを正式導入します。
+## 進行管理
+
+現在Task、HEAD、PR、進捗率などの動的情報はREADMEへ固定しません。`task-list.md`と`NEXT_WORK.md`を参照してください。
