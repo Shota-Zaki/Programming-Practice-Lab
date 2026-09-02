@@ -10,6 +10,7 @@
 - Next Action: `HTML第1章を教材データへ分離し、4レッスンを順番に完了できる構成へ進める`
 - Blocking / unresolved: `なし`
 - Next Command: `task-list.mdと対象実装を確認してcurrentTaskのscope内で継続する`
+- Verification entrypoint: `npm run verify:agent`
 
 ## Mandatory update rule
 
