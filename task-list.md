@@ -10,7 +10,7 @@
 - workBranch: `work`
 - pagesSource: `main/docs`
 - selectedDesign: `foundation-first + project-based`
-- updatedAt: `2026-09-01`
+- updatedAt: `2026-09-02`
 
 ## PPL-INIT-001 GitHub Pages公開基盤
 
@@ -129,3 +129,11 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - READMEへ現在TaskやHEAD等のlive値を記録しない。
 - **すべての作業で、このファイルと`NEXT_WORK.md`を必ず更新する。**
 - 検証方法・既存検証コマンドはこの運用統一では変更しない。
+
+## Repository Operations Log
+
+### 2026-09-02 — ChatGPT/Codex検証入口
+
+- `npm run verify:agent`を追加し、既存`npm run verify`をそのまま呼ぶようにした。
+- `VERIFY_AGENT.md`に固定SHA、Task固有追加検証、未実施の扱い、証拠記録ルールを定義した。
+- Current Taskの375 / 768 / 1280操作監査等は引き続きAcceptance Criteria側の追加検証として扱う。
