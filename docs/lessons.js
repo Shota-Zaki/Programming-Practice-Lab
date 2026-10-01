@@ -18,6 +18,11 @@ const learningImage = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="ht
 const cssMarkup = '<main class="card"><h1>学習カード</h1><p class="intro">少しずつ学びます。</p><p id="note">今日の目標を決めましょう。</p></main><p class="plain">通常の段落です。</p>';
 const cssTest = (id, label, selector, property, expected, requiredSelector) => ({ id, label, selector, property, expected, requiredSelector });
 const sides = (property, value) => ['top','right','bottom','left'].map(side => cssTest(`${property}-${side}`, `${property}の${{top:'上',right:'右',bottom:'下',left:'左'}[side]}を${value}にする`, '.card', `${property}-${side}`, value));
+const layoutMarkup = '<h1>学習メニュー</h1><div class="cards"><article class="tile"><h2>HTML</h2><p>構造を学ぶ</p></article><article class="tile"><h2>CSS</h2><p>見た目を整える</p></article><article class="tile"><h2>JavaScript</h2><p>動きを作る</p></article><article class="tile"><h2>復習</h2><p>繰り返し練習する</p></article></div>';
+const responsiveWidths = [375,599,600,768,1280];
+const combinedWidths = [375,599,600,768,899,900,1280];
+const viewportTest = (id,label,selector,property,widths,valueForWidth) => ({id,label,selector,property,byWidth:Object.fromEntries(widths.map(width=>[width,valueForWidth(width)]))});
+const layoutChecks = [cssTest('visible','すべてのカードを表示する','.cards','visible-items','true'),cssTest('equal','カードを等幅にする','.cards','equal-columns','true'),{id:'gap',label:'カードの縦横の間隔を16pxにする',checks:[cssTest('x','','.cards','column-gap','16px'),cssTest('y','','.cards','row-gap','16px')]}];
 export const lessons = [
   {
     id: 'html01', title: 'HTMLの基本構造',
@@ -173,9 +178,59 @@ export const lessons = [
     completionTests: [cssTest('box','box-sizingをborder-boxにする','.card','box-sizing','border-box'),cssTest('width','widthを240pxにする','.card','width','240px'),{id:'padding',label:'内側余白を四辺とも16pxにする',checks:sides('padding','16px')},{id:'border',label:'四辺の境界線を2px・実線・#166534にする',checks:['top','right','bottom','left'].flatMap(side => [cssTest(`border-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線幅を2pxにする`,'.card',`border-${side}-width`,'2px'),cssTest(`solid-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線を実線にする`,'.card',`border-${side}-style`,'solid'),cssTest(`color-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線色を#166534にする`,'.card',`border-${side}-color`,'rgb(22, 101, 52)')])},cssTest('outer','境界線を含む外寸を240pxにする','.card','outer-width','240')],
     hints: ['borderには太さ・種類・色を指定します。paddingを含めても外寸240pxになるようbox-sizingを確認しましょう。'], explanation: '第3章の基本ができました。次は配置と画面幅への対応を学びます。',
   },
+  {
+    id:'css05', language:'css', chapterId:'css-chapter04', title:'Flexboxで横に並べる',
+    markup:'<h1>学習の順序</h1><div class="links"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>',
+    objectives:['親要素にFlexboxを指定する','並べる方向と揃え方を指定する'],
+    contentBlocks:[
+      {title:'親が子の並べ方を決める',text:'display:flexを親の.linksへ指定すると、直下の三つのspanが並びます。flex-direction:rowは横方向です。子のspanへflexを付けても、兄弟同士の並び方は変わりません。'},
+      {title:'軸と間隔',text:'rowではjustify-contentが横方向、align-itemsが縦方向の揃え方です。space-betweenで両端と間に配置し、centerで縦位置を中央に揃えます。gap:16pxで項目間に最低16pxの間隔を設けてください。採点は800px幅で三つが横一列になるかも確認します。'},
+    ],
+    example:'.links { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; }',
+    starterCode:'.links {\n  /* 並べ方と間隔を指定しましょう */\n}',
+    completionTests:[cssTest('flex','親.linksにdisplay:flexを指定する','.links','display','flex'),cssTest('direction','横方向rowにする','.links','flex-direction','row'),cssTest('align','縦位置を中央に揃える','.links','align-items','center'),cssTest('justify','横方向をspace-betweenにする','.links','justify-content','space-between'),cssTest('gap','項目の間隔を16pxにする','.links','column-gap','16px'),{id:'layout',label:'三つの項目を表示し、横一列に並べる',checks:[cssTest('rows','','.links','rows','1'),cssTest('columns','','.links','columns','3')]}],
+    hints:['.linksが親、spanが子です。rowでは主軸が横になります。'],explanation:'親要素で子の並びと揃え方を指定できました。',
+  },
+  {
+    id:'css06',language:'css',chapterId:'css-chapter04',title:'Gridで列を作る',markup:layoutMarkup,
+    objectives:['Gridの行と列を理解する','等幅の二列を作る'],
+    contentBlocks:[
+      {title:'行と列をまとめて配置する',text:'Gridは縦横の配置を作る仕組みです。親.cardsにdisplay:gridを書き、grid-template-columns:repeat(2,1fr)で等幅二列を作ります。frは残りの空間を分ける単位で、1fr 1frと書いても同じです。'},
+      {title:'四つのカードを並べる',text:'gap:16pxで縦横の間隔を揃えます。四つのカードは二列・二行になります。一つのカードだけ幅を変えず、列の幅をGridに任せましょう。'},
+    ],
+    example:'.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }',starterCode:'.cards { }',
+    completionTests:[cssTest('grid','親.cardsにdisplay:gridを指定する','.cards','display','grid'),cssTest('columns','二列にする','.cards','columns','2'),cssTest('rows','二行にする','.cards','rows','2'),...layoutChecks],
+    hints:['repeat(2, 1fr)は、同じ幅の列を二つ作る指定です。'],explanation:'四つのカードを等幅の二列に並べられました。',
+  },
+  {
+    id:'css07',language:'css',chapterId:'css-chapter04',title:'画面幅で列数を変える',markup:layoutMarkup,viewports:responsiveWidths,
+    objectives:['メディアクエリで画面幅に応じて切り替える','境界の前後を確認する'],
+    contentBlocks:[
+      {title:'狭い画面から始める',text:'最初に.cardsをGridの一列にします。@media (min-width:600px) { ... }の中に、二列にする規則を書きます。min-widthは指定した幅以上という意味なので、600pxちょうどでも二列になります。'},
+      {title:'境界を確かめる',text:'375pxと599pxでは一列、600px・768px・1280pxでは二列にしてください。どの幅でもgap:16pxと等幅を維持し、カードを隠さず横にはみ出さないようにします。プレビュー幅を選ぶと、同じCSSを異なる幅で表示できます。'},
+    ],
+    example:'.cards { display: grid; grid-template-columns: 1fr; gap: 16px; }\n@media (min-width: 600px) {\n  .cards { grid-template-columns: repeat(2, 1fr); }\n}',
+    starterCode:'.cards { display: grid; gap: 16px; }\n/* 600px以上の規則を追加しましょう */',
+    completionTests:[cssTest('grid','すべての幅でGridにする','.cards','display','grid'),viewportTest('columns','600px未満は一列、600px以上は二列にする','.cards','columns',responsiveWidths,w=>w<600?'1':'2'),...layoutChecks,cssTest('overflow','すべての採点幅で横にはみ出さない','.cards','no-overflow','true')],
+    hints:['@mediaの内側と外側の波括弧を確認しましょう。条件内の規則は後に書くと同じ選択子を上書きできます。'],explanation:'境界の前後で列数が切り替わるようになりました。',
+  },
+  {
+    id:'css08',language:'css',chapterId:'css-chapter04',title:'レスポンシブな学習ページ',
+    markup:'<main class="page"><header class="page-head"><h1>学習メニュー</h1><p>自分のペースで進めよう</p></header>'+layoutMarkup.slice(layoutMarkup.indexOf('<div'))+'</main>',viewports:combinedWidths,
+    objectives:['FlexboxとGridを組み合わせる','二つの境界とページの最大幅を指定する'],
+    contentBlocks:[
+      {title:'全体と部分を組み合わせる',text:'ページ.pageはmax-width:960px、padding:16px、box-sizing:border-boxにします。max-widthは幅の上限なので、狭い画面では画面に収まります。margin:0 autoを加えると広い画面で中央に配置できます。'},
+      {title:'二つの境界',text:'見出し部分.page-headをFlexboxにし、600px未満はcolumn、600px以上はrowにします。カードはGridで一列、600px以上で二列、900px以上で三列にします。両方の親にgap:16pxを指定してください。599/600pxと899/900pxの前後を確認し、全カードを等幅で表示しましょう。'},
+    ],
+    example:'.page { max-width: 960px; margin: 0 auto; padding: 16px; box-sizing: border-box; }\n.page-head { display: flex; flex-direction: column; gap: 16px; }\n.cards { display: grid; grid-template-columns: 1fr; gap: 16px; }\n@media (min-width: 600px) {\n  .page-head { flex-direction: row; }\n  .cards { grid-template-columns: repeat(2, 1fr); }\n}\n@media (min-width: 900px) {\n  .cards { grid-template-columns: repeat(3, 1fr); }\n}',
+    starterCode:'.page { }\n.page-head { }\n.cards { }',
+    completionTests:[{id:'page',label:'ページの最大幅960px・内側余白16px・border-boxを指定する',checks:[cssTest('max','','.page','max-width','960px'),cssTest('box','','.page','box-sizing','border-box'),...sides('padding','16px').map(c=>({...c,selector:'.page'}))]},cssTest('flex','見出し部分をFlexboxにする','.page-head','display','flex'),viewportTest('direction','見出し部分は600px未満で縦、それ以上で横に並べる','.page-head','flex-direction',combinedWidths,w=>w<600?'column':'row'),cssTest('head-gap','見出し部分の間隔を16pxにする','.page-head','gap','16px'),cssTest('grid','カードをGridにする','.cards','display','grid'),viewportTest('columns','600px・900pxを境にカードを一列・二列・三列にする','.cards','columns',combinedWidths,w=>w<600?'1':w<900?'2':'3'),...layoutChecks,cssTest('overflow','すべての採点幅でページが横にはみ出さない','.page','no-overflow','true')],
+    hints:['小さい画面の規則を先に書き、大きい画面の@mediaを後へ並べます。width:960pxではなくmax-width:960pxです。'],explanation:'第4章が完了しました。画面幅に合わせた配置を組み合わせられました。',
+  },
 ].map((lesson, index, all) => ({ language: 'html', courseId: 'web-foundation', chapterId: 'html-chapter01', ...lesson, nextLessonId: all[index + 1]?.id ?? null }));
 export const chapters = [
   { id: 'html-chapter01', title: 'HTML第1章', number: '01' },
   { id: 'html-chapter02', title: 'HTML第2章', number: '02' },
   { id: 'css-chapter03', title: 'CSS第3章', number: '03', language: 'CSS' },
+  { id: 'css-chapter04', title: 'CSS第4章', number: '04', language: 'CSS' },
 ];

@@ -2,3 +2,5 @@
 #lesson-picker{display:grid;gap:8px;grid-column:1/-1}#lesson-picker button{text-align:left;white-space:normal;padding:10px;border:1px solid var(--line);border-radius:6px}#lesson-picker button[aria-current=step]{border-color:var(--accent);color:var(--accent);font-weight:700}.lesson pre{overflow:auto;max-width:100%}.lesson,.lesson-layout>*{min-width:0}#save-status{max-width:18rem;white-space:normal}#next-lesson{margin-top:12px}[hidden]{display:none!important}
 
 #lesson-picker section{display:grid;gap:8px}#lesson-picker h3{font-size:.85rem;margin:12px 0 0}
+
+.preview-controls{padding:12px 13px;background:var(--soft);font-size:.78rem;display:flex;flex-wrap:wrap;align-items:center;gap:8px}.preview-controls select{max-width:100%;padding:6px}.preview-controls p{flex-basis:100%;margin:0;line-height:1.5;color:var(--muted)}.preview-viewport{min-width:0;max-width:100%;height:430px;flex:1;overflow:auto;background:#fff}.preview-viewport iframe{display:block;flex:none;height:100%;max-width:none}@media(max-width:600px){.preview-viewport{height:300px}}

@@ -350,3 +350,18 @@ HTMLプレビューはscriptを許可しないsandboxを維持し、CSPで外部
 ブラウザAPIの参照: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe 、https://developer.mozilla.org/en-US/docs/Web/API/MessageChannel 。sandboxのsame-origin許可は付けず、専用portを移譲する。
 
 CSSの四辺条件は全辺を採点したうえで「内側余白」「外側余白」「境界線」のまとまりで表示し、同じ説明を繰り返さない。
+
+## CSS第4章の実装仕様（2026-10-02）
+
+css05〜css08の4教材を追加する。固定HTMLへのCSS入力、旧教材IDと保存、iframe隔離を維持する。
+
+- css05「Flexboxで横に並べる」: .linksをflex/row、align-items:center、justify-content:space-between、gap16pxにする。3項目の可視性と横一列を800pxで確認。
+- css06「Gridで列を作る」: .cardsをgrid、等幅2列、gap16pxにし、4カードを2行に配置。実際の各カード位置・幅・可視性を800pxで確認。
+- css07「画面幅で列数を変える」: 600px未満は1列、600px以上は2列のGrid。375/599/600/768/1280pxで判定し、全幅でgap16px・可視性・横溢れなしを確認。
+- css08「レスポンシブな学習ページ」: .pageをmax-width960px・padding16px・border-box、.page-headを狭幅column/600px以上rowのFlexbox、.cardsを1列/600px以上2列/900px以上3列のGridにする。gap16pxと可視性・横溢れなしを375/599/600/768/899/900/1280pxで確認する。
+
+教材は選択子・軸・行列・fr・メディアクエリ・境界値を順に説明し、例・開始コード・ヒントを持つ。Grid/Flexbox採点は計算値だけでなく、正の幅高さを持つ全子要素の位置から列/行数を測定する。非表示やoverflowで誤配置を隠した答案は合格にしない。小数ピクセルの丸めを考慮し、列位置は0.5px、等幅は1pxの許容差を使う。
+
+採点は教材指定の各viewportに個別の隔離フレームを作り、全幅の結果を同じ条件IDへ集約する。一幅だけの合格で進捗を完了しない。既存教材は800px判定のまま。キャンセルは次の幅へ進まず、各フレームを破棄する。表示用iframeは権限を増やさず、CSS教材のみ「表示領域に合わせる」または指定px幅を選べる。大きい幅はプレビュー枠内の横スクロールで表示し、アプリ全体を横溢れさせない。
+
+受入: 新4教材と旧11教材を3画面幅で通し確認、境界599/600・899/900の誤り、固定幅・非表示・不均等列・折返し・配置上書きの誤答、幅切替、集約結果/取消、保存/旧教材回帰、生成物同期。

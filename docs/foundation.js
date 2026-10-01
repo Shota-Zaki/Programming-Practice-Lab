@@ -44,6 +44,8 @@ function progress() {
   $('#lesson-picker').innerHTML = chapters.map(c => `<section><h3>${escapeHtml(c.title)}</h3>${lessons.filter(l => l.chapterId === c.id).map((l, i) => `<button type="button" data-lesson="${l.id}" ${l.id === state.lessonId ? 'aria-current="step"' : ''}>${i + 1}. ${escapeHtml(l.title)}${state.lessons[l.id].completed ? ' ✓ 完了' : ''}</button>`).join('')}</section>`).join('');
 }
 function renderPreview() {
+  const width = $('#preview-width').value;
+  $('#preview').style.width = width === 'fit' ? '100%' : `${Number(width)}px`;
   $('#preview').srcdoc = lessonPreview(editor.value, current());
 }
 function renderResult() {
@@ -72,6 +74,11 @@ function renderLesson() {
   $('[data-view-panel="lesson"] .breadcrumb span:last-child').textContent = lesson.id.toUpperCase();
   $('#task-title').textContent = lesson.title;
   $('#practice-hint').textContent = lesson.hints.join(' ');
+  $('#preview-controls').hidden = lesson.language !== 'css';
+  const widths = lesson.viewports ?? [375,768,1280];
+  $('#preview-width').innerHTML = '<option value="fit">表示領域に合わせる</option>' + widths.map(width => `<option value="${width}">${width}px</option>`).join('');
+  $('#preview-width-note').textContent = `採点幅: ${(lesson.viewports ?? [800]).join(' / ')}px。広いプレビューは枠内で横にスクロールできます。`;
+  $('#preview').title = lesson.language === 'css' ? 'CSSを適用したHTMLプレビュー' : 'HTMLプレビュー';
   editor.value = entry().code;
   progress(); renderResult(); renderPreview();
 }
@@ -92,6 +99,7 @@ editor.addEventListener('keydown', e => {
   if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); renderPreview(); }
 });
 $('#run-preview').addEventListener('click', renderPreview);
+$('#preview-width').addEventListener('change', renderPreview);
 $('#check-code').addEventListener('click', async () => {
   cancelGrade();
   const record = entry(), lesson = current(), code = editor.value;
