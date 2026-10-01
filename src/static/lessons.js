@@ -159,7 +159,7 @@ export const lessons = [
       { title: '一辺だけ指定する', text: 'margin-bottomは下側の余白です。.introに12pxを指定してください。paddingとmarginを逆にすると同じ見た目にはなりません。上下に隣り合うブロックのmarginは相殺されることもありますが、この演習では指定した四辺の値を確認します。' },
     ],
     example: '.card { padding: 24px; margin: 16px; }\n.intro { margin-bottom: 12px; }', starterCode: '.card { }\n.intro { }',
-    completionTests: [...sides('padding','24px'),...sides('margin','16px'),cssTest('intro-margin','紹介文の下余白を12pxにする','.intro','margin-bottom','12px')],
+    completionTests: [{id:'padding',label:'カードの内側余白を四辺とも24pxにする',checks:sides('padding','24px')},{id:'margin',label:'カードの外側余白を四辺とも16pxにする',checks:sides('margin','16px')},cssTest('intro-margin','紹介文の下余白を12pxにする','.intro','margin-bottom','12px')],
     hints: ['上下左右を個別に指定しても構いません。paddingは内側、marginは外側です。'], explanation: '内側と外側の余白を区別して指定できました。',
   },
   {
@@ -170,7 +170,7 @@ export const lessons = [
       { title: '240pxのカードを作る', text: '.cardをwidth:240px、padding:16px、border:2px solid #166534、box-sizing:border-boxにしてください。境界線を含む外寸は240px、内容部分は204pxです。content-boxのままだと外寸は276pxになります。' },
     ],
     example: '.card {\n  width: 240px;\n  padding: 16px;\n  border: 2px solid #166534;\n  box-sizing: border-box;\n}', starterCode: '.card {\n  width: 240px;\n}',
-    completionTests: [cssTest('box','box-sizingをborder-boxにする','.card','box-sizing','border-box'),cssTest('width','widthを240pxにする','.card','width','240px'),...sides('padding','16px'),...['top','right','bottom','left'].flatMap(side => [cssTest(`border-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線幅を2pxにする`,'.card',`border-${side}-width`,'2px'),cssTest(`solid-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線を実線にする`,'.card',`border-${side}-style`,'solid'),cssTest(`color-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線色を#166534にする`,'.card',`border-${side}-color`,'rgb(22, 101, 52)')]),cssTest('outer','境界線を含む外寸を240pxにする','.card','outer-width','240')],
+    completionTests: [cssTest('box','box-sizingをborder-boxにする','.card','box-sizing','border-box'),cssTest('width','widthを240pxにする','.card','width','240px'),{id:'padding',label:'内側余白を四辺とも16pxにする',checks:sides('padding','16px')},{id:'border',label:'四辺の境界線を2px・実線・#166534にする',checks:['top','right','bottom','left'].flatMap(side => [cssTest(`border-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線幅を2pxにする`,'.card',`border-${side}-width`,'2px'),cssTest(`solid-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線を実線にする`,'.card',`border-${side}-style`,'solid'),cssTest(`color-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線色を#166534にする`,'.card',`border-${side}-color`,'rgb(22, 101, 52)')])},cssTest('outer','境界線を含む外寸を240pxにする','.card','outer-width','240')],
     hints: ['borderには太さ・種類・色を指定します。paddingを含めても外寸240pxになるようbox-sizingを確認しましょう。'], explanation: '第3章の基本ができました。次は配置と画面幅への対応を学びます。',
   },
 ].map((lesson, index, all) => ({ language: 'html', courseId: 'web-foundation', chapterId: 'html-chapter01', ...lesson, nextLessonId: all[index + 1]?.id ?? null }));

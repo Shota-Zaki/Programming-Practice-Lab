@@ -13,9 +13,13 @@ function gradingFrame() {
       document.head.append(style);
       const rules = [...style.sheet.cssRules];
       const results = tests.map(test => {
-        const node = document.querySelector(test.selector);
-        const actual = node ? test.property === 'outer-width' ? String(node.getBoundingClientRect().width) : getComputedStyle(node).getPropertyValue(test.property) : '';
-        return { id: test.id, passed: Boolean(node && actual === test.expected && (!test.requiredSelector || rules.some(rule => rule.selectorText?.split(',').map(s => s.trim()).includes(test.requiredSelector) && rule.style.getPropertyValue(test.property)))), actual, expected: test.expected };
+        const checks = (test.checks ?? [test]).map(check => {
+          const node = document.querySelector(check.selector);
+          const actual = node ? check.property === 'outer-width' ? String(node.getBoundingClientRect().width) : getComputedStyle(node).getPropertyValue(check.property) : '';
+          const selectorMatches = !check.requiredSelector || rules.some(rule => rule.selectorText?.split(',').map(s => s.trim()).includes(check.requiredSelector) && rule.style.getPropertyValue(check.property));
+          return { passed: Boolean(node && actual === check.expected && selectorMatches), actual, expected: check.expected };
+        });
+        return { id: test.id, passed: checks.every(check => check.passed), actual: checks.map(check => check.actual).join(' / '), expected: checks.map(check => check.expected).join(' / ') };
       });
       port.postMessage({ results });
     } catch { port.postMessage({ error: true }); }

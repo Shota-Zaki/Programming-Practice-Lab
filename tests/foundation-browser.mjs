@@ -14,7 +14,7 @@ const results = [];
 await mkdir('evidence/2026-10-02-css', {recursive:true});
 try {
   for (const width of [375,768,1280]) {
-    const page = await browser.newPage({viewport:{width,height:900}});
+    const page = await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'});
     const errors=[]; page.on('pageerror',e=>errors.push(e.message));
     await page.goto(origin);
     const lessons = await page.evaluate(async()=> (await import('/lessons.js')).lessons);
@@ -32,6 +32,7 @@ try {
       await page.getByText('演習を完了しました', {exact:true}).waitFor();
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);
       await page.frameLocator('#preview').locator('h1').waitFor({state:'visible'});
+      await page.evaluate(() => window.scrollTo({top:0,behavior:'instant'}));
       await page.screenshot({path:`evidence/2026-10-02-css/practice-${width}-${i+1}.png`,fullPage:true});
       await page.locator('#next-lesson').click();
     }

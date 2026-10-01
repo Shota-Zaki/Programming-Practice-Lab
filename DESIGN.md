@@ -348,3 +348,5 @@ HTMLプレビューはscriptを許可しないsandboxを維持し、CSPで外部
 非同期採点中の入力変更・初期化・教材移動で古い結果を破棄する。採点失敗は未完了のまま再試行でき、結果や試行数を誤った教材へ保存しない。受入は4教材×3幅の操作、完成例/初期コード、cascade/同値表現/誤選択子/四辺/box-sizing、隔離・外部通信禁止・取消・復元。CSS採点固定viewportは800×600。第4章の画面幅課題は別途明示サイズを設計する。
 
 ブラウザAPIの参照: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe 、https://developer.mozilla.org/en-US/docs/Web/API/MessageChannel 。sandboxのsame-origin許可は付けず、専用portを移譲する。
+
+CSSの四辺条件は全辺を採点したうえで「内側余白」「外側余白」「境界線」のまとまりで表示し、同じ説明を繰り返さない。
