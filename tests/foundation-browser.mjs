@@ -34,6 +34,7 @@ try {
       await page.frameLocator('#preview').locator('h1').waitFor({state:'visible'});
       await page.evaluate(() => window.scrollTo({top:0,behavior:'instant'}));
       await page.screenshot({path:`evidence/2026-10-02-css/practice-${width}-${i+1}.png`,fullPage:true});
+      if (i === 10) await page.locator('#preview').screenshot({path:`evidence/2026-10-02-css/preview-${width}.png`});
       await page.locator('#next-lesson').click();
     }
     assert.equal(await page.locator('.course-side [data-chapter-progress]').textContent(),'4 / 4');
