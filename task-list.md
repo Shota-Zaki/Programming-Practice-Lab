@@ -5,7 +5,7 @@
 - currentTask: `PPL-FOUNDATION-001`
 - currentPhase: `Web開発基礎講座`
 - currentStatus: `in_progress`
-- completionPercentage: `29%`（講座全体24レッスン中7レッスン実装・検証済み。初期カリキュラム17/17と第2章7/7受入項目は完了）
+- completionPercentage: `46%`（講座全体24レッスン中11レッスン実装・検証済み。初期カリキュラム17/17、第2章7/7、第3章7/7受入項目は完了）
 - baseBranch: `main`
 - workBranch: `work`
 - pagesSource: `main/docs`
@@ -84,6 +84,16 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] 全7教材を375/768/1280pxで操作・採点・再読込確認する。
 - [x] 誤答22ケース、sandbox維持、画像表示、生成物同期を検証する。
 
+### CSS第3章の受入条件
+
+- [x] 選択子・色と文字・余白・ボックスモデルの4教材を設計する。
+- [x] CSS専用入力、固定HTML、教材の説明・例・ヒントを提供する。
+- [x] 計算済みスタイルと外寸を採点し、同値表現とcascadeを扱う。
+- [x] 学習者CSSを隔離し、プレビュー権限・外部通信禁止を維持する。
+- [x] 入力変更・教材移動・初期化で採点を取り消し、タイムアウト後に再試行できる。
+- [x] 全11教材×3幅、HTML/CSS誤答、保存互換性を検証する。
+- [x] 生成物を同期し、実画面とプレビューを確認する。
+
 ### Web開発基礎の全体範囲
 
 #### HTML
@@ -129,7 +139,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`のHTML第1〜2章は実装・検証済み（7/24レッスン、29%）。次は既存第3章「見た目を整える」の4教材について、選択子・色と文字・余白・ボックスモデルの目標と演習・採点条件をDESIGN.mdに具体化し、CSS入力の判定を設計・実装する。
+`PPL-FOUNDATION-001`はHTML第1〜2章とCSS第3章まで実装・検証済み（11/24レッスン、46%）。次は既存第4章「レイアウトとレスポンシブ」の4教材をDESIGN.mdに具体化する。Flexbox・Grid・画面幅への対応の演習と、幅別のブラウザ採点条件を設計して実装する。
 
 ## Repository operation policy — 2026-09-01
 
@@ -168,3 +178,14 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - ブラウザ再実行: `PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node tests/foundation-browser.mjs`。Evidence: `evidence/2026-10-02/browser-results.json`、`verify-agent.log`、24枚の画面画像。375px教材と1280pxフォームを目視確認。iframeにscript権限を追加せず、画像は同梱data、CSPは外部通信・送信を制限。
 - 初回ブラウザ試行の教材ボタンlocator重複と、旧保存fixture投入後のhashchangeによる上書きをテスト側で修正して再実行。完成例や誤答判定の条件は削除していない。
 - 残件: 第3〜7章17レッスン、統合PPL-CORE-001の共通形式/アダプター・Worker/停止・結果内訳・IndexedDB・実Pages検証。未設定の新Taskは作成していない。公開/main mergeは未実施。
+
+
+### 2026-10-02 — CSS第3章を完成
+
+- Source/test SHA: `e2627b652dec6ddde31de6de7be278da7a16b77d`。アプリケーション実装は9c1df02/3b574c2、最終証拠追加テストはe2627b6。4教材css01〜css04、CSS/HTML表示切替、固定HTMLへのCSS入力を追加。
+- `css-grading.js`はブラウザのCSSOM/getComputedStyle/外寸を使う。固定コードのみnonce許可するopaque-origin iframeにCSS文字列を専用portで渡し、親DOM/保存領域への同一オリジンアクセスや外部通信は許可しない。学習者JavaScript実行機能は追加していない。表示用プレビューのsandboxは空のまま。
+- 入力変更・教材移動・初期化で採点を取り消す。2秒タイマーの失敗表示と再試行を確認。これはCSS採点の待機制限であり、将来のWorkerによるJavaScript実行制御の完成を意味しない。
+- `npm run verify:agent` PASS。全11教材×375/768/1280pxで完成例合格/開始コード未達、入力・結果復元、初期化、Tab、横溢れなし、pageerror0。HTML誤答22/CSS誤答10、同値色表現・important/cascade、外部リクエスト0、CSSへのHTML混入、取消・タイムアウト・UI再試行を確認。
+- 四辺の検証は維持し、余白/境界線の条件をまとめて表示。採点失敗表示がfinally処理で消えないよう修正し、最終固定SHAで再検証。スクリーンショットはreduced motionとscroll位置固定で採取し、画面外iframeの全ページ画像だけに頼らず各幅のプレビュー単体画像も保存。
+- Evidence: `evidence/2026-10-02-css/` のbrowser-results.json、verify-agent.log、39枚の画像。1280px演習、375px演習とプレビューを目視確認。実GitHub Pages・Safari・手動読み上げは未検証。
+- 残件: 第4〜7章13レッスン、統合PPL-CORE-001の共通実行アダプター・Worker/停止・結果内訳・IndexedDB・実Pages検証。次の別Taskは未設定。公開/main mergeは未実施。
