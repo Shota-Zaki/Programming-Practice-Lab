@@ -23,7 +23,7 @@
         <button type="button" data-view="practice"><span>&gt;_</span>入力演習</button>
       </nav>
       <section class="current-course">
-        <div><span>HTML第1章</span><strong data-chapter-percent>0%</strong></div>
+        <div><span data-chapter-title>HTML第1章</span><strong data-chapter-percent>0%</strong></div>
         <h2>Web開発基礎</h2>
         <p id="current-lesson-label">HTML第1章</p>
         <div class="progress"><i data-progress-bar style="width:0%"></i></div>
@@ -107,13 +107,13 @@
         <section class="view" data-view-panel="course" aria-labelledby="course-title" hidden>
           <div class="page">
             <div class="breadcrumb"><button type="button" data-view="courses">基礎講座</button><span>/</span><span>Web開発基礎</span></div>
-            <header class="course-hero"><div><p class="eyebrow">COURSE 01</p><h1 id="course-title">Web開発基礎</h1><p class="lead">HTMLで意味のある構造を作り、CSSで配置を整え、JavaScriptで操作に反応する画面を完成させます。</p><div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Browser</span></div><div class="actions"><button class="primary" type="button" data-view="lesson">最初のレッスンへ</button><button class="secondary" type="button" data-view="courses">一覧へ戻る</button></div></div><aside><span>最終成果物</span><strong>操作できる自己紹介サイト</strong><ul><li>意味のあるHTML構造</li><li>レスポンシブなレイアウト</li><li>入力と表示のJavaScript</li><li>ブラウザ保存</li></ul></aside></header>
+            <header class="course-hero"><div><p class="eyebrow">COURSE 01</p><h1 id="course-title">Web開発基礎</h1><p class="lead">HTMLで意味のある構造を作り、CSSで配置を整え、JavaScriptで操作に反応する画面を完成させます。</p><div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Browser</span></div><div class="actions"><button class="primary" type="button" data-lesson="html01">最初のレッスンへ</button><button class="secondary" type="button" data-view="courses">一覧へ戻る</button></div></div><aside><span>最終成果物</span><strong>操作できる自己紹介サイト</strong><ul><li>意味のあるHTML構造</li><li>レスポンシブなレイアウト</li><li>入力と表示のJavaScript</li><li>ブラウザ保存</li></ul></aside></header>
             <div class="course-layout">
               <main>
                 <header class="section-head"><div><p class="eyebrow">CURRICULUM</p><h2>カリキュラム</h2></div><p>7章・24レッスン</p></header>
                 <ol class="curriculum">
-                  <li class="current"><span>01</span><div><small>HTML / 4 LESSONS</small><h3>Webページの構造</h3><p>タグ、属性、head、body、見出し、文章。</p></div><button type="button" data-view="lesson">開始</button></li>
-                  <li><span>02</span><div><small>HTML / 3 LESSONS</small><h3>意味のあるHTML</h3><p>セクション、リスト、リンク、画像、フォーム。</p></div><b>未着手</b></li>
+                  <li class="current"><span>01</span><div><small>HTML / 4 LESSONS</small><h3>Webページの構造</h3><p>タグ、属性、head、body、見出し、文章。</p></div><button type="button" data-lesson="html01">開始</button></li>
+                  <li><span>02</span><div><small>HTML / 3 LESSONS</small><h3>意味のあるHTML</h3><p>セクション、リスト、リンク、画像、フォーム。</p></div><button type="button" data-lesson="html05">開始</button></li>
                   <li><span>03</span><div><small>CSS / 4 LESSONS</small><h3>見た目を整える</h3><p>選択子、色、文字、余白、ボックスモデル。</p></div><b>未着手</b></li>
                   <li><span>04</span><div><small>CSS / 4 LESSONS</small><h3>レイアウトとレスポンシブ</h3><p>Flexbox、Grid、画面幅への対応。</p></div><b>未着手</b></li>
                   <li><span>05</span><div><small>JAVASCRIPT / 3 LESSONS</small><h3>値と処理の基本</h3><p>変数、条件分岐、繰り返し、関数。</p></div><b>未着手</b></li>
@@ -122,7 +122,7 @@
                 </ol>
               </main>
               <aside class="course-side">
-                <section><p class="eyebrow">COURSE STATUS</p><h2>HTML第1章の進捗</h2><div class="progress"><i data-progress-bar style="width:0%"></i></div><dl><div><dt>完了</dt><dd data-course-progress>0 / 24</dd></div><div><dt>第1章演習</dt><dd data-chapter-progress>0 / 4</dd></div><div><dt>目安</dt><dd>12〜16時間</dd></div></dl></section>
+                <section><p class="eyebrow">COURSE STATUS</p><h2><span data-chapter-title>HTML第1章</span>の進捗</h2><div class="progress"><i data-progress-bar style="width:0%"></i></div><dl><div><dt>完了</dt><dd data-course-progress>0 / 24</dd></div><div><dt>選択中の章</dt><dd data-chapter-progress>0 / 4</dd></div><div><dt>目安</dt><dd>12〜16時間</dd></div></dl></section>
                 <section><p class="eyebrow">REQUIREMENTS</p><h2>前提条件</h2><ul><li>ブラウザを操作できる</li><li>日本語入力ができる</li><li>プログラミング経験は不要</li></ul></section>
               </aside>
             </div>
@@ -133,7 +133,7 @@
           <div class="page">
             <div class="breadcrumb"><button type="button" data-view="course">Web開発基礎</button><span>/</span><span>HTML 01</span></div>
             <div class="lesson-layout">
-              <aside class="toc"><h2>HTML第1章</h2><div id="lesson-picker" aria-label="教材一覧"></div><div><span>章の進捗</span><strong data-chapter-progress>0 / 4</strong></div></aside>
+              <aside class="toc"><h2 data-chapter-title>HTML第1章</h2><div id="lesson-picker" aria-label="教材一覧"></div><div><span>章の進捗</span><strong data-chapter-progress>0 / 4</strong></div></aside>
               <article class="lesson" id="lesson-content"></article>
             </div>
           </div>

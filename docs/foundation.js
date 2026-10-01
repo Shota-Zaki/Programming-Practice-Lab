@@ -1,4 +1,4 @@
-import { lessons } from './lessons.js';
+import { lessons, chapters } from './lessons.js';
 import { gradeHtml } from './grading.js';
 import { createProgressRepository } from './progress.js';
 const $ = selector => document.querySelector(selector);
@@ -26,13 +26,18 @@ function showView(name, { focus = false, history = true } = {}) {
   if (focus) { const heading = $(`[data-view-panel="${state.view}"] h1`); if (heading) { heading.tabIndex = -1; heading.focus({preventScroll:true}); } }
 }
 function progress() {
-  const count = lessons.filter(l => state.lessons[l.id].completed).length;
-  document.querySelectorAll('[data-chapter-progress]').forEach(n => n.textContent = `${count} / 4`);
-  document.querySelectorAll('[data-course-progress]').forEach(n => n.textContent = `${count} / 24`);
-  document.querySelectorAll('[data-chapter-percent]').forEach(n => n.textContent = `${count * 25}%`);
-  document.querySelectorAll('[data-progress-bar]').forEach(n => n.style.width = `${count * 25}%`);
-  $('#current-lesson-label').textContent = `HTML第1章 / ${current().title}`;
-  $('#lesson-picker').innerHTML = lessons.map((l, i) => `<button type="button" data-lesson="${l.id}" ${l.id === state.lessonId ? 'aria-current="step"' : ''}>${i + 1}. ${escapeHtml(l.title)}${state.lessons[l.id].completed ? ' ✓ 完了' : ''}</button>`).join('');
+  const chapter = chapters.find(c => c.id === current().chapterId);
+  const chapterLessons = lessons.filter(l => l.chapterId === chapter.id);
+  const count = chapterLessons.filter(l => state.lessons[l.id].completed).length;
+  const total = lessons.filter(l => state.lessons[l.id].completed).length;
+  const percent = Math.round(count / chapterLessons.length * 100);
+  document.querySelectorAll('[data-chapter-title]').forEach(n => n.textContent = chapter.title);
+  document.querySelectorAll('[data-chapter-progress]').forEach(n => n.textContent = `${count} / ${chapterLessons.length}`);
+  document.querySelectorAll('[data-course-progress]').forEach(n => n.textContent = `${total} / 24`);
+  document.querySelectorAll('[data-chapter-percent]').forEach(n => n.textContent = `${percent}%`);
+  document.querySelectorAll('[data-progress-bar]').forEach(n => n.style.width = `${percent}%`);
+  $('#current-lesson-label').textContent = `${chapter.title} / ${current().title}`;
+  $('#lesson-picker').innerHTML = chapters.map(c => `<section><h3>${escapeHtml(c.title)}</h3>${lessons.filter(l => l.chapterId === c.id).map((l, i) => `<button type="button" data-lesson="${l.id}" ${l.id === state.lessonId ? 'aria-current="step"' : ''}>${i + 1}. ${escapeHtml(l.title)}${state.lessons[l.id].completed ? ' ✓ 完了' : ''}</button>`).join('')}</section>`).join('');
 }
 function renderPreview() {
   // CSP precedes learner markup; sandbox intentionally grants no capabilities.
@@ -53,7 +58,8 @@ function renderResult() {
 }
 function renderLesson() {
   const lesson = current();
-  $('#lesson-content').innerHTML = `<header><p class="eyebrow">HTML / CHAPTER 01</p><h1 id="lesson-title">${escapeHtml(lesson.title)}</h1></header><section><h2>今回の目標</h2><ul class="goals">${lesson.objectives.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></section>${lesson.contentBlocks.map(b => `<section><h2>${escapeHtml(b.title)}</h2><p>${escapeHtml(b.text)}</p></section>`).join('')}<section><h2>コード例</h2><div class="code"><header><span>index.html</span><button type="button" data-copy-code>コピー</button></header><pre><code>${escapeHtml(lesson.example)}</code></pre></div></section><footer class="lesson-next"><p>例を参考に自分で入力し、完了条件を確認しましょう。</p><button class="primary" type="button" data-view="practice">入力演習へ進む</button></footer>`;
+  const chapter = chapters.find(c => c.id === lesson.chapterId);
+  $('#lesson-content').innerHTML = `<header><p class="eyebrow">HTML / CHAPTER ${chapter.number}</p><h1 id="lesson-title">${escapeHtml(lesson.title)}</h1></header><section><h2>今回の目標</h2><ul class="goals">${lesson.objectives.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></section>${lesson.contentBlocks.map(b => `<section><h2>${escapeHtml(b.title)}</h2><p>${escapeHtml(b.text)}</p></section>`).join('')}<section><h2>コード例</h2><div class="code"><header><span>index.html</span><button type="button" data-copy-code>コピー</button></header><pre><code>${escapeHtml(lesson.example)}</code></pre></div></section><footer class="lesson-next"><p>例を参考に自分で入力し、完了条件を確認しましょう。</p><button class="primary" type="button" data-view="practice">入力演習へ進む</button></footer>`;
   $('#practice-title').textContent = lesson.title;
   $('.practice-head small').textContent = `WEB基礎 / ${lesson.id.toUpperCase()} / PRACTICE`;
   $('[data-view-panel="lesson"] .breadcrumb span:last-child').textContent = lesson.id.toUpperCase();
