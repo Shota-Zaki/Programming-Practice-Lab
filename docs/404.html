@@ -23,10 +23,10 @@
         <button type="button" data-view="practice"><span>&gt;_</span>入力演習</button>
       </nav>
       <section class="current-course">
-        <div><span>最初の講座</span><strong>0%</strong></div>
+        <div><span>HTML第1章</span><strong data-chapter-percent>0%</strong></div>
         <h2>Web開発基礎</h2>
-        <p>HTML 01 / 基本構造</p>
-        <div class="progress"><i style="width:0%"></i></div>
+        <p id="current-lesson-label">HTML第1章</p>
+        <div class="progress"><i data-progress-bar style="width:0%"></i></div>
         <button type="button" data-view="lesson">レッスンを始める</button>
       </section>
       <a class="project-preview-link" href="./project-preview.html">
@@ -69,7 +69,7 @@
                   <div class="browser-bar"><i></i><i></i><i></i><b>my-page.html</b></div>
                   <div class="browser-body"><small>HELLO, WEB</small><strong>はじめてのWebページ</strong><p>自分で入力したHTMLがここに表示されます。</p></div>
                 </div>
-                <dl><div><dt>現在</dt><dd>0 / 24</dd></div><div><dt>目安</dt><dd>12時間</dd></div><div><dt>方式</dt><dd>Browser</dd></div></dl>
+                <dl><div><dt>現在</dt><dd data-course-progress>0 / 24</dd></div><div><dt>目安</dt><dd>12時間</dd></div><div><dt>方式</dt><dd>Browser</dd></div></dl>
               </article>
             </section>
 
@@ -122,7 +122,7 @@
                 </ol>
               </main>
               <aside class="course-side">
-                <section><p class="eyebrow">COURSE STATUS</p><h2>開始前</h2><div class="progress"><i style="width:0%"></i></div><dl><div><dt>完了</dt><dd>0 / 24</dd></div><div><dt>演習</dt><dd>0 / 18</dd></div><div><dt>目安</dt><dd>12〜16時間</dd></div></dl></section>
+                <section><p class="eyebrow">COURSE STATUS</p><h2>HTML第1章の進捗</h2><div class="progress"><i data-progress-bar style="width:0%"></i></div><dl><div><dt>完了</dt><dd data-course-progress>0 / 24</dd></div><div><dt>第1章演習</dt><dd data-chapter-progress>0 / 4</dd></div><div><dt>目安</dt><dd>12〜16時間</dd></div></dl></section>
                 <section><p class="eyebrow">REQUIREMENTS</p><h2>前提条件</h2><ul><li>ブラウザを操作できる</li><li>日本語入力ができる</li><li>プログラミング経験は不要</li></ul></section>
               </aside>
             </div>
@@ -133,25 +133,8 @@
           <div class="page">
             <div class="breadcrumb"><button type="button" data-view="course">Web開発基礎</button><span>/</span><span>HTML 01</span></div>
             <div class="lesson-layout">
-              <aside class="toc"><p class="eyebrow">LESSON 01</p><h2>HTMLの基本構造</h2><nav><a href="#goal">今回の目標</a><a href="#structure">基本構造</a><a href="#tags">タグの役割</a><a href="#check">理解確認</a></nav><div><span>章の進捗</span><strong>1 / 4</strong><div class="progress"><i style="width:25%"></i></div></div></aside>
-              <article class="lesson">
-                <header><p class="eyebrow">HTML / CHAPTER 01</p><h1 id="lesson-title">HTMLの基本構造を理解する</h1><p class="lead">HTMLは、ブラウザへ「これは見出し」「これは文章」と内容の意味を伝えるための言語です。</p></header>
-                <section id="goal"><h2>今回の目標</h2><ul class="goals"><li>HTML文書の最小構造を説明できる</li><li>headとbodyの役割を区別できる</li><li>見出しと文章を自分で入力できる</li></ul></section>
-                <section id="structure"><h2>HTML文書の最小構造</h2><p>最初は暗記せず、各行の役割を確認してください。</p><div class="code"><header><span>index.html</span><button type="button" data-copy-code>コピー</button></header><pre><code>&lt;!doctype html&gt;
-&lt;html lang="ja"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;title&gt;はじめてのページ&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;はじめてのWebページ&lt;/h1&gt;
-    &lt;p&gt;HTMLを入力して表示しています。&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="concepts"><article><span>1</span><h3>doctype</h3><p>HTML文書であることを宣言。</p></article><article><span>2</span><h3>head</h3><p>ページの設定やタイトル。</p></article><article><span>3</span><h3>body</h3><p>画面に表示する内容。</p></article></div></section>
-                <section id="tags"><h2>タグは内容の意味を表す</h2><div class="tag-list"><article><code>&lt;h1&gt;</code><div><h3>ページの主見出し</h3><p>ページ全体の内容を代表します。</p></div></article><article><code>&lt;p&gt;</code><div><h3>文章の段落</h3><p>複数の文を一つの段落にします。</p></div></article><article><code>&lt;title&gt;</code><div><h3>タブの名前</h3><p>本文ではなくブラウザのタブに表示されます。</p></div></article></div></section>
-                <section id="check" class="knowledge"><p class="eyebrow">QUICK CHECK</p><h2>理解確認</h2><p>ブラウザ画面に表示する見出しと文章は、どこへ書きますか。</p><label><input type="radio" name="knowledge" value="head" /> headの中</label><label><input type="radio" name="knowledge" value="body" /> bodyの中</label><label><input type="radio" name="knowledge" value="doctype" /> doctypeの中</label><button id="check-knowledge" type="button">回答を確認</button><p id="knowledge-result" role="status" aria-live="polite"></p></section>
-                <footer class="lesson-next"><div><span>次の操作</span><strong>自分でHTMLを入力して表示を確認する</strong></div><button class="primary" type="button" data-view="practice">入力演習へ進む</button></footer>
-              </article>
+              <aside class="toc"><h2>HTML第1章</h2><div id="lesson-picker" aria-label="教材一覧"></div><div><span>章の進捗</span><strong data-chapter-progress>0 / 4</strong></div></aside>
+              <article class="lesson" id="lesson-content"></article>
             </div>
           </div>
         </section>
@@ -159,17 +142,8 @@
         <section class="view practice-view" data-view-panel="practice" aria-labelledby="practice-title" hidden>
           <header class="practice-head"><button type="button" data-view="lesson">← 教材へ戻る</button><div><small>WEB基礎 / HTML 01 / PRACTICE</small><h1 id="practice-title">HTMLの基本構造を入力する</h1></div><span id="save-status">自動保存</span></header>
           <div class="practice-grid">
-            <section class="task-panel"><p class="eyebrow">TASK</p><h2>見出しと文章を持つページを完成させる</h2><p>空欄を埋め、ブラウザプレビューへ自己紹介ページを表示してください。</p><h3>完了条件</h3><ul class="conditions"><li data-test="doctype"><span>○</span>HTML文書として宣言</li><li data-test="title"><span>○</span>titleに文字がある</li><li data-test="heading"><span>○</span>h1見出しがある</li><li data-test="paragraph"><span>○</span>p段落がある</li></ul><details><summary>ヒントを見る</summary><p>画面に表示する内容はbodyの中へ書きます。</p></details></section>
-            <section class="editor-panel"><header><div><span>index.html</span><b>HTML</b></div><button id="reset-code" type="button">初期状態へ戻す</button></header><textarea id="editor" spellcheck="false" aria-label="HTMLコード入力欄">&lt;!doctype html&gt;
-&lt;html lang="ja"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;title&gt;&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    
-  &lt;/body&gt;
-&lt;/html&gt;</textarea><footer><button class="secondary" id="run-preview" type="button">プレビュー更新</button><button class="primary" id="check-code" type="button">完了条件を確認</button></footer></section>
+            <section class="task-panel"><p class="eyebrow">TASK</p><h2 id="task-title"></h2><p>教材を参考に入力して、表示と完了条件を確認してください。</p><h3>完了条件</h3><ul class="conditions" id="conditions"></ul><details><summary>ヒントを見る</summary><p id="practice-hint"></p></details><p id="attempts" role="status"></p><button class="primary" id="next-lesson" type="button" hidden>次のレッスンへ</button></section>
+            <section class="editor-panel"><header><div><span>index.html</span><b>HTML</b></div><button id="reset-code" type="button">初期状態へ戻す</button></header><textarea id="editor" spellcheck="false" aria-label="HTMLコード入力欄"></textarea><footer><button class="secondary" id="run-preview" type="button">プレビュー更新</button><button class="primary" id="check-code" type="button">完了条件を確認</button></footer></section>
             <section class="preview-panel"><header><span>ブラウザプレビュー</span><b id="result-status">未確認</b></header><iframe id="preview" title="HTMLプレビュー" sandbox></iframe><div class="result-message"><strong id="result-title">コードを入力してください</strong><p id="result-message" aria-live="polite">プレビュー更新後、完了条件を確認できます。</p></div></section>
           </div>
         </section>

@@ -5,12 +5,12 @@
 - currentTask: `PPL-FOUNDATION-001`
 - currentPhase: `Web開発基礎講座`
 - currentStatus: `in_progress`
-- completionPercentage: `59%`（初期カリキュラム17項目中10項目完了）
+- completionPercentage: `100%`（初期カリキュラム17項目中17項目完了。講座全体24レッスンの完成率ではない）
 - baseBranch: `main`
 - workBranch: `work`
 - pagesSource: `main/docs`
 - selectedDesign: `foundation-first + project-based`
-- updatedAt: `2026-09-02`
+- updatedAt: `2026-10-01`
 
 ## PPL-INIT-001 GitHub Pages公開基盤
 
@@ -66,13 +66,13 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] title、h1、pの条件判定を追加する。
 - [x] 入力コードを端末へ保存する。
 - [x] 既存の実践プロジェクトUIを別ページへ退避する。
-- [ ] 教材データを画面HTMLから分離する。
-- [ ] HTML第1章の4レッスンを教材データとして作成する。
-- [ ] レッスン完了状態と章進捗を保存する。
-- [ ] 入力演習の試行回数と結果を保存する。
-- [ ] 再読込後に教材位置と演習状態を復元する。
-- [ ] HTML第1章の通し検証を行う。
-- [ ] 375px、768px、1280pxで操作監査を行う。
+- [x] 教材データを画面HTMLから分離する。
+- [x] HTML第1章の4レッスンを教材データとして作成する。
+- [x] レッスン完了状態と章進捗を保存する。
+- [x] 入力演習の試行回数と結果を保存する。
+- [x] 再読込後に教材位置と演習状態を復元する。
+- [x] HTML第1章の通し検証を行う。
+- [x] 375px、768px、1280pxで操作監査を行う。
 
 ### Web開発基礎の全体範囲
 
@@ -119,7 +119,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`として、HTML第1章を教材データへ分離し、4レッスンを順番に完了できる状態へ進める。
+`PPL-FOUNDATION-001`のHTML第1章（初期カリキュラム）は完了。次は第2章「意味のあるHTML」の3レッスンの教材・採点条件をDESIGN.mdに具体化し、同じデータ形式で実装する。講座全体は4 / 24レッスン実装済み（17%）、引き続き進行中。
 
 ## Repository operation policy — 2026-09-01
 
@@ -137,3 +137,14 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - `npm run verify:agent`を追加し、既存`npm run verify`をそのまま呼ぶようにした。
 - `VERIFY_AGENT.md`に固定SHA、Task固有追加検証、未実施の扱い、証拠記録ルールを定義した。
 - Current Taskの375 / 768 / 1280操作監査等は引き続きAcceptance Criteria側の追加検証として扱う。
+
+
+### 2026-10-01 — HTML第1章を完成
+
+- `lessons.js`に4レッスン、`grading.js`にDOM採点、`progress.js`に保存Repositoryを分離。
+- 入力、試行数、採点時コード・結果、完了履歴、表示位置を教材別に保存。旧入力の移行、壊れた保存・保存拒否からの継続を検証。
+- 375 / 768 / 1280pxの各幅で4教材を順次完了し、再読込、教材復習、入力変更時の採点無効化、初期化、Tab移動、横溢れなしを確認。全幅pageerror 0。
+- `tests/foundation-browser.mjs`で再実行可能。`PLAYWRIGHT_MODULE`で既存PlaywrightのESM入口を指定するか、利用環境のPlaywrightを使う。
+- Evidence: `evidence/2026-10-01/browser-results.json`と15枚の画面画像。目視確認は375px教材・1280px演習を含む。
+- HTML第1章の17 ACは完了。章2〜7（20レッスン）、JavaScript Worker/停止、IndexedDB/共通アダプターは未完。公開は未実施。
+- `npm run verify:agent` PASS（build、Pages必須ファイル、生成物と編集元の同期）。ログ: `evidence/2026-10-01/verify-agent.log`。`git diff --check`もPASS。

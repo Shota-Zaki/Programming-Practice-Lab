@@ -9,6 +9,9 @@ const requiredFiles = [
   "docs/.nojekyll",
   "docs/foundation.css",
   "docs/foundation.js",
+  "docs/lessons.js",
+  "docs/grading.js",
+  "docs/progress.js",
   "docs/project-preview.html",
   "docs/styles.css",
   "docs/app.js"

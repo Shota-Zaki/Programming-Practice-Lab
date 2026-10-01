@@ -1,1 +1,98 @@
-const panels=[...document.querySelectorAll("[data-view-panel]")];const controls=[...document.querySelectorAll("[data-view]")];const nav=[...document.querySelectorAll(".sidebar nav [data-view],.mobile-nav [data-view]")];const sidebar=document.querySelector("#sidebar");const menu=document.querySelector(".menu-button");const title=document.querySelector("#view-title");const kicker=document.querySelector("#view-kicker");const meta={home:["FOUNDATION LEARNING","ホーム"],courses:["FOUNDATION COURSES","基礎講座"],course:["COURSE 01","Web開発基礎"],lesson:["HTML 01","教材"],practice:["HTML PRACTICE","入力演習"]};const valid=new Set(panels.map(x=>x.dataset.viewPanel));const VIEW_KEY="ppl.foundation.view";const CODE_KEY="ppl.foundation.html01";function closeMenu(){sidebar?.classList.remove("open");menu?.setAttribute("aria-expanded","false")}function showView(name,{focus=false,history=true}={}){const target=valid.has(name)?name:"home";panels.forEach(p=>{const active=p.dataset.viewPanel===target;p.hidden=!active;p.classList.toggle("active",active)});const m=meta[target]||meta.home;if(kicker)kicker.textContent=m[0];if(title)title.textContent=m[1];nav.forEach(b=>{if(b.dataset.view===target)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});localStorage.setItem(VIEW_KEY,target);if(history)window.history.replaceState(null,"",`#${target}`);closeMenu();window.scrollTo({top:0,behavior:"smooth"});if(focus){requestAnimationFrame(()=>{const h=document.querySelector(`[data-view-panel="${target}"] h1`);if(h instanceof HTMLElement){h.tabIndex=-1;h.focus({preventScroll:true})}})}}controls.forEach(c=>c.addEventListener("click",()=>showView(c.dataset.view,{focus:true})));document.querySelector("[data-view-link]")?.addEventListener("click",e=>{e.preventDefault();showView("home",{focus:true})});menu?.addEventListener("click",()=>{const open=!sidebar?.classList.contains("open");sidebar?.classList.toggle("open",open);menu.setAttribute("aria-expanded",String(open))});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu()});document.querySelector("#check-knowledge")?.addEventListener("click",()=>{const selected=document.querySelector('input[name="knowledge"]:checked');const result=document.querySelector("#knowledge-result");if(!result)return;if(!(selected instanceof HTMLInputElement)){result.textContent="回答を選択してください。";return}result.textContent=selected.value==="body"?"正解です。画面に表示する内容はbodyの中へ書きます。":"headは設定、doctypeは文書種別です。表示内容はbodyの中へ書きます。"});document.querySelectorAll("[data-copy-code]").forEach(button=>button.addEventListener("click",async()=>{const code=button.closest(".code")?.querySelector("code")?.textContent||"";try{await navigator.clipboard.writeText(code);button.textContent="コピー済み";setTimeout(()=>button.textContent="コピー",1400)}catch{button.textContent="選択してコピー"}}));const editor=document.querySelector("#editor");const preview=document.querySelector("#preview");const save=document.querySelector("#save-status");const status=document.querySelector("#result-status");const resultTitle=document.querySelector("#result-title");const resultMessage=document.querySelector("#result-message");const tests=[...document.querySelectorAll("[data-test]")];const initial=editor instanceof HTMLTextAreaElement?editor.value:"";let saveTimer;function saveState(message="保存済み"){if(!(editor instanceof HTMLTextAreaElement))return;localStorage.setItem(CODE_KEY,editor.value);if(save){save.textContent=message;clearTimeout(saveTimer);saveTimer=setTimeout(()=>save.textContent="自動保存",1300)}}function render(){if(editor instanceof HTMLTextAreaElement&&preview instanceof HTMLIFrameElement){preview.srcdoc=editor.value;saveState()}}function setTest(name,passed){const item=tests.find(x=>x.dataset.test===name);if(!item)return;item.classList.toggle("pass",passed);item.classList.toggle("fail",!passed);const symbol=item.querySelector("span");if(symbol)symbol.textContent=passed?"✓":"×"}function check(){if(!(editor instanceof HTMLTextAreaElement))return;const code=editor.value;const doc=new DOMParser().parseFromString(code,"text/html");const results={doctype:/<!doctype\s+html>/i.test(code),title:(doc.querySelector("title")?.textContent?.trim()||"").length>0,heading:(doc.querySelector("h1")?.textContent?.trim()||"").length>0,paragraph:(doc.querySelector("p")?.textContent?.trim()||"").length>0};Object.entries(results).forEach(([name,passed])=>setTest(name,passed));const count=Object.values(results).filter(Boolean).length;const all=count===4;if(status){status.textContent=all?"4 / 4 合格":`${count} / 4 合格`;status.style.color=all?"#1d6b4c":"#aa6d16"}if(resultTitle)resultTitle.textContent=all?"最初のHTMLページが完成しました":"未達成の条件があります";if(resultMessage)resultMessage.textContent=all?"title、h1、pが正しく入力されています。次のレッスンへ進める状態です。":"空のtitle、h1、pがないか確認してください。";render()}document.querySelector("#run-preview")?.addEventListener("click",render);document.querySelector("#check-code")?.addEventListener("click",check);document.querySelector("#reset-code")?.addEventListener("click",()=>{if(!(editor instanceof HTMLTextAreaElement))return;editor.value=initial;localStorage.removeItem(CODE_KEY);tests.forEach(item=>{item.classList.remove("pass","fail");const s=item.querySelector("span");if(s)s.textContent="○"});if(status){status.textContent="未確認";status.style.color=""}if(resultTitle)resultTitle.textContent="コードを入力してください";if(resultMessage)resultMessage.textContent="プレビュー更新後、完了条件を確認できます。";render();editor.focus()});if(editor instanceof HTMLTextAreaElement){const saved=localStorage.getItem(CODE_KEY);if(saved)editor.value=saved;editor.addEventListener("input",()=>saveState("入力中"));editor.addEventListener("keydown",e=>{if(e.key!=="Tab")return;e.preventDefault();const start=editor.selectionStart,end=editor.selectionEnd;editor.setRangeText("  ",start,end,"end")});render()}const hash=location.hash.slice(1),savedView=localStorage.getItem(VIEW_KEY);showView(valid.has(hash)?hash:valid.has(savedView)?savedView:"home",{history:false});window.addEventListener("hashchange",()=>{const next=location.hash.slice(1);if(valid.has(next))showView(next,{history:false})});
+import { lessons } from './lessons.js';
+import { gradeHtml } from './grading.js';
+import { createProgressRepository } from './progress.js';
+const $ = selector => document.querySelector(selector);
+const repository = createProgressRepository(() => window.localStorage, lessons);
+const state = repository.state;
+const panels = [...document.querySelectorAll('[data-view-panel]')];
+const validViews = new Set(panels.map(p => p.dataset.viewPanel));
+const editor = $('#editor');
+const escapeHtml = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const current = () => lessons.find(l => l.id === state.lessonId);
+const entry = () => state.lessons[state.lessonId];
+function save() { $('#save-status').textContent = repository.save() ? '保存済み' : '保存できません。この画面内のみ保持します'; }
+function closeMenu() { $('#sidebar').classList.remove('open'); $('.menu-button').setAttribute('aria-expanded', 'false'); }
+function showView(name, { focus = false, history = true } = {}) {
+  state.view = validViews.has(name) ? name : 'home';
+  panels.forEach(p => { p.hidden = p.dataset.viewPanel !== state.view; p.classList.toggle('active', !p.hidden); });
+  $('#view-title').textContent = {home:'ホーム',courses:'基礎講座',course:'Web開発基礎',lesson:'教材',practice:'入力演習'}[state.view];
+  $('#view-kicker').textContent = 'FOUNDATION LEARNING';
+  document.querySelectorAll('.sidebar nav [data-view],.mobile-nav [data-view]').forEach(button => {
+    if (button.dataset.view === state.view) button.setAttribute('aria-current','page'); else button.removeAttribute('aria-current');
+  });
+  if (history) window.history.replaceState(null, '', `#${state.view}`);
+  save(); closeMenu();
+  window.scrollTo({top:0, behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+  if (focus) { const heading = $(`[data-view-panel="${state.view}"] h1`); if (heading) { heading.tabIndex = -1; heading.focus({preventScroll:true}); } }
+}
+function progress() {
+  const count = lessons.filter(l => state.lessons[l.id].completed).length;
+  document.querySelectorAll('[data-chapter-progress]').forEach(n => n.textContent = `${count} / 4`);
+  document.querySelectorAll('[data-course-progress]').forEach(n => n.textContent = `${count} / 24`);
+  document.querySelectorAll('[data-chapter-percent]').forEach(n => n.textContent = `${count * 25}%`);
+  document.querySelectorAll('[data-progress-bar]').forEach(n => n.style.width = `${count * 25}%`);
+  $('#current-lesson-label').textContent = `HTML第1章 / ${current().title}`;
+  $('#lesson-picker').innerHTML = lessons.map((l, i) => `<button type="button" data-lesson="${l.id}" ${l.id === state.lessonId ? 'aria-current="step"' : ''}>${i + 1}. ${escapeHtml(l.title)}${state.lessons[l.id].completed ? ' ✓ 完了' : ''}</button>`).join('');
+}
+function renderPreview() {
+  // CSP precedes learner markup; sandbox intentionally grants no capabilities.
+  $('#preview').srcdoc = `<!doctype html><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'">${editor.value}`;
+}
+function renderResult() {
+  const lesson = current(), record = entry();
+  const result = record.checkedCode === record.code ? record.result : null;
+  $('#conditions').innerHTML = lesson.completionTests.map((test, i) => `<li class="${result ? result[i].passed ? 'pass' : 'fail' : ''}"><span>${result ? result[i].passed ? '✓' : '×' : '○'}</span>${escapeHtml(test.label)}</li>`).join('');
+  const count = result?.filter(r => r.passed).length ?? 0;
+  const passed = result && count === lesson.completionTests.length;
+  $('#result-status').textContent = result ? `${count} / ${lesson.completionTests.length} 合格` : '未確認';
+  $('#result-title').textContent = passed ? '演習を完了しました' : result ? '未達成の条件があります' : 'コードを入力してください';
+  $('#result-message').textContent = passed ? lesson.explanation : result ? '×の条件を教材と見比べて修正してください。' : 'プレビュー更新後、完了条件を確認できます。';
+  $('#attempts').textContent = `確認回数: ${record.attempts}回${record.completed ? ' / 完了履歴あり' : ''}`;
+  $('#next-lesson').hidden = !passed;
+  $('#next-lesson').textContent = lesson.nextLessonId ? '次のレッスンへ' : '章の進捗を確認する';
+}
+function renderLesson() {
+  const lesson = current();
+  $('#lesson-content').innerHTML = `<header><p class="eyebrow">HTML / CHAPTER 01</p><h1 id="lesson-title">${escapeHtml(lesson.title)}</h1></header><section><h2>今回の目標</h2><ul class="goals">${lesson.objectives.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></section>${lesson.contentBlocks.map(b => `<section><h2>${escapeHtml(b.title)}</h2><p>${escapeHtml(b.text)}</p></section>`).join('')}<section><h2>コード例</h2><div class="code"><header><span>index.html</span><button type="button" data-copy-code>コピー</button></header><pre><code>${escapeHtml(lesson.example)}</code></pre></div></section><footer class="lesson-next"><p>例を参考に自分で入力し、完了条件を確認しましょう。</p><button class="primary" type="button" data-view="practice">入力演習へ進む</button></footer>`;
+  $('#practice-title').textContent = lesson.title;
+  $('.practice-head small').textContent = `WEB基礎 / ${lesson.id.toUpperCase()} / PRACTICE`;
+  $('[data-view-panel="lesson"] .breadcrumb span:last-child').textContent = lesson.id.toUpperCase();
+  $('#task-title').textContent = lesson.title;
+  $('#practice-hint').textContent = lesson.hints.join(' ');
+  editor.value = entry().code;
+  progress(); renderResult(); renderPreview();
+}
+document.addEventListener('click', async event => {
+  const button = event.target.closest('[data-view],[data-view-link],[data-lesson],[data-copy-code]');
+  if (!button) return;
+  if (button.hasAttribute('data-copy-code')) {
+    try { await navigator.clipboard.writeText(current().example); button.textContent = 'コピー済み'; } catch { button.textContent = '選択してコピー'; }
+  } else if (button.dataset.lesson) {
+    state.lessonId = button.dataset.lesson; renderLesson(); showView('lesson', {focus:true});
+  } else { event.preventDefault(); showView(button.dataset.view || 'home', {focus:true}); }
+});
+$('.menu-button').addEventListener('click', () => { const open = $('#sidebar').classList.toggle('open'); $('.menu-button').setAttribute('aria-expanded', String(open)); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+editor.addEventListener('input', () => { entry().code = editor.value; renderResult(); save(); });
+editor.addEventListener('keydown', e => {
+  // Preserve normal Tab navigation; Ctrl/Command+Enter provides a keyboard preview shortcut.
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); renderPreview(); }
+});
+$('#run-preview').addEventListener('click', renderPreview);
+$('#check-code').addEventListener('click', () => {
+  const record = entry(); record.code = editor.value;
+  record.result = gradeHtml(record.code, current().completionTests); record.checkedCode = record.code; record.attempts++;
+  if (record.result.every(r => r.passed)) record.completed = true;
+  progress(); renderResult(); renderPreview(); save();
+});
+$('#reset-code').addEventListener('click', () => {
+  entry().code = current().starterCode; entry().result = null; entry().checkedCode = null;
+  editor.value = entry().code; renderResult(); renderPreview(); save(); editor.focus();
+});
+$('#next-lesson').addEventListener('click', () => {
+  if (current().nextLessonId) { state.lessonId = current().nextLessonId; renderLesson(); showView('lesson', {focus:true}); }
+  else showView('course', {focus:true});
+});
+renderLesson();
+showView(validViews.has(location.hash.slice(1)) ? location.hash.slice(1) : state.view, {history:false});
+window.addEventListener('hashchange', () => { if (validViews.has(location.hash.slice(1))) showView(location.hash.slice(1), {history:false}); });
