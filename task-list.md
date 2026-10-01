@@ -5,12 +5,12 @@
 - currentTask: `PPL-FOUNDATION-001`
 - currentPhase: `Web開発基礎講座`
 - currentStatus: `in_progress`
-- completionPercentage: `100%`（初期カリキュラム17項目中17項目完了。講座全体24レッスンの完成率ではない）
+- completionPercentage: `29%`（講座全体24レッスン中7レッスン実装・検証済み。初期カリキュラム17/17と第2章7/7受入項目は完了）
 - baseBranch: `main`
 - workBranch: `work`
 - pagesSource: `main/docs`
 - selectedDesign: `foundation-first + project-based`
-- updatedAt: `2026-10-01`
+- updatedAt: `2026-10-02`
 
 ## PPL-INIT-001 GitHub Pages公開基盤
 
@@ -74,6 +74,16 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] HTML第1章の通し検証を行う。
 - [x] 375px、768px、1280pxで操作監査を行う。
 
+### HTML第2章の受入条件
+
+- [x] 意味のある構造、リスト・リンク・画像、フォームの3教材を設計する。
+- [x] 説明・例・開始コード・採点・ヒントを3教材に提供する。
+- [x] DOMの親子関係、リンク先、alt、labelと入力欄の対応を採点する。
+- [x] 章移動と章別進捗、講座進捗を表示する。
+- [x] 第1章のIDとv1保存データを維持し、第2章の入力・結果を復元する。
+- [x] 全7教材を375/768/1280pxで操作・採点・再読込確認する。
+- [x] 誤答22ケース、sandbox維持、画像表示、生成物同期を検証する。
+
 ### Web開発基礎の全体範囲
 
 #### HTML
@@ -119,7 +129,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`のHTML第1章（初期カリキュラム）は完了。次は第2章「意味のあるHTML」の3レッスンの教材・採点条件をDESIGN.mdに具体化し、同じデータ形式で実装する。講座全体は4 / 24レッスン実装済み（17%）、引き続き進行中。
+`PPL-FOUNDATION-001`のHTML第1〜2章は実装・検証済み（7/24レッスン、29%）。次は既存第3章「見た目を整える」の4教材について、選択子・色と文字・余白・ボックスモデルの目標と演習・採点条件をDESIGN.mdに具体化し、CSS入力の判定を設計・実装する。
 
 ## Repository operation policy — 2026-09-01
 
@@ -148,3 +158,13 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - Evidence: `evidence/2026-10-01/browser-results.json`と15枚の画面画像。目視確認は375px教材・1280px演習を含む。
 - HTML第1章の17 ACは完了。章2〜7（20レッスン）、JavaScript Worker/停止、IndexedDB/共通アダプターは未完。公開は未実施。
 - `npm run verify:agent` PASS（build、Pages必須ファイル、生成物と編集元の同期）。ログ: `evidence/2026-10-01/verify-agent.log`。`git diff --check`もPASS。
+
+
+### 2026-10-02 — HTML第2章を完成
+
+- Source/test SHA: `549ef789a483494d19ed507fa7b8d536084c3071`。教材html05〜html07、章メタデータ、章ごとの分母・進捗、先頭教材への導線を追加。
+- 採点は同じsection/リスト/form内の関係、一意のリンク先ID、教材画像と非空alt、明示label、入力名・必須・無効化を検証。fieldsetの無効化と別form所有も拒否する。
+- `npm run verify:agent` PASS（build/check:pages/生成物差分なし）。全7教材を375/768/1280pxで通し検証、全幅pageerror0・横溢れなし。完成例7件は合格、開始コード7件は未達、誤答22ケースは不合格。旧v1/旧単体入力、破損・保存拒否も確認。
+- ブラウザ再実行: `PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs node tests/foundation-browser.mjs`。Evidence: `evidence/2026-10-02/browser-results.json`、`verify-agent.log`、24枚の画面画像。375px教材と1280pxフォームを目視確認。iframeにscript権限を追加せず、画像は同梱data、CSPは外部通信・送信を制限。
+- 初回ブラウザ試行の教材ボタンlocator重複と、旧保存fixture投入後のhashchangeによる上書きをテスト側で修正して再実行。完成例や誤答判定の条件は削除していない。
+- 残件: 第3〜7章17レッスン、統合PPL-CORE-001の共通形式/アダプター・Worker/停止・結果内訳・IndexedDB・実Pages検証。未設定の新Taskは作成していない。公開/main mergeは未実施。
