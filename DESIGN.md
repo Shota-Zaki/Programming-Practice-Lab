@@ -333,3 +333,18 @@ HTMLプレビューはscriptを許可しないsandboxを維持し、CSPで外部
 
 全教材に説明・例・未完成の開始コード・採点条件・ヒントを用意する。採点は独立したDOM構造の関係を確認し、無関係な場所にタグだけを置いたコードは合格にしない。data画像以外の通信を許可せず、フォームも実行アダプターの権限を増やさない。
 受入: 三教材の初期コード不合格/完成例合格、誤構造・壊れたリンク・空alt・label欠落の不合格、全7教材の通し操作、章別進捗、旧v1保存の維持、375/768/1280pxの操作と横溢れ確認。
+
+## CSS第3章の実装仕様（2026-10-02）
+
+第3章はcss01〜css04の4教材。入力はCSSのみ、教材が持つ固定HTMLへ適用する。HTML教材は既存の全文入力・保存IDを維持する。章見出し、エディター言語・ファイル名、演習の説明を教材種別に合わせる。
+
+- css01: 要素h1、クラス.intro、ID#noteの選択子を学ぶ。h1を32px、.introを20px、#noteを太字700にし、比較用の通常段落は16pxのままとする。指定選択子の規則と実際の計算値を両方確認する。
+- css02: .cardの背景#f0fdf4、文字#14532d、文字サイズ18px、行の高さ1.5を学ぶ。単位・色指定と継承を説明し、計算値rgb/pxで同値表現を受け入れる。
+- css03: .cardの内側padding24px、外側margin16px、.introのmargin-bottom12px。余白の領域とショートハンドを説明する。四辺と段落の実値を確認する。
+- css04: .cardのwidth240px、padding16px、border2px solid #166534、box-sizing:border-box。内容・内側余白・境界線・外側余白の違いと、外寸を幅に含める意味を説明する。計算値と実際の外寸240pxを確認する。
+
+採点アダプターはCSSOM/getComputedStyleを使い、正規表現でCSSの意味を推測しない。専用の一時iframeはsandbox=allow-scriptsのみでopaque originを維持し、nonce付きの固定採点プログラムだけを実行する。学習者のCSSはMessageChannelでデータとして渡しstyle.textContentへ設定する。HTMLは教材の固定fixtureのみ。親DOM/localStorageへのアクセス・外部通信・フォーム送信・任意スクリプトを許可しない。既存プレビューのsandboxは空のまま維持する。2秒でタイムアウトし、完了/取消時はポートとiframeを破棄する。
+
+非同期採点中の入力変更・初期化・教材移動で古い結果を破棄する。採点失敗は未完了のまま再試行でき、結果や試行数を誤った教材へ保存しない。受入は4教材×3幅の操作、完成例/初期コード、cascade/同値表現/誤選択子/四辺/box-sizing、隔離・外部通信禁止・取消・復元。CSS採点固定viewportは800×600。第4章の画面幅課題は別途明示サイズを設計する。
+
+ブラウザAPIの参照: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/iframe 、https://developer.mozilla.org/en-US/docs/Web/API/MessageChannel 。sandboxのsame-origin許可は付けず、専用portを移譲する。

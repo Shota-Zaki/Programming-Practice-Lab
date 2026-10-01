@@ -1,5 +1,6 @@
 import { lessons, chapters } from './lessons.js';
 import { gradeHtml } from './grading.js';
+import { gradeCss, lessonPreview } from './css-grading.js';
 import { createProgressRepository } from './progress.js';
 const $ = selector => document.querySelector(selector);
 const repository = createProgressRepository(() => window.localStorage, lessons);
@@ -8,11 +9,14 @@ const panels = [...document.querySelectorAll('[data-view-panel]')];
 const validViews = new Set(panels.map(p => p.dataset.viewPanel));
 const editor = $('#editor');
 const escapeHtml = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let pendingGrade = null;
+function cancelGrade() { const pending = pendingGrade; pendingGrade = null; pending?.abort(); $('#check-code').disabled = false; if (pending) renderResult(); }
 const current = () => lessons.find(l => l.id === state.lessonId);
 const entry = () => state.lessons[state.lessonId];
 function save() { $('#save-status').textContent = repository.save() ? '保存済み' : '保存できません。この画面内のみ保持します'; }
 function closeMenu() { $('#sidebar').classList.remove('open'); $('.menu-button').setAttribute('aria-expanded', 'false'); }
 function showView(name, { focus = false, history = true } = {}) {
+  cancelGrade();
   state.view = validViews.has(name) ? name : 'home';
   panels.forEach(p => { p.hidden = p.dataset.viewPanel !== state.view; p.classList.toggle('active', !p.hidden); });
   $('#view-title').textContent = {home:'ホーム',courses:'基礎講座',course:'Web開発基礎',lesson:'教材',practice:'入力演習'}[state.view];
@@ -40,8 +44,7 @@ function progress() {
   $('#lesson-picker').innerHTML = chapters.map(c => `<section><h3>${escapeHtml(c.title)}</h3>${lessons.filter(l => l.chapterId === c.id).map((l, i) => `<button type="button" data-lesson="${l.id}" ${l.id === state.lessonId ? 'aria-current="step"' : ''}>${i + 1}. ${escapeHtml(l.title)}${state.lessons[l.id].completed ? ' ✓ 完了' : ''}</button>`).join('')}</section>`).join('');
 }
 function renderPreview() {
-  // CSP precedes learner markup; sandbox intentionally grants no capabilities.
-  $('#preview').srcdoc = `<!doctype html><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'">${editor.value}`;
+  $('#preview').srcdoc = lessonPreview(editor.value, current());
 }
 function renderResult() {
   const lesson = current(), record = entry();
@@ -57,9 +60,13 @@ function renderResult() {
   $('#next-lesson').textContent = lesson.nextLessonId ? '次のレッスンへ' : '章の進捗を確認する';
 }
 function renderLesson() {
+  cancelGrade();
   const lesson = current();
+  $('.editor-panel header span').textContent = lesson.language === 'css' ? 'style.css' : 'index.html';
+  $('.editor-panel header b').textContent = lesson.language.toUpperCase();
+  editor.setAttribute('aria-label', `${lesson.language.toUpperCase()}コード入力欄`);
   const chapter = chapters.find(c => c.id === lesson.chapterId);
-  $('#lesson-content').innerHTML = `<header><p class="eyebrow">HTML / CHAPTER ${chapter.number}</p><h1 id="lesson-title">${escapeHtml(lesson.title)}</h1></header><section><h2>今回の目標</h2><ul class="goals">${lesson.objectives.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></section>${lesson.contentBlocks.map(b => `<section><h2>${escapeHtml(b.title)}</h2><p>${escapeHtml(b.text)}</p></section>`).join('')}<section><h2>コード例</h2><div class="code"><header><span>index.html</span><button type="button" data-copy-code>コピー</button></header><pre><code>${escapeHtml(lesson.example)}</code></pre></div></section><footer class="lesson-next"><p>例を参考に自分で入力し、完了条件を確認しましょう。</p><button class="primary" type="button" data-view="practice">入力演習へ進む</button></footer>`;
+  $('#lesson-content').innerHTML = `<header><p class="eyebrow">${chapter.language ?? 'HTML'} / CHAPTER ${chapter.number}</p><h1 id="lesson-title">${escapeHtml(lesson.title)}</h1></header><section><h2>今回の目標</h2><ul class="goals">${lesson.objectives.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></section>${lesson.contentBlocks.map(b => `<section><h2>${escapeHtml(b.title)}</h2><p>${escapeHtml(b.text)}</p></section>`).join('')}${lesson.markup ? `<section><h2>このCSSを適用するHTML</h2><div class="code"><pre><code>${escapeHtml(lesson.markup)}</code></pre></div><p>HTMLは用意されています。入力欄にはCSSだけを書きます。</p></section>` : ''}<section><h2>コード例</h2><div class="code"><header><span>${lesson.language === 'css' ? 'style.css' : 'index.html'}</span><button type="button" data-copy-code>コピー</button></header><pre><code>${escapeHtml(lesson.example)}</code></pre></div></section><footer class="lesson-next"><p>例を参考に自分で入力し、完了条件を確認しましょう。</p><button class="primary" type="button" data-view="practice">入力演習へ進む</button></footer>`;
   $('#practice-title').textContent = lesson.title;
   $('.practice-head small').textContent = `WEB基礎 / ${lesson.id.toUpperCase()} / PRACTICE`;
   $('[data-view-panel="lesson"] .breadcrumb span:last-child').textContent = lesson.id.toUpperCase();
@@ -79,19 +86,36 @@ document.addEventListener('click', async event => {
 });
 $('.menu-button').addEventListener('click', () => { const open = $('#sidebar').classList.toggle('open'); $('.menu-button').setAttribute('aria-expanded', String(open)); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-editor.addEventListener('input', () => { entry().code = editor.value; renderResult(); save(); });
+editor.addEventListener('input', () => { cancelGrade(); entry().code = editor.value; renderResult(); save(); });
 editor.addEventListener('keydown', e => {
   // Preserve normal Tab navigation; Ctrl/Command+Enter provides a keyboard preview shortcut.
   if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); renderPreview(); }
 });
 $('#run-preview').addEventListener('click', renderPreview);
-$('#check-code').addEventListener('click', () => {
-  const record = entry(); record.code = editor.value;
-  record.result = gradeHtml(record.code, current().completionTests); record.checkedCode = record.code; record.attempts++;
-  if (record.result.every(r => r.passed)) record.completed = true;
-  progress(); renderResult(); renderPreview(); save();
+$('#check-code').addEventListener('click', async () => {
+  cancelGrade();
+  const record = entry(), lesson = current(), code = editor.value;
+  const controller = new AbortController(); pendingGrade = controller;
+  record.code = code;
+  $('#check-code').disabled = true;
+  $('#result-title').textContent = '完了条件を確認しています';
+  try {
+    const result = lesson.language === 'css' ? await gradeCss(code, lesson, {signal:controller.signal}) : gradeHtml(code, lesson.completionTests);
+    if (controller.signal.aborted || current().id !== lesson.id || record.code !== code) return;
+    record.result = result; record.checkedCode = code; record.attempts++;
+    if (result.every(r => r.passed)) record.completed = true;
+    progress(); renderResult(); renderPreview(); save();
+  } catch (error) {
+    if (error.name !== 'AbortError') {
+      record.result = null; record.checkedCode = null;
+      renderResult(); save();
+      $('#result-title').textContent = '確認できませんでした';
+      $('#result-message').textContent = 'もう一度、完了条件を確認してください。入力内容は保持されています。';
+    }
+  } finally { if (pendingGrade === controller) { pendingGrade = null; $('#check-code').disabled = false; } }
 });
 $('#reset-code').addEventListener('click', () => {
+  cancelGrade();
   entry().code = current().starterCode; entry().result = null; entry().checkedCode = null;
   editor.value = entry().code; renderResult(); renderPreview(); save(); editor.focus();
 });

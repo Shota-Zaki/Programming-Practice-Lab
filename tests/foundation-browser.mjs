@@ -11,7 +11,7 @@ await new Promise(r => server.listen(0,'127.0.0.1',r));
 const browser = await chromium.launch({headless:true});
 const origin = `http://127.0.0.1:${server.address().port}`;
 const results = [];
-await mkdir('evidence/2026-10-02', {recursive:true});
+await mkdir('evidence/2026-10-02-css', {recursive:true});
 try {
   for (const width of [375,768,1280]) {
     const page = await browser.newPage({viewport:{width,height:900}});
@@ -19,29 +19,29 @@ try {
     await page.goto(origin);
     const lessons = await page.evaluate(async()=> (await import('/lessons.js')).lessons);
     await page.locator('.hero [data-view="lesson"]').click();
-    for (let i=0;i<7;i++) {
+    for (let i=0;i<11;i++) {
       await page.locator('#lesson-content [data-view="practice"]').click();
       await page.locator('#check-code').click();
-      assert.match(await page.locator('#result-title').textContent(),/未達成/);
+      await page.getByText('未達成の条件があります', {exact:true}).waitFor();
       await page.locator('#editor').fill(lessons[i].example);
       await page.locator('#check-code').click();
-      assert.equal(await page.locator('#result-title').textContent(),'演習を完了しました');
+      await page.getByText('演習を完了しました', {exact:true}).waitFor();
       assert.match(await page.locator('#attempts').textContent(),/2回/);
       await page.reload();
       assert.equal(await page.locator('#editor').inputValue(),lessons[i].example);
-      assert.equal(await page.locator('#result-title').textContent(),'演習を完了しました');
+      await page.getByText('演習を完了しました', {exact:true}).waitFor();
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);
       await page.frameLocator('#preview').locator('h1').waitFor({state:'visible'});
-      await page.screenshot({path:`evidence/2026-10-02/practice-${width}-${i+1}.png`,fullPage:true});
+      await page.screenshot({path:`evidence/2026-10-02-css/practice-${width}-${i+1}.png`,fullPage:true});
       await page.locator('#next-lesson').click();
     }
-    assert.equal(await page.locator('.course-side [data-chapter-progress]').textContent(),'3 / 3');
-    assert.equal(await page.locator('.course-side [data-course-progress]').textContent(),'7 / 24');
+    assert.equal(await page.locator('.course-side [data-chapter-progress]').textContent(),'4 / 4');
+    assert.equal(await page.locator('.course-side [data-course-progress]').textContent(),'11 / 24');
     await page.locator('.course-hero [data-lesson="html01"]').click();
     assert.equal(await page.locator('.toc [data-chapter-progress]').textContent(),'4 / 4');
     await page.locator('#lesson-picker [data-lesson="html01"]').click();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);
-    await page.screenshot({path:`evidence/2026-10-02/lesson-${width}.png`,fullPage:true});
+    await page.screenshot({path:`evidence/2026-10-02-css/lesson-${width}.png`,fullPage:true});
     await page.locator('#lesson-content [data-view="practice"]').click();
     await page.locator('#editor').fill('<p>changed</p>');
     assert.equal(await page.locator('#result-status').textContent(),'未確認');
@@ -57,7 +57,7 @@ try {
       return [gradeHtml('<!-- <!doctype html> --><title>T</title><h1>X</h1><p>P</p>',lessons[0].completionTests)[0].passed,gradeHtml(lessons[1].example.replace('</body>','<p id="intro">duplicate</p></body>'),lessons[1].completionTests).at(-1).passed];
     });
     assert.deepEqual(checks,[false,false]);
-    assert.deepEqual(errors,[]);results.push({width,lessons:7,reload:true,reset:true,noOverflow:true,errors});await page.close();
+    assert.deepEqual(errors,[]);results.push({width,lessons:11,reload:true,reset:true,noOverflow:true,errors});await page.close();
   }
   const grading = await browser.newPage(); await grading.goto(origin);
   const matrix = await grading.evaluate(async () => {
@@ -87,8 +87,8 @@ try {
       splitForms: check(6, form.replace('<label for="email">', '</form><form><label for="email">'), 'form'),
       wrongButton: check(6, form.replace('type="submit"','type="button"'), 'form'),
       blankButton: check(6, form.replace('内容を送信</button>',' </button>'), 'form'),
-      examples: lessons.map(l => gradeHtml(l.example, l.completionTests).every(r => r.passed)),
-      starters: lessons.map(l => gradeHtml(l.starterCode, l.completionTests).every(r => r.passed)),
+      examples: lessons.slice(0,7).map(l => gradeHtml(l.example, l.completionTests).every(r => r.passed)),
+      starters: lessons.slice(0,7).map(l => gradeHtml(l.starterCode, l.completionTests).every(r => r.passed)),
     };
   });
   assert.deepEqual(matrix.examples, Array(7).fill(true));
@@ -116,6 +116,73 @@ try {
   await preview.locator('img').waitFor();
   assert.equal(await preview.locator('img').evaluate(img => img.complete && img.naturalWidth > 0), true);
   await grading.close();
+  const cssPage = await browser.newPage(); await cssPage.goto(origin);
+  const external = []; await cssPage.route('https://example.invalid/**', route => { external.push(route.request().url()); return route.abort(); });
+  const cssChecks = await cssPage.evaluate(async () => {
+    const {gradeCss} = await import('/css-grading.js'); const {lessons} = await import('/lessons.js');
+    const css = lessons.filter(l => l.language === 'css');
+    const all = async (code, l) => (await gradeCss(code, l)).every(r => r.passed);
+    const examples = [], starters = [];
+    for (const l of css) { examples.push(await all(l.example,l)); starters.push(await all(l.starterCode,l)); }
+    const wrong = [];
+    wrong.push(await all(css[0].example.replace('.intro', '.missing'), css[0]));
+    wrong.push(await all(css[0].example.replace('font-size: 32px;', ''), css[0]));
+    wrong.push(await all(css[0].example + '\np {font-size:20px}', css[0]));
+    wrong.push(await all(css[1].example + '\n.card {color:red !important}', css[1]));
+    wrong.push(await all(css[1].example.replace('1.5','1.5px'), css[1]));
+    wrong.push(await all(css[2].example + '\n.card {padding-left:0}', css[2]));
+    wrong.push(await all(css[2].example.replace('margin: 16px','margin: 24px'), css[2]));
+    wrong.push(await all(css[3].example.replace('border-box','content-box'), css[3]));
+    wrong.push(await all(css[3].example.replace('solid','dashed'), css[3]));
+    wrong.push(await all(css[3].example + '\n.card {border-right-width:0}', css[3]));
+    const equivalent = await all(css[1].example.replace('#14532d','rgb(20, 83, 45)').replace('#f0fdf4','rgb(240, 253, 244)').replace('1.5','27px'), css[1]);
+    const important = await all(css[1].example.replace('color: #14532d','color: #14532d !important') + '\n.card {color:red}', css[1]);
+    const injected = css[1].example + '\n</style><script>parent.__cssEscape = true</script><img src="https://example.invalid/leak" onerror="parent.__cssEscape=true">';
+    await gradeCss(injected, css[1]);
+    await gradeCss('@import url("https://example.invalid/import");\n' + css[1].example + '\n.card {background-image:url("https://example.invalid/image")}', css[1]);
+    const controller = new AbortController(); const pending = gradeCss(css[0].example, css[0], {signal:controller.signal}); controller.abort();
+    let cancelled = false, timedOut = false;
+    try { await pending; } catch (e) { cancelled = e.name === 'AbortError'; }
+    try { await gradeCss(css[0].example, css[0], {timeoutMs:0}); } catch { timedOut = true; }
+    return {examples,starters,wrong,equivalent,important,cancelled,timedOut,noEscape:!window.__cssEscape,frames:document.querySelectorAll('iframe[title="CSS採点"]').length};
+  });
+  assert.deepEqual(cssChecks.examples, Array(4).fill(true)); assert.deepEqual(cssChecks.starters, Array(4).fill(false));
+  assert.deepEqual(cssChecks.wrong, Array(10).fill(false));
+  for (const key of ['equivalent','important','cancelled','timedOut','noEscape']) assert.equal(cssChecks[key],true,key);
+  assert.equal(cssChecks.frames,0); assert.deepEqual(external,[]);
+  await cssPage.goto(origin + '/#lesson'); await cssPage.locator('#lesson-picker [data-lesson="css01"]').click();
+  await cssPage.locator('#lesson-content [data-view="practice"]').click();
+  const firstCss = await cssPage.evaluate(async()=> (await import('/lessons.js')).lessons.find(l=>l.id==='css01').example);
+  await cssPage.locator('#editor').fill(firstCss);
+  await cssPage.evaluate(() => { document.querySelector('#check-code').click(); const editor = document.querySelector('#editor'); editor.value = '.intro {}'; editor.dispatchEvent(new Event('input',{bubbles:true})); });
+  assert.equal(await cssPage.locator('#result-status').textContent(),'未確認');
+  assert.equal(await cssPage.locator('#check-code').isEnabled(),true);
+  await cssPage.reload(); assert.equal(await cssPage.locator('#editor').inputValue(),'.intro {}');
+  assert.match(await cssPage.locator('#attempts').textContent(),/0回/);
+  await cssPage.locator('#editor').fill(firstCss);
+  await cssPage.evaluate(() => { document.querySelector('#check-code').click(); document.querySelector('#lesson-picker [data-lesson="css02"]').click(); });
+  await cssPage.locator('#lesson-content [data-view="practice"]').click();
+  assert.equal(await cssPage.locator('#result-status').textContent(),'未確認');
+  assert.match(await cssPage.locator('#attempts').textContent(),/0回/);
+  const secondCss = await cssPage.evaluate(async()=> (await import('/lessons.js')).lessons.find(l=>l.id==='css02').example);
+  await cssPage.locator('#editor').fill(secondCss);
+  await cssPage.evaluate(() => {
+    window.originalAppend = document.body.append;
+    document.body.append = function(...nodes) { if (nodes.some(n => n.title === 'CSS採点')) return; return window.originalAppend.apply(this,nodes); };
+  });
+  await cssPage.locator('#check-code').click();
+  await cssPage.getByText('確認できませんでした',{exact:true}).waitFor();
+  assert.equal(await cssPage.locator('#check-code').isEnabled(),true);
+  assert.equal(await cssPage.locator('#editor').inputValue(),secondCss);
+  assert.match(await cssPage.locator('#attempts').textContent(),/0回/);
+  await cssPage.evaluate(() => { document.body.append = window.originalAppend; delete window.originalAppend; });
+  await cssPage.locator('#check-code').click();
+  await cssPage.getByText('演習を完了しました',{exact:true}).waitFor();
+  assert.match(await cssPage.locator('#attempts').textContent(),/1回/);
+  await cssPage.evaluate(() => { document.querySelector('#check-code').click(); document.querySelector('#reset-code').click(); });
+  assert.equal(await cssPage.locator('#result-status').textContent(),'未確認');
+  assert.match(await cssPage.locator('#attempts').textContent(),/1回/);
+  await cssPage.close();
   const legacy=await browser.newPage();await legacy.goto(origin);
   await legacy.evaluate(()=>{localStorage.clear();localStorage.setItem('ppl.foundation.html01','<p>legacy</p>');localStorage.setItem('ppl.foundation.view','practice');});
   await legacy.reload(); assert.equal(await legacy.locator('#editor').inputValue(),'<p>legacy</p>'); await legacy.close();
@@ -126,5 +193,5 @@ try {
     if(mode==='denied')assert.match(await page.locator('#save-status').textContent(),/保存できません/);
     assert.deepEqual(errors,[]);await page.close();
   }
-  console.log(JSON.stringify({results,gradingRegressions:22,oldV1Upgrade:true,inlineImage:true,legacyMigration:true,corruptStorage:true,deniedStorage:true},null,2));
+  console.log(JSON.stringify({results,cssChecks,cssExternalRequests:external,cssUiCancellation:true,cssUiTimeoutRetry:true,gradingRegressions:22,oldV1Upgrade:true,inlineImage:true,legacyMigration:true,corruptStorage:true,deniedStorage:true},null,2));
 } finally { await browser.close();await new Promise(r=>server.close(r)); }

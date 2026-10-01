@@ -15,6 +15,9 @@ const common = [
   { id: 'paragraph', label: 'body内にpの段落を書く', selector: 'body p' },
 ];
 const learningImage = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80" viewBox="0 0 120 80"><rect x="25" y="8" width="70" height="64" rx="4" fill="#2563eb"/><path d="M40 28h40M40 40h40M40 52h25" stroke="white" stroke-width="4"/></svg>');
+const cssMarkup = '<main class="card"><h1>学習カード</h1><p class="intro">少しずつ学びます。</p><p id="note">今日の目標を決めましょう。</p></main><p class="plain">通常の段落です。</p>';
+const cssTest = (id, label, selector, property, expected, requiredSelector) => ({ id, label, selector, property, expected, requiredSelector });
+const sides = (property, value) => ['top','right','bottom','left'].map(side => cssTest(`${property}-${side}`, `${property}の${{top:'上',right:'右',bottom:'下',left:'左'}[side]}を${value}にする`, '.card', `${property}-${side}`, value));
 export const lessons = [
   {
     id: 'html01', title: 'HTMLの基本構造',
@@ -125,8 +128,54 @@ export const lessons = [
     hints: ['labelのforとinputのidを一致させます。開始タグにnameとrequiredも加えましょう。ボタンにもtype="submit"を書きます。'],
     explanation: 'ラベルと入力欄が対応し、入力の種類と必須条件を持つフォームになりました。第2章の学習を振り返りましょう。',
   },
-].map((lesson, index, all) => ({ courseId: 'web-foundation', chapterId: 'html-chapter01', ...lesson, nextLessonId: all[index + 1]?.id ?? null }));
+  {
+    id: 'css01', language: 'css', chapterId: 'css-chapter03', title: '選択子で対象を選ぶ', markup: cssMarkup,
+    objectives: ['要素・クラス・IDの選択子を区別する', '狙った要素だけに見た目を指定する'],
+    contentBlocks: [
+      { title: 'CSSの書き方', text: 'CSSは見た目を指定する言語です。選択子 { プロパティ: 値; } と書きます。h1は要素名、.introはclass="intro"、#noteはid="note"を選びます。pxは画面上の長さを指定する単位です。' },
+      { title: '今回の入力', text: '下のHTMLは固定です。CSSだけを入力してh1を32px、.introを20px、#noteをfont-weight:700にしてください。通常の段落.plainは16pxのままにします。p全体を大きくすると指定していない段落にも影響します。' },
+    ],
+    example: 'h1 { font-size: 32px; }\n.intro { font-size: 20px; }\n#note { font-weight: 700; }',
+    starterCode: 'h1 { }\n.intro { }\n#note { }',
+    completionTests: [cssTest('heading-size','h1選択子で見出しを32pxにする','h1','font-size','32px','h1'), cssTest('intro-size','.intro選択子で紹介文を20pxにする','.intro','font-size','20px','.intro'), cssTest('note-weight','#note選択子で注記を太字700にする','#note','font-weight','700','#note'), cssTest('plain-size','通常の段落は16pxのままにする','.plain','font-size','16px')],
+    hints: ['クラスには .、IDには # を付けます。値の後にセミコロンを書きましょう。'], explanation: '対象ごとに選択子を使い分けて指定できました。',
+  },
+  {
+    id: 'css02', language: 'css', chapterId: 'css-chapter03', title: '色と文字を整える', markup: cssMarkup,
+    objectives: ['文字色と背景色を区別する', '文字サイズと行の高さを指定する'],
+    contentBlocks: [
+      { title: '色を指定する', text: 'colorは文字色、background-colorは背景色です。#14532dのような16進数やrgb()で色を指定できます。.cardの文字色を#14532d、背景を#f0fdf4にしましょう。' },
+      { title: '読みやすい文字', text: 'font-sizeは文字の大きさ、line-heightは行の高さです。.cardを18pxとline-height:1.5にすると、行の高さは27pxになります。単位なしの1.5は文字サイズに対する倍率で、子の段落にも引き継がれます。色だけで重要さを伝えず、文章も分かりやすくしましょう。' },
+    ],
+    example: '.card {\n  color: #14532d;\n  background-color: #f0fdf4;\n  font-size: 18px;\n  line-height: 1.5;\n}', starterCode: '.card {\n  /* 色と文字を指定しましょう */\n}',
+    completionTests: [cssTest('color','カードの文字色を#14532dにする','.card','color','rgb(20, 83, 45)'),cssTest('background','背景色を#f0fdf4にする','.card','background-color','rgb(240, 253, 244)'),cssTest('font','文字サイズを18pxにする','.card','font-size','18px'),cssTest('line','行の高さを27px相当にする','.card','line-height','27px')],
+    hints: ['colorとbackground-colorの役割を確認してください。line-height: 1.5にはpxを付けません。'], explanation: '文字色・背景色・文字サイズ・行の高さを指定できました。',
+  },
+  {
+    id: 'css03', language: 'css', chapterId: 'css-chapter03', title: '内側と外側の余白', markup: cssMarkup,
+    objectives: ['paddingとmarginの違いを理解する', '四辺と一辺の余白を指定する'],
+    contentBlocks: [
+      { title: '二種類の余白', text: 'paddingは内容と境界線の間の内側余白、marginは要素の外側の余白です。.cardにpadding:24pxとmargin:16pxを書きましょう。一つの値で四辺すべてに適用されます。' },
+      { title: '一辺だけ指定する', text: 'margin-bottomは下側の余白です。.introに12pxを指定してください。paddingとmarginを逆にすると同じ見た目にはなりません。上下に隣り合うブロックのmarginは相殺されることもありますが、この演習では指定した四辺の値を確認します。' },
+    ],
+    example: '.card { padding: 24px; margin: 16px; }\n.intro { margin-bottom: 12px; }', starterCode: '.card { }\n.intro { }',
+    completionTests: [...sides('padding','24px'),...sides('margin','16px'),cssTest('intro-margin','紹介文の下余白を12pxにする','.intro','margin-bottom','12px')],
+    hints: ['上下左右を個別に指定しても構いません。paddingは内側、marginは外側です。'], explanation: '内側と外側の余白を区別して指定できました。',
+  },
+  {
+    id: 'css04', language: 'css', chapterId: 'css-chapter03', title: 'ボックスモデルと幅', markup: cssMarkup,
+    objectives: ['内容・余白・境界線の関係を理解する', 'border-boxで外寸を指定する'],
+    contentBlocks: [
+      { title: '幅に含まれるもの', text: '通常のcontent-boxではwidthは内容部分だけの幅です。paddingとborderを加えると外寸は大きくなります。box-sizing:border-boxでは、widthに内側余白と境界線を含めます。marginは含みません。' },
+      { title: '240pxのカードを作る', text: '.cardをwidth:240px、padding:16px、border:2px solid #166534、box-sizing:border-boxにしてください。境界線を含む外寸は240px、内容部分は204pxです。content-boxのままだと外寸は276pxになります。' },
+    ],
+    example: '.card {\n  width: 240px;\n  padding: 16px;\n  border: 2px solid #166534;\n  box-sizing: border-box;\n}', starterCode: '.card {\n  width: 240px;\n}',
+    completionTests: [cssTest('box','box-sizingをborder-boxにする','.card','box-sizing','border-box'),cssTest('width','widthを240pxにする','.card','width','240px'),...sides('padding','16px'),...['top','right','bottom','left'].flatMap(side => [cssTest(`border-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線幅を2pxにする`,'.card',`border-${side}-width`,'2px'),cssTest(`solid-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線を実線にする`,'.card',`border-${side}-style`,'solid'),cssTest(`color-${side}`,`${{top:'上',right:'右',bottom:'下',left:'左'}[side]}の境界線色を#166534にする`,'.card',`border-${side}-color`,'rgb(22, 101, 52)')]),cssTest('outer','境界線を含む外寸を240pxにする','.card','outer-width','240')],
+    hints: ['borderには太さ・種類・色を指定します。paddingを含めても外寸240pxになるようbox-sizingを確認しましょう。'], explanation: '第3章の基本ができました。次は配置と画面幅への対応を学びます。',
+  },
+].map((lesson, index, all) => ({ language: 'html', courseId: 'web-foundation', chapterId: 'html-chapter01', ...lesson, nextLessonId: all[index + 1]?.id ?? null }));
 export const chapters = [
   { id: 'html-chapter01', title: 'HTML第1章', number: '01' },
   { id: 'html-chapter02', title: 'HTML第2章', number: '02' },
+  { id: 'css-chapter03', title: 'CSS第3章', number: '03', language: 'CSS' },
 ];
