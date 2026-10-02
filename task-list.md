@@ -5,7 +5,7 @@
 - currentTask: `PPL-FOUNDATION-001`
 - currentPhase: `Web開発基礎講座`
 - currentStatus: `in_progress`
-- completionPercentage: `63%`（講座全体24レッスン中15レッスン実装・検証済み。初期カリキュラム17/17、第2〜4章は各7/7受入項目完了）
+- completionPercentage: `75%`（講座全体24レッスン中18レッスン実装・検証済み。初期カリキュラム17/17、第2〜5章は各7/7受入項目完了）
 - baseBranch: `main`
 - workBranch: `work`
 - pagesSource: `main/docs`
@@ -104,6 +104,16 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] 複数幅途中の取消・フレーム解放、全15教材×3幅と旧保存を検証する。
 - [x] 生成物同期と実画面確認の証拠を保存する。
 
+### JavaScript第5章の受入条件
+
+- [x] 変数・条件/反復・関数の3教材を設計し、説明・例・開始コード・ヒント・意味採点を提供する。
+- [x] opaque iframeのBlob Workerで評価し、親画面は評価せず、通信/保存/追加Worker/偽結果を検証する。
+- [x] 2秒の結果期限、停止、遅延結果破棄、コード/ケース/出力制限を実装する。
+- [x] 同時ホスト枠1・待ち行列なし・停止後5秒の予約と画面待機を実装し、連続Run/Cancel/Timeoutの追加実行128件を拒否、実Worker終了とCPU idleを検証する。
+- [x] 3教材×3幅で入力/結果復元、停止、入力変更/移動取消、初期化、文字列HTMLの安全表示を確認する。
+- [x] 全18教材×3幅、旧v1/旧単体入力/破損/保存拒否、既存HTML/CSS採点とプレビューを回帰検証する。
+- [x] 生成物同期・独立固定SHAレビュー・実画面確認の証拠を保存する。
+
 ### Web開発基礎の全体範囲
 
 #### HTML
@@ -141,15 +151,15 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 - [ ] 教材データの共通形式を定義する。
 - [ ] 実行アダプターの共通インターフェースを定義する。
-- [ ] JavaScript実行をWeb Workerへ分離する。
-- [ ] 実行時間上限と停止処理を実装する。
-- [ ] テスト結果を期待値、実際値、修正案に分けて表示する。
+- [x] JavaScript実行をWeb Workerへ分離する。（第5章の数値処理。DOM演習用境界は別途設計）
+- [x] 実行時間上限と停止処理を実装する。（結果期限/停止要求とnative終了遅延を区別）
+- [x] テスト結果を期待値、実際値、修正案に分けて表示する。
 - [ ] IndexedDB保存へ移行する。
 - [ ] GitHub Pagesで動作する。
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`はHTML第1〜2章とCSS第3〜4章まで実装・検証済み（15/24レッスン、63%）。次は既存第5章「値と処理の基本」の3教材を設計する。変数・条件分岐・繰り返し・関数の課題と期待値を定義し、任意JavaScriptをメイン画面で実行しないWorker実行・時間制限・停止・結果通知の境界を先に実装してから教材へ接続する。
+`PPL-FOUNDATION-001`はHTML第1〜2章、CSS第3〜4章、JavaScript第5章まで実装・検証済み（18/24レッスン、75%）。次は既存第6章DOM・イベントの3教材と、DOM演習の隔離・表示・採点境界を設計する。数値演習WorkerはDOMを持たないため、そのままDOM演習へ転用しない。既存保存とプレビュー隔離を維持する。別の次Taskは未設定。
 
 ## Repository operation policy — 2026-09-01
 
@@ -219,3 +229,13 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - 本先行単位の受入検査7/7=100%。講座は15/24=63%のまま。PPL-COREのWorker/共通アダプター完了条件は未チェックのまま。実行ホスト、権限制約、ブラウザ検証、採点、教材/UI接続は未完。
 - Active: PPL-FOUNDATION-001。Ready: 実行ホストの境界設計/検証。Planned: 第5〜7章9教材、共通アダプター/結果内訳/IndexedDB/実Pages確認。Blocked: なし。Deferred: 実践UI（基礎講座後）。別の次Task: 未設定。
 - main merge/公開なし。次は教材接続前に通信/保存/出力量/メモリ制約を扱う実行ホストを設計・検証する。Worker単体を権限隔離とみなさない。
+
+
+### 2026-10-02 — JavaScript第5章を完成
+
+- Fixed source/test SHA: `7e7e8fb9ca18a9dbfd04e86366b33e14c8452b14`。js01/02/03の3教材、opaque iframeで作るBlob Workerホスト、親側数値採点、停止/取消/時間制限、型/実際値/期待値表示を追加。旧15IDとv1保存を維持。
+- `npm run verify:agent` PASS、controller8/8 PASS。Chromium151で3教材の例合格/開始コード未達、誤答9件拒否、数値同値表現、DOM/保存/通信/API/偽結果/HTML表示、実無限ループ/遅延応答/取消/再試行を検証。3教材×3幅の操作と全18教材×3幅の回帰PASS（pageerror0、横溢れなし、旧保存・保存拒否・HTML22/CSS25誤答・幅境界を維持）。
+- 初期400ms停止済Workerゼロの検査は失敗。独立最小対照からnative終了遅延と判明し、即時停止とは報告しない。最終実測は取消53.1〜53.8ms、150ms試験timeout応答152.6〜152.9ms、400ms後はWorker1、応答後2035〜2046msでtarget消失、待機後CPU0秒/500ms。実行枠1/待ち行列なし、frame解放後5秒予約で追加128実行を拒否。公開2秒期限は維持。5秒は今回環境での余裕であり、全ブラウザー終了/硬いメモリ上限を保証しない。
+- 独立固定SHAソースレビューでblocking findingなし。期限/解放/停止遅延の記述と測定時点に関するP2二件を修正済み。Evidence: `evidence/2026-10-02-javascript/` のREADME、結果JSON/生ログ/controller/verify/レビュー、独立probe、画面画像。
+- 第5章受入7/7=100%。currentTask講座完成度18/24=75%。Active: PPL-FOUNDATION-001。Ready: 既存第6章DOM/イベントと実行境界の設計。Planned: 第6〜7章6教材、正式共通形式/アダプター、IndexedDB、実Pages/Safari/手動読み上げ確認。Blocked: 今回scopeなし。Deferred: 実践UI（基礎講座後）。別の次Task: 未設定。
+- main merge/公開は未実施。main mergeには実行直前のユーザー承認が必要。
