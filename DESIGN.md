@@ -431,3 +431,62 @@ executionMode=domに限りparent graderを使う。初期状態と実行後状�
 既存境界契約内で#name(type=text input)と独立#message(p)を使う。初期入力空/表示未入力、native inputで太郎→空→次郎を設定し、各回のvalueと表示「こんにちは、太郎さん」→「未入力」→「こんにちは、次郎さん」を親で採点する。event.target.valueで現在の入力を読み、空文字の条件分岐とtextContentを教える。固定値・clickのみ・初回だけ・消去未対応・textContentから値を読む誤りを拒否する。採点が自動入力し、結果iframeは手入力してもhandlerが動かない静的確認用と明記する。
 
 表示のvalueはDOMParserのlive propertyだけではserializeに残らないため、inputはvalue属性、textareaは文字内容へ検証済み文字列を反映する。trusted fixtureと親のsnapshot文字列だけを扱い、scriptなしsandbox/CSP/文字列encodingを維持する。通常DOM全体/バブリング/async native挙動等の未対応を追加しない。受入は3幅実UI/各入力snapshot/入力消去/復元（最終input value含む）/停止/処理中取消/移動/エラー/期限後retry、旧js03/js04/js05履歴、全21教材回帰、controller/生成物同期、固定SHA独立レビュー。受入前20/24=83%、完了後21/24=88%、第6章3/3=100%。第7章保存などは未実装。
+
+
+## 第7章保存契約 — 設計チェックポイント（2026-10-02）
+
+### 既存要件と今回の範囲
+
+根拠は本書「初期リリースの中心」の学習内容14ブラウザ保存/15ミニ成果物、7章24教材/1ミニ成果物、およびsrc/static/index.htmlの第7章MINI PROJECT/3 LESSONS「自己紹介サイトを完成させる」「設計、実装、確認、公開用ビルド」。最後の3教材はミニ成果物として維持し、保存API3教材へ置き換えない。js07〜js09などのID/個別教材構成は未確定。公開用ビルドは生成物の確認であり、この作業で公開する承認ではない。
+
+今回の完了単位は保存の設計と、両案に共通するpure record codecだけ。現在21/24=88%を維持する。教材、learner API、実保存backend、UI、sandbox/Worker/共有枠、既存v1進捗、ユーザーの保存データへ接続しない。codecは信頼された親側の将来部品であり、native Storageのpolyfillではない。
+
+### native APIの事実と今回の制約
+
+native localStorageはWindowに公開された同期の文字列Storage。取得時のorigin/policy拒否、書込時のquota失敗を区別する。setItem一回の失敗はその更新を反映しないが、複数操作のtransactionや任意コードの取消によるrollbackはない。成功済み書込はその後の例外/停止で消えない。same-originの他画面と共有し、複数画面間のlockは保証されない。保存は再読込を跨ぐが、削除/設定/ブラウザーの保持方針で失われ得る。Workerのnative localStorageは提供されず、opaque frameはnative getterで拒否される。
+
+[HTML Standard Web storage](https://html.spec.whatwg.org/multipage/webstorage.html#the-storage-interface)、[localStorage getter](https://html.spec.whatwg.org/multipage/webstorage.html#the-localstorage-attribute)、[MDN localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)。IndexedDBは非同期request/transactionであり、localStorageの同期get/setと同じAPI・取消契約ではない。[Indexed Database API](https://w3c.github.io/IndexedDB/)参照。今回IndexedDB migrationは行わない。
+
+### 教材方針の案と決定境界
+
+**A native API中心**: native localStorageの説明/コードを最終成果物へ使う。同じコードを現Workerで実行できるとは説明しない。trusted固定コードのnative観察と、成果物の適切なoriginでの実行を区別する。任意コードを親/same-origin frameや同一権限Workerで評価する方法は採用不可。成果物export/local実行のUX・組合せHTML/CSS/JS検証が別途必要。file URL上の永続性を保証せず、適切なHTTP originでの検証を設計する。
+
+**B 演習専用API中心**: 独自名lessonStore等のPromise APIを教材に明示し、native localStorageとの違いを表にする。getを同期に見せる、保存snapshotをlocalStorageという名前で偽装する、async commitを同期setItemの成功として扱うことは不可。成果物でも専用runtimeが必要になり、nativeコードのコピー再利用とは異なる。
+
+A/Bは学習者が書くAPIとミニ成果物の持ち出し方を変えるproduct決定。既存要件だけからBをnativeAPIと等価として選ばない。選択前にlearner facade/教材/新しい永続書込を接続しない。共通codecの形状/限度は安全な工程上の判断として先行できる。今回UI方針は既存を維持し、新案のUIを実装しない。
+
+### 非同期案Bを採る場合の提案契約（未採択・未実装）
+
+- 親が教材を登録し、lessonId/許可key/保存namespaceを固定する。learnerはlogical key/valueのみを渡し、任意origin key、progressキー、保存オブジェクト自体を受け取れない。clearは当該教材の論理レコードだけ。native localStorage.clearは呼ばない。
+- get/set/removeはPromise。strict stringのみでnative DOMStringの自動変換を真似しない。各set/removeのackは親による当該レコードのnative書込成功後。先行処理一つ、待ち行列なし、未awaitの競合操作は明示拒否。native quota/policy errorをfake成功・メモリ保存成功へ変換しない。
+- 取消/入力変更/移動/期限で親のrun generationを無効化し、後着要求を拒否する。取消前にcommit済みの操作は残る。二つのsetの間で取消なら最初のみ残るpartial writeを教材で説明する。取消はデータrollbackではない。親の同期書込とcancel処理の実行順でcommit境界が決まり、遅延ackで成功表示を復活させない。
+- 順次awaitでread-after-writeを確認する。同一教材のnamespaceを再読込時にloadし、別教材は別namespace。採点はknown fixtureのvolatile backendで行い、通常操作のpersist backendと区別する。ユーザーの保存内容を採点の期待値/初期化で上書きしない。実reloadは新しいrunなので既存snapshotを信用せず再load。
+- 同じ教材の複数タブはnative backend上でlast writerが勝つことがある。optimistic conflict検知は原子的lockではなく、完全な競合解決を保証しない。保存操作数上限16/run、既存公開2秒期限、同時実行1/解放後5秒予約を維持する案だが、facade wiringとnative検証を終えるまで対応機能と宣言しない。
+
+### 今回採択を求める共通codec契約
+
+`src/static/lesson-storage-codec.js`を独立moduleとして作り、既存画面/Workerからimportしない。外部権限/依存なし。`createLessonStorageCodec({lessonId,allowedKeys})`はtrusted設定だけを受け取る。lessonIdは英小文字開始の英数/ハイフン最大64文字。許可keyは最大8個、一意・空でない文字列、最大64 UTF-16単位。設定をコピーし、logical keyが__proto__でも連想objectのprototypeを変えないarray/Mapで扱う。
+
+保存key候補はppl.lesson-record.v1.<lessonId>。v1進捗/旧入力/viewとprefixが異なる。許可済みlessonIdの登録・実際の保存先へのアクセスは将来のtrusted adapterの責任であり、codec単独を権限境界として扱わない。今回storageKeyは計算するだけでread/write/deleteはしない。
+
+recordは厳密に{version:1,lessonId,entries:[[key,value],...]}。encodeは許可された一意のkeyとstring valueのみを受け取り、deterministicに許可key順へ正規化する。valueは最大1024 UTF-16単位、record全体はJSON metadata/escapeも含めて最大4096 UTF-8 bytes。8key/64/1024/4096は初学者の短いプロフィール用の工学上限で、nativeブラウザーquotaではない。切捨て・Stringによる暗黙変換・fake quota成功をしない。
+
+decode(null)はmissing。JSONの文字列null、壊れたJSON、型違い、version違い、lesson違い、未知field、未知key、重複keyはcorrupt。長さ/bytes/件数超過はover-limit。厳密なplain schema以外を復元しない。okだけが凍結済みコピーentriesを返す。入力を消す・修復する・空recordを自動保存する処理は持たない。storage getterが拒否された場合のunavailableはcodecでnullへ置換せず、将来adapterが別statusとして扱う。
+
+parse前にraw文字数とUTF-8 bytesを制限し、既存保存/他lesson recordを受け入れない。短いinputでもescaped JSONはquotaを超え得るのでserialized bytesを測る。import自体に保存/起動/移行のside effectを持たせない。
+
+### reload、corruption、拒否と回復の今後の受入
+
+native書込済みrecordのreload/再open、別lesson/keyとprogressの不変、許可namespaceのみのremoveをnative browserで検証する。missing/corrupt/over-limit/unavailable/QuotaExceededを別状態として表示し、破損rawは明示した当該lessonリセット操作まで保持する。自動削除・silent overwrite・バックエンド切替で永続成功を装うことは不可。permission拒否時は作業コードの既存保存拒否表示と区別し、教材データ保存未成功を伝える。実ユーザーstorage移行は別作業。
+
+今回codecはこれらを実行しない。pure schema検証のPASSをnative persistence、cancel race、quota、UI受入のPASSとして扱わない。真のnative quota値/総origin使用量/ストレージ消去/別タブ競合・Safari/Pagesの挙動は別検証。
+
+### チェックポイントの受入
+
+1. 既存capstone要件、native/custom API差、product決定と未採択案を記録する。
+2. 固定SHA独立設計レビューを通し、codecだけの実装承認範囲を明確にする。
+3. bounded codecのroundtrip、空文字、Unicode/escape、重複/未知key/version/lesson、byte超過、破損/nullと変更不能コピーを検証する。
+4. importに保存/起動side effectがなく既存runtime/UI/v1と21教材が不変である証拠、生成物同期を保存する。
+5. 実装後の固定SHA独立レビュー、task-list/NEXT/evidenceを更新し、講座88%を維持する。
+
+実native persistence、facade/run取消/partialwrite、UI、教材、ミニ成果物/公開用ビルドの受入はこのcheckpoint対象外。
