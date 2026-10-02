@@ -1,0 +1,16 @@
+✔ correlated result terminates worker; unrelated message ignored (0.566083ms)
+✔ timeout terminates and allows retry (10.907542ms)
+✔ replacement cancels; stale callback ignored; stop idempotent (0.0975ms)
+✔ error, decode error, malformed reply release worker (0.098083ms)
+✔ creation and send errors resolve and release resources (0.089959ms)
+✔ invalid arguments never cancel active job (0.167709ms)
+✔ real worker: infinite loop terminates, UI thread remains responsive, retry succeeds (158.787125ms)
+✔ cancel during worker creation terminates the returned host before sending (0.0955ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 245.934583

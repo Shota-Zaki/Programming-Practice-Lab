@@ -5,7 +5,7 @@
 - currentTask: `PPL-FOUNDATION-001`
 - currentPhase: `Web開発基礎講座`
 - currentStatus: `in_progress`
-- completionPercentage: `75%`（講座全体24レッスン中18レッスン実装・検証済み。初期カリキュラム17/17、第2〜5章は各7/7受入項目完了）
+- completionPercentage: `79%`（講座全体24レッスン中19レッスン実装・検証済み。初期カリキュラム17/17、第2〜5章各7/7、第6章js04受入7/7完了）
 - baseBranch: `main`
 - workBranch: `work`
 - pagesSource: `main/docs`
@@ -124,7 +124,17 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] callback重複/this/currentTarget/文字列encoding/誤答/新しいDOM初期化と未対応API拒否を確認する。
 - [x] callback途中取消/期限/遅延継続/作成失敗/作成中取消と、共有枠の追加128実行拒否を確認する。
 - [x] 第5章実ブラウザー回帰、固定SHA独立レビュー、生成物同期と証拠管理を完了する。
-- [ ] 第6章教材/通常UIへ接続し、実操作・保存・初期化・移動の受入を行う（本チェックポイント対象外）。
+- [ ] 第6章全3教材を通常UIへ接続する（js04完了、イベント/入力2教材は未実装）。
+
+### 第6章 js04 DOM更新教材の受入条件
+
+- [x] ID選択/textContent更新の説明・例・開始コード・限定API契約を提供する。
+- [x] native DOM snapshotを親で採点し、未対応API/開始コードを拒否する。
+- [x] learner文字列を安全表示し、偽メッセージ/禁止通信を確認する。
+- [x] 3幅の実UIで停止・初期化・入力取消・教材移動・期限後再試行を受け入れる。
+- [x] 同一成功コードの再実行停止で未確認表示/固定HTMLへ復帰し、履歴を保持する。
+- [x] 旧v1/保存復元と予定3教材の進捗分母を維持し、全19教材回帰を通す。
+- [x] 生成物同期、固定SHA独立レビュー、実画面確認と証拠を保存する。
 
 ### Web開発基礎の全体範囲
 
@@ -171,7 +181,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`はHTML第1〜2章、CSS第3〜4章、JavaScript第5章まで実装・検証済み（18/24レッスン、75%）。次は第6章先行DOM/イベントブリッジの契約に沿って最初のDOM更新教材を設計し、既存UIへ小さく接続する。対応APIとnative DOMとの差を教材に明示し、保存・初期化・移動を実ブラウザーで受け入れる。既存保存とプレビュー隔離を維持する。別の次Taskは未設定。
+`PPL-FOUNDATION-001`はHTML第1〜2章、CSS第3〜4章、JavaScript第5章と第6章js04まで実装・検証済み（19/24レッスン、79%）。次は既存境界契約に沿ってjs05クリックイベント教材を設計し、通常UIで受け入れる。第6章残り2教材と第7章3教材は未実装。別の次Taskは未設定。
 
 ## Repository operation policy — 2026-09-01
 
@@ -263,3 +273,10 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - 独立固定SHAソースレビューでblocking findingなし。currentTarget/async例外/disabled・nested fixtureの指摘は修正済み。Evidence: `evidence/2026-10-02-dom-boundary/`（native JSON/ログ、controller/verify、manifest、レビュー、第5章回帰画像/結果）。
 - 先行scope受入6/6。講座currentTask完成度は18/24=75%を維持。Active: PPL-FOUNDATION-001。Ready: 契約に沿った最初の第6章DOM更新教材設計/既存UI接続。Planned: 第6〜7章6教材と通常UI/保存/リセット/rapid navigation受入、正式共通形式/アダプター、IndexedDB、実Pages/Safari/手動読み上げ。Blocked: 本scopeなし。Deferred: 基礎講座後の実践UI。別の次Task: 未設定。
 - main merge/公開なし。main mergeには実行直前のユーザー承認が必要。
+
+### 2026-10-02 — js04 DOM更新教材を通常UIで受け入れ
+
+- source/test `00821bbaea1b8b0f632e51d802b0c3e9a5c63dcc`。375/768/1280pxの実UI停止/初期化/移動/復元/エラー/安全表示を受け入れ、同一コード再実行停止の旧表示残存も修正した。
+- 全19教材×3幅と47誤答、旧保存/破損/拒否回帰PASS。controller8/8、verify:agent PASS。Evidence: `evidence/2026-10-02-dom-lesson/`。
+- js04受入7/7。Active: PPL-FOUNDATION-001、完成度19/24=79%。Ready: js05クリックイベント教材設計/通常UI受入。Planned: 残り5教材、共通形式/adapter、IndexedDB、実Pages/Safari/読み上げ。Blocked: 本scopeなし。Deferred: 基礎講座後の実践UI。別Task未設定。
+- native終了/メモリ制約は既存境界の限界を維持。main merge/公開は未実施。
