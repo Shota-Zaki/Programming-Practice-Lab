@@ -181,7 +181,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`はHTML第1〜2章、CSS第3〜4章、JavaScript第5章と第6章js06まで実装・検証済み（21/24レッスン、88%）。次は第7章のブラウザー保存教材を設計する。現ブリッジは保存APIを提供しないため、保存の実行境界/教育内容を先に定義し、未対応APIを使えると説明しない。別の次Taskは未設定。
+`PPL-FOUNDATION-001`は第6章まで21/24教材受入済み（88%）。第7章は既存ミニ成果物3教材を維持する。保存のnative API中心案Aと明示した独自async API案BをDESIGNへ比較済みで、学習API/成果物の持ち出し方はowner決定待ち。具体的consumer未確定のcodec、facade、backend、教材は実装しない。別の次Taskは未設定。
 
 ## Repository operation policy — 2026-09-01
 
@@ -304,3 +304,12 @@ source/test `280a7626bb26a392eed9c2550e7d3895abccab58`。Evidence: `evidence/202
 - [x] controller8/8、生成物同期、固定SHA独立レビュー、実画面確認と証拠を保存する。
 
 source/test `c30cdc2bceadefd47e1d5020e0775a48c818651b`。Evidence: `evidence/2026-10-02-input-lesson/`。Active: PPL-FOUNDATION-001、完成度21/24=88%。Ready: 第7章保存境界/教材設計。Planned: 残り3教材、共通形式/adapter、IndexedDB、実Pages/Safari/読み上げ。Blocked: 本scopeなし。Deferred: 基礎講座後の実践UI。別Task未設定。native終了/メモリ制約を維持。main merge/公開未実施。
+
+### 2026-10-02 — 第7章保存契約の設計のみを受入
+
+- [x] 既存mini-project要件とnative/custom APIの事実・差を追跡する。
+- [x] 固定SHA独立設計レビューを通し、owner choiceと保留範囲を明確にする。
+- [x] runtime/UI/v1/21教材/過去evidence不変、生成物同期を確認する。
+- [x] task/NEXT/evidenceを更新し、講座88%を維持する。
+
+Design `245605fd6a5ed304b59321e89eca468e83660b23`。Evidence: `evidence/2026-10-02-storage-design/`。設計4/4であり教材を追加していない。Active: PPL-FOUNDATION-001。Ready: 選択後の具体的受入/consumer設計。Planned: 第7章mini-project3教材、共通形式/adapter、IndexedDB、実Pages/Safari/読み上げ。Blocked: A/B学習APIと成果物持ち出しのowner決定。Deferred: consumer未確定codec/facade/backend実装と実践UI。別Task未設定。native persistence/取消/partial writes等は未実装・未検証。main merge/公開未実施。
