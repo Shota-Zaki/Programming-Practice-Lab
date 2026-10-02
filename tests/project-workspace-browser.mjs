@@ -38,6 +38,7 @@ try {
       await page.getByRole('tab', { name: 'index.html', exact: true }).focus(); await page.keyboard.press('ArrowRight');
       assert.equal(await page.getByRole('tab', { name: 'styles.css', exact: true }).evaluate(node => node === document.activeElement), true);
       await page.keyboard.press('End'); assert.equal(await page.locator('#project-editor').inputValue(), starter['app.js']);
+      await page.keyboard.press('Tab'); assert.equal(await page.locator('#project-editor').evaluate(node => node === document.activeElement), true);
       const js = 'window.LEARNER_CODE_RAN=true;\n// 日本語🙂 <script></script> & \\" \\n\nwhile(true){}\n';
       await setFile(page, 'app.js', js);
       await setFile(page, 'index.html', starter['index.html'].replace('学習者の自己紹介', '日本語🙂の自己紹介'));
@@ -45,7 +46,8 @@ try {
       const expected = await page.evaluate(() => JSON.parse(localStorage.getItem('ppl.foundation.project.v1.profile')).files);
       const oldProgress = await page.evaluate(() => JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons);
       await page.reload(); assert.equal(await page.locator('#project-editor').inputValue(), expected['styles.css']);
-      await page.locator('#project-inspect').click(); await page.getByText(/静的確認を更新しました。JavaScript/).waitFor();
+      await page.locator('#project-editor').press('Control+Enter'); await page.getByText(/静的確認を更新しました。JavaScript/).waitFor();
+      await page.locator('#project-editor').press('Meta+Enter'); await page.getByText(/静的確認を更新しました。JavaScript/).waitFor();
       assert.equal(await page.locator('#project-checks li').count(), 6);
       assert.equal(await page.locator('#project-checks').textContent().then(text => text.includes('見直してください')), false);
       assert.equal(await page.locator('#project-preview').getAttribute('sandbox'), '');
@@ -115,6 +117,13 @@ try {
       await page.getByText(/書き出せませんでした.*32KiB/).waitFor(); assert.equal(await page.locator('#project-downloads button').count(), 0);
       assert.equal(await page.locator('#project-editor').inputValue(), 'あ'.repeat(10923));
       results.push({ width, case: 'node-limit/utf8-limit/retain-errors', pass: true });
+      const parserCancel = await page.evaluate(async () => {
+        const { inspectProjectFiles } = await import('./project-static.js');
+        const { STARTER_FILES } = await import('./project-files.js');
+        const controller = new AbortController(); const job = inspectProjectFiles(STARTER_FILES, { signal: controller.signal }); controller.abort();
+        try { await job; return false; } catch (error) { return error.name === 'AbortError' && document.querySelectorAll('[data-project-parser]').length === 0; }
+      });
+      assert.equal(parserCancel, true); results.push({ width, case: 'parser-immediate-abort/cleanup', pass: true });
       for (const name of Object.keys(starter)) await setFile(page, name, starter[name]);
       for (const action of ['edit', 'cancel', 'move', 'reset']) {
         await page.evaluate(() => {
