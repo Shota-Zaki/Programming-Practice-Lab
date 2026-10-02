@@ -1,0 +1,40 @@
+✔ snapshot copies exactly three complete files (3.449125ms)
+✔ UTF-8 limits reject overflow and unpaired surrogate without truncation (0.196292ms)
+✔ restore and reset affect only project key, preserving old progress (0.561875ms)
+✔ corrupt raw survives load and editing until explicit reset (2.437583ms)
+✖ storage failures and oversized edits preserve in-memory work (0.775834ms)
+✔ repeated export preserves bytes and matching real SHA-256 hashes (6.438833ms)
+✔ async digest snapshots edits and cancellation/error never returns a bundle (1.861042ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 130.654125
+
+✖ failing tests:
+
+test at tests/project-files.mjs:49:1
+✖ storage failures and oversized edits preserve in-memory work (0.775834ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'corrupt'
+  - 'unavailable'
+
+      at TestContext.<anonymous> (file:///Users/zaki/Documents/Codex/2026-10-02/task-3/ppl-export-work/tests/project-files.mjs:50:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'corrupt',
+    expected: 'unavailable',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

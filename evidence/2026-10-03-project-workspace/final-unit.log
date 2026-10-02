@@ -1,0 +1,25 @@
+✔ correlated result terminates worker; unrelated message ignored (1.11575ms)
+✔ timeout terminates and allows retry (11.852792ms)
+✔ replacement cancels; stale callback ignored; stop idempotent (0.119208ms)
+✔ error, decode error, malformed reply release worker (0.102167ms)
+✔ creation and send errors resolve and release resources (0.105834ms)
+✔ invalid arguments never cancel active job (0.181084ms)
+✔ real worker: infinite loop terminates, UI thread remains responsive, retry succeeds (165.866666ms)
+✔ cancel during worker creation terminates the returned host before sending (0.103459ms)
+✔ resource function tokens include string image URLs and CSS escapes (1.399042ms)
+✔ ordinary colors/layout/variables and quoted text remain available (0.094167ms)
+✔ snapshot copies exactly three complete files (0.605ms)
+✔ UTF-8 limits reject overflow and unpaired surrogate without truncation (0.145833ms)
+✔ restore and reset affect only project key, preserving old progress (0.891333ms)
+✔ corrupt raw survives load and editing until explicit reset (0.287542ms)
+✔ storage failures and oversized edits preserve in-memory work (0.094542ms)
+✔ repeated export preserves bytes and matching real SHA-256 hashes (2.473875ms)
+✔ async digest snapshots edits and cancellation/error never returns a bundle (0.326583ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 217.1855

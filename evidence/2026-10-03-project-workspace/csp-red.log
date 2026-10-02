@@ -1,0 +1,26 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: valid input must not emit CSP or application errors
++ actual - expected
+
++ [
++   "Applying inline style violates the following Content Security Policy directive 'style-src 'nonce-8e0f4bc194174708a8e1d958ef565530''. Either the 'unsafe-inline' keyword, a hash ('sha256-aJ/XnfhbK2/kDnnLe18etOL1vZmFCKyGdV2VOh0XuY4='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked."
++ ]
+- []
+
+    at file:///Users/zaki/Documents/Codex/2026-10-02/task-3/ppl-export-work/tests/project-workspace-browser.mjs:80:14
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:541:9) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [
+    "Applying inline style violates the following Content Security Policy directive 'style-src 'nonce-8e0f4bc194174708a8e1d958ef565530''. Either the 'unsafe-inline' keyword, a hash ('sha256-aJ/XnfhbK2/kDnnLe18etOL1vZmFCKyGdV2VOh0XuY4='), or a nonce ('nonce-...') is required to enable inline execution. The action has been blocked."
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

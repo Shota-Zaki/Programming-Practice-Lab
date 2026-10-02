@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /見直してください/. Input:
+
+'確認できました: 追加script・外部resource・イベント属性を使わない'
+
+    at file:///Users/zaki/Documents/Codex/2026-10-02/task-3/ppl-export-work/tests/project-workspace-browser.mjs:98:16 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '確認できました: 追加script・外部resource・イベント属性を使わない',
+  expected: /見直してください/,
+  operator: 'match',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

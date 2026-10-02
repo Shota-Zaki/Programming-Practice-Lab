@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /日本語🙂/. Input:
+
+'学習者の自己紹介'
+
+    at file:///Users/zaki/Documents/Codex/2026-10-02/task-3/ppl-export-work/tests/project-workspace-browser.mjs:56:14 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '学習者の自己紹介',
+  expected: /日本語🙂/,
+  operator: 'match',
+  diff: 'simple'
+}
+
+Node.js v24.21.0
