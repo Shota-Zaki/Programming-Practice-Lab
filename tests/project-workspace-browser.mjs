@@ -1,5 +1,5 @@
 import { createServer } from 'node:http';
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { readFile, mkdir, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { resolve, extname } from 'node:path';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
@@ -164,19 +164,50 @@ try {
       const page = await context.newPage();
       await page.addInitScript(kind => {
         const key = 'ppl.foundation.project.v1.profile';
-        if (kind === 'corrupt') localStorage.setItem(key, '{broken');
-        if (kind === 'denied') Object.defineProperty(window, 'localStorage', { get() { throw new DOMException('denied', 'SecurityError'); } });
-        if (kind === 'quota') { const original = Storage.prototype.setItem; Storage.prototype.setItem = function(name, value) { if (name === key) throw new DOMException('full', 'QuotaExceededError'); return original.call(this, name, value); }; }
-        if (kind === 'digest') crypto.subtle.digest = async () => { throw Error('controlled digest failure'); };
+        window.qaRestoreFault = () => {};
+        if (kind === 'corrupt' && localStorage.getItem(key) === null) localStorage.setItem(key, '{broken');
+        if (kind === 'denied') { const descriptor = Object.getOwnPropertyDescriptor(window, 'localStorage'); Object.defineProperty(window, 'localStorage', { configurable: true, get() { throw new DOMException('denied', 'SecurityError'); } }); window.qaRestoreFault = () => Object.defineProperty(window, 'localStorage', descriptor); }
+        if (kind === 'quota') { const original = Storage.prototype.setItem; Storage.prototype.setItem = function(name, value) { if (name === key) throw new DOMException('full', 'QuotaExceededError'); return original.call(this, name, value); }; window.qaRestoreFault = () => { Storage.prototype.setItem = original; }; }
+        if (kind === 'digest') { const original = crypto.subtle.digest.bind(crypto.subtle); crypto.subtle.digest = async () => { throw Error('controlled digest failure'); }; window.qaRestoreFault = () => { crypto.subtle.digest = original; }; }
       }, fault);
       await open(page); await setFile(page, 'app.js', '// keep fault input 日本語🙂\n');
       if (fault === 'corrupt') assert.equal(await page.evaluate(() => localStorage.getItem('ppl.foundation.project.v1.profile')), '{broken');
       if (fault === 'digest') { await page.locator('#project-export').click(); await page.getByText(/書き出せませんでした.*controlled digest failure/).waitFor(); }
       else assert.match(await page.locator('#project-save-status').textContent(), /保存できません|保存データを読み取れません/);
       assert.equal(await page.locator('#project-editor').inputValue(), '// keep fault input 日本語🙂\n');
+      if (fault === 'corrupt') {
+        page.once('dialog', dialog => dialog.accept()); await page.locator('#project-reset').click();
+        assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('ppl.foundation.project.v1.profile')).version), 1);
+        await page.reload(); await page.locator('#project-title').waitFor(); assert.match(await page.locator('#project-save-status').textContent(), /保存済み/);
+      } else {
+        await page.evaluate(() => window.qaRestoreFault());
+        if (fault !== 'digest') { await page.getByRole('tab', { name: 'index.html', exact: true }).click(); assert.match(await page.locator('#project-save-status').textContent(), /保存済み/); }
+        await page.locator('#project-export').click(); await expectDownloads(page);
+      }
       results.push({ width: 375, case: `controlled-fault/${fault}`, pass: true });
     } finally { await context.close(); }
   }
+  // A dedicated disposable persistent profile proves editor restore across real browser processes.
+  await browser.close();
+  const profile = await mkdtemp('/tmp/ppl-project-editor-profile-');
+  try {
+    let saved;
+    for (let restart = 0; restart < 2; restart++) {
+      const context = await chromium.launchPersistentContext(profile, { headless: true, viewport: { width: 375, height: 900 } });
+      try {
+        const page = context.pages()[0]; await open(page);
+        if (restart === 0) {
+          await setFile(page, 'app.js', '// process restore 日本語🙂 </script>\nwhile(true){}\n');
+          saved = await page.evaluate(() => JSON.parse(localStorage.getItem('ppl.foundation.project.v1.profile')));
+        } else {
+          assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('ppl.foundation.project.v1.profile'))), saved);
+          assert.equal(await page.locator('#project-editor').inputValue(), saved.files['app.js']);
+          assert.equal(await page.locator('#lesson-picker [data-lesson]').count(), 21);
+        }
+      } finally { await context.close(); }
+    }
+    results.push({ width: 375, case: 'editor-native-storage/browser-process-restart', pass: true });
+  } finally { await rm(profile, { recursive: true, force: true }); }
   await writeFile(`${output}/results.json`, JSON.stringify({ browser: browser.version(), observations: results.length, results }, null, 2) + '\n');
   console.log(JSON.stringify({ result: 'PASS', browser: browser.version(), observations: results.length }));
 } finally { await browser.close(); await new Promise(resolve => server.close(resolve)); }
