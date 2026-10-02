@@ -211,3 +211,11 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - 初期検証で幅変更直後の古いレイアウトを読んでいたため、iframe navigationと描画フレーム完了を待つようテストを修正。固定幅の期待値は変更していない。初期化ハンドラーへの不要な表示設定挿入を除去し、取消がappend中に起きる場合のフレーム解放も補強した。
 - Evidence: `evidence/2026-10-02-layout/` のbrowser-results.json、verify-agent.log、51枚の画像。1280px演習と375pxプレビューを目視確認。実Pages公開、Safari、手動スクリーンリーダーは未検証。
 - 残件: 第5〜7章9レッスン、統合PPL-CORE-001の共通実行/Worker/停止/結果内訳/IndexedDB/実Pages検証。次の別Taskは未設定。main merge/公開は未実施。
+
+### 2026-10-02 — JavaScript実行ライフサイクルの先行単位
+
+- Fixed source/test SHA: `f21a2f0023d965944ba7f6d17bb3574d7f15918c`。第5章3教材の目標/代表値/境界をDESIGN.mdへ定義。Worker factoryの契約を持つ独立controllerを追加し、コードを評価せず相関ID、停止、置換取消、時間上限、終了時解放、エラー、遅延応答破棄を扱う。
+- `npm run test:execution`7/7 PASS（実Node Worker無限ループ停止とmainタイマー応答、再試行を含む）。`npm run verify:agent` PASS。独立固定SHAレビューでblocking findingなし。証拠: `evidence/2026-10-02-execution/`。
+- 本先行単位の受入検査7/7=100%。講座は15/24=63%のまま。PPL-COREのWorker/共通アダプター完了条件は未チェックのまま。実行ホスト、権限制約、ブラウザ検証、採点、教材/UI接続は未完。
+- Active: PPL-FOUNDATION-001。Ready: 実行ホストの境界設計/検証。Planned: 第5〜7章9教材、共通アダプター/結果内訳/IndexedDB/実Pages確認。Blocked: なし。Deferred: 実践UI（基礎講座後）。別の次Task: 未設定。
+- main merge/公開なし。次は教材接続前に通信/保存/出力量/メモリ制約を扱う実行ホストを設計・検証する。Worker単体を権限隔離とみなさない。
