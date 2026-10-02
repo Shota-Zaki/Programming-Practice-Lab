@@ -439,7 +439,7 @@ executionMode=domに限りparent graderを使う。初期状態と実行後状�
 
 根拠は本書「初期リリースの中心」の学習内容14ブラウザ保存/15ミニ成果物、7章24教材/1ミニ成果物、およびsrc/static/index.htmlの第7章MINI PROJECT/3 LESSONS「自己紹介サイトを完成させる」「設計、実装、確認、公開用ビルド」。最後の3教材はミニ成果物として維持し、保存API3教材へ置き換えない。js07〜js09などのID/個別教材構成は未確定。公開用ビルドは生成物の確認であり、この作業で公開する承認ではない。
 
-今回の完了単位は保存の設計と、両案に共通するpure record codecだけ。現在21/24=88%を維持する。教材、learner API、実保存backend、UI、sandbox/Worker/共有枠、既存v1進捗、ユーザーの保存データへ接続しない。codecは信頼された親側の将来部品であり、native Storageのpolyfillではない。
+今回の完了単位は保存の設計だけ。pure record codecは将来案に限り、定義済みconsumerがないため実装しない。現在21/24=88%を維持する。教材、learner API、実保存backend、UI、sandbox/Worker/共有枠、既存v1進捗、ユーザーの保存データへ接続しない。codecは信頼された親側の将来部品であり、native Storageのpolyfillではない。
 
 ### native APIの事実と今回の制約
 
@@ -453,7 +453,7 @@ native localStorageはWindowに公開された同期の文字列Storage。取得
 
 **B 演習専用API中心**: 独自名lessonStore等のPromise APIを教材に明示し、native localStorageとの違いを表にする。getを同期に見せる、保存snapshotをlocalStorageという名前で偽装する、async commitを同期setItemの成功として扱うことは不可。成果物でも専用runtimeが必要になり、nativeコードのコピー再利用とは異なる。
 
-A/Bは学習者が書くAPIとミニ成果物の持ち出し方を変えるproduct決定。既存要件だけからBをnativeAPIと等価として選ばない。選択前にlearner facade/教材/新しい永続書込を接続しない。共通codecの形状/限度は安全な工程上の判断として先行できる。今回UI方針は既存を維持し、新案のUIを実装しない。
+A/Bは学習者が書くAPIとミニ成果物の持ち出し方を変えるproduct決定。既存要件だけからBをnativeAPIと等価として選ばない。選択前にlearner facade/教材/新しい永続書込を接続しない。共通codecの形状/限度は工学上の候補として整理できるが、既存要件への直接の追跡と具体的consumerが確定するまでコードにしない。今回UI方針は既存を維持し、新案のUIを実装しない。
 
 ### 非同期案Bを採る場合の提案契約（未採択・未実装）
 
@@ -463,11 +463,11 @@ A/Bは学習者が書くAPIとミニ成果物の持ち出し方を変えるprodu
 - 順次awaitでread-after-writeを確認する。同一教材のnamespaceを再読込時にloadし、別教材は別namespace。採点はknown fixtureのvolatile backendで行い、通常操作のpersist backendと区別する。ユーザーの保存内容を採点の期待値/初期化で上書きしない。実reloadは新しいrunなので既存snapshotを信用せず再load。
 - 同じ教材の複数タブはnative backend上でlast writerが勝つことがある。optimistic conflict検知は原子的lockではなく、完全な競合解決を保証しない。保存操作数上限16/run、既存公開2秒期限、同時実行1/解放後5秒予約を維持する案だが、facade wiringとnative検証を終えるまで対応機能と宣言しない。
 
-### 今回採択を求める共通codec契約
+### 共通codec候補（consumer未確定・未採択）
 
-`src/static/lesson-storage-codec.js`を独立moduleとして作り、既存画面/Workerからimportしない。外部権限/依存なし。`createLessonStorageCodec({lessonId,allowedKeys})`はtrusted設定だけを受け取る。lessonIdは英小文字開始の英数/ハイフン最大64文字。許可keyは最大8個、一意・空でない文字列、最大64 UTF-16単位。設定をコピーし、logical keyが__proto__でも連想objectのprototypeを変えないarray/Mapで扱う。
+将来codecを実装するなら独立moduleとし、既存画面/Workerからimportしない。外部権限/依存なし。`createLessonStorageCodec({lessonId,allowedKeys})`はtrusted設定だけを受け取る。lessonIdは英小文字開始の英数/ハイフン最大64文字。許可keyは最大8個、一意・空でない文字列、最大64 UTF-16単位。設定をコピーし、logical keyが__proto__でも連想objectのprototypeを変えないarray/Mapで扱う。
 
-保存key候補はppl.lesson-record.v1.<lessonId>。v1進捗/旧入力/viewとprefixが異なる。許可済みlessonIdの登録・実際の保存先へのアクセスは将来のtrusted adapterの責任であり、codec単独を権限境界として扱わない。今回storageKeyは計算するだけでread/write/deleteはしない。
+保存key候補はppl.lesson-record.v1.<lessonId>。v1進捗/旧入力/viewとprefixが異なる。許可済みlessonIdの登録・実際の保存先へのアクセスは将来のtrusted adapterの責任であり、codec単独を権限境界として扱わない。storageKey案は文書上の候補のみで、今回計算するコードもread/write/deleteも作らない。
 
 recordは厳密に{version:1,lessonId,entries:[[key,value],...]}。encodeは許可された一意のkeyとstring valueのみを受け取り、deterministicに許可key順へ正規化する。valueは最大1024 UTF-16単位、record全体はJSON metadata/escapeも含めて最大4096 UTF-8 bytes。8key/64/1024/4096は初学者の短いプロフィール用の工学上限で、nativeブラウザーquotaではない。切捨て・Stringによる暗黙変換・fake quota成功をしない。
 
@@ -481,12 +481,24 @@ native書込済みrecordのreload/再open、別lesson/keyとprogressの不変、
 
 今回codecはこれらを実行しない。pure schema検証のPASSをnative persistence、cancel race、quota、UI受入のPASSとして扱わない。真のnative quota値/総origin使用量/ストレージ消去/別タブ競合・Safari/Pagesの挙動は別検証。
 
+### A/B比較とowner choice前に進められる範囲
+
+| 観点 | A native API中心 | B 独自async API中心 |
+| --- | --- | --- |
+| 学習者コード | native getItem/setItemを成果物で使える。現Workerで同じ任意コードを評価できない | 専用Promise APIを明示。native同期Storageをそのまま書く教材ではない |
+| 教育上の差 | native APIと実行環境の関係を直接学ぶ。export/local UXが必要 | 隔離した現画面で反復しやすいが、API差とpartial writesを別途教える |
+| 完成サイトへの再利用 | nativeコードを適切なoriginで実行。file URLの永続性は保証しない | 専用runtimeを同梱するかnativeコードへ書換えが必要。教材コード単独では完成サイトにならない |
+| 保存・取消 | native成功済み操作は残る。停止によるrollbackなし | Promise ack/親commit境界を設計し、成功済み操作は残る。同期APIを偽装しない |
+| 必要な新規設計 | HTML/CSS/JSの組合せ・export・実行手順・native動作の受入 | facade capability/operation protocol/永続backend/専用runtimeとUI受入 |
+| 既存sandbox | 同一origin権限を渡さない。native任意実行を現previewへ追加しない | 同一origin権限を渡さず、許可されたlogical record操作だけを仲介する |
+
+選択前に行えるのは既存要件の追跡、native事実の確認、A/B比較、工程/受入の整理、既存21教材の独立した不具合修正。採択前に書込backend/facade/レッスンID/完成サイトruntimeを決めない。codec案にもまだ具体的consumerがないため実装しない。第7章はmini-projectとして維持し、保存専用3教材へ改変しない。
+
 ### チェックポイントの受入
 
-1. 既存capstone要件、native/custom API差、product決定と未採択案を記録する。
-2. 固定SHA独立設計レビューを通し、codecだけの実装承認範囲を明確にする。
-3. bounded codecのroundtrip、空文字、Unicode/escape、重複/未知key/version/lesson、byte超過、破損/nullと変更不能コピーを検証する。
-4. importに保存/起動side effectがなく既存runtime/UI/v1と21教材が不変である証拠、生成物同期を保存する。
-5. 実装後の固定SHA独立レビュー、task-list/NEXT/evidenceを更新し、講座88%を維持する。
+1. 既存capstone要件、native/custom API差と未採択案を記録する。
+2. 固定SHA独立設計レビューで、owner choiceと実装保留範囲を明確にする。
+3. runtime/UI/v1保存/既存21教材と旧evidenceが不変である証拠、生成物同期を保存する。
+4. task-list/NEXT/evidenceを更新し、講座88%を維持する。
 
-実native persistence、facade/run取消/partialwrite、UI、教材、ミニ成果物/公開用ビルドの受入はこのcheckpoint対象外。
+実native persistence、codec、facade/run取消/partialwrite、UI、教材、ミニ成果物/公開用ビルドの受入は未実装・未検証。今回native挙動の根拠は上記規格であり、新しいbrowser実測は行わない。
