@@ -185,16 +185,18 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ### 第7章案A — 今回の設計受入条件
 
-状態: `進行中`。実教材受入数21/24=88%を維持する。
+状態: `設計受入完了`（6/6=100%）。実教材受入数21/24=88%を維持する。
 
-- [ ] 承認済み案Aと既存mini-project3教材要件を追跡し、具体的な3教材・consumerを定義する。
-- [ ] 同じHTML/CSS/JSを持ち出すファイル形式、操作、取消・繰返し・復帰を定義する。
-- [ ] 専用origin/profile、保存寿命、削除、quota/破損/partial writesをnative仕様と整合させる。
-- [ ] 親アプリ・既存opaque frame/Workerの境界を維持し、local実行の通信・停止に関する成立条件と未成立箇所を明示する。
-- [ ] 編集/exportを先行できる順序と、native実行・採点・3教材受入の具体的検証条件を定義する。
-- [ ] src/docs/tests不変、verify同期PASS、固定SHA独立レビューと証拠を記録する。
+- [x] 承認済み案Aと既存mini-project3教材要件を追跡し、具体的な3教材・consumerを定義する。
+- [x] 同じHTML/CSS/JSを持ち出すファイル形式、操作、取消・繰返し・復帰を定義する。
+- [x] 専用origin/profile、保存寿命、削除、quota/破損/partial writesをnative仕様と整合させる。
+- [x] 親アプリ・既存opaque frame/Workerの境界を維持し、local実行の通信・停止に関する成立条件と未成立箇所を明示する。
+- [x] 編集/exportを先行できる順序と、native実行・採点・3教材受入の具体的検証条件を定義する。
+- [x] src/docs/tests不変、verify同期PASS、固定SHA独立レビューと証拠を記録する。
 
 実装受入は今回の設計受入と別。`DESIGN.md`の第7章案A節と`design/chapter7-native-export.md`へ実装契約を置き、Task状態・scope・ACの正本は本ファイルとする。
+
+固定設計`e9ee4ae862102d6189f6bd4b5370df22d220df9e`を独立レビューし阻害指摘なし。Evidence: `evidence/2026-10-03-native-export-design/`。Active: PPL-FOUNDATION-001。Ready: 権限追加のない編集/静的確認/export。Planned: 残り3教材/正式共通形式/adapter/IndexedDB。Blocked: 任意native実行向け専用環境と信頼できる結果連携の受入。Deferred: 実Pages/Safari/読み上げ、基礎講座後の実践UI。別Task未設定。A/B選択は解消済みで再確認不要。native実装/受入は未実施。main merge/公開未実施。
 
 ### 第7章案A — 後続実装の受入条件（全て未受入）
 
