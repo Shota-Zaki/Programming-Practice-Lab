@@ -1,0 +1,54 @@
+import {createServer} from 'node:http';
+import {readFile,mkdir,writeFile} from 'node:fs/promises';
+import {resolve,extname} from 'node:path';
+import assert from 'node:assert/strict';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const lessonId=process.env.LESSON_ID||'js05',evidence=process.env.EVIDENCE_DIR||'evidence/2026-10-02-click-lesson';
+const root=resolve('docs');await mkdir(evidence,{recursive:true});
+const server=createServer(async(req,res)=>{try{const name=new URL(req.url,'http://local').pathname.replace(/^\/Programming-Practice-Lab\//,'/');const file=resolve(root,'.'+(name==='/'?'/index.html':name));if(!file.startsWith(root+'/'))throw Error();res.setHeader('Content-Type',{'.js':'text/javascript','.css':'text/css','.html':'text/html'}[extname(file)]||'text/plain');res.end(await readFile(file))}catch{res.writeHead(404);res.end()}});
+await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch({headless:true}),results=[];
+try{
+ for(const width of [375,768,1280]){
+  const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'}),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(origin+'/Programming-Practice-Lab/');await page.locator('.hero [data-view="lesson"]').click();await page.locator(`#lesson-picker [data-lesson="${lessonId}"]`).click();
+  const lesson=await page.evaluate(async id=>(await import('./lessons.js')).lessons.find(l=>l.id===id),lessonId);
+  assert.match(await page.locator('#lesson-content').textContent(),/通常のブラウザーDOM全体ではありません/);assert.match(await page.locator('#lesson-content').textContent(),/手で押しても|手で入力しても/);assert.equal(await page.locator('.toc [data-chapter-progress]').textContent(),'0 / 3');await page.locator('#lesson-content [data-view="practice"]').click();
+  const record=()=>page.evaluate(id=>JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons[id],lessonId);
+  const run=async(code,status='演習を完了しました')=>{await page.locator('#editor').fill(code);await page.locator('#run-preview').click();await page.getByText(status,{exact:true}).waitFor();};
+  const initial=async()=>{assert.equal(await page.locator('#preview').getAttribute('sandbox'),'');if(lessonId==='js05')assert.equal(await page.frameLocator('#preview').locator('#count').textContent(),'0');else{assert.equal(await page.frameLocator('#preview').locator('#name').inputValue(),'');assert.equal(await page.frameLocator('#preview').locator('#message').textContent(),'未入力');}};
+  const final=async()=>{const last=lesson.completionTests.at(-1);await page.frameLocator('#preview').locator(last.selector).waitFor();assert.equal(await page.frameLocator('#preview').locator(last.selector).textContent(),last.expected);};
+  await initial();await run(lesson.starterCode,'未達成の条件があります');assert.equal((await record()).completed,false);
+  await run('document.querySelector("body").textContent="unsupported"','確認できませんでした');assert.equal((await record()).completed,false);await initial();
+  const wrong=lessonId==='js05'?[
+   'document.querySelector("#count").textContent=3;',
+   'document.querySelector("#add").addEventListener("click",()=>{document.querySelector("#count").textContent=1});',
+   lesson.example.replace('count += 1','count += 2'),
+   lesson.example.replace('let count = 0','let count = 1'),
+   'document.querySelector("#count").textContent=0;document.querySelector("#add").addEventListener("input",()=>{document.querySelector("#count").textContent=3});'
+  ]:[
+   'document.querySelector("#message").textContent="こんにちは、次郎さん";',
+   lesson.example.replace('event.target.value','"太郎"'),
+   lesson.example.replace('"input"','"click"'),
+   lesson.example.replace('value === ""','value !== ""'),
+   lesson.example.replace('event.target.value','event.target.textContent')
+  ];
+  if(width===375)for(const code of wrong){await run(code,'未達成の条件があります');assert.equal((await record()).completed,false);assert.equal((await record()).result.every(r=>r.passed),false);}
+  await page.locator('#editor').fill(lesson.example);await page.waitForFunction(()=>!document.querySelector('#check-code').disabled);await page.locator('#editor').press('Control+Enter');await page.getByText('演習を完了しました',{exact:true}).waitFor();await final();assert.equal((await record()).completed,true);assert.equal((await record()).result.length,lesson.completionTests.length);assert.equal(await page.locator('[data-chapter-percent]').first().textContent(),'33%');
+  await page.reload();await page.getByText('演習を完了しました',{exact:true}).waitFor();assert.equal(await page.locator('#editor').inputValue(),lesson.example);await final();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);await page.locator('#editor').blur();await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await page.screenshot({path:`${evidence}/practice-${width}.png`,fullPage:true});await page.locator('#preview').screenshot({path:`${evidence}/preview-${width}.png`});
+  // Display is a script-free final snapshot, not a second execution surface.
+  if(lessonId==='js05'){await page.frameLocator('#preview').locator('#add').click();await final();}
+  else{await page.frameLocator('#preview').locator('#name').fill('手入力');await final();await page.reload();await final();assert.equal(await page.frameLocator('#preview').locator('#name').inputValue(),'次郎');}
+  const same=lesson.example+'\nreturn new Promise(r=>setTimeout(r,600));';await run(same);await page.locator('#run-preview').click();await page.locator('[data-dom-host]').waitFor({state:'attached'});await page.locator('#stop-code').click();await page.getByText('実行を停止しました',{exact:true}).waitFor();assert.equal(await page.locator('#result-status').textContent(),'未確認');assert.equal((await record()).result,null);assert.equal((await record()).completed,true);await initial();
+  const attempts=(await record()).attempts;
+  const start=async(code)=>{await page.locator('#editor').fill(code);await page.locator('#run-preview').click();await page.locator('[data-dom-host]').waitFor({state:'attached'});};
+  // Cancel while a native event handler is already processing, not merely top-level setup.
+  const delayed=lessonId==='js05'?lesson.example.replace('() => {','async () => {\n  await new Promise(r=>setTimeout(r,500));'):lesson.example.replace('(event) => {','async (event) => {\n  await new Promise(r=>setTimeout(r,350));');
+  await start(delayed);await page.waitForTimeout(180);await page.locator('#reset-code').click();assert.equal(await page.locator('#editor').inputValue(),lesson.starterCode);await page.waitForTimeout(800);assert.equal(await page.locator('#result-status').textContent(),'未確認');assert.equal((await record()).attempts,attempts);await initial();
+  await start(delayed);await page.waitForTimeout(180);await page.locator('#editor').fill(lesson.example+'\n// edited');await page.waitForTimeout(800);assert.equal(await page.locator('#result-status').textContent(),'未確認');assert.equal((await record()).attempts,attempts);await initial();
+  await start(delayed);await page.waitForTimeout(180);await page.locator('.practice-head [data-view="lesson"]').click();await page.locator('#lesson-picker [data-lesson="js04"]').click();await page.locator('#lesson-content [data-view="practice"]').click();assert.equal(await page.locator('#result-status').textContent(),'未確認');await page.locator('.practice-head [data-view="lesson"]').click();await page.locator(`#lesson-picker [data-lesson="${lessonId}"]`).click();await page.locator('#lesson-content [data-view="practice"]').click();await page.waitForTimeout(800);assert.equal(await page.locator('#result-status').textContent(),'未確認');assert.equal((await record()).attempts,attempts);
+  const infinite=lessonId==='js05'?'document.querySelector("#add").addEventListener("click",()=>{while(true){}});':'document.querySelector("#name").addEventListener("input",()=>{while(true){}});';await run(infinite,'確認できませんでした');assert.match(await page.locator('#result-message').textContent(),/2秒/);assert.equal((await record()).attempts,attempts);await initial();await run(lesson.example);await final();
+  await page.locator('#sidebar [data-view="course"]').click();assert.equal(await page.locator('.course-side [data-chapter-progress]').textContent(),'1 / 3');assert.equal(await page.locator('.course-side [data-course-progress]').textContent(),'1 / 24');assert.deepEqual(errors,[]);
+  results.push({width,example:true,starterFails:true,unsupportedError:true,semanticWrongCases:width===375?wrong.length:0,perEventSnapshots:true,restore:true,staticDisplay:true,sameCodeStop:true,resetDuringHandler:true,inputCancel:true,actualNavigation:true,eventTimeoutRetry:true,chapterPlannedTotal:true,noOverflow:true,errors});console.log(`${lessonId} UI ${width} complete`);await page.close();
+ }
+ const old=await browser.newPage();await old.addInitScript(()=>{if(!localStorage.getItem('qa-old-loaded')){localStorage.setItem('qa-old-loaded','1');localStorage.setItem('ppl.foundation.progress.v1',JSON.stringify({version:1,lessonId:'js04',view:'practice',lessons:{js03:{code:'old-js03',attempts:6,completed:true,result:null,checkedCode:null},js04:{code:'old-js04',attempts:4,completed:true,result:null,checkedCode:null}}}))}});await old.goto(origin);await old.locator('.practice-head [data-view="lesson"]').click();await old.locator(`#lesson-picker [data-lesson="${lessonId}"]`).click();await old.locator('#lesson-content [data-view="practice"]').click();const migrated=await old.evaluate(()=>JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')));assert.equal(migrated.lessons.js03.attempts,6);assert.equal(migrated.lessons.js04.attempts,4);assert.equal(migrated.lessons.js04.completed,true);assert.equal(migrated.lessons[lessonId].completed,false);assert.equal(migrated.lessons[lessonId].attempts,0);await old.close();
+ await writeFile(evidence+'/ui-results.json',JSON.stringify({browser:browser.version(),lessonId,results,oldV1Preserved:true,newLessonFresh:true},null,2)+'\n');
+}finally{await browser.close();await new Promise(r=>server.close(r))}

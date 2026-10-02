@@ -417,3 +417,10 @@ executionMode=domに限りparent graderを使う。初期状態と実行後状�
 実UIはコード実行/完了条件ボタン、Ctrl/Command+Enter、停止、入力変更、reset、教材/画面/hash移動、エラーと復元を確認する。実行枠1/5秒予約/2秒期限/32KiB等は先行契約を維持。取消/エラーから古い結果を保存せず、完了履歴と試行数は既存ルールを維持する。第6章の進捗は完了1/計画3を表示し、未実装2教材を完了/受講可能扱いにしない。講座全体は実教材受入後19/24=79%へ更新する。最終教材末尾は章進捗へ戻り、次教材を自動作成しない。
 
 受入: js04例/開始/誤答・偽合否・HTML-looking出力、native DOM結果からのscriptなし表示、3幅の実UI通し/横溢れ、停止/timeout/error/reset/input cancel/rapid navigationと旧結果破棄、reload/旧v1追加/保存拒否、既存19教材回帰、controller/境界/生成物同期、固定SHA独立レビュー。教材のAPI説明もレビュー対象とする。
+
+
+### 第6章 js05 クリックイベント教材
+
+既存DOM境界/表示UIのままjs05を追加する。#add(type=button)と#count(p)を使い、変数count=0を作ってaddEventListener("click", callback)で1ずつ加算しtextContentへ表示する。実行開始時0、native clickを3回発生させた各snapshot1/2/3を親で採点する。登録時にcallbackを呼ぶ誤り、固定値、二重加算、未登録を拒否する。ボタンは採点環境が自動操作し、表示iframeはスクリプトなしの最終結果確認用であり手動クリックで実行されない。
+
+限定API/nativeとの違いはjs04の説明に加え、click/input function listenerのみ、options/removeEventListener/バブリング不可、handler例外で実行全体失敗、native Promiseを返すhandlerを順に待つことを明記する。既存ID/v1・共有枠/停止予約・2秒期限・CSPは維持し、変更しない。js04と第5章の既存証拠は保存する。受入は初期値/3イベントの意味誤答、3幅の実UI保存/復元/停止/timeout/エラー/初期化/入力変更/教材移動、全20教材回帰、controller/生成物同期と固定SHA独立レビュー。受入前は19/24=79%、完了後20/24=83%とし、Chapter6予定3を分母にする。

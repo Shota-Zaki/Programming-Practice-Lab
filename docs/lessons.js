@@ -272,7 +272,21 @@ export const lessons = [
     example:'const heading = document.querySelector("#heading");\nconst message = document.querySelector("#message");\nheading.textContent = "学習メモ";\nmessage.textContent = "DOMの文字を更新できました";',
     starterCode:'const heading = document.querySelector("#heading");\nconst message = document.querySelector("#message");\n// 二つの要素のtextContentを更新しましょう',
     completionTests:[{id:'heading-text',label:'見出しを「学習メモ」に更新する',step:0,selector:'#heading',property:'textContent',expected:'学習メモ'},{id:'message-text',label:'本文を「DOMの文字を更新できました」に更新する',step:0,selector:'#message',property:'textContent',expected:'DOMの文字を更新できました'}],
-    hints:['heading.textContent = "学習メモ"; の形で代入します。ID、変数名、引用符と表示する文字を確認してください。'],explanation:'要素をIDで選び、textContentで文字を更新できました。第6章の残り2教材は準備中です。',
+    hints:['heading.textContent = "学習メモ"; の形で代入します。ID、変数名、引用符と表示する文字を確認してください。'],explanation:'要素をIDで選び、textContentで文字を更新できました。次はクリックイベントを扱います。',
+  },
+  {
+    id:'js05',language:'javascript',executionMode:'dom',chapterId:'js-chapter06',title:'クリックで数を増やす',
+    objectives:['イベントを受け取る関数を登録する','クリックのたびに変数と表示を更新する'],
+    contentBlocks:[
+      {title:'クリックを受け取る',text:'addEventListener("click", 関数)はクリックされたときの処理を登録します。登録するときは関数を渡し、先に呼び出しません。const add = document.querySelector("#add"); で用意されたボタンを取得し、処理を登録しましょう。'},
+      {title:'クリックごとに表示を変える',text:'let count = 0; で回数を保持します。登録した関数の中でcount += 1; とし、#countのtextContentへcountを代入します。開始時0を表示し、採点環境が自動で3回クリックした後に1・2・3となるかを各回で確認します。固定で3と表示するだけでは合格しません。JavaScriptだけを入力してください。'},
+      {title:'採点中のイベントと結果表示',text:'Workerの限定ブリッジから隔離した実DOMのclickイベントを扱います。通常のブラウザーDOM全体ではありません。結果表示はスクリプトなしの最終状態です。表示中のボタンを手で押しても実行されず、実行ボタンで最初から採点します。ID選択、textContent/value、click/inputのfunction listenerだけを扱い、options、removeEventListener、バブリング、innerHTML、style、親画面や保存APIは使えません。書込みは文字列・数値・booleanを文字列化し160 UTF-16単位まで、null/undefined/オブジェクトは拒否します。handler例外は実行全体を失敗させます。native Promiseを返すhandlerは登録順に待ちます（通常のDOMは待ちません）。この教材では同期のclick処理を使います。'},
+    ],
+    fixture:{markup:'<button id="add" type="button">1増やす</button><p id="count">0</p>',selectors:['#add','#count'],steps:[{type:'click',selector:'#add'},{type:'click',selector:'#add'},{type:'click',selector:'#add'}]},
+    example:'const add = document.querySelector("#add");\nconst output = document.querySelector("#count");\nlet count = 0;\noutput.textContent = count;\nadd.addEventListener("click", () => {\n  count += 1;\n  output.textContent = count;\n});',
+    starterCode:'const add = document.querySelector("#add");\nconst output = document.querySelector("#count");\nlet count = 0;\n// clickの処理を登録し、回数と表示を更新しましょう',
+    completionTests:[{id:'initial-count',label:'クリック前は0を表示する',step:0,selector:'#count',property:'textContent',expected:'0'},{id:'first-click',label:'1回目のクリック後は1を表示する',step:1,selector:'#count',property:'textContent',expected:'1'},{id:'second-click',label:'2回目のクリック後は2を表示する',step:2,selector:'#count',property:'textContent',expected:'2'},{id:'third-click',label:'3回目のクリック後は3を表示する',step:3,selector:'#count',property:'textContent',expected:'3'}],
+    hints:['add.addEventListener("click", () => { ... }); の中でcount += 1; とoutput.textContent = count; を実行します。'],explanation:'クリックのたびに変数と表示を更新できました。次は入力値を受け取る教材です。',
   },
 ].map((lesson, index, all) => ({ language: 'html', courseId: 'web-foundation', chapterId: 'html-chapter01', ...lesson, nextLessonId: all[index + 1]?.id ?? null }));
 export const chapters = [

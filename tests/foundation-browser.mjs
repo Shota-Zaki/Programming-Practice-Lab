@@ -11,7 +11,7 @@ await new Promise(r => server.listen(0,'127.0.0.1',r));
 const browser = await chromium.launch({headless:true});
 const origin = `http://127.0.0.1:${server.address().port}`;
 const results = [];
-const evidenceDirectory = process.env.EVIDENCE_DIR || 'evidence/2026-10-02-dom-lesson/regression';
+const evidenceDirectory = process.env.EVIDENCE_DIR || 'evidence/2026-10-02-click-lesson/regression';
 await mkdir(evidenceDirectory, {recursive:true});
 try {
   for (const width of [375,768,1280]) {
@@ -57,8 +57,8 @@ try {
       }
       await page.locator('#next-lesson').click();
     }
-    assert.equal(await page.locator('.course-side [data-chapter-progress]').textContent(),'1 / 3');
-    assert.equal(await page.locator('.course-side [data-course-progress]').textContent(),'19 / 24');
+    assert.equal(await page.locator('.course-side [data-chapter-progress]').textContent(),'2 / 3');
+    assert.equal(await page.locator('.course-side [data-course-progress]').textContent(),'20 / 24');
     await page.locator('.course-hero [data-lesson="html01"]').click();
     assert.equal(await page.locator('.toc [data-chapter-progress]').textContent(),'4 / 4');
     await page.locator('#lesson-picker [data-lesson="html01"]').click();
@@ -79,7 +79,7 @@ try {
       return [gradeHtml('<!-- <!doctype html> --><title>T</title><h1>X</h1><p>P</p>',lessons[0].completionTests)[0].passed,gradeHtml(lessons[1].example.replace('</body>','<p id="intro">duplicate</p></body>'),lessons[1].completionTests).at(-1).passed];
     });
     assert.deepEqual(checks,[false,false]);
-    assert.deepEqual(errors,[]);results.push({width,lessons:19,reload:true,reset:true,noOverflow:true,errors});await page.close();
+    assert.deepEqual(errors,[]);results.push({width,lessons:20,reload:true,reset:true,noOverflow:true,errors});await page.close();
   }
   const grading = await browser.newPage(); await grading.goto(origin);
   const matrix = await grading.evaluate(async () => {
