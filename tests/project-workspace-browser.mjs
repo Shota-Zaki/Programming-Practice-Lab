@@ -78,7 +78,27 @@ try {
       await page.locator('#project-preview').scrollIntoViewIfNeeded();
       await page.locator('#project-preview').screenshot({ path: `${output}/static-preview-${width}.png` });
       assert.deepEqual(consoleErrors, [], 'valid input must not emit CSP or application errors');
+      const actionContrast = await page.locator('#project-inspect,#project-export,#project-reset').evaluateAll(buttons => {
+        const luminance = color => {
+          const channels = color.match(/[\d.]+/g).slice(0, 3).map(Number).map(value => value / 255).map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4);
+          return channels[0] * .2126 + channels[1] * .7152 + channels[2] * .0722;
+        };
+        return buttons.map(button => {
+          const style = getComputedStyle(button), front = luminance(style.color), back = luminance(style.backgroundColor);
+          return { id: button.id, contrast: (Math.max(front, back) + .05) / (Math.min(front, back) + .05), height: button.getBoundingClientRect().height };
+        });
+      });
+      for (const button of actionContrast) { assert.ok(button.contrast >= 4.5, JSON.stringify(button)); assert.ok(button.height >= 44, JSON.stringify(button)); }
       results.push({ width, case: 'keyboard/restoration/static/native-disabled/real-downloads/repeat', pass: true });
+      for (const expression of ['image-set("https://malicious.example.invalid/leak" 1x)', '-webkit-image-set("https://malicious.example.invalid/leak" 1x)', 'i\\6d age-set("https://malicious.example.invalid/leak" 1x)', 'var(--image)']) {
+        await setFile(page, 'index.html', starter['index.html']);
+        const variable = expression.startsWith('var(') ? '--image:i\\6d age-set("https://malicious.example.invalid/leak" 1x);' : '';
+        await setFile(page, 'styles.css', `body{${variable}background-image:${expression}}`);
+        await page.locator('#project-inspect').click(); await page.getByText(/静的確認を更新しました。JavaScript/).waitFor();
+        assert.match(await page.locator('#project-checks li').last().textContent(), /見直してください/);
+        assert.equal(await page.frameLocator('#project-preview').locator('body').evaluate(node => getComputedStyle(node).backgroundImage), 'none');
+      }
+      results.push({ width, case: 'image-set-string-url/prefixed/escaped-function', pass: true });
       const hostile = starter['index.html'].replace('</head>', '<base href="https://malicious.example.invalid/leak"><meta http-equiv="refresh" content="0;url=https://malicious.example.invalid/leak"></head>')
         .replace('</main>', '<img src="https://malicious.example.invalid/leak" onerror="parent.LEARNER_CODE_RAN=true"><iframe src="' + origin + '/leak"></iframe><svg onload="alert(1)"></svg><a href="https://malicious.example.invalid/leak" onclick="alert(1)">外部</a></main>');
       await setFile(page, 'index.html', hostile);

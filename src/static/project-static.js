@@ -1,7 +1,8 @@
 import { createProjectSnapshot } from './project-files.js';
+import { containsCssResource } from './project-css-values.js';
 
 // Trusted parser only. Learner HTML/CSS are data; learner JavaScript is never evaluated.
-function staticParser() {
+function staticParser(hasResourceFunction) {
   const nonce = document.currentScript.nonce;
   addEventListener('message', event => {
     if (event.source !== parent || !event.ports[0]) return;
@@ -36,7 +37,7 @@ function staticParser() {
           for (const property of rule.style) {
             const value = rule.style.getPropertyValue(property);
             // CSSOM has parsed the declarations. URL-bearing declarations are omitted from this display copy.
-            if (/url\s*\(/i.test(value)) { omittedCss = true; continue; }
+            if (hasResourceFunction(value)) { omittedCss = true; continue; }
             declarations.push(`${property}:${value}${rule.style.getPropertyPriority(property) ? '!important' : ''};`);
           }
           return `${rule.selectorText}{${declarations.join('')}}`;
@@ -98,7 +99,7 @@ export function inspectProjectFiles(files, { signal } = {}) {
     frame.addEventListener('load', () => {
       if (!ended) frame.contentWindow.postMessage(snapshot, '*', [channel.port2]);
     }, { once: true });
-    frame.srcdoc = `<!doctype html><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'nonce-${nonce}'; style-src 'nonce-${nonce}'; connect-src 'none'; base-uri 'none'; form-action 'none'"><script nonce="${nonce}">(${staticParser.toString()})()<\/script>`;
+    frame.srcdoc = `<!doctype html><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'nonce-${nonce}'; style-src 'nonce-${nonce}'; connect-src 'none'; base-uri 'none'; form-action 'none'"><script nonce="${nonce}">(${staticParser.toString()})(${containsCssResource.toString()})<\/script>`;
     document.body.append(frame);
   });
 }
