@@ -5,7 +5,7 @@
 - currentTask: `PPL-FOUNDATION-001`
 - currentPhase: `Web開発基礎講座`
 - currentStatus: `in_progress`
-- completionPercentage: `83%`（講座全体24レッスン中20レッスン実装・検証済み。初期17/17、第2〜5章各7/7、第6章js04/js05各7/7受入完了）
+- completionPercentage: `88%`（講座全体24レッスン中21レッスン実装・検証済み。初期17/17、第2〜5章各7/7、第6章js04/js05/js06各7/7受入完了）
 - baseBranch: `main`
 - workBranch: `work`
 - pagesSource: `main/docs`
@@ -116,7 +116,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ### JavaScript第6章の先行DOM/イベント境界
 
-この受入は教材/UI接続前の独立基盤に限る。講座18/24=75%を維持する。
+この先行境界受入は教材/UI接続前の独立基盤のみを対象とした。当時の講座完成度は18/24=75%。教材/通常UIの受入は以下のjs04〜js06と最新履歴を参照。
 
 - [x] 対応APIとnative DOMとの違い、fixture/命令/出力制約、parent snapshot採点契約を定義する。
 - [x] Workerからopaque iframeの実DOMへ限定命令を渡し、native click/inputを処理する。
@@ -124,7 +124,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] callback重複/this/currentTarget/文字列encoding/誤答/新しいDOM初期化と未対応API拒否を確認する。
 - [x] callback途中取消/期限/遅延継続/作成失敗/作成中取消と、共有枠の追加128実行拒否を確認する。
 - [x] 第5章実ブラウザー回帰、固定SHA独立レビュー、生成物同期と証拠管理を完了する。
-- [ ] 第6章全3教材を通常UIへ接続する（js04/js05完了、js06入力教材は未実装）。
+- [x] 第6章全3教材を通常UIへ接続する（js04/js05/js06受入完了）。
 
 ### 第6章 js04 DOM更新教材の受入条件
 
@@ -173,7 +173,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 - [ ] 教材データの共通形式を定義する。
 - [ ] 実行アダプターの共通インターフェースを定義する。
-- [x] JavaScript実行をWeb Workerへ分離する。（第5章の数値処理。DOM演習用境界は別途設計）
+- [x] JavaScript実行をWeb Workerへ分離する。（第5章数値処理と第6章限定DOM/event演習）
 - [x] 実行時間上限と停止処理を実装する。（結果期限/停止要求とnative終了遅延を区別）
 - [x] テスト結果を期待値、実際値、修正案に分けて表示する。
 - [ ] IndexedDB保存へ移行する。
@@ -181,7 +181,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`はHTML第1〜2章、CSS第3〜4章、JavaScript第5章と第6章js05まで実装・検証済み（20/24レッスン、83%）。次はjs06入力イベント教材を設計・接続し、各入力/消去の通常UI受入を行う。別の次Taskは未設定。
+`PPL-FOUNDATION-001`はHTML第1〜2章、CSS第3〜4章、JavaScript第5章と第6章js06まで実装・検証済み（21/24レッスン、88%）。次は第7章のブラウザー保存教材を設計する。現ブリッジは保存APIを提供しないため、保存の実行境界/教育内容を先に定義し、未対応APIを使えると説明しない。別の次Taskは未設定。
 
 ## Repository operation policy — 2026-09-01
 
@@ -292,3 +292,15 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] controller8/8、生成物同期、固定SHA独立レビュー、実画面確認と証拠を保存する。
 
 source/test `280a7626bb26a392eed9c2550e7d3895abccab58`。Evidence: `evidence/2026-10-02-click-lesson/`。Active: PPL-FOUNDATION-001、完成度20/24=83%。Ready: js06入力教材。Planned: 残り4教材、共通形式/adapter、IndexedDB、実Pages/Safari/読み上げ。Blocked: 本scopeなし。Deferred: 基礎講座後の実践UI。別Task未設定。native終了/メモリ制約を維持。main merge/公開未実施。
+
+### 2026-10-02 — js06 入力イベント教材を通常UIで受入
+
+- [x] 教材説明/例/開始コード/限定APIとnativeとの差を提供する。
+- [x] 開始空/未入力、native input太郎→空→次郎のvalue/表示の8条件を親で採点し、7意味誤答を拒否する。
+- [x] scriptなし静的最終表示と保存復元を確認する。
+- [x] 同一コード再実行Stopで未確認状態へ戻し、完了履歴を保持する。
+- [x] handler開始marker確認後のreset/edit/navigation取消とhandler期限後retryを3幅で受入する。
+- [x] 旧v1履歴、全21教材×3幅、既存47誤答/保存拒否等を回帰検証する。
+- [x] controller8/8、生成物同期、固定SHA独立レビュー、実画面確認と証拠を保存する。
+
+source/test `c30cdc2bceadefd47e1d5020e0775a48c818651b`。Evidence: `evidence/2026-10-02-input-lesson/`。Active: PPL-FOUNDATION-001、完成度21/24=88%。Ready: 第7章保存境界/教材設計。Planned: 残り3教材、共通形式/adapter、IndexedDB、実Pages/Safari/読み上げ。Blocked: 本scopeなし。Deferred: 基礎講座後の実践UI。別Task未設定。native終了/メモリ制約を維持。main merge/公開未実施。
