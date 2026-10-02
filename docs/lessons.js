@@ -227,10 +227,44 @@ export const lessons = [
     completionTests:[{id:'page',label:'ページの最大幅960px・内側余白16px・border-boxを指定する',checks:[cssTest('max','','.page','max-width','960px'),cssTest('box','','.page','box-sizing','border-box'),...sides('padding','16px').map(c=>({...c,selector:'.page'}))]},cssTest('flex','見出し部分をFlexboxにする','.page-head','display','flex'),viewportTest('direction','見出し部分は600px未満で縦、それ以上で横に並べる','.page-head','flex-direction',combinedWidths,w=>w<600?'column':'row'),cssTest('head-gap','見出し部分の間隔を16pxにする','.page-head','gap','16px'),cssTest('grid','カードをGridにする','.cards','display','grid'),viewportTest('columns','600px・900pxを境にカードを一列・二列・三列にする','.cards','columns',combinedWidths,w=>w<600?'1':w<900?'2':'3'),...layoutChecks,cssTest('overflow','すべての採点幅でページが横にはみ出さない','.page','no-overflow','true')],
     hints:['小さい画面の規則を先に書き、大きい画面の@mediaを後へ並べます。width:960pxではなくmax-width:960pxです。'],explanation:'第4章が完了しました。画面幅に合わせた配置を組み合わせられました。',
   },
+  {
+    id:'js01',language:'javascript',chapterId:'js-chapter05',title:'変数と値を使う',parameters:['quantity'],returnExpression:'total',
+    objectives:['constとletで値に名前を付ける','数値の式で結果を計算する'],
+    contentBlocks:[
+      {title:'値に名前を付ける',text:'const unitPrice = 100; は数値100にunitPriceという名前を付けます。constの変数へ別の値は代入できません。letは後から値を変える変数に使います。文字列は引用符で囲み、数値は囲みません。'},
+      {title:'提供される個数から計算する',text:'この演習ではquantity（個数）が環境から渡されます。quantityを宣言し直さず、単価100と掛けてtotalへ数値を入れてください。個数3なら300、1なら100、0なら0です。値を表示するだけでなく、totalへ計算結果を入れることが課題です。'},
+    ],
+    example:'const unitPrice = 100;\nlet total = unitPrice * quantity;',starterCode:'const unitPrice = 100;\nlet total = 0;\n// quantityを使ってtotalを計算しましょう',
+    completionTests:[{id:'three',label:'個数3から数値300を計算する',inputs:[3],expected:300},{id:'one',label:'個数1から数値100を計算する',inputs:[1],expected:100},{id:'zero',label:'個数0から数値0を計算する',inputs:[0],expected:0}],
+    hints:['掛け算は * です。quantityは用意されています。「300」は文字列なので、数値300とは区別します。'],explanation:'値に名前を付け、個数に応じた数値を計算できました。',
+  },
+  {
+    id:'js02',language:'javascript',chapterId:'js-chapter05',title:'条件と繰り返しで集計する',parameters:['scores'],returnExpression:'total',
+    objectives:['条件に一致する値を選ぶ','for...ofで配列を繰り返し処理する'],
+    contentBlocks:[
+      {title:'条件によって処理を選ぶ',text:'if (score >= 60) はscoreが60以上のときだけ内側を実行します。>=は60ちょうどを含み、>では含みません。配列scoresは演習環境から渡される点数の並びです。'},
+      {title:'合計を更新する',text:'let total = 0; から始め、for (const score of scores)で各点数を取り出します。条件に一致するときだけtotal += scoreで加算してください。[40,60,80]なら140、空の配列なら0、[60]なら60、[59]なら0です。繰り返しはWorker内で実行され、長く続く処理は停止できます。'},
+    ],
+    example:'let total = 0;\nfor (const score of scores) {\n  if (score >= 60) {\n    total += score;\n  }\n}',starterCode:'let total = 0;\n// scoresの60以上の点数だけを合計しましょう',
+    completionTests:[{id:'mixed',label:'40・60・80から140を合計する',inputs:[[40,60,80]],expected:140},{id:'empty',label:'空の配列から0を返す',inputs:[[]],expected:0},{id:'boundary',label:'60ちょうどを含める',inputs:[[60]],expected:60},{id:'below',label:'59を合計へ含めない',inputs:[[59]],expected:0}],
+    hints:['totalの初期値は0です。>=で境界を含め、加算する場所がifの内側か確かめてください。'],explanation:'条件の境界を含め、配列を集計できました。',
+  },
+  {
+    id:'js03',language:'javascript',chapterId:'js-chapter05',title:'関数の引数と戻り値',parameters:['price','rate'],returnExpression:'priceAfterTax(price, rate)',
+    objectives:['関数へ引数を渡す','returnで計算結果を返す'],
+    contentBlocks:[
+      {title:'処理に名前を付ける',text:'function priceAfterTax(price, rate) { ... } は価格と税率を受け取る関数です。関数内では引数のpriceとrateを使い、同じ処理を異なる値で繰り返し利用できます。'},
+      {title:'結果を呼び出し元へ返す',text:'return price + price * rate; で税込価格を返します。価格100・税率0.1なら110、価格200・税率0なら200、価格0なら0です。console.logは戻り値ではありません。priceAfterTaxという関数名と二つの引数を維持してください。計算の小さな浮動小数点誤差は採点で許容します。'},
+    ],
+    example:'function priceAfterTax(price, rate) {\n  return price + price * rate;\n}',starterCode:'function priceAfterTax(price, rate) {\n  // 計算結果をreturnで返しましょう\n}',
+    completionTests:[{id:'tax',label:'価格100・税率0.1から110を返す',inputs:[100,0.1],expected:110},{id:'no-tax',label:'価格200・税率0から200を返す',inputs:[200,0],expected:200},{id:'zero',label:'価格0から0を返す',inputs:[0,0.1],expected:0}],
+    hints:['console.logではなくreturnを使います。呼び出し例はpriceAfterTax(100, 0.1)です。'],explanation:'第5章が完了しました。引数を受け取り、結果を返す関数を作れました。',
+  },
 ].map((lesson, index, all) => ({ language: 'html', courseId: 'web-foundation', chapterId: 'html-chapter01', ...lesson, nextLessonId: all[index + 1]?.id ?? null }));
 export const chapters = [
   { id: 'html-chapter01', title: 'HTML第1章', number: '01' },
   { id: 'html-chapter02', title: 'HTML第2章', number: '02' },
   { id: 'css-chapter03', title: 'CSS第3章', number: '03', language: 'CSS' },
   { id: 'css-chapter04', title: 'CSS第4章', number: '04', language: 'CSS' },
+  { id: 'js-chapter05', title: 'JavaScript第5章', number: '05', language: 'JAVASCRIPT' },
 ];

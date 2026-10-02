@@ -27,6 +27,7 @@ export function createExecutionController({ createWorker }) {
         active = job;
         try {
           job.worker = createWorker();
+          if (active !== job) { job.worker.terminate(); return; }
           job.worker.onmessage = ({ data }) => {
             if (active !== job || !data || data.id !== job.id) return;
             if (data.status === 'success') finish(job, { status: 'success', value: data.value });

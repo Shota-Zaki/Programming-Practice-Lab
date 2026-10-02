@@ -11,7 +11,8 @@ await new Promise(r => server.listen(0,'127.0.0.1',r));
 const browser = await chromium.launch({headless:true});
 const origin = `http://127.0.0.1:${server.address().port}`;
 const results = [];
-await mkdir('evidence/2026-10-02-layout', {recursive:true});
+const evidenceDirectory = process.env.EVIDENCE_DIR || 'evidence/2026-10-02-javascript/regression';
+await mkdir(evidenceDirectory, {recursive:true});
 try {
   for (const width of [375,768,1280]) {
     const page = await browser.newPage({viewport:{width,height:900},reducedMotion:'reduce'});
@@ -19,7 +20,7 @@ try {
     await page.goto(origin);
     const lessons = await page.evaluate(async()=> (await import('/lessons.js')).lessons);
     await page.locator('.hero [data-view="lesson"]').click();
-    for (let i=0;i<15;i++) {
+    for (let i=0;i<lessons.length;i++) {
       await page.locator('#lesson-content [data-view="practice"]').click();
       await page.locator('#check-code').click();
       await page.getByText('未達成の条件があります', {exact:true}).waitFor();
@@ -31,9 +32,9 @@ try {
       assert.equal(await page.locator('#editor').inputValue(),lessons[i].example);
       await page.getByText('演習を完了しました', {exact:true}).waitFor();
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);
-      await page.frameLocator('#preview').locator('h1').waitFor({state:'visible'});
+      if (lessons[i].language !== 'javascript') await page.frameLocator('#preview').locator('h1').waitFor({state:'visible'});
       await page.evaluate(() => window.scrollTo({top:0,behavior:'instant'}));
-      await page.screenshot({path:`evidence/2026-10-02-layout/practice-${width}-${i+1}.png`,fullPage:true});
+      await page.screenshot({path:`${evidenceDirectory}/practice-${width}-${i+1}.png`,fullPage:true});
       if (i === 14) {
         for (const previewWidth of ['375','599','600','899','900','1280']) {
           const navigation = page.waitForEvent('framenavigated',{predicate:frame=>frame.parentFrame()===page.mainFrame() && frame.url()==='about:srcdoc'});
@@ -52,17 +53,17 @@ try {
         await navigation;
         await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
         await page.frameLocator('#preview').locator('h1').waitFor();
-        await page.locator('#preview').screenshot({path:`evidence/2026-10-02-layout/preview-${width}.png`});
+        await page.locator('#preview').screenshot({path:`${evidenceDirectory}/preview-${width}.png`});
       }
       await page.locator('#next-lesson').click();
     }
-    assert.equal(await page.locator('.course-side [data-chapter-progress]').textContent(),'4 / 4');
-    assert.equal(await page.locator('.course-side [data-course-progress]').textContent(),'15 / 24');
+    assert.equal(await page.locator('.course-side [data-chapter-progress]').textContent(),'3 / 3');
+    assert.equal(await page.locator('.course-side [data-course-progress]').textContent(),'18 / 24');
     await page.locator('.course-hero [data-lesson="html01"]').click();
     assert.equal(await page.locator('.toc [data-chapter-progress]').textContent(),'4 / 4');
     await page.locator('#lesson-picker [data-lesson="html01"]').click();
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true);
-    await page.screenshot({path:`evidence/2026-10-02-layout/lesson-${width}.png`,fullPage:true});
+    await page.screenshot({path:`${evidenceDirectory}/lesson-${width}.png`,fullPage:true});
     await page.locator('#lesson-content [data-view="practice"]').click();
     await page.locator('#editor').fill('<p>changed</p>');
     assert.equal(await page.locator('#result-status').textContent(),'未確認');
@@ -78,7 +79,7 @@ try {
       return [gradeHtml('<!-- <!doctype html> --><title>T</title><h1>X</h1><p>P</p>',lessons[0].completionTests)[0].passed,gradeHtml(lessons[1].example.replace('</body>','<p id="intro">duplicate</p></body>'),lessons[1].completionTests).at(-1).passed];
     });
     assert.deepEqual(checks,[false,false]);
-    assert.deepEqual(errors,[]);results.push({width,lessons:15,reload:true,reset:true,noOverflow:true,errors});await page.close();
+    assert.deepEqual(errors,[]);results.push({width,lessons:18,reload:true,reset:true,noOverflow:true,errors});await page.close();
   }
   const grading = await browser.newPage(); await grading.goto(origin);
   const matrix = await grading.evaluate(async () => {

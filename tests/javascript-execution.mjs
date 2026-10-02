@@ -60,3 +60,9 @@ test('real worker: infinite loop terminates, UI thread remains responsive, retry
  const stopped=controller.run({code:'loop',timeoutMs:1000});controller.stop();
  assert.deepEqual(await stopped,{status:'cancelled'});
 });
+
+test('cancel during worker creation terminates the returned host before sending',async()=>{
+ let terminated=0,sent=0,controller;
+ controller=createExecutionController({createWorker(){controller.stop();return {terminate(){terminated++},postMessage(){sent++}}}});
+ assert.deepEqual(await controller.run({code:'x'}),{status:'cancelled'});assert.equal(terminated,1);assert.equal(sent,0);assert.equal(controller.running,false);
+});
