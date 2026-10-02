@@ -114,6 +114,18 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] 全18教材×3幅、旧v1/旧単体入力/破損/保存拒否、既存HTML/CSS採点とプレビューを回帰検証する。
 - [x] 生成物同期・独立固定SHAレビュー・実画面確認の証拠を保存する。
 
+### JavaScript第6章の先行DOM/イベント境界
+
+この受入は教材/UI接続前の独立基盤に限る。講座18/24=75%を維持する。
+
+- [x] 対応APIとnative DOMとの違い、fixture/命令/出力制約、parent snapshot採点契約を定義する。
+- [x] Workerからopaque iframeの実DOMへ限定命令を渡し、native click/inputを処理する。
+- [x] 親DOM/保存/通信/追加Worker/偽メッセージを実ブラウザーで検証する。
+- [x] callback重複/this/currentTarget/文字列encoding/誤答/新しいDOM初期化と未対応API拒否を確認する。
+- [x] callback途中取消/期限/遅延継続/作成失敗/作成中取消と、共有枠の追加128実行拒否を確認する。
+- [x] 第5章実ブラウザー回帰、固定SHA独立レビュー、生成物同期と証拠管理を完了する。
+- [ ] 第6章教材/通常UIへ接続し、実操作・保存・初期化・移動の受入を行う（本チェックポイント対象外）。
+
 ### Web開発基礎の全体範囲
 
 #### HTML
@@ -159,7 +171,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`はHTML第1〜2章、CSS第3〜4章、JavaScript第5章まで実装・検証済み（18/24レッスン、75%）。次は既存第6章DOM・イベントの3教材と、DOM演習の隔離・表示・採点境界を設計する。数値演習WorkerはDOMを持たないため、そのままDOM演習へ転用しない。既存保存とプレビュー隔離を維持する。別の次Taskは未設定。
+`PPL-FOUNDATION-001`はHTML第1〜2章、CSS第3〜4章、JavaScript第5章まで実装・検証済み（18/24レッスン、75%）。次は第6章先行DOM/イベントブリッジの契約に沿って最初のDOM更新教材を設計し、既存UIへ小さく接続する。対応APIとnative DOMとの差を教材に明示し、保存・初期化・移動を実ブラウザーで受け入れる。既存保存とプレビュー隔離を維持する。別の次Taskは未設定。
 
 ## Repository operation policy — 2026-09-01
 
@@ -239,3 +251,15 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - 独立固定SHAソースレビューでblocking findingなし。期限/解放/停止遅延の記述と測定時点に関するP2二件を修正済み。Evidence: `evidence/2026-10-02-javascript/` のREADME、結果JSON/生ログ/controller/verify/レビュー、独立probe、画面画像。
 - 第5章受入7/7=100%。currentTask講座完成度18/24=75%。Active: PPL-FOUNDATION-001。Ready: 既存第6章DOM/イベントと実行境界の設計。Planned: 第6〜7章6教材、正式共通形式/アダプター、IndexedDB、実Pages/Safari/手動読み上げ確認。Blocked: 今回scopeなし。Deferred: 実践UI（基礎講座後）。別の次Task: 未設定。
 - main merge/公開は未実施。main mergeには実行直前のユーザー承認が必要。
+
+
+### 2026-10-02 — 第6章先行DOM/イベント境界を検証
+
+- Fixed source/test SHA: `c4f80e091b5b5a728667eaf5dd2704e7b0bfc4c8`。独立DOM/event executorと親側graderを追加。学習者コードはWorkerのみ、trusted opaque iframeがnative DOM/イベント/snapshotを所有する。第5章と同じ1枠/待ち行列なし/5秒予約を共有する。
+- 本scopeは教材/UI接続前の先行境界。simple ID selector、textContent/value、click/input listenerのみ。重複、this/currentTarget、非同期handler、例外、unsupported API、fixture/encoding/数量制約とnativeとの差をDESIGNへ明記。第6章教材や通常UIの完了とは扱わない。
+- `npm run verify:agent`、controller8/8、実Chromium151 DOM/eventテストPASS。native click2回0→1→2、文字列/空入力、新規DOM reset、親snapshot採点、未対応API5件/fixture4件拒否、iframe作成失敗/作成中取消、親/保存/通信/追加Worker/偽命令/Worker synthetic eventを検証。browser toolingでnativeテキスト/img0と親からのSecurityErrorも確認。
+- 実クリックcallback途中の取消/reset/navigation harness・無限loop timeoutを確認。追加DOM/第5章128実行拒否、逆方向の共有枠と新規runを検証。取消0.1〜4ms、150ms試験timeout応答152.1ms、無限Workerは400ms残存/2036msでtarget消失、待機後CPU0秒/500ms。実行期限2秒は変更せず、5秒は普遍的終了/硬いmemory quotaの保証としない。
+- 第5章既存実ブラウザー回帰3教材×3幅PASS（採点/型/隔離/無限loop/停止/入力/移動取消/復元/reset/HTML安全表示/追加128件拒否）。元の4d980e2証拠は別作業dirで再検証し変更していない。lessons/progress/foundation/indexと既存テストはbaseから不変（source-manifest）。
+- 独立固定SHAソースレビューでblocking findingなし。currentTarget/async例外/disabled・nested fixtureの指摘は修正済み。Evidence: `evidence/2026-10-02-dom-boundary/`（native JSON/ログ、controller/verify、manifest、レビュー、第5章回帰画像/結果）。
+- 先行scope受入6/6。講座currentTask完成度は18/24=75%を維持。Active: PPL-FOUNDATION-001。Ready: 契約に沿った最初の第6章DOM更新教材設計/既存UI接続。Planned: 第6〜7章6教材と通常UI/保存/リセット/rapid navigation受入、正式共通形式/アダプター、IndexedDB、実Pages/Safari/手動読み上げ。Blocked: 本scopeなし。Deferred: 基礎講座後の実践UI。別の次Task: 未設定。
+- main merge/公開なし。main mergeには実行直前のユーザー承認が必要。

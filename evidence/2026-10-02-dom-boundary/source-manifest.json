@@ -1,0 +1,51 @@
+{
+  "sourceSHA": "c4f80e091b5b5a728667eaf5dd2704e7b0bfc4c8",
+  "baseSHA": "4d980e200346ecf287157b8d0838731ddf32d727",
+  "files": [
+    {
+      "path": "src/static/dom-execution.js",
+      "sha256": "3fdc4939c6bbd0629d3a994f449962ddad51e6b123dfa011fd9636d826a4e4e4",
+      "unchangedFromBase": false
+    },
+    {
+      "path": "src/static/dom-grading.js",
+      "sha256": "a8f45615523d4c86eabb40d7a5ca2420ff486879881e8d80d83cdc692fea34ce",
+      "unchangedFromBase": false
+    },
+    {
+      "path": "src/static/javascript-host.js",
+      "sha256": "229f80b1ca61f679ca6009549053a73715a607da397d399c7b78c8bb0152e6b3",
+      "unchangedFromBase": false
+    },
+    {
+      "path": "tests/dom-browser.mjs",
+      "sha256": "9bf2851a83bbd69e948026cf8cb56d8b5163edd8eaf1247d244b5bc9b8c8a7af",
+      "unchangedFromBase": false
+    },
+    {
+      "path": "tests/javascript-browser.mjs",
+      "sha256": "0a48a3f1c0f96a2c436d11f939f3415c7f1fe5a96ea842fcf427c63f2c4be80d",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "src/static/lessons.js",
+      "sha256": "d1b9b76d9dc08d53a87ebd4da119c298c11226968b940de19765c1590f162f93",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "src/static/progress.js",
+      "sha256": "c36a1771cdfcc2d56d99a45e2919ede80996a9bf87a9a72bc5f2443df17e7829",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "src/static/foundation.js",
+      "sha256": "171ab637a3feef2f7d9b5a1e5938dcaf5d4d544a07b425ec03697319aeb1623a",
+      "unchangedFromBase": true
+    },
+    {
+      "path": "src/static/index.html",
+      "sha256": "55f8a11edca60b8e93e7e6f3aee5ae6f23303a9c1bb614923959ce9bd2beee60",
+      "unchangedFromBase": true
+    }
+  ]
+}

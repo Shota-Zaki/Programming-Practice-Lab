@@ -1,0 +1,226 @@
+native DOM/event semantics complete
+fixture/failure contracts complete
+unsupported API rejection complete
+browser boundary probes complete
+{
+  "dom": {
+    "snapshots": [
+      [
+        {
+          "selector": "#add",
+          "textContent": "Add",
+          "value": "",
+          "hasValue": true
+        },
+        {
+          "selector": "#name",
+          "textContent": "",
+          "value": "",
+          "hasValue": true
+        },
+        {
+          "selector": "#count",
+          "textContent": "0",
+          "value": "",
+          "hasValue": false
+        },
+        {
+          "selector": "#message",
+          "textContent": "Start",
+          "value": "",
+          "hasValue": false
+        }
+      ],
+      [
+        {
+          "selector": "#add",
+          "textContent": "Add",
+          "value": "",
+          "hasValue": true
+        },
+        {
+          "selector": "#name",
+          "textContent": "",
+          "value": "",
+          "hasValue": true
+        },
+        {
+          "selector": "#count",
+          "textContent": "1",
+          "value": "",
+          "hasValue": false
+        },
+        {
+          "selector": "#message",
+          "textContent": "Start",
+          "value": "",
+          "hasValue": false
+        }
+      ],
+      [
+        {
+          "selector": "#add",
+          "textContent": "Add",
+          "value": "",
+          "hasValue": true
+        },
+        {
+          "selector": "#name",
+          "textContent": "",
+          "value": "",
+          "hasValue": true
+        },
+        {
+          "selector": "#count",
+          "textContent": "2",
+          "value": "",
+          "hasValue": false
+        },
+        {
+          "selector": "#message",
+          "textContent": "Start",
+          "value": "",
+          "hasValue": false
+        }
+      ],
+      [
+        {
+          "selector": "#add",
+          "textContent": "Add",
+          "value": "",
+          "hasValue": true
+        },
+        {
+          "selector": "#name",
+          "textContent": "",
+          "value": "<img src=x> & 日本語 \" 😀",
+          "hasValue": true
+        },
+        {
+          "selector": "#count",
+          "textContent": "2",
+          "value": "",
+          "hasValue": false
+        },
+        {
+          "selector": "#message",
+          "textContent": "<img src=x> & 日本語 \" 😀",
+          "value": "",
+          "hasValue": false
+        }
+      ],
+      [
+        {
+          "selector": "#add",
+          "textContent": "Add",
+          "value": "",
+          "hasValue": true
+        },
+        {
+          "selector": "#name",
+          "textContent": "",
+          "value": "",
+          "hasValue": true
+        },
+        {
+          "selector": "#count",
+          "textContent": "2",
+          "value": "",
+          "hasValue": false
+        },
+        {
+          "selector": "#message",
+          "textContent": "",
+          "value": "",
+          "hasValue": false
+        }
+      ]
+    ],
+    "duplicateListenerIgnored": true,
+    "thisAndCurrentTarget": true,
+    "currentTargetCleared": true,
+    "resetFresh": true,
+    "wrongRejected": true,
+    "parentGrading": true
+  },
+  "fixtureAndFailure": {
+    "fixtureRejected": 4,
+    "creationFailureReleasesSlot": true,
+    "cancelDuringCreation": true
+  },
+  "unsupported": {
+    "rejected": [
+      "document.querySelector(\"p\")",
+      "document.createElement(\"img\")",
+      "document.querySelector(\"#count\").innerHTML=\"<b>x</b>\"",
+      "document.querySelector(\"#add\").addEventListener(\"change\",()=>{})",
+      "document.querySelector(\"#add\").addEventListener(\"click\",()=>{},true)"
+    ]
+  },
+  "boundary": {
+    "parentUnavailable": true,
+    "storageDenied": true,
+    "networkDenied": true,
+    "noChildWorkers": true,
+    "forgedCommandsIgnored": true,
+    "syntheticWorkerEventsIgnored": true,
+    "htmlAsText": true
+  },
+  "nativeInspection": {
+    "textNode": true,
+    "imageNodes": 0,
+    "parentCannotReadFrame": true
+  },
+  "rapid": [
+    {
+      "mode": "cancel",
+      "responseMs": 0.09999999403953552,
+      "cancelled": true,
+      "timedOut": false,
+      "responsive": true,
+      "blocked": 32,
+      "frames": 1,
+      "workersAt400ms": 0,
+      "targetGoneMsAfterResponse": 403
+    },
+    {
+      "mode": "reset",
+      "responseMs": 0.09999999403953552,
+      "cancelled": true,
+      "timedOut": false,
+      "responsive": true,
+      "blocked": 32,
+      "frames": 1,
+      "workersAt400ms": 0,
+      "targetGoneMsAfterResponse": 403
+    },
+    {
+      "mode": "navigation",
+      "responseMs": 4,
+      "cancelled": true,
+      "timedOut": false,
+      "responsive": true,
+      "blocked": 32,
+      "frames": 1,
+      "workersAt400ms": 0,
+      "targetGoneMsAfterResponse": 403
+    },
+    {
+      "mode": "timeout",
+      "responseMs": 152.09999999403954,
+      "cancelled": false,
+      "timedOut": true,
+      "responsive": true,
+      "blocked": 32,
+      "frames": 1,
+      "workersAt400ms": 1,
+      "targetGoneMsAfterResponse": 2036
+    }
+  ],
+  "rendererCpuSeconds": 0,
+  "retry": {
+    "freshDom": true,
+    "chapter5Retry": true,
+    "reverseSharedSlot": true
+  }
+}

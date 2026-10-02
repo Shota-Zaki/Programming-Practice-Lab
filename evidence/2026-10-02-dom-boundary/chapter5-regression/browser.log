@@ -1,0 +1,114 @@
+semantic checks complete
+capability checks complete
+UI 375 complete
+UI 768 complete
+UI 1280 complete
+{
+  "semantic": {
+    "checks": [
+      {
+        "id": "js01",
+        "example": true,
+        "starter": false
+      },
+      {
+        "id": "js02",
+        "example": true,
+        "starter": false
+      },
+      {
+        "id": "js03",
+        "example": true,
+        "starter": false
+      }
+    ],
+    "wrongRejected": 9
+  },
+  "capabilities": {
+    "opaqueOriginStorageDenied": true,
+    "noDOM": true,
+    "noNetwork": true,
+    "noWorkerConstructors": true,
+    "forgeryRejected": true,
+    "htmlRejected": true
+  },
+  "lifecycle": {
+    "timeout": true,
+    "responsive": true,
+    "cancelled": true,
+    "retry": true,
+    "earlyCancel": true,
+    "oversized": true,
+    "frames": 0
+  },
+  "rapid": {
+    "samples": [
+      {
+        "mode": "cancel",
+        "responseMs": 51.39999997615814,
+        "rejected": 32,
+        "frames": 1,
+        "workersAt400msAfterResponse": 1,
+        "targetGoneMsAfterResponse": 2034
+      },
+      {
+        "mode": "timeout",
+        "responseMs": 153.7999999821186,
+        "rejected": 32,
+        "frames": 1,
+        "workersAt400msAfterResponse": 1,
+        "targetGoneMsAfterResponse": 2039
+      },
+      {
+        "mode": "cancel",
+        "responseMs": 53.5,
+        "rejected": 32,
+        "frames": 1,
+        "workersAt400msAfterResponse": 1,
+        "targetGoneMsAfterResponse": 2029
+      },
+      {
+        "mode": "timeout",
+        "responseMs": 153.2000000178814,
+        "rejected": 32,
+        "frames": 1,
+        "workersAt400msAfterResponse": 1,
+        "targetGoneMsAfterResponse": 2040
+      }
+    ],
+    "noQueue": true,
+    "slotBound": 1
+  },
+  "postGraceRendererCpuSeconds": 0,
+  "workerLeaks": 0,
+  "ui375": {
+    "lessons": 3,
+    "restore": true,
+    "stop": true,
+    "inputCancel": true,
+    "navigationCancel": true,
+    "htmlPreviewPreserved": true,
+    "htmlOutputEscaped": true,
+    "reset": true
+  },
+  "ui768": {
+    "lessons": 3,
+    "restore": true,
+    "stop": true,
+    "inputCancel": true,
+    "navigationCancel": true,
+    "htmlPreviewPreserved": true,
+    "htmlOutputEscaped": true,
+    "reset": true
+  },
+  "ui1280": {
+    "lessons": 3,
+    "restore": true,
+    "stop": true,
+    "inputCancel": true,
+    "navigationCancel": true,
+    "htmlPreviewPreserved": true,
+    "htmlOutputEscaped": true,
+    "reset": true
+  }
+}
