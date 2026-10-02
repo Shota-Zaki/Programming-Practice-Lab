@@ -5,7 +5,9 @@ import { gradeJavaScript } from './javascript-grading.js';
 import { gradeDomLesson, domLessonPreview } from './dom-grading.js';
 import { javascriptHostBusy, javascriptHostReady } from './javascript-host.js';
 import { createProgressRepository } from './progress.js';
+import { initializeProjectWorkspace } from './project-workspace.js';
 const $ = selector => document.querySelector(selector);
+const projectWorkspace = initializeProjectWorkspace($('#project-workspace'));
 const repository = createProgressRepository(() => window.localStorage, lessons);
 const state = repository.state;
 const panels = [...document.querySelectorAll('[data-view-panel]')];
@@ -27,10 +29,11 @@ const entry = () => state.lessons[state.lessonId];
 function save() { $('#save-status').textContent = repository.save() ? '保存済み' : '保存できません。この画面内のみ保持します'; }
 function closeMenu() { $('#sidebar').classList.remove('open'); $('.menu-button').setAttribute('aria-expanded', 'false'); }
 function showView(name, { focus = false, history = true } = {}) {
+  projectWorkspace.leave();
   cancelGrade();
   state.view = validViews.has(name) ? name : 'home';
   panels.forEach(p => { p.hidden = p.dataset.viewPanel !== state.view; p.classList.toggle('active', !p.hidden); });
-  $('#view-title').textContent = {home:'ホーム',courses:'基礎講座',course:'Web開発基礎',lesson:'教材',practice:'入力演習'}[state.view];
+  $('#view-title').textContent = {home:'ホーム',courses:'基礎講座',course:'Web開発基礎',lesson:'教材',practice:'入力演習',project:'ミニ成果物の編集'}[state.view];
   $('#view-kicker').textContent = 'FOUNDATION LEARNING';
   document.querySelectorAll('.sidebar nav [data-view],.mobile-nav [data-view]').forEach(button => {
     if (button.dataset.view === state.view) button.setAttribute('aria-current','page'); else button.removeAttribute('aria-current');

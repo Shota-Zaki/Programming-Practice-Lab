@@ -118,7 +118,7 @@
                   <li><span>04</span><div><small>CSS / 4 LESSONS</small><h3>レイアウトとレスポンシブ</h3><p>Flexbox、Grid、画面幅への対応。</p></div><button type="button" data-lesson="css05">開始</button></li>
                   <li><span>05</span><div><small>JAVASCRIPT / 3 LESSONS</small><h3>値と処理の基本</h3><p>変数、条件分岐、繰り返し、関数。</p></div><b>受講可能</b></li>
                   <li><span>06</span><div><small>JAVASCRIPT / 3 LESSONS</small><h3>画面を操作する</h3><p>DOM更新・クリック・入力値の3教材を受講可能。</p></div><button type="button" data-lesson="js04">開始</button></li>
-                  <li><span>07</span><div><small>MINI PROJECT / 3 LESSONS</small><h3>自己紹介サイトを完成させる</h3><p>設計、実装、確認、公開用ビルド。</p></div><b>未着手</b></li>
+                  <li><span>07</span><div><small>MINI PROJECT / 3 LESSONS</small><h3>自己紹介サイトを完成させる</h3><p>設計、実装、確認、公開用ビルド。編集・静的確認・書き出しを準備できます。3教材の受入は未完了です。</p></div><button type="button" data-view="project">成果物を編集</button></li>
                 </ol>
               </main>
               <aside class="course-side">
@@ -145,6 +145,28 @@
             <section class="task-panel"><p class="eyebrow">TASK</p><h2 id="task-title"></h2><p>教材を参考に入力して、表示と完了条件を確認してください。</p><h3>完了条件</h3><ul class="conditions" id="conditions"></ul><details><summary>ヒントを見る</summary><p id="practice-hint"></p></details><p id="attempts" role="status"></p><button class="primary" id="next-lesson" type="button" hidden>次のレッスンへ</button></section>
             <section class="editor-panel"><header><div><span>index.html</span><b>HTML</b></div><button id="reset-code" type="button">初期状態へ戻す</button></header><textarea id="editor" spellcheck="false" aria-label="HTMLコード入力欄"></textarea><footer><button class="secondary" id="run-preview" type="button">プレビュー更新</button><button class="secondary" id="stop-code" type="button" hidden>停止</button><button class="primary" id="check-code" type="button">完了条件を確認</button></footer></section>
             <section class="preview-panel"><header><span>ブラウザプレビュー</span><b id="result-status">未確認</b></header><div id="preview-controls" class="preview-controls" hidden><label for="preview-width">プレビュー幅</label><select id="preview-width"><option value="fit">表示領域に合わせる</option></select><p id="preview-width-note"></p></div><div class="preview-viewport" tabindex="0" aria-label="プレビュー表示領域。幅が大きい場合は横にスクロールできます"><iframe id="preview" title="HTMLプレビュー" sandbox></iframe><p id="execution-state" role="status" hidden>停止処理を待っています。数秒後に再実行できます。</p><pre id="execution-output" aria-label="JavaScript実行結果" hidden></pre></div><div class="result-message"><strong id="result-title">コードを入力してください</strong><p id="result-message" aria-live="polite">プレビュー更新後、完了条件を確認できます。</p></div></section>
+          </div>
+        </section>
+        <section class="view" data-view-panel="project" aria-labelledby="project-title" hidden>
+          <div class="page" id="project-workspace">
+            <div class="breadcrumb"><button type="button" data-view="course">Web開発基礎</button><span>/</span><span>第7章の編集準備</span></div>
+            <header class="page-head"><div><p class="eyebrow">MINI PROJECT / PREPARATION</p><h1 id="project-title">自己紹介サイトを編集する</h1><p>3ファイルを同じ内容で持ち出せます。この準備画面は教材の合格や公開を行いません。</p></div></header>
+            <p id="project-save-status" role="status"></p>
+            <section class="project-guide"><h2>設計、実装、確認を一つの成果物へ</h2><p>架空の表示名・紹介文・学習テーマを使います。HTMLに構造、CSSに見た目、JSに操作と標準localStorageを書く3教材の準備です。個人情報や秘密は入力しないでください。</p><p>JSの通常DOM・同期localStorageは、第6章の限定APIとは異なります。静的確認ではJSも保存処理も動きません。</p><button id="project-native" type="button" disabled aria-describedby="project-native-note">native動作確認（準備中）</button><p id="project-native-note">専用の隔離実行環境と結果連携は未対応です。通常ブラウザーへ直接開くfallbackや、完了結果の自己申告はありません。</p></section>
+            <div class="project-grid">
+              <section class="project-editor">
+                <div class="project-tabs" role="tablist" aria-label="成果物のファイル">
+                  <button type="button" role="tab" id="project-tab-0" data-project-file="index.html" aria-controls="project-file-panel" aria-selected="true">index.html</button>
+                  <button type="button" role="tab" id="project-tab-1" data-project-file="styles.css" aria-controls="project-file-panel" aria-selected="false" tabindex="-1">styles.css</button>
+                  <button type="button" role="tab" id="project-tab-2" data-project-file="app.js" aria-controls="project-file-panel" aria-selected="false" tabindex="-1">app.js</button>
+                </div>
+                <div id="project-file-panel" role="tabpanel" aria-labelledby="project-tab-0"><label id="project-editor-label" for="project-editor">index.html 入力欄</label><textarea id="project-editor" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></div>
+                <div class="project-actions"><button type="button" class="secondary" id="project-inspect">静的構造を確認</button><button type="button" class="primary" id="project-export">ファイルを書き出す</button><button type="button" id="project-cancel" hidden>確認・書き出しを取消</button><button type="button" id="project-reset">3ファイルを初期化</button></div>
+                <p>Ctrl / Command + Enterで静的確認。Tabは次の操作へ移動します。各ファイル32KiB、合計96KiBまで書き出せます。</p>
+              </section>
+              <section class="project-display"><h2>静的プレビュー</h2><p>表示用コピーからscript・イベント属性・外部resourceを除きます。入力と書き出すファイルは変更しません。動作や保存の確認ではありません。</p><iframe id="project-preview" title="自己紹介サイトの静的プレビュー（スクリプトなし）" sandbox></iframe><ul id="project-checks" aria-label="静的構造の確認結果"></ul></section>
+            </div>
+            <section class="project-export"><h2>成果物のファイル</h2><p id="project-action-status" role="status">静的確認または書き出しを選んでください。</p><div id="project-downloads" aria-label="書き出すファイル"></div><p>5ファイルを同じ空フォルダに保存してください。manifest.jsonに3ファイルのサイズとSHA-256を記録します。編集後は全ファイルを取り直してください。保存値や講座の履歴は含めません。</p></section>
           </div>
         </section>
       </main>

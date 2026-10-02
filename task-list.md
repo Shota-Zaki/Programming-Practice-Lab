@@ -200,6 +200,17 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ### 第7章案A — 後続実装の受入条件（全て未受入）
 
+今回の実装scopeは3ファイル編集workspace・静的確認・exportまで。project01/02/03の教材登録/合格連携はしない。native実行・結果transport/進捗の新教材完了を有効にしない。
+
+#### 今回の静的workspace受入（作業前登録）
+
+- [ ] 独立3ファイルmodel/schema、専用保存key、復元/破損/保存拒否、旧v1不変をテストする。
+- [ ] 同一snapshotのUTF-8 bytes/manifest/hash/limits、Unicode/HTML風文字列/反復/非同期取消/errorをテストする。
+- [ ] 3タブ編集・静的構造確認・scriptなしプレビュー・明示native未対応・未完了を通常UIへ接続する。
+- [ ] reload/保存拒否/初期化確認/取消/移動・keyboard/mobile/3幅/禁止通信を実ブラウザーで検証する。
+- [ ] 既存21教材と実行controller・生成物同期を回帰確認する。
+- [ ] 固定SHA独立レビュー・証拠・管理文書・guarded work反映を完了する。
+
 - [ ] 3教材の説明/開始例/完成例/ヒント、nativeと既存限定APIの差、project01/02/03の条件・計画分母を実装する。
 - [ ] 3ファイル入力・タブ切替・保存/再読込・保存拒否・確認付き初期化・教材移動を375/768/1280で検証し、既存21ID/v1/完了履歴を回帰確認する。
 - [ ] scriptなし静的プレビューで学習者HTML/JSを親やsame-originで評価せず、script/event/iframe/base/meta/import/resource・CSS通信・親保存への到達を負検証する。

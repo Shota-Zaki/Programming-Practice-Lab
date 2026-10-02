@@ -4,7 +4,7 @@
 - Status: `in_progress`（第6章まで21教材受入済み。第7章mini-project3教材は未実装）
 - Completion: `88%`（21/24教材）。案A具体設計6/6=100%は教材数へ加算しない。
 - Branch: `work`
-- Next Action: 独立レビュー済み案A契約`design/chapter7-native-export.md`に沿い、権限追加のない3ファイルモデル/静的編集/export+manifestの最小単位を実装・検証する。native実行の成立条件を満たすまで任意Windowコードを接続しない。
+- Next Action: 承認済み静的workspaceを実装中。3ファイルmodel/schema/保存/exportをテスト先行し、隔離静的確認と通常UI、3幅実ブラウザー・既存21教材回帰、固定SHAレビューを一つの受入単位として完了する。native実行/新教材完了は接続しない。
 - Ready: 3ファイルモデル/静的編集/export+manifest実装（設計受入済み）。
 - Planned: 第7章mini-project3教材、正式共通形式/adapter、IndexedDB、実Pages/Safari/手動読み上げ。
 - Blocking: native任意実行向け専用環境の通信拒否/ファイル・プロセス/資源分離の実受入、合否連携transport。A/B選択は案A承認により解消。
