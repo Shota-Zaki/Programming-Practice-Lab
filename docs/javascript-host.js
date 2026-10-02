@@ -4,6 +4,18 @@ let hostSlot = null;
 export const javascriptHostBusy = () => hostSlot !== null;
 export const javascriptHostReady = () => hostSlot?.ready ?? Promise.resolve();
 const SHUTDOWN_GRACE_MS = 5000;
+export function reserveJavaScriptHost() {
+  if (hostSlot) throw new Error('JavaScript host is still stopping');
+  let resolveReady;
+  const slot = {ready:new Promise(resolve => {resolveReady=resolve;})};
+  hostSlot = slot;
+  let released = false;
+  return {release(grace = true) {
+    if (released) return; released = true;
+    const finish = () => { if (hostSlot === slot) hostSlot = null; resolveReady(); };
+    if (grace) setTimeout(finish, SHUTDOWN_GRACE_MS); else finish();
+  }};
+}
 // Trusted bootstrap; learner code is compiled only inside its dedicated Worker.
 function learnerWorker(token) {
   'use strict';
@@ -77,14 +89,11 @@ export function createOpaqueWorker(spec) {
   const workerSource = `(${learnerWorker.toString()})(${JSON.stringify(token)})`;
   let ready = false, stopped = false, message, released = false, closeTimer, resolveClosed;
   const closed = new Promise(resolve => { resolveClosed = resolve; });
-  let resolveReady;
-  const slot = {ready:new Promise(resolve => {resolveReady=resolve;})};
-  hostSlot = slot;
+  const slot = reserveJavaScriptHost();
   const release = () => {
     if (released) return; released = true; clearTimeout(closeTimer);
     channel.port1.close(); channel.port2.close(); frame.remove(); resolveClosed();
-    const finishGrace = () => { if (hostSlot === slot) hostSlot = null; resolveReady(); };
-    if (ready && message) setTimeout(finishGrace, SHUTDOWN_GRACE_MS); else finishGrace();
+    slot.release(Boolean(ready && message));
   };
   const adapter = {
     onmessage:null, onerror:null, onmessageerror:null, closed,
