@@ -260,6 +260,20 @@ export const lessons = [
     completionTests:[{id:'tax',label:'価格100・税率0.1から110を返す',inputs:[100,0.1],expected:110},{id:'no-tax',label:'価格200・税率0から200を返す',inputs:[200,0],expected:200},{id:'zero',label:'価格0から0を返す',inputs:[0,0.1],expected:0}],
     hints:['console.logではなくreturnを使います。呼び出し例はpriceAfterTax(100, 0.1)です。'],explanation:'第5章が完了しました。引数を受け取り、結果を返す関数を作れました。',
   },
+  {
+    id:'js04',language:'javascript',executionMode:'dom',chapterId:'js-chapter06',title:'DOMの文字を更新する',
+    objectives:['IDで要素を取得する','textContentで画面の文字を更新する'],
+    contentBlocks:[
+      {title:'HTMLの要素をJavaScriptから選ぶ',text:'DOMはHTMLの要素をプログラムから扱うための仕組みです。document.querySelector("#heading")はIDがheadingの要素を取得します。#はIDの選択子です。対象がないとnullになるため、用意されたHTMLのIDと一致させましょう。'},
+      {title:'表示する文字を更新する',text:'取得した要素のtextContentへ文字列を代入すると、その要素の文字が変わります。#headingを「学習メモ」、#messageを「DOMの文字を更新できました」へ変更してください。textContentはHTMLタグのような文字列も文字として扱い、HTMLを作りません。HTMLは環境が用意するため、入力欄にはJavaScriptだけを書きます。'},
+      {title:'この演習で使えるAPI',text:'この環境ではWorkerと隔離した画面の間で、教材指定のIDへのquerySelectorとtextContent/valueを扱う限定ブリッジを使います。通常のブラウザーDOM全体ではありません。ID以外の選択子、innerHTML、createElement、style、親画面やブラウザー保存は使えません。文字列・数値・booleanの書込みは文字列化され160 UTF-16単位まで、null/undefined/オブジェクトは拒否します。画面の結果は実行後に確認します。この教材ではtextContentの文字列更新だけを扱います。'},
+    ],
+    fixture:{markup:'<h1 id="heading">はじめの見出し</h1><p id="message">ここへ学習メモを表示します</p>',selectors:['#heading','#message'],steps:[]},
+    example:'const heading = document.querySelector("#heading");\nconst message = document.querySelector("#message");\nheading.textContent = "学習メモ";\nmessage.textContent = "DOMの文字を更新できました";',
+    starterCode:'const heading = document.querySelector("#heading");\nconst message = document.querySelector("#message");\n// 二つの要素のtextContentを更新しましょう',
+    completionTests:[{id:'heading-text',label:'見出しを「学習メモ」に更新する',step:0,selector:'#heading',property:'textContent',expected:'学習メモ'},{id:'message-text',label:'本文を「DOMの文字を更新できました」に更新する',step:0,selector:'#message',property:'textContent',expected:'DOMの文字を更新できました'}],
+    hints:['heading.textContent = "学習メモ"; の形で代入します。ID、変数名、引用符と表示する文字を確認してください。'],explanation:'要素をIDで選び、textContentで文字を更新できました。第6章の残り2教材は準備中です。',
+  },
 ].map((lesson, index, all) => ({ language: 'html', courseId: 'web-foundation', chapterId: 'html-chapter01', ...lesson, nextLessonId: all[index + 1]?.id ?? null }));
 export const chapters = [
   { id: 'html-chapter01', title: 'HTML第1章', number: '01' },
@@ -267,4 +281,5 @@ export const chapters = [
   { id: 'css-chapter03', title: 'CSS第3章', number: '03', language: 'CSS' },
   { id: 'css-chapter04', title: 'CSS第4章', number: '04', language: 'CSS' },
   { id: 'js-chapter05', title: 'JavaScript第5章', number: '05', language: 'JAVASCRIPT' },
+  { id: 'js-chapter06', title: 'JavaScript第6章', number: '06', language: 'JAVASCRIPT', plannedLessons:3 },
 ];

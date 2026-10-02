@@ -9,3 +9,11 @@ export async function gradeDomLesson(code,lesson,options={}) {
     return {id:test.id,passed:typeof actual==='string'&&actual===test.expected,actual:actual??'',expected:test.expected};
   });
 }
+
+// Reconstruct a script-free display from trusted fixture and parent-validated strings.
+// Learner code is never run here; strings are always inserted as text.
+export function domLessonPreview(lesson,result) {
+  const document=new DOMParser().parseFromString(lesson.fixture.markup,'text/html');
+  if(result)lesson.completionTests.forEach((test,i)=>{const node=document.querySelector(test.selector);if(node&&typeof result[i]?.actual==='string')node[test.property]=result[i].actual;});
+  return `<!doctype html><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">${document.body.innerHTML}`;
+}

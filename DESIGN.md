@@ -405,3 +405,15 @@ fixtureの指定要素は一意ID・初期値160 code units以内・互いに祖
 第5章と共有するホスト枠は同時1・待ち行列なし。結果期限は既定2秒、停止・タイムアウト・入力変更/移動/リセットをAbortSignalで取り消す。frameはnative terminate要求応答で除去し、応答不能時1秒後に除去、frame解放後5秒は共有枠を予約する。結果期限と実Worker終了/CPU停止は別で、5秒は既存Chromium実測の余裕であり普遍的保証ではない。硬いメモリquota/ページ再読込を跨ぐ枠は保証しない。第5章のIDs、保存、期限、操作数以外の既存機能は変更しない。
 
 受入: 実ブラウザーでnative要素とクリック/inputを使ったDOM結果、境界誤答・複数イベント・fresh reset、限定API、親DOM/保存/通信/追加Worker拒否・偽結果/HTML安全性、無限loop/非同期遅延/取消/rapid navigationと共有枠のbacklog制限、native Worker終了/CPU idle、既存第5章実ブラウザー回帰・controller/生成物同期を検証する。jsdom/staticテストは隔離証拠としない。未接続なので教材・通常アプリUIの第6章完成は宣言しない。
+
+## 第6章の最初のDOM更新教材（2026-10-02）
+
+既存UIへjs04の1教材だけを接続する。既存18ID/v1保存を維持し、受入前は75%のまま。js04「DOMの文字を更新する」は固定HTMLの#heading（h1）と#message（p）をquerySelectorで選び、textContentをそれぞれ「学習メモ」「DOMの文字を更新できました」へ変更する。HTMLは環境が用意し、学習者はJavaScriptだけ入力する。開始コードは対象取得のみ、完成例は二つのtextContent更新。id/selector/文字列の意味、nullの可能性、textContentがHTMLを解釈しないことを説明する。
+
+executionMode=domに限りparent graderを使う。初期状態と実行後状態をtrusted frame snapshotで比較する既存ブリッジを使用し、Workerの合否報告を採用しない。この教材はイベントステップなし、実行後のh1/pの文字列2件が採点条件。初期・入力変更・reset・取消・エラーでは固定HTMLへ戻し、採点結果が現在コードと一致するときだけ採点snapshotの実際値を表示する。
+
+表示用iframeは既存sandbox空/通信禁止のまま、trusted fixtureを親のdetached DOMで解析し、親が検証した結果文字列をtextContentへ適用してserializeする。学習者コード/HTMLは評価・挿入しない。DOM表示180px以上と結果内訳を既存preview領域へ並べ、js01〜03の数値出力はそのまま維持する。教材に固定HTMLと限定API・nativeとの差を説明し、Workerで使用可能なAPIをfull DOMとして教えない。click/input/保存は後続教材とし、この1教材では提供しない。
+
+実UIはコード実行/完了条件ボタン、Ctrl/Command+Enter、停止、入力変更、reset、教材/画面/hash移動、エラーと復元を確認する。実行枠1/5秒予約/2秒期限/32KiB等は先行契約を維持。取消/エラーから古い結果を保存せず、完了履歴と試行数は既存ルールを維持する。第6章の進捗は完了1/計画3を表示し、未実装2教材を完了/受講可能扱いにしない。講座全体は実教材受入後19/24=79%へ更新する。最終教材末尾は章進捗へ戻り、次教材を自動作成しない。
+
+受入: js04例/開始/誤答・偽合否・HTML-looking出力、native DOM結果からのscriptなし表示、3幅の実UI通し/横溢れ、停止/timeout/error/reset/input cancel/rapid navigationと旧結果破棄、reload/旧v1追加/保存拒否、既存19教材回帰、controller/境界/生成物同期、固定SHA独立レビュー。教材のAPI説明もレビュー対象とする。
