@@ -1,0 +1,157 @@
+{
+  "baseline": "e40a7b6e3c7239832c1e72037cfb5f0d185c2a9d",
+  "files": [
+    {
+      "path": "src/static/app.js",
+      "sha256": "8cf09640e022de14fff4549aa5c0f3c36ce8bb9789fbc51cc851e332260983f7"
+    },
+    {
+      "path": "src/static/css-grading.js",
+      "sha256": "c74604708154daf76df64dfd212e740af9b06a42d9602f28171c554cee8f1ffe"
+    },
+    {
+      "path": "src/static/dom-execution.js",
+      "sha256": "3fdc4939c6bbd0629d3a994f449962ddad51e6b123dfa011fd9636d826a4e4e4"
+    },
+    {
+      "path": "src/static/dom-grading.js",
+      "sha256": "b99665be8444cd106087c0ccd0d3445cdccb60ee6d77181c85204e5dd24a1a8e"
+    },
+    {
+      "path": "src/static/foundation.css",
+      "sha256": "c77b2a9685d8bfd750505d849aa2c19e844ddb35ae508d0f6c8da345b2a65462"
+    },
+    {
+      "path": "src/static/foundation.js",
+      "sha256": "040859541e209617e4dfe2057cc730ea508df4af364e2762c188435a5f72d688"
+    },
+    {
+      "path": "src/static/grading.js",
+      "sha256": "275272f85f05a374ac366414dc0022b593b0976a04a656feddf215343cdac48e"
+    },
+    {
+      "path": "src/static/index.html",
+      "sha256": "d27f3578c378052e1793d71adc80fefc36709acc1e811e02831d19a0ac7d78a7"
+    },
+    {
+      "path": "src/static/javascript-execution.js",
+      "sha256": "9184f2df153b03206c8dadbb6b8551e941028d0aab8d10f92780793c219bf01a"
+    },
+    {
+      "path": "src/static/javascript-grading.js",
+      "sha256": "23da26cc62e24135390a7d4db7e8d603973fd6b30424afb405691b0388af9c45"
+    },
+    {
+      "path": "src/static/javascript-host.js",
+      "sha256": "229f80b1ca61f679ca6009549053a73715a607da397d399c7b78c8bb0152e6b3"
+    },
+    {
+      "path": "src/static/lessons.js",
+      "sha256": "84ad5c1c0c96a74cdb908af74d3c3bd8c7fe523f71777332cb9b1be38fa90b7a"
+    },
+    {
+      "path": "src/static/progress.js",
+      "sha256": "c36a1771cdfcc2d56d99a45e2919ede80996a9bf87a9a72bc5f2443df17e7829"
+    },
+    {
+      "path": "src/static/project-preview.html",
+      "sha256": "72037a40a84c833ff9bdd11248119e06a1b822b753d5c270b689ac0ecc667fb0"
+    },
+    {
+      "path": "src/static/styles.css",
+      "sha256": "3ec248e02f08787caaae43831f018203e598be4656b9a58c417d070c3e764ac5"
+    },
+    {
+      "path": "docs/.nojekyll",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/404.html",
+      "sha256": "d27f3578c378052e1793d71adc80fefc36709acc1e811e02831d19a0ac7d78a7"
+    },
+    {
+      "path": "docs/app.js",
+      "sha256": "8cf09640e022de14fff4549aa5c0f3c36ce8bb9789fbc51cc851e332260983f7"
+    },
+    {
+      "path": "docs/css-grading.js",
+      "sha256": "c74604708154daf76df64dfd212e740af9b06a42d9602f28171c554cee8f1ffe"
+    },
+    {
+      "path": "docs/dom-execution.js",
+      "sha256": "3fdc4939c6bbd0629d3a994f449962ddad51e6b123dfa011fd9636d826a4e4e4"
+    },
+    {
+      "path": "docs/dom-grading.js",
+      "sha256": "b99665be8444cd106087c0ccd0d3445cdccb60ee6d77181c85204e5dd24a1a8e"
+    },
+    {
+      "path": "docs/foundation.css",
+      "sha256": "c77b2a9685d8bfd750505d849aa2c19e844ddb35ae508d0f6c8da345b2a65462"
+    },
+    {
+      "path": "docs/foundation.js",
+      "sha256": "040859541e209617e4dfe2057cc730ea508df4af364e2762c188435a5f72d688"
+    },
+    {
+      "path": "docs/grading.js",
+      "sha256": "275272f85f05a374ac366414dc0022b593b0976a04a656feddf215343cdac48e"
+    },
+    {
+      "path": "docs/index.html",
+      "sha256": "d27f3578c378052e1793d71adc80fefc36709acc1e811e02831d19a0ac7d78a7"
+    },
+    {
+      "path": "docs/javascript-execution.js",
+      "sha256": "9184f2df153b03206c8dadbb6b8551e941028d0aab8d10f92780793c219bf01a"
+    },
+    {
+      "path": "docs/javascript-grading.js",
+      "sha256": "23da26cc62e24135390a7d4db7e8d603973fd6b30424afb405691b0388af9c45"
+    },
+    {
+      "path": "docs/javascript-host.js",
+      "sha256": "229f80b1ca61f679ca6009549053a73715a607da397d399c7b78c8bb0152e6b3"
+    },
+    {
+      "path": "docs/lessons.js",
+      "sha256": "84ad5c1c0c96a74cdb908af74d3c3bd8c7fe523f71777332cb9b1be38fa90b7a"
+    },
+    {
+      "path": "docs/progress.js",
+      "sha256": "c36a1771cdfcc2d56d99a45e2919ede80996a9bf87a9a72bc5f2443df17e7829"
+    },
+    {
+      "path": "docs/project-preview.html",
+      "sha256": "72037a40a84c833ff9bdd11248119e06a1b822b753d5c270b689ac0ecc667fb0"
+    },
+    {
+      "path": "docs/styles.css",
+      "sha256": "3ec248e02f08787caaae43831f018203e598be4656b9a58c417d070c3e764ac5"
+    },
+    {
+      "path": "tests/dom-browser.mjs",
+      "sha256": "9bf2851a83bbd69e948026cf8cb56d8b5163edd8eaf1247d244b5bc9b8c8a7af"
+    },
+    {
+      "path": "tests/dom-lesson-browser.mjs",
+      "sha256": "01ef133debc6cab997ebf4dda33b2ef1d41af631a661cb5862ea3394c8e93800"
+    },
+    {
+      "path": "tests/event-lesson-browser.mjs",
+      "sha256": "a48392ef39d41002d9b74b126ab16a18d6f0d187fb4e0267ea8516e6cea6d466"
+    },
+    {
+      "path": "tests/foundation-browser.mjs",
+      "sha256": "366823f31f78d4ef0516ae8b86bf0055e48da2a6c7655e79e262fa294e010b8a"
+    },
+    {
+      "path": "tests/javascript-browser.mjs",
+      "sha256": "ca8e3d3a4ee3a768384b68dcb6ab38261aec724096b0d4596e9ff11d40591743"
+    },
+    {
+      "path": "tests/javascript-execution.mjs",
+      "sha256": "a0e6245fbe96ddb1552e471572d274a3e11ecff2cef36eb8e9016cf38fc197a0"
+    }
+  ]
+}

@@ -181,7 +181,33 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`は第6章まで21/24教材受入済み（88%）。第7章は既存ミニ成果物3教材を維持する。保存のnative API中心案Aと明示した独自async API案BをDESIGNへ比較済みで、学習API/成果物の持ち出し方はowner決定待ち。具体的consumer未確定のcodec、facade、backend、教材は実装しない。別の次Taskは未設定。
+`PPL-FOUNDATION-001`は第6章まで21/24教材受入済み（88%）。第7章は既存ミニ成果物3教材を維持する。ownerは標準localStorageと同じコードの成果物持ち出しを使う案Aを承認した。今回のscopeはnative/export/local実行の具体的設計と独立レビューまで。設計受入後、権限を追加しない編集・静的確認・exportから実装可能とし、任意native実行は分離環境の検証条件を満たすまで接続しない。別の次Taskは未設定。
+
+### 第7章案A — 今回の設計受入条件
+
+状態: `進行中`。実教材受入数21/24=88%を維持する。
+
+- [ ] 承認済み案Aと既存mini-project3教材要件を追跡し、具体的な3教材・consumerを定義する。
+- [ ] 同じHTML/CSS/JSを持ち出すファイル形式、操作、取消・繰返し・復帰を定義する。
+- [ ] 専用origin/profile、保存寿命、削除、quota/破損/partial writesをnative仕様と整合させる。
+- [ ] 親アプリ・既存opaque frame/Workerの境界を維持し、local実行の通信・停止に関する成立条件と未成立箇所を明示する。
+- [ ] 編集/exportを先行できる順序と、native実行・採点・3教材受入の具体的検証条件を定義する。
+- [ ] src/docs/tests不変、verify同期PASS、固定SHA独立レビューと証拠を記録する。
+
+実装受入は今回の設計受入と別。`DESIGN.md`の第7章案A節と`design/chapter7-native-export.md`へ実装契約を置き、Task状態・scope・ACの正本は本ファイルとする。
+
+### 第7章案A — 後続実装の受入条件（全て未受入）
+
+- [ ] 3教材の説明/開始例/完成例/ヒント、nativeと既存限定APIの差、project01/02/03の条件・計画分母を実装する。
+- [ ] 3ファイル入力・タブ切替・保存/再読込・保存拒否・確認付き初期化・教材移動を375/768/1280で検証し、既存21ID/v1/完了履歴を回帰確認する。
+- [ ] scriptなし静的プレビューで学習者HTML/JSを親やsame-originで評価せず、script/event/iframe/base/meta/import/resource・CSS通信・親保存への到達を負検証する。
+- [ ] exportの同一snapshot/UTF-8 bytes/hash/相対参照、32KiB/96KiB境界、HTML風JS文字列、取消/途中保存/再export混在/manifest不一致、OS保存完了を装わない表示を確認する。
+- [ ] 専用native環境の事前条件（通信拒否/ファイル・プロセス分離/資源上限/ブラウザーsandbox/秘密不在）を実際の環境で受け入れ、外部navigation/fetch/WebSocket/WebRTC/DNS/別loopback/新page/worker/download/permissionsを負検証する。成立前はruntimeを有効にしない。
+- [ ] 専用origin/profileと固定bundleのみの配信、競合port/二重起動拒否、親・他project保存不変、同じコードのnativeWindow起動/初回/選択/再読込/正常再open/忘れるを実測する。frame/Worker/独自async APIで代用しない。
+- [ ] native missing/不正value/SecurityError/QuotaExceededError、成功書込後の例外・停止、強制終了後の実値再読取、保存だけ削除/編集だけ初期化/再exportを区別して確認する。quota拒否の制御faultは実quota枯渇証拠と区別する。
+- [ ] 無限初期処理/無限event/非同期遅延/大量出力・確保の停止、独立heartbeat/旧run結果拒否、プロセス群終了まで次run拒否、終了確認不能時fail closedを検証する。OS級保証をbrowser timerで代用しない。
+- [ ] 外部controllerの実DOM/native保存観察とsnapshot/hashに対応した合否、偽結果/自己申告/別bundle/古いrun拒否、未実装runtime利用不可・no fallbackを確認し、3教材ごとの開始例不合格/完成例合格/意味誤答を検証する。
+- [ ] 全24教材の実受入を終えるまで88%を一括100%にせず、教材ごとに受入数更新。verify/生成物同期・固定SHA独立レビュー・native証拠を保存する。Safari/実Pages/読み上げは未検証ならDeferredのまま、main/公開は別承認。
 
 ## Repository operation policy — 2026-09-01
 
