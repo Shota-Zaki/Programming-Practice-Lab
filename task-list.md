@@ -5,7 +5,7 @@
 - currentTask: `PPL-FOUNDATION-001`
 - currentPhase: `Web開発基礎講座`
 - currentStatus: `in_progress`
-- completionPercentage: `79%`（講座全体24レッスン中19レッスン実装・検証済み。初期カリキュラム17/17、第2〜5章各7/7、第6章js04受入7/7完了）
+- completionPercentage: `83%`（講座全体24レッスン中20レッスン実装・検証済み。初期17/17、第2〜5章各7/7、第6章js04/js05各7/7受入完了）
 - baseBranch: `main`
 - workBranch: `work`
 - pagesSource: `main/docs`
@@ -124,7 +124,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] callback重複/this/currentTarget/文字列encoding/誤答/新しいDOM初期化と未対応API拒否を確認する。
 - [x] callback途中取消/期限/遅延継続/作成失敗/作成中取消と、共有枠の追加128実行拒否を確認する。
 - [x] 第5章実ブラウザー回帰、固定SHA独立レビュー、生成物同期と証拠管理を完了する。
-- [ ] 第6章全3教材を通常UIへ接続する（js04完了、イベント/入力2教材は未実装）。
+- [ ] 第6章全3教材を通常UIへ接続する（js04/js05完了、js06入力教材は未実装）。
 
 ### 第6章 js04 DOM更新教材の受入条件
 
@@ -181,7 +181,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`はHTML第1〜2章、CSS第3〜4章、JavaScript第5章と第6章js04まで実装・検証済み（19/24レッスン、79%）。次は既存境界契約に沿ってjs05クリックイベント教材を設計し、通常UIで受け入れる。第6章残り2教材と第7章3教材は未実装。別の次Taskは未設定。
+`PPL-FOUNDATION-001`はHTML第1〜2章、CSS第3〜4章、JavaScript第5章と第6章js05まで実装・検証済み（20/24レッスン、83%）。次はjs06入力イベント教材を設計・接続し、各入力/消去の通常UI受入を行う。別の次Taskは未設定。
 
 ## Repository operation policy — 2026-09-01
 
@@ -280,3 +280,15 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - 全19教材×3幅と47誤答、旧保存/破損/拒否回帰PASS。controller8/8、verify:agent PASS。Evidence: `evidence/2026-10-02-dom-lesson/`。
 - js04受入7/7。Active: PPL-FOUNDATION-001、完成度19/24=79%。Ready: js05クリックイベント教材設計/通常UI受入。Planned: 残り5教材、共通形式/adapter、IndexedDB、実Pages/Safari/読み上げ。Blocked: 本scopeなし。Deferred: 基礎講座後の実践UI。別Task未設定。
 - native終了/メモリ制約は既存境界の限界を維持。main merge/公開は未実施。
+
+### 2026-10-02 — js05 クリックイベント教材を通常UIで受入
+
+- [x] 教材説明/例/開始コード/限定APIとnativeとの差を提供する。
+- [x] 開始0、native click3回後の1/2/3の4snapshotを親で採点し、5意味誤答を拒否する。
+- [x] scriptなし静的最終表示と保存復元を確認する。
+- [x] 同一コード再実行Stopで未確認状態へ戻し、完了履歴を保持する。
+- [x] handler開始marker確認後のreset/edit/navigation取消とhandler期限後retryを3幅で受入する。
+- [x] 旧v1履歴、全20教材×3幅、既存47誤答/保存拒否等を回帰検証する。
+- [x] controller8/8、生成物同期、固定SHA独立レビュー、実画面確認と証拠を保存する。
+
+source/test `280a7626bb26a392eed9c2550e7d3895abccab58`。Evidence: `evidence/2026-10-02-click-lesson/`。Active: PPL-FOUNDATION-001、完成度20/24=83%。Ready: js06入力教材。Planned: 残り4教材、共通形式/adapter、IndexedDB、実Pages/Safari/読み上げ。Blocked: 本scopeなし。Deferred: 基礎講座後の実践UI。別Task未設定。native終了/メモリ制約を維持。main merge/公開未実施。
