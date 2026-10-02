@@ -211,7 +211,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] 既存21教材と実行controller・生成物同期を回帰確認する。
 - [ ] 固定SHA独立レビュー・証拠・管理文書・guarded work反映を完了する。
 
-Product95f8604、NativeQA f42971f、旧21教材回帰c67e532。Evidence: `evidence/2026-10-03-project-workspace/REPORT.md`。17 unit/35 native/30実download/21教材×3幅/verify PASS。product独立レビュー阻害なし、証跡checkpointレビュー待ち。編集workspaceを実教材の合格として加算しない。現在5/6（83%）、最後の受入はreviewとremote push保留解除後の反映まで。native環境/結果transportは別Blockedのまま。
+Product95f8604、NativeQA f42971f、旧21教材回帰c67e532。Evidence: `evidence/2026-10-03-project-workspace/REPORT.md`。17 unit/35 native/30実download/21教材×3幅/verify PASS。productと証跡checkpoint f483f0aの独立レビュー阻害なし。編集workspaceを実教材の合格として加算しない。現在5/6（83%）、最後の受入はremote push保留解除後のguarded work反映まで。native環境/結果transportは別Blockedのまま。Active: PPL-FOUNDATION-001。Ready: reviewed local候補。Planned: 3教材の正式登録/受入、共通形式/adapter/IndexedDB。Blocked: remote反映HOLD、native実行環境/結果transport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。canonical workの変更・push/main merge/公開はしていない。
 
 - [ ] 3教材の説明/開始例/完成例/ヒント、nativeと既存限定APIの差、project01/02/03の条件・計画分母を実装する。
 - [ ] 3ファイル入力・タブ切替・保存/再読込・保存拒否・確認付き初期化・教材移動を375/768/1280で検証し、既存21ID/v1/完了履歴を回帰確認する。

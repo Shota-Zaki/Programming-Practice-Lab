@@ -33,3 +33,5 @@ Existing course regression source `c67e532ae297ed9fa5762eb037e953cc70089bd4`。
 `manifest.json`にproduct/旧module/全artifact hashes、実行SHAを保存。`native/`はfinal35シナリオ・30実取得ファイル・全体3枚とfocusedプレビュー3枚。full-page captureでoffscreen iframeが空に写る場合があるため、実描画はfocusedプレビュー画像とDOM/computed CSS assertionで確認する。`regression/`は既存教材の実画面。可読logとgzip exact rawはCR/末尾空白/末尾空行のみ正規化する。
 
 講座21/24=88%のまま。native runner環境と信頼できる結果transport、3教材の実受入は未完了。2026-10-03の親指示でremote pushは保留中。workflow/settings/run/deployを変更・実行せず、main merge/公開も未実施。静的workspaceのローカル実装・検証とリモート反映を区別する。
+
+固定証跡checkpoint `f483f0aba284789a65ff9b432954a0c77e0663c0` の独立レビューは阻害指摘なし。製品不変、134artifact hashes、raw/可読log、35シナリオ/30取得ファイル/6画像、旧module9本、限定した受入主張を確認済み。反映を含む最終条件が保留のためworkspace5/6を維持。この後の更新は管理文書・本review記録だけ。

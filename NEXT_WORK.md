@@ -4,8 +4,8 @@
 - Status: `in_progress`（第6章まで21教材受入済み。第7章mini-project3教材は未実装）
 - Completion: `88%`（21/24教材）。案A具体設計6/6=100%は教材数へ加算しない。
 - Branch: `work`
-- Next Action: 静的workspaceのローカル実装/検証を完了。証跡checkpointを独立レビューし、親のremote push保留解除を待ってguarded work反映を行う。native実行/新教材完了は接続しない。
-- Ready: ローカル静的workspace候補の固定証跡レビュー・保留解除後の反映。3教材の教材/正式合格接続は今回とは別の受入単位。
+- Next Action: 静的workspaceのローカル実装/検証・固定証跡f483f0aの独立レビューを完了。親のremote push保留解除後、canonical clean/work/既知baseline・originを再確認しguarded work反映を行う。native実行/新教材完了は接続しない。
+- Ready: reviewed local静的workspace候補（owned clone ppl-export-work）。保留解除後の反映。3教材の教材/正式合格接続は今回とは別の受入単位。
 - Planned: 第7章mini-project3教材、正式共通形式/adapter、IndexedDB、実Pages/Safari/手動読み上げ。
 - Blocking: 親のremote push保留（動的Pages実行metadata確認待ち）。native任意実行向け専用環境の通信拒否/ファイル・プロセス/資源分離の実受入、合否連携transportは別Blocked。A/B選択は案A承認により解消。
 - Deferred: native実行接続（環境受入前）、基礎講座後の実践UI。旧案B codec/facadeは不採用の履歴。別の次Task: 未設定。
