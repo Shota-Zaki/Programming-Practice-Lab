@@ -14,6 +14,6 @@ export async function gradeDomLesson(code,lesson,options={}) {
 // Learner code is never run here; strings are always inserted as text.
 export function domLessonPreview(lesson,result) {
   const document=new DOMParser().parseFromString(lesson.fixture.markup,'text/html');
-  if(result)lesson.completionTests.forEach((test,i)=>{const node=document.querySelector(test.selector);if(node&&typeof result[i]?.actual==='string')node[test.property]=result[i].actual;});
+  if(result)lesson.completionTests.forEach((test,i)=>{const node=document.querySelector(test.selector);if(node&&typeof result[i]?.actual==='string'){const value=result[i].actual;if(test.property==='value'){node.value=value;if(node.tagName==='INPUT')node.setAttribute('value',value);else if(node.tagName==='TEXTAREA')node.textContent=value;}else node.textContent=value;}});
   return `<!doctype html><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">${document.body.innerHTML}`;
 }

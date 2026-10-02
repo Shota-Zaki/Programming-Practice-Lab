@@ -286,7 +286,21 @@ export const lessons = [
     example:'const add = document.querySelector("#add");\nconst output = document.querySelector("#count");\nlet count = 0;\noutput.textContent = count;\nadd.addEventListener("click", () => {\n  count += 1;\n  output.textContent = count;\n});',
     starterCode:'const add = document.querySelector("#add");\nconst output = document.querySelector("#count");\nlet count = 0;\n// clickの処理を登録し、回数と表示を更新しましょう',
     completionTests:[{id:'initial-count',label:'クリック前は0を表示する',step:0,selector:'#count',property:'textContent',expected:'0'},{id:'first-click',label:'1回目のクリック後は1を表示する',step:1,selector:'#count',property:'textContent',expected:'1'},{id:'second-click',label:'2回目のクリック後は2を表示する',step:2,selector:'#count',property:'textContent',expected:'2'},{id:'third-click',label:'3回目のクリック後は3を表示する',step:3,selector:'#count',property:'textContent',expected:'3'}],
-    hints:['add.addEventListener("click", () => { ... }); の中でcount += 1; とoutput.textContent = count; を実行します。'],explanation:'クリックのたびに変数と表示を更新できました。次は入力値を受け取る教材です。',
+    hints:['add.addEventListener("click", () => { ... }); の中でcount += 1; とoutput.textContent = count; を実行します。'],explanation:'クリックのたびに変数と表示を更新できました。次はinputイベントから入力値を読みます。',
+  },
+  {
+    id:'js06',language:'javascript',executionMode:'dom',chapterId:'js-chapter06',title:'入力値を表示に反映する',
+    objectives:['inputイベントから現在の値を読む','空文字を分けて表示を更新する'],
+    contentBlocks:[
+      {title:'入力の変化を受け取る',text:'inputイベントは入力値が変わったときの処理を登録するために使います。#nameへaddEventListener("input", (event) => { ... }); を登録しましょう。event.targetはこの教材では入力欄を指し、event.target.valueで現在の文字列を読みます。input要素のtextContentは入力値ではありません。'},
+      {title:'入力値と空文字を分ける',text:'入力が空文字なら#messageへ「未入力」、文字があれば「こんにちは、」+ value +「さん」を表示します。採点環境は初期状態のあと「太郎」、空文字、「次郎」の順に自動入力し、毎回valueとtextContentを確認します。入力を消した場合も更新してください。JavaScriptだけを入力します。'},
+      {title:'この入力演習の環境',text:'Workerと隔離した実DOMの限定ブリッジです。通常のブラウザーDOM全体ではありません。結果表示はスクリプトなしの最終状態です。表示欄に手で入力しても処理は動かず、実行ボタンで最初から採点します。教材指定IDへのquerySelector、textContent/value、click/inputのfunction listenerだけを扱います。options、removeEventListener、バブリング、innerHTML、style、親画面やブラウザー保存は使えません。書込みは文字列・数値・booleanを文字列化し160 UTF-16単位まで、null/undefined/オブジェクトは拒否します。handler例外は実行全体を失敗させ、native Promiseを返すhandlerは順に待ちます（通常DOMは待ちません）。valueの要求文字列は手元に反映され、実DOMの値の正規化は次イベントと採点結果で同期します。この教材では同期のinput処理を使います。'},
+    ],
+    fixture:{markup:'<label for="name">名前</label><input id="name" type="text" value=""><p id="message">未入力</p>',selectors:['#name','#message'],steps:[{type:'input',selector:'#name',value:'太郎'},{type:'input',selector:'#name',value:''},{type:'input',selector:'#name',value:'次郎'}]},
+    example:'const nameInput = document.querySelector("#name");\nconst message = document.querySelector("#message");\nnameInput.addEventListener("input", (event) => {\n  const value = event.target.value;\n  if (value === "") {\n    message.textContent = "未入力";\n  } else {\n    message.textContent = "こんにちは、" + value + "さん";\n  }\n});',
+    starterCode:'const nameInput = document.querySelector("#name");\nconst message = document.querySelector("#message");\n// inputの処理を登録し、空文字と名前を分けて表示しましょう',
+    completionTests:[{id:'initial-value',label:'開始時の入力値は空文字',step:0,selector:'#name',property:'value',expected:''},{id:'initial-message',label:'開始時は「未入力」を表示する',step:0,selector:'#message',property:'textContent',expected:'未入力'},{id:'first-value',label:'最初の入力値は「太郎」',step:1,selector:'#name',property:'value',expected:'太郎'},{id:'first-message',label:'太郎の入力後に挨拶を表示する',step:1,selector:'#message',property:'textContent',expected:'こんにちは、太郎さん'},{id:'empty-value',label:'入力を消すと値は空文字',step:2,selector:'#name',property:'value',expected:''},{id:'empty-message',label:'入力を消すと「未入力」に戻る',step:2,selector:'#message',property:'textContent',expected:'未入力'},{id:'last-value',label:'最後の入力値は「次郎」',step:3,selector:'#name',property:'value',expected:'次郎'},{id:'last-message',label:'次郎の入力後にも挨拶を更新する',step:3,selector:'#message',property:'textContent',expected:'こんにちは、次郎さん'}],
+    hints:['const value = event.target.value; で読み、if (value === "") で分けてmessage.textContentへ代入します。'],explanation:'入力と消去のたびに現在の値を読み、表示を更新できました。第6章が完了しました。第7章は準備中です。',
   },
 ].map((lesson, index, all) => ({ language: 'html', courseId: 'web-foundation', chapterId: 'html-chapter01', ...lesson, nextLessonId: all[index + 1]?.id ?? null }));
 export const chapters = [

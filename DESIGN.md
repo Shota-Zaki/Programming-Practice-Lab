@@ -424,3 +424,10 @@ executionMode=domに限りparent graderを使う。初期状態と実行後状�
 既存DOM境界/表示UIのままjs05を追加する。#add(type=button)と#count(p)を使い、変数count=0を作ってaddEventListener("click", callback)で1ずつ加算しtextContentへ表示する。実行開始時0、native clickを3回発生させた各snapshot1/2/3を親で採点する。登録時にcallbackを呼ぶ誤り、固定値、二重加算、未登録を拒否する。ボタンは採点環境が自動操作し、表示iframeはスクリプトなしの最終結果確認用であり手動クリックで実行されない。
 
 限定API/nativeとの違いはjs04の説明に加え、click/input function listenerのみ、options/removeEventListener/バブリング不可、handler例外で実行全体失敗、native Promiseを返すhandlerを順に待つことを明記する。既存ID/v1・共有枠/停止予約・2秒期限・CSPは維持し、変更しない。js04と第5章の既存証拠は保存する。受入は初期値/3イベントの意味誤答、3幅の実UI保存/復元/停止/timeout/エラー/初期化/入力変更/教材移動、全20教材回帰、controller/生成物同期と固定SHA独立レビュー。受入前は19/24=79%、完了後20/24=83%とし、Chapter6予定3を分母にする。
+
+
+### 第6章 js06 入力イベント教材
+
+既存境界契約内で#name(type=text input)と独立#message(p)を使う。初期入力空/表示未入力、native inputで太郎→空→次郎を設定し、各回のvalueと表示「こんにちは、太郎さん」→「未入力」→「こんにちは、次郎さん」を親で採点する。event.target.valueで現在の入力を読み、空文字の条件分岐とtextContentを教える。固定値・clickのみ・初回だけ・消去未対応・textContentから値を読む誤りを拒否する。採点が自動入力し、結果iframeは手入力してもhandlerが動かない静的確認用と明記する。
+
+表示のvalueはDOMParserのlive propertyだけではserializeに残らないため、inputはvalue属性、textareaは文字内容へ検証済み文字列を反映する。trusted fixtureと親のsnapshot文字列だけを扱い、scriptなしsandbox/CSP/文字列encodingを維持する。通常DOM全体/バブリング/async native挙動等の未対応を追加しない。受入は3幅実UI/各入力snapshot/入力消去/復元（最終input value含む）/停止/処理中取消/移動/エラー/期限後retry、旧js03/js04/js05履歴、全21教材回帰、controller/生成物同期、固定SHA独立レビュー。受入前20/24=83%、完了後21/24=88%、第6章3/3=100%。第7章保存などは未実装。
