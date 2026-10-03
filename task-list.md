@@ -209,9 +209,9 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] 3タブ編集・静的構造確認・scriptなしプレビュー・明示native未対応・未完了を通常UIへ接続する。
 - [x] reload/保存拒否/初期化確認/取消/移動・keyboard/mobile/3幅/禁止通信を実ブラウザーで検証する。
 - [x] 既存21教材と実行controller・生成物同期を回帰確認する。
-- [ ] 固定SHA独立レビュー・証拠・管理文書・guarded work反映を完了する。
+- [x] 固定SHA独立レビュー・証拠・管理文書・guarded work反映を完了する。
 
-Product95f8604、NativeQA f42971f、旧21教材回帰c67e532。Evidence: `evidence/2026-10-03-project-workspace/REPORT.md`。17 unit/35 native/30実download/21教材×3幅/verify PASS。productと証跡checkpoint f483f0aの独立レビュー阻害なし。編集workspaceを実教材の合格として加算しない。現在5/6（83%）、最後の受入はremote push保留解除後のguarded work反映まで。native環境/結果transportは別Blockedのまま。Active: PPL-FOUNDATION-001。Ready: reviewed local候補。Planned: 3教材の正式登録/受入、共通形式/adapter/IndexedDB。Blocked: remote反映HOLD、native実行環境/結果transport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。canonical workの変更・push/main merge/公開はしていない。
+Product95f8604、NativeQA f42971f、旧21教材回帰c67e532。Evidence: `evidence/2026-10-03-project-workspace/REPORT.md`。17 unit/35 native/30実download/21教材×3幅/verify PASS。productと証跡checkpoint f483f0aの独立レビュー阻害なし。編集workspaceを実教材の合格として加算しない。静的workspace受入6/6（100%）。親の保留解除後、canonical/originの既知baselineとcleanを再確認し、レビュー済み5d2a52dをfast-forward/pushしremote readback一致を確認。native環境/結果transportは別Blockedのまま。Active: PPL-FOUNDATION-001。Ready: 3教材の正式登録に向けた教材設計・受入準備。Planned: 3教材の正式登録/受入、共通形式/adapter/IndexedDB。Blocked: native実行環境/結果transport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。canonical workへの反映・通常push済み。main merge/公開は未実施。
 
 - [ ] 3教材の説明/開始例/完成例/ヒント、nativeと既存限定APIの差、project01/02/03の条件・計画分母を実装する。
 - [ ] 3ファイル入力・タブ切替・保存/再読込・保存拒否・確認付き初期化・教材移動を375/768/1280で検証し、既存21ID/v1/完了履歴を回帰確認する。

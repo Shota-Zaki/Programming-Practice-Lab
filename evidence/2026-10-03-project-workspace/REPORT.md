@@ -35,3 +35,5 @@ Existing course regression source `c67e532ae297ed9fa5762eb037e953cc70089bd4`。
 講座21/24=88%のまま。native runner環境と信頼できる結果transport、3教材の実受入は未完了。2026-10-03の親指示でremote pushは保留中。workflow/settings/run/deployを変更・実行せず、main merge/公開も未実施。静的workspaceのローカル実装・検証とリモート反映を区別する。
 
 固定証跡checkpoint `f483f0aba284789a65ff9b432954a0c77e0663c0` の独立レビューは阻害指摘なし。製品不変、134artifact hashes、raw/可読log、35シナリオ/30取得ファイル/6画像、旧module9本、限定した受入主張を確認済み。反映を含む最終条件が保留のためworkspace5/6を維持。この後の更新は管理文書・本review記録だけ。
+
+2026-10-03 delivery追記: 親がPPL通常work pushの保留を解除。canonical clean/workおよびfresh origin/workがbc54a906であることを再確認し、レビュー済み5d2a52d008fc333fc4b3aeb2739267ca1fb02e3dへfast-forward、通常push、remote readback一致を確認。静的workspace受入6/6=100%。上記の保留記述は検証時点の履歴。main merge、workflow実行、deployは行っていない。
