@@ -111,6 +111,7 @@ try {
           ['resource', html => html.replace('</main>', '<img src="https://example.invalid/leak"></main>')],
           ['metadata-refresh', html => html.replace('<meta charset="utf-8">', '<meta charset="utf-8" http-equiv="refresh" content="0;url=https://example.invalid/leak">')],
           ['disabled-stylesheet', html => html.replace('rel="stylesheet"', 'rel="stylesheet" disabled')],
+          ['unsupported-attribute', html => html.replace('<main>', '<main custom-hidden>')],
         ];
         const results = [];
         for (const [name, mutate] of mutations) results.push({ name, rejected: !(await gradeProject01({ ...base, 'index.html': mutate(base['index.html']) })).checks.every(check => check.passed) });
@@ -121,6 +122,9 @@ try {
           ['hidden-html-class', base['index.html'].replace('lang="ja"', 'lang="ja" class="hide"'), '.hide{display:none}'],
           ['hidden-body-class', base['index.html'].replace('<body>', '<body class="hide">'), '.hide{display:none}'],
           ['hidden-wrapper-css', base['index.html'].replace('<label', '<fieldset><label').replace('</main>', '</fieldset></main>'), 'fieldset{display:none}'],
+          ['hidden-main-data', base['index.html'].replace('<main>', '<main data-hidden>'), '[data-hidden]{display:none}'],
+          ['hidden-body-data', base['index.html'].replace('<body>', '<body data-hidden>'), '[data-hidden]{display:none}'],
+          ['hidden-dir', base['index.html'].replace('<main>', '<main dir="rtl">'), '[dir=rtl]{display:none}'],
         ]) results.push({ name, rejected: !(await gradeProject01({ ...base, 'index.html': html, 'styles.css': base['styles.css'] + css })).checks.every(check => check.passed) });
         const wrapped = base['index.html'].replace('<label', '<fieldset><legend>学習テーマ</legend><label').replace('</main>', '</fieldset></main>');
         results.push({ name: 'usable-fieldset-equivalent', accepted: (await gradeProject01({ ...base, 'index.html': wrapped })).checks.every(check => check.passed) });
@@ -129,10 +133,10 @@ try {
         let cancelled = false; try { await pending; } catch (error) { cancelled = error.name === 'AbortError'; }
         return { results, cancelled, frames: document.querySelectorAll('[data-project-parser]').length };
       });
-      assert.equal(grading.results.length, 37);
+      assert.equal(grading.results.length, 41);
       assert.ok(grading.results.every(result => result.name === 'usable-fieldset-equivalent' ? result.accepted : result.rejected), JSON.stringify(grading));
       assert.equal(grading.cancelled, true); assert.equal(grading.frames, 0);
-      assert.deepEqual(leaks, []); results.push({ case: '36-semantic-wrong-answers/fieldset-equivalent/cancel/no-network', ...grading, pass: true });
+      assert.deepEqual(leaks, []); results.push({ case: '40-semantic-wrong-answers/fieldset-equivalent/cancel/no-network', ...grading, pass: true });
     }
     await page.close();
   }
@@ -158,5 +162,5 @@ try {
     results.push({ case: `controlled-storage-fault/${fault}`, pass: true }); await page.close();
   }
   await writeFile(`${output}/results.json`, JSON.stringify({ browser: browser.version(), results }, null, 2) + '\n');
-  console.log(JSON.stringify({ result: 'PASS', browser: browser.version(), cases: results.length, negativeCases: 36, equivalentCases: 1 }));
+  console.log(JSON.stringify({ result: 'PASS', browser: browser.version(), cases: results.length, negativeCases: 40, equivalentCases: 1 }));
 } finally { await browser.close(); await new Promise(done => server.close(done)); }

@@ -49,9 +49,11 @@ function staticParser(hasResourceFunction) {
       checks.push({ label: '追加script・外部resource・イベント属性を使わない', passed: !unsafeMarkup && !omittedCss });
       const output = document.implementation.createHTMLDocument('自己紹介サイトの静的表示');
       const safeTags = new Set(['MAIN', 'SECTION', 'HEADER', 'FOOTER', 'NAV', 'ARTICLE', 'ASIDE', 'DIV', 'SPAN', 'H1', 'H2', 'H3', 'H4', 'P', 'UL', 'OL', 'LI', 'LABEL', 'SELECT', 'OPTION', 'BUTTON', 'STRONG', 'EM', 'SMALL', 'PRE', 'CODE', 'BR', 'HR', 'A', 'FORM', 'FIELDSET', 'LEGEND', 'DETAILS', 'SUMMARY', 'DIALOG']);
-      const safeAttrs = new Set(['id', 'class', 'lang', 'title', 'for', 'value', 'selected', 'disabled', 'hidden', 'inert', 'open', 'tabindex', 'aria-hidden', 'aria-label', 'aria-describedby']);
+      const safeAttrs = new Set(['id', 'class', 'lang', 'dir', 'role', 'title', 'for', 'value', 'selected', 'disabled', 'hidden', 'inert', 'open', 'tabindex', 'size', 'multiple']);
+      const supportedAttribute = attr => safeAttrs.has(attr.name) || attr.name.startsWith('data-') || attr.name.startsWith('aria-')
+        || (attr.ownerElement?.tagName === 'A' && attr.name === 'href' && attr.value.startsWith('#'));
       const copyAttributes = (source, target) => {
-        for (const attr of source.attributes) if (safeAttrs.has(attr.name)) target.setAttribute(attr.name, attr.value);
+        for (const attr of source.attributes) if (supportedAttribute(attr)) target.setAttribute(attr.name, attr.value);
       };
       const copy = (node, target) => {
         if (node.nodeType === Node.TEXT_NODE) { target.append(output.createTextNode(node.textContent)); return; }
@@ -96,7 +98,10 @@ function staticParser(hasResourceFunction) {
           { id: 'message', label: 'mainに一意なp#topic-messageと未選択表示', passed: unique('topic-message') && inMain('p#topic-message')?.textContent.trim() === '未選択' },
           { id: 'forget', label: 'mainに一意なtype=buttonの忘れるボタン', passed: Boolean(unique('forget') && hasText(button) && reachable(button)) },
           { id: 'references', label: 'headの相対CSSとbody末尾の空のdefer script', passed: Boolean(doc.querySelectorAll('link').length === 1 && doc.querySelector('head link[rel="stylesheet"][href="./styles.css"]') && doc.querySelectorAll('script').length === 1 && script === doc.body.lastElementChild && script?.getAttribute('src') === './app.js' && script.hasAttribute('defer') && !script.textContent.trim() && [...script.attributes].every(attr => ['src', 'defer'].includes(attr.name))) },
-          { id: 'resources', label: '追加script・外部resource・未対応要素・イベント属性を使わない', passed: !unsafeMarkup && !omittedCss && all.every(node => safeTags.has(node.tagName) || ['HTML', 'HEAD', 'BODY', 'TITLE'].includes(node.tagName) || permittedSetup(node)) }
+          { id: 'resources', label: '追加script・外部resource・未対応要素/属性・イベント属性を使わない', passed: !unsafeMarkup && !omittedCss && all.every(node =>
+            (safeTags.has(node.tagName) || ['HTML', 'HEAD', 'BODY', 'TITLE'].includes(node.tagName))
+              ? [...node.attributes].every(attr => supportedAttribute(attr) || (node.tagName === 'BUTTON' && attr.name === 'type' && attr.value === 'button'))
+              : permittedSetup(node)) }
         );
         // Measure only the sanitized, script-free display copy in the opaque trusted parser.
         const measureStyle = document.createElement('style'); measureStyle.nonce = nonce; measureStyle.textContent = css; document.head.append(measureStyle);

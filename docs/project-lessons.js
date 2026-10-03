@@ -9,7 +9,7 @@ export const project01 = Object.freeze({
     { title: '操作する要素にも名前を付ける', text: 'labelのforをtopic、selectのidをtopicにそろえます。未選択の空文字とhtml・css・javascriptの4つのoptionを用意します。表示欄はp#topic-messageに「未選択」、保存を忘れる操作はbutton#forgetにtype="button"を指定します。IDはページ内で一意にしてください。hidden・inert・無効化やTab順の変更を使わず、操作欄を表示します。' },
     { title: '同じフォルダーの3ファイルをつなぐ', text: 'headに<link rel="stylesheet" href="./styles.css">、bodyの末尾に<script src="./app.js" defer></script>を書きます。CSSやJSをHTMLへ埋め込まず、3つのタブで編集します。開始コードの空欄を完成例と比べ、構造を完成させましょう。' },
     { title: 'このレッスンで確認する範囲', text: 'project01はHTML構造の静的採点です。表示コピーにはJavaScriptが含まれず、選択しても表示更新や保存は動きません。第6章の限定APIと違い、成果物のapp.jsでは通常のDOMと同期localStorageを使う予定です。project02の動作とproject03の実行確認は専用環境の受入待ちです。' },
-    { title: '静的表示で使える要素', text: '文書設定と例にある要素のほか、section・header・footer・nav・article・aside・div・span・見出しh2〜h4・ol・strong・em・small・pre・code・br・hr・ページ内リンクa、form・fieldset・legend・details・summary・dialogを表示できます。追加の入力欄や未対応要素はこの教材では使いません。閉じたdetails/dialogや非表示の親要素の中へ必須内容を置くと、表示条件を満たせません。' },
+    { title: '静的表示で使える要素と属性', text: '文書設定と例にある要素のほか、section・header・footer・nav・article・aside・div・span・見出しh2〜h4・ol・strong・em・small・pre・code・br・hr・ページ内リンクa、form・fieldset・legend・details・summary・dialogを表示できます。本文の属性はid・class・lang・dir・role・title・for・value・selected・disabled・hidden・inert・open・tabindex・size・multiple・data-*・aria-*、ボタンのtype="button"に対応します。操作欄のtabindexは指定しません。追加の入力欄や未対応要素/属性は使いません。閉じたdetails/dialogや非表示の親要素の中へ必須内容を置くと、表示条件を満たせません。' },
   ],
   hints: ['h1・紹介文・リスト・操作欄をmainの中へ置きます。labelのforとselectのidをそろえ、optionのvalueを空文字/html/css/javascriptにします。', 'CSS参照はhead、defer付きJS参照はbodyの末尾です。CSSで必須要素を隠していないか確認しましょう。'],
   starterFiles: Object.freeze({
