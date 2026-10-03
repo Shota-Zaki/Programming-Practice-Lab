@@ -55,7 +55,8 @@ export const project02Css = Object.freeze({
   contentBlocks: [
     { title: '共有ファイルから続ける', text: 'project01のHTML構造を完成させてからstyles.cssを編集します。教材の切替は3ファイルを置き換えません。CSS開始例を手動でコピーして余白や寸法を追加しましょう。再読込後はproject01教材を表示し、入力は保存から復元します。' },
     { title: '外側とカード内の余白', text: 'bodyの左右paddingを16px以上、mainの左右paddingを24px以上にします。mainはmax-width: 720pxとmargin: 0 autoで中央へ。box-sizing: border-boxを使い、狭い幅で固定widthを指定しないようにします。' },
-    { title: '文字と操作欄', text: '本文・リスト・label・select・buttonを16px以上、本文とボタンの行高を文字サイズの1.5倍以上にします。font: inheritで操作欄にも反映し、selectとbuttonの高さを44px以上にします。native selectの行高・選択肢の表示はブラウザーが管理します。Tabキーで選択欄とボタンへ移動し、既定のフォーカス表示を残しましょう。' },
+    { title: '文字と操作欄', text: '主見出し・本文・リスト・label・select・buttonを16px以上、select以外の行高を文字サイズの1.5倍以上にします。font: inheritで操作欄にも反映し、selectとbuttonの高さを44px以上にします。native selectの行高・選択肢の表示はブラウザーが管理します。Tabキーで選択欄とボタンへ移動し、既定のフォーカス表示を残しましょう。フォーカス表示は自動採点に含めず、プレビューで確かめます。' },
+    { title: '文字色と単色背景', text: 'この先行教材では白いカードと暗い文字など、単色背景で明暗比4.5以上の組合せを使います。必須文字・選択肢と背景の計算済み色を比較します。透明文字、背景画像/グラデーション、opacityの変更、blend・mask・clip・filterによる視覚効果はこの確認範囲では使いません。親要素で内容を切り抜くoverflow指定も避けます。色以外のアクセシビリティ全体を保証する採点ではありません。' },
     { title: '3幅で確かめる', text: '長い文章はoverflow-wrapで折り返せます。文字や操作欄を隠したりoverflowで切り抜いたりせず、横スクロール不要な配置を作ります。確認結果は3幅を集約します。プレビューにはJSがなく、テーマ選択・表示更新・標準localStorageの動作確認は専用native環境の受入待ちです。CSS確認だけではproject02全体を完了にしません。' },
   ],
   hints: ['mainを固定幅にせず最大幅と自動marginで整えます。', 'bodyとmainのpaddingは別々です。select・buttonにも文字サイズと行高を継承します。'],

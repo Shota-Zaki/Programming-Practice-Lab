@@ -128,13 +128,42 @@ function staticParser(hasResourceFunction) {
           const card = document.querySelector('body > main'), body = document.body;
           const px = value => Number.parseFloat(value) || 0;
           const b = getComputedStyle(body), m = card && getComputedStyle(card), rect = card?.getBoundingClientRect();
-          const text = [...document.querySelectorAll('main p,main li,main label,select#topic,button#forget')];
+          const text = [...document.querySelectorAll('main h1,main p,main li,main label,select#topic,button#forget')];
+          const layout = new Set([document.documentElement, body, card]);
+          for (const node of text) for (let ancestor = node; ancestor && !layout.has(ancestor); ancestor = ancestor.parentElement) layout.add(ancestor);
+          // Read computed solid colors only; never rasterize learner HTML or execute its JavaScript.
+          const swatch = document.createElement('canvas'); swatch.width = swatch.height = 1;
+          const ink = swatch.getContext('2d', { willReadFrequently: true }), colors = new Map(), backgrounds = new Map();
+          const color = value => {
+            if (!colors.has(value)) {
+              ink.clearRect(0, 0, 1, 1); ink.fillStyle = 'transparent'; ink.fillStyle = value; ink.fillRect(0, 0, 1, 1);
+              const pixel = [...ink.getImageData(0, 0, 1, 1).data]; colors.set(value, [...pixel.slice(0, 3), pixel[3] / 255]);
+            }
+            return colors.get(value);
+          };
+          const composite = (front, back) => front.slice(0, 3).map((value, i) => value * front[3] + back[i] * (1 - front[3]));
+          const background = node => {
+            if (!node) return [255, 255, 255];
+            if (!backgrounds.has(node)) backgrounds.set(node, composite(color(getComputedStyle(node).backgroundColor), background(node.parentElement)));
+            return backgrounds.get(node);
+          };
+          const luminance = rgb => rgb.map(value => { const channel = value / 255; return channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4; }).reduce((sum, value, i) => sum + value * [.2126, .7152, .0722][i], 0);
+          const readable = [...text, ...(document.querySelector('select#topic')?.options ?? [])].every(node => {
+            for (let ancestor = node; ancestor; ancestor = ancestor.parentElement) {
+              const c = getComputedStyle(ancestor);
+              if (c.backgroundImage !== 'none' || Number(c.opacity) !== 1 || c.mixBlendMode !== 'normal') return false;
+            }
+            const c = getComputedStyle(node), foreground = color(c.webkitTextFillColor || c.color), bg = background(node);
+            const a = luminance(composite(foreground, bg)), b = luminance(bg);
+            return foreground[3] > 0 && (Math.max(a, b) + .05) / (Math.min(a, b) + .05) >= 4.5;
+          });
           checks.push(
-            { id: 'css-spacing', label: 'body左右16px・main内左右24px以上の余白', passed: Boolean(m && px(b.paddingLeft) >= 16 && px(b.paddingRight) >= 16 && px(m.paddingLeft) >= 24 && px(m.paddingRight) >= 24) },
+            { id: 'css-spacing', label: '外側左右16px・main内左右24px以上の余白', passed: Boolean(m && rect.left >= 16 && rect.right <= innerWidth - 16 + 1 && px(b.paddingLeft) >= 16 && px(b.paddingRight) >= 16 && px(m.paddingLeft) >= 24 && px(m.paddingRight) >= 24) },
             { id: 'css-card', label: 'mainを最大720px以内で中央へ配置', passed: Boolean(rect && rect.width > 0 && rect.width <= 721 && Math.abs(rect.left - (innerWidth - rect.right)) <= 2) },
-            { id: 'css-type', label: '本文・操作欄16px以上、本文とボタンの行高1.5倍以上', passed: text.length > 0 && text.every(node => { const c = getComputedStyle(node); return px(c.fontSize) >= 16 && (node.tagName === 'SELECT' || px(c.lineHeight) + .1 >= px(c.fontSize) * 1.5); }) },
+            { id: 'css-type', label: '主見出し・本文・操作欄16px以上、select以外の行高1.5倍以上', passed: text.length > 0 && text.every(node => { const c = getComputedStyle(node); return px(c.fontSize) >= 16 && (node.tagName === 'SELECT' || px(c.lineHeight) + .1 >= px(c.fontSize) * 1.5); }) },
             { id: 'css-controls', label: '選択欄とボタンの高さ44px以上', passed: controls.every(selector => document.querySelector(selector)?.getBoundingClientRect().height >= 44) },
-            { id: 'css-overflow', label: '横溢れ・本文の切抜きなし', passed: Boolean(card && [document.documentElement, body, card, ...text].every(node => { const c = getComputedStyle(node); return (node.tagName === 'SELECT' || (!['hidden','clip'].includes(c.overflowX) && !['hidden','clip'].includes(c.overflowY))) && (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth + 1); })) }
+            { id: 'css-contrast', label: '必須文字と選択肢を単色背景で読みやすく（明暗比4.5以上）', passed: readable },
+            { id: 'css-overflow', label: '横溢れ・必須内容と親要素の切抜き/マスク/フィルターなし', passed: Boolean(card && [...layout].every(node => { const c = getComputedStyle(node); return (node.tagName === 'SELECT' || (!['hidden','clip'].includes(c.overflowX) && !['hidden','clip'].includes(c.overflowY))) && c.clipPath === 'none' && c.clip === 'auto' && c.maskImage === 'none' && c.filter === 'none' && (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth + 1); })) }
           );
         }
         measureStyle.remove();

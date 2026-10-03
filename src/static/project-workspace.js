@@ -20,6 +20,7 @@ export function initializeProjectWorkspace(root) {
     const content = $('#project-lesson-content'); content.replaceChildren(); $('#project-examples').replaceChildren();
     $('#project-title').textContent = lesson.title; content.setAttribute('aria-label', lesson.title);
     $('#project-kicker').textContent = lesson === project01 ? 'MINI PROJECT / PROJECT01' : 'MINI PROJECT / PROJECT02 CSS';
+    $('#project-breadcrumb').textContent = lesson === project01 ? '第7章 / PROJECT01' : '第7章 / PROJECT02 CSS';
     $('#project-description').textContent = lesson === project01 ? 'HTML構造を完成させ、同じ3ファイルを持ち出せます。静的採点でproject01を完了できます。' : '同じ成果物に読みやすいCSSを追加します。静的条件を確認し、続きの動作・保存へ備えます。';
     $('#project-lesson-note').textContent = lesson === project01 ? 'project01は構造の静的採点です。教材の切替は入力を保持します。' : 'project02 CSS先行教材 — 静的CSSのみ。project02全体は未完了です。切替は入力を保持し、再読込時はproject01へ戻ります。';
     $('#project-inspect').textContent = lesson === project01 ? '静的構造を確認' : '3幅の静的CSSを確認';

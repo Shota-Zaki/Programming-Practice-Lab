@@ -40,7 +40,8 @@ try {
     assert.match(await page.locator('#project-editor').inputValue(), /while\(true\)/);
     await inspect(page);
     assert.match(await page.locator('#project-result').textContent(), /静的CSS条件を確認できました.*project02全体は未完了/, JSON.stringify(await page.locator('#project-checks li').allTextContents()));
-    assert.equal(await page.locator('#project-checks li').count(), 15);
+    assert.equal(await page.locator('#project-checks li').count(), 16);
+    assert.match(await page.locator('#project-breadcrumb').textContent(), /PROJECT02 CSS/);
     assert.equal(await page.locator('[data-course-progress]').first().textContent(), '0 / 24');
     assert.equal(await page.locator('#project-native').isDisabled(), true);
     assert.equal(await page.evaluate(() => window.CSS_LEARNER_RAN), undefined);
@@ -98,15 +99,26 @@ try {
           ['hidden-overflow', 'main{overflow:hidden}'], ['clipped-height', 'main{height:80px;overflow:clip}'], ['nowrap', 'p{white-space:nowrap}'],
           ['tablet-only', '@media(min-width:768px){body{padding:0}}'], ['desktop-only', '@media(min-width:1280px){button{font-size:10px}}'],
           ['hidden-content', 'li{display:none}'], ['resource', 'body{background:url(https://example.invalid/leak)}'],
+          ['clipped-heading', 'h1{height:1px;overflow:hidden}'], ['clip-path', 'main{clip-path:inset(100%)}'],
+          ['mask', 'main{mask-image:linear-gradient(transparent,transparent)}'], ['filter', 'main{filter:opacity(0)}'], ['negative-margin', 'body{margin:-16px}'],
+          ['transparent-text', 'main{color:transparent}'], ['same-color', 'main{color:white;background:white}'], ['text-fill', 'main{-webkit-text-fill-color:transparent}'],
+          ['transparent-ancestor', 'main{opacity:.01}'], ['fixed-edge', 'main{position:fixed;top:0;left:0;right:0}'], ['option-ink', 'option{color:transparent}'],
+          ['low-contrast', 'main{color:#777}'],
         ]) { const checks = (await gradeProject02Css({ ...base, 'styles.css': base['styles.css'] + css })).checks; results.push({ name, rejected: !checks.every(check => check.passed), failed: checks.filter(check => !check.passed).map(check => check.id) }); }
+        for (const [name, pattern] of [['heading-wrapper', /<h1>.*?<\/h1>/], ['intro-wrapper', /<p>.*?<\/p>/], ['controls-wrapper', /<label[\s\S]*?<\/button>/]]) {
+          const html = base['index.html'].replace(pattern, value => '<div class="crop">' + value + '</div>');
+          const checks = (await gradeProject02Css({ ...base, 'index.html': html, 'styles.css': base['styles.css'] + '.crop{height:1px;overflow:hidden}' })).checks;
+          results.push({ name, rejected: !checks.every(check => check.passed), failed: checks.filter(check => !check.passed).map(check => check.id) });
+        }
         const equivalent = base['styles.css'].replace('padding: 16px', 'padding: 1rem').replace('padding: 24px', 'padding: 1.5rem').replace('max-width: 720px', 'max-width: 45rem').replace('min-height: 44px', 'min-height: 2.75rem');
         results.push({ name: 'rem-equivalent', accepted: (await gradeProject02Css({ ...base, 'styles.css': equivalent })).checks.every(check => check.passed) });
         const long = base['index.html'].replace('HTML', '長い文章と単語'.repeat(40));
         results.push({ name: 'long-wrap', accepted: (await gradeProject02Css({ ...base, 'index.html': long })).checks.every(check => check.passed) });
+        for (const [name, css] of [['contrast-boundary-valid', 'main{color:#767676}'], ['composited-ink', 'main{color:rgba(0,0,0,.85)}']]) results.push({ name, accepted: (await gradeProject02Css({ ...base, 'styles.css': base['styles.css'] + css })).checks.every(check => check.passed) });
         return results;
       });
       assert.ok(grading.every(row => row.accepted ?? row.rejected), JSON.stringify(grading));
-      assert.deepEqual(leaks, []); results.push({ case: '15-wrong-CSS/2-equivalent-content/no-network', grading, pass: true });
+      assert.deepEqual(leaks, []); results.push({ case: '30-wrong-CSS/4-equivalent-content/no-network', grading, pass: true });
     }
     await page.close();
   }
@@ -128,5 +140,5 @@ try {
     results.push({ case: `controlled-storage-fault/${fault}`, pass: true }); await page.close();
   }
   await writeFile(`${output}/results.json`, JSON.stringify({ browser: browser.version(), results }, null, 2) + '\n');
-  console.log(JSON.stringify({ result: 'PASS', browser: browser.version(), cases: results.length, negativeCases: 15, equivalentCases: 2 }));
+  console.log(JSON.stringify({ result: 'PASS', browser: browser.version(), cases: results.length, negativeCases: 30, equivalentCases: 4 }));
 } finally { await browser.close(); await new Promise(done => server.close(done)); }
