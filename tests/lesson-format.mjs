@@ -64,6 +64,13 @@ test('catalog rejects duplicate, missing, cross-course and cyclic navigation; so
   for(const change of [ls=>ls.push(ls[0]),ls=>ls[0].nextLessonId='missing',ls=>ls[1].courseId='another-course',ls=>ls.at(-1).nextLessonId=ls[0].id]){const value=structuredClone(lessonCatalog);change(value);assert.throws(()=>createLessonCatalog(value),TypeError);}
   const source=structuredClone(lessonCatalog),before=JSON.stringify(source);createLessonCatalog(source);assert.equal(JSON.stringify(source),before);
 });
+test('legacy CSS source validates hidden fields, dense arrays and accessors before optional cleanup',()=>{
+  const css=()=>structuredClone(baseline.lessons.find(l=>l.id==='css01'));
+  for(const change of [v=>Object.defineProperty(v.completionTests[0],'unknown',{value:1}),v=>v.completionTests.extra='unknown',v=>delete v.completionTests[0]]){const value=css();change(value);assert.throws(()=>compileLegacyLesson(value),TypeError);}
+  let invoked=0;const legacy=css();Object.defineProperty(legacy.completionTests[0],'selector',{enumerable:true,get(){invoked++;return 'h1';}});assert.throws(()=>compileLegacyLesson(legacy),TypeError);assert.equal(invoked,0);
+  const aggregate=structuredClone(baseline.lessons.find(l=>l.id==='css08'));Object.defineProperty(aggregate.completionTests[0].checks[0],'expected',{enumerable:true,get(){invoked++;return '960px';}});assert.throws(()=>compileLegacyLesson(aggregate),TypeError);assert.equal(invoked,0);
+  for(const path of ['mode','id']){const value=lesson('html01'),target=path==='mode'?value.exercise:value.exercise.completionTests[0];Object.defineProperty(target,path,{enumerable:true,get(){invoked++;return path==='mode'?'html':'doctype';}});assert.throws(()=>validateLesson(value),TypeError);assert.equal(invoked,0);}
+});
 test('real adapter consumes common catalog while legacy API yields identical spec/results for all modes',async()=>{
   const seen=[];const rowResult=(code,spec)=>{const tests=Array.isArray(spec)?spec:spec.completionTests;seen.push({code,spec});return tests.map(t=>({id:t.id,passed:true}));};
   const dependencies={html:rowResult,css:rowResult,javascript:rowResult,dom:rowResult};

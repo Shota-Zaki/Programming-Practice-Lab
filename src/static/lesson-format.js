@@ -41,7 +41,9 @@ export function validateLesson(value) {
   if(value.version!==1)fail();for(const key of ['id','courseId','chapterId','title'])text(value[key]);
   for(const key of ['id','courseId','chapterId'])if(!/^[a-z][a-z0-9-]{0,63}$/.test(value[key]))fail();
   if(value.nextLessonId!==null)text(value.nextLessonId);
-  const learning=value.learning,exercise=value.exercise,mode=exercise?.mode;
+  const learning=value.learning,exercise=value.exercise;
+  object(exercise);
+  const mode=exercise.mode;
   if(!['html','css','javascript','dom'].includes(mode)||value.language!==(mode==='dom'?'javascript':mode))fail();
   keys(learning,['objectives','contentBlocks','example','hints','explanation']);
   list(learning.objectives,item=>text(item));list(learning.hints,item=>text(item));
@@ -53,6 +55,7 @@ export function validateLesson(value) {
   if(mode==='javascript'){list(exercise.parameters,name=>text(name),true);text(exercise.returnExpression);}
   if(mode==='dom')fixtureCheck(exercise.fixture);
   list(exercise.completionTests,test=>{
+    object(test);
     text(test?.id);text(test?.label);
     if(mode==='html')htmlTest(test);
     if(mode==='css'){
@@ -77,7 +80,8 @@ export function compileLegacyLesson(source) {
   for(const key of ['markup','viewports','parameters','returnExpression','fixture'])if(Object.hasOwn(source,key)){if(!allowed.includes(key))fail();common.exercise[key]=source[key];}
   // Earlier CSS helpers emitted an own optional field with value undefined. It is absent in JSON and unused by the grader.
   if(mode==='css') {
-    const clean=check=>{const copy={...check};if(Object.hasOwn(copy,'requiredSelector')&&copy.requiredSelector===undefined)delete copy.requiredSelector;return copy;};
+    const clean=check=>{keys(check,['selector','property'],['id','label','expected','requiredSelector','byWidth']);const copy={...check};if(Object.hasOwn(copy,'requiredSelector')&&copy.requiredSelector===undefined)delete copy.requiredSelector;return copy;};
+    list(source.completionTests,test=>{object(test);if(Object.hasOwn(test,'checks')){keys(test,['id','label','checks']);list(test.checks,check=>clean(check));}else clean(test);});
     common.exercise.completionTests=source.completionTests.map(test=>Object.hasOwn(test,'checks')?{...test,checks:test.checks.map(clean)}:clean(test));
   }
   return validateLesson(common);
