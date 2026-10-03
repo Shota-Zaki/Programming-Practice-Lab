@@ -1,0 +1,19 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('#editor') to be visible
+    64 ﾃ・locator resolved to hidden <textarea id="editor" spellcheck="false" aria-label="HTML繧ｳ繝ｼ繝牙・蜉帶ｬ・></textarea>
+
+    at session (C:\Users\shota\Documents\Codex\2026-10-03\task-2\ppl\tests\indexed-progress-browser.mjs:53:66)
+    at async file:///C:/Users/shota/Documents/Codex/2026-10-03/task-2/ppl/tests/indexed-progress-browser.mjs:103:26 {
+  log: [
+    "  - waiting for locator('#editor') to be visible",
+    '    64 ﾃ・locator resolved to hidden <textarea id="editor" spellcheck="false" aria-label="HTML繧ｳ繝ｼ繝牙・蜉帶ｬ・></textarea>'
+  ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.19.0

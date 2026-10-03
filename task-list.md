@@ -14,16 +14,20 @@
 
 ## CORE IndexedDB進捗移行 — 現在の独立実装単位
 
-状態: 実装中（0/6=0%）。既存Foundation21の進捗consumerを対象とし旧rawを残す。講座92%維持。設計: design/indexeddb-progress.md。
+状態: 実装/検証/独立レビュー完了・guarded work反映待ち（5/6=83%）。既存Foundation21の進捗consumerを対象とし旧rawを残す。講座92%維持。設計: design/indexeddb-progress.md。
 
-- [ ] authority/移行/復帰/非同期表示を実consumerへ接続する。
-- [ ] 初回/繰返し/単体legacy/reload/旧raw不変を確認する。
-- [ ] abort/refusal/quota/破損/期限を検証する。
-- [ ] blocked upgrade/複数tab/競合/versionchange/遅延snapshot/closeを検証する。
-- [ ] 旧21×3幅/adapter/controller/workspace/export/同期を回帰する。
+- [x] authority/移行/復帰/非同期表示を実consumerへ接続する。
+- [x] 初回/繰返し/単体legacy/reload/旧raw不変を確認する。
+- [x] abort/refusal/quota/破損/期限を検証する。
+- [x] blocked upgrade/複数tab/競合/versionchange/遅延snapshot/closeを検証する。
+- [x] 旧21×3幅/adapter/controller/workspace/export/同期を回帰する。
 - [ ] 固定候補の独立レビュー・証拠・管理文書・guarded work反映を完了する。
 
-Active: Foundation/IndexedDB。Ready: 契約に従う実consumer接続。Planned: 残native動作/成果物。Blocked: native専用環境/transport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。
+固定Product382def60674d07900f944b72e5b515ff25200acc/tree5d663010a131ff8a5ef5e2b761025660993f104e。最終native DB25シナリオと旧21×3幅、verify:agent PASS。b739のadapter3幅/workspace35/download30/project03 9/download15/遅延6raceとde6bcの50既存unitは、その対象JSが最終候補から不変であることを確認した別証拠。新DBconsumerの検証はnative browserであり50unitをそのcoverageとしない。独立レビューの起動復元中pagehide後の遅延UI初期化をb739で修正し、pre-aborted/late open close/mobileも再確認。最終382はpending/errorの全幅行とbutton1行表示を独立確認。Evidence: evidence/2026-10-03-indexeddb/REPORT.md。初回失敗を保持し最終PASSと区別する。
+
+この単位はFoundation21進捗だけ。旧localStorageを保持しDB正本/transaction complete/CAS/serial snapshots/readonly fallbackを実UIへ接続した。workspace入力/project01進捗は未移行で、全COREの保存移行checkboxは未完。native任意実行/transport、実quota容量試験/物理durability/実BFCache/Safari/Pages/読み上げも未受入。activeテストserver/profileは解放済み。親の継続公開許可の範囲で、直前policy/expected remote1a5c211/trigger再確認後に通常workへ反映する。
+
+Active: Foundation/IndexedDB。Ready: レビュー済みFoundation21候補のguarded work反映。Planned: 第7章workspace入力/project01進捗のIndexedDB移行/復帰契約と残native動作/成果物。Blocked: native専用環境/transport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。
 
 ## CORE 共通教材形式 — 受入・work反映済み（前工程記録）
 
@@ -269,12 +273,12 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 - [x] JavaScript実行をWeb Workerへ分離する。（第5章数値処理と第6章限定DOM/event演習）
 - [x] 実行時間上限と停止処理を実装する。（結果期限/停止要求とnative終了遅延を区別）
 - [x] テスト結果を期待値、実際値、修正案に分けて表示する。
-- [ ] IndexedDB保存へ移行する。
+- [ ] IndexedDB保存へ移行する。（Foundation21進捗consumerは冒頭単位で実装/受入済み。workspace入力/project01進捗の移行は後続で、全保存の移行完了とはしない）
 - [ ] GitHub Pagesで動作する。
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は冒頭のCORE共通教材形式節（5/5=100%）、固定候補a5e29c7をwork反映・remote照合済み。次は既存CORE IndexedDB工程の移行/復帰契約を具体化する。現在progress repositoryは同期save/booleanであり、非同期transactionの完了前に保存成功を表示してはならない。authority・旧v1保持・途中upgrade/失敗/reloadの挙動を定義した後に実consumerへ接続する。nativeは専用環境/transport受入前には接続しない。第7章ミニ成果物3教材を維持する。別Task未設定。
+`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は冒頭のFoundation21 IndexedDB進捗単位、固定Product382def6を受入・guarded work反映待ち。次の実装単位は既存COREの第7章workspace入力/project01進捗の移行/復帰契約。これらの旧raw保持・3ファイルsnapshot・完了履歴・非同期保存/競合を定義して実consumerへ接続する。nativeは専用環境/transport受入前には接続しない。第7章ミニ成果物3教材を維持する。別Task未設定。
 
 ### 第7章案A — 今回の設計受入条件
 

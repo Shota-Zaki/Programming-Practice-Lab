@@ -18,6 +18,8 @@ saveは呼出時のsnapshotをコピーし、画面の世代番号を増やす�
 
 versionchangeでは接続をcloseし、未完writeをabort、後出しackを無効化して再読込が必要なerrorを表示する。未知の高いDB version、未知/不正recordは上書きしない。blocked openとopen/transactionの時間上限はerrorへ帰着し、後で成功したopenはcloseする。接続を無期限に保持して他画面のupgradeを妨げない。通常のDB schemaは1であり、テストのversion2 upgradeはtask専用profile内のみ。
 
+pagehideの取消は初期復元をawaitする前から登録し、signalをopen/接続/transaction/復元へ渡す。中断後は遅延callbackでstateやUIを初期化しない。BFCacheのpageshow復帰は再読込し、close済みrepositoryを保存可能として再利用しない。
+
 ## 故障時と表示
 
 DBが使えない場合は旧保存を読取専用で復元し、以後の編集はこの画面内のメモリのみ。localStorageへの書込fallback/dual-writeを行わず、異なる正本を作らない。保存拒否/abort/quota後は同じ接続が有効なら次の編集でretryできる。競合・壊れたrecord・versionchangeはreloadまでwrite禁止。DB復帰時はreloadでDB正本から復元する。旧fallbackに新たな編集が保存されたと装わない。

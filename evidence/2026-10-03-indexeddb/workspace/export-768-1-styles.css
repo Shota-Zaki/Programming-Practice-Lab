@@ -1,0 +1,4 @@
+body { margin: 0; padding: 24px; font-family: sans-serif; line-height: 1.7; }
+main { max-width: 720px; margin: 0 auto; }
+select, button { font: inherit; max-width: 100%; }
+p::after { content: "日本語🙂"; }

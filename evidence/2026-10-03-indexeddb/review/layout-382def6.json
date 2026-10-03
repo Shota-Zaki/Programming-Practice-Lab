@@ -1,0 +1,105 @@
+{
+  "sha": "382def60674d07900f944b72e5b515ff25200acc",
+  "immutableGitServing": true,
+  "width": 375,
+  "states": [
+    {
+      "state": "saved",
+      "text": "保存済み（IndexedDB）",
+      "back": {
+        "left": 13,
+        "right": 136.59375,
+        "top": 79,
+        "bottom": 115,
+        "width": 123.59375,
+        "height": 36
+      },
+      "status": {
+        "left": 229.25,
+        "right": 362,
+        "top": 88.5,
+        "bottom": 105.5,
+        "width": 132.75,
+        "height": 17
+      },
+      "title": {
+        "left": 13,
+        "right": 362,
+        "top": 151,
+        "bottom": 175,
+        "width": 349,
+        "height": 24
+      },
+      "backWhiteSpace": "nowrap",
+      "statusFont": "12px",
+      "overflow": false,
+      "headerHeight": 119
+    },
+    {
+      "state": "pending",
+      "text": "保存中です。完了前に閉じると未保存の入力を失うことがあります",
+      "back": {
+        "left": 13,
+        "right": 136.59375,
+        "top": 79,
+        "bottom": 115,
+        "width": 123.59375,
+        "height": 36
+      },
+      "status": {
+        "left": 13,
+        "right": 362,
+        "top": 193,
+        "bottom": 227,
+        "width": 349,
+        "height": 34
+      },
+      "title": {
+        "left": 13,
+        "right": 362,
+        "top": 151,
+        "bottom": 175,
+        "width": 349,
+        "height": 24
+      },
+      "backWhiteSpace": "nowrap",
+      "statusFont": "12px",
+      "overflow": false,
+      "headerHeight": 171
+    },
+    {
+      "state": "error",
+      "text": "保存できません。旧保存から復元しました。保存容量が足りません。この画面内のみ保持します。閉じる前に入力を控えてください",
+      "back": {
+        "left": 13,
+        "right": 136.59375,
+        "top": 79,
+        "bottom": 115,
+        "width": 123.59375,
+        "height": 36
+      },
+      "status": {
+        "left": 13,
+        "right": 362,
+        "top": 193,
+        "bottom": 244,
+        "width": 349,
+        "height": 51
+      },
+      "title": {
+        "left": 13,
+        "right": 362,
+        "top": 151,
+        "bottom": 175,
+        "width": 349,
+        "height": 24
+      },
+      "backWhiteSpace": "nowrap",
+      "statusFont": "12px",
+      "overflow": false,
+      "headerHeight": 188
+    }
+  ],
+  "errors": [],
+  "pass": true
+}

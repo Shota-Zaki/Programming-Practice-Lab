@@ -1,0 +1,59 @@
+{
+  "sha": "b739eb067a37e2fc7c6cf82f7783974b15502915",
+  "immutableGitServing": true,
+  "width": 375,
+  "observations": [
+    {
+      "migration": true,
+      "legacyHistory": true,
+      "staleResultHidden": true
+    },
+    {
+      "reloadUsesDB": true,
+      "legacyRawUnchanged": true
+    },
+    {
+      "commitAcknowledgementRequired": true,
+      "staleAckDoesNotMarkLatestSaved": true,
+      "latestQueueCommitted": true
+    },
+    {
+      "nativeTransactionAbortKeepsDB": true,
+      "errorRetainsEditor": true,
+      "retrySaved": true
+    },
+    {
+      "nativeTwoTabConflictPreservesWinner": true,
+      "conflictRetainsDraft": true,
+      "conflictReloadUsesWinner": true
+    },
+    {
+      "pagehideIgnoresStaleAck": true,
+      "reloadReadsActualCommit": true
+    },
+    {
+      "initialRestoreHideSynthetic": true,
+      "statusAfterHeldInitialAck": null,
+      "editorStillDisabled": true,
+      "noLateUIBoot": true
+    },
+    {
+      "preAbortedOpenAndRepository": {
+        "calls": 0,
+        "driverError": "AbortError",
+        "status": "error",
+        "save": false,
+        "databases": []
+      }
+    },
+    {
+      "abortedNativeOpenLateSuccess": {
+        "error": "AbortError",
+        "lateConnectionClosed": true
+      }
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "pass": true
+}
