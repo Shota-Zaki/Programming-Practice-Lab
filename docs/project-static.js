@@ -48,21 +48,25 @@ function staticParser(hasResourceFunction) {
       const css = serializeRules(style.sheet.cssRules); style.remove();
       checks.push({ label: '追加script・外部resource・イベント属性を使わない', passed: !unsafeMarkup && !omittedCss });
       const output = document.implementation.createHTMLDocument('自己紹介サイトの静的表示');
-      const safeTags = new Set(['MAIN', 'SECTION', 'HEADER', 'FOOTER', 'NAV', 'ARTICLE', 'ASIDE', 'DIV', 'SPAN', 'H1', 'H2', 'H3', 'H4', 'P', 'UL', 'OL', 'LI', 'LABEL', 'SELECT', 'OPTION', 'BUTTON', 'STRONG', 'EM', 'SMALL', 'PRE', 'CODE', 'BR', 'HR', 'A']);
-      const safeAttrs = new Set(['id', 'class', 'lang', 'title', 'for', 'value', 'selected', 'disabled', 'aria-label', 'aria-describedby']);
+      const safeTags = new Set(['MAIN', 'SECTION', 'HEADER', 'FOOTER', 'NAV', 'ARTICLE', 'ASIDE', 'DIV', 'SPAN', 'H1', 'H2', 'H3', 'H4', 'P', 'UL', 'OL', 'LI', 'LABEL', 'SELECT', 'OPTION', 'BUTTON', 'STRONG', 'EM', 'SMALL', 'PRE', 'CODE', 'BR', 'HR', 'A', 'FORM', 'FIELDSET', 'LEGEND', 'DETAILS', 'SUMMARY', 'DIALOG']);
+      const safeAttrs = new Set(['id', 'class', 'lang', 'title', 'for', 'value', 'selected', 'disabled', 'hidden', 'inert', 'open', 'tabindex', 'aria-hidden', 'aria-label', 'aria-describedby']);
+      const copyAttributes = (source, target) => {
+        for (const attr of source.attributes) if (safeAttrs.has(attr.name)) target.setAttribute(attr.name, attr.value);
+      };
       const copy = (node, target) => {
         if (node.nodeType === Node.TEXT_NODE) { target.append(output.createTextNode(node.textContent)); return; }
         if (node.nodeType !== Node.ELEMENT_NODE || activeTags.has(node.tagName)) return;
         let container = target;
         if (safeTags.has(node.tagName)) {
           container = output.createElement(node.tagName.toLowerCase());
-          for (const attr of node.attributes) if (safeAttrs.has(attr.name)) container.setAttribute(attr.name, attr.value);
+          copyAttributes(node, container);
           if (node.tagName === 'BUTTON') container.type = 'button';
           target.append(container);
         }
         for (const child of node.childNodes) copy(child, container);
       };
       for (const child of doc.body.childNodes) copy(child, output.body);
+      copyAttributes(doc.documentElement, output.documentElement); copyAttributes(doc.body, output.body);
       // Escape '<' in the CSS text before HTML serialization so a literal </style> cannot end the trusted style element.
       const displayStyle = output.createElement('style'); displayStyle.nonce = nonce; displayStyle.textContent = css.replaceAll('<', '\\3c '); output.head.append(displayStyle);
       const policy = output.createElement('meta'); policy.httpEquiv = 'Content-Security-Policy';
@@ -70,9 +74,16 @@ function staticParser(hasResourceFunction) {
       output.head.prepend(policy); output.documentElement.lang = 'ja';
       const viewport = output.createElement('meta'); viewport.name = 'viewport'; viewport.content = 'width=device-width, initial-scale=1'; output.head.append(viewport);
       if (lessonId === 'project01') {
+        const permittedSetup = node => {
+          if (node.tagName === 'SCRIPT') return expectedReference(node);
+          if (node.tagName === 'LINK') return expectedReference(node) && [...node.attributes].every(attr => ['rel', 'href'].includes(attr.name));
+          if (node.tagName === 'META') return (node.hasAttribute('charset') && [...node.attributes].every(attr => attr.name === 'charset'))
+            || (node.getAttribute('name') === 'viewport' && [...node.attributes].every(attr => ['name', 'content'].includes(attr.name)));
+          return false;
+        };
         const main = doc.querySelector('body > main');
         const inMain = selector => main?.querySelector(selector);
-        const reachable = node => Boolean(node && !node.closest('[hidden],[inert],[aria-hidden="true"]') && !node.disabled && node.tabIndex >= 0);
+        const reachable = node => Boolean(node && !node.closest('[hidden],[inert],[aria-hidden="true"]') && !node.matches(':disabled') && !node.hasAttribute('tabindex') && node.tabIndex >= 0);
         const options = topic ? [...topic.options] : [];
         const button = inMain('button#forget[type="button"]');
         const script = doc.querySelector('script');
@@ -85,13 +96,14 @@ function staticParser(hasResourceFunction) {
           { id: 'message', label: 'mainに一意なp#topic-messageと未選択表示', passed: unique('topic-message') && inMain('p#topic-message')?.textContent.trim() === '未選択' },
           { id: 'forget', label: 'mainに一意なtype=buttonの忘れるボタン', passed: Boolean(unique('forget') && hasText(button) && reachable(button)) },
           { id: 'references', label: 'headの相対CSSとbody末尾の空のdefer script', passed: Boolean(doc.querySelectorAll('link').length === 1 && doc.querySelector('head link[rel="stylesheet"][href="./styles.css"]') && doc.querySelectorAll('script').length === 1 && script === doc.body.lastElementChild && script?.getAttribute('src') === './app.js' && script.hasAttribute('defer') && !script.textContent.trim() && [...script.attributes].every(attr => ['src', 'defer'].includes(attr.name))) },
-          { id: 'resources', label: '追加script・外部resource・イベント属性を使わない', passed: !unsafeMarkup && !omittedCss }
+          { id: 'resources', label: '追加script・外部resource・未対応要素・イベント属性を使わない', passed: !unsafeMarkup && !omittedCss && all.every(node => safeTags.has(node.tagName) || ['HTML', 'HEAD', 'BODY', 'TITLE'].includes(node.tagName) || permittedSetup(node)) }
         );
         // Measure only the sanitized, script-free display copy in the opaque trusted parser.
         const measureStyle = document.createElement('style'); measureStyle.nonce = nonce; measureStyle.textContent = css; document.head.append(measureStyle);
         document.body.replaceChildren(...[...output.body.childNodes].map(node => document.importNode(node, true)));
+        copyAttributes(doc.documentElement, document.documentElement); copyAttributes(doc.body, document.body);
         const visible = node => {
-          if (!node) return false;
+          if (!node || node.closest('details:not([open]),dialog:not([open])')) return false;
           for (let current = node; current; current = current.parentElement) {
             const style = getComputedStyle(current);
             if (style.display === 'none' || style.visibility !== 'visible' || Number(style.opacity) === 0 || style.contentVisibility === 'hidden') return false;

@@ -93,7 +93,11 @@ try {
           ['duplicate', html => html.replace('</main>', '<div id="topic"></div></main>')],
           ['disabled', html => html.replace('id="topic"', 'id="topic" disabled')],
           ['negative-tab', html => html.replace('id="topic"', 'id="topic" tabindex="-1"')],
+          ['positive-tab', html => html.replace('id="topic"', 'id="topic" tabindex="2"')],
           ['inert', html => html.replace('<main>', '<main inert>')],
+          ['fieldset-disabled', html => html.replace('<label', '<fieldset disabled><label').replace('</main>', '</fieldset></main>')],
+          ['details-closed', html => html.replace('<label', '<details><summary>操作</summary><label').replace('</main>', '</details></main>')],
+          ['unsupported-wrapper', html => html.replace('<main>', '<custom-wrapper><main>').replace('</main>', '</main></custom-wrapper>')],
           ['option', html => html.replace('value="html"', 'value="other"')],
           ['option-disabled', html => html.replace('value="css"', 'value="css" disabled')],
           ['message', html => html.replace('id="topic-message"', 'id="other"')],
@@ -105,21 +109,30 @@ try {
           ['async', html => html.replace(' defer', ' defer async')],
           ['inline-js', html => html.replace('</script>', 'alert(1)</script>')],
           ['resource', html => html.replace('</main>', '<img src="https://example.invalid/leak"></main>')],
+          ['metadata-refresh', html => html.replace('<meta charset="utf-8">', '<meta charset="utf-8" http-equiv="refresh" content="0;url=https://example.invalid/leak">')],
+          ['disabled-stylesheet', html => html.replace('rel="stylesheet"', 'rel="stylesheet" disabled')],
         ];
         const results = [];
         for (const [name, mutate] of mutations) results.push({ name, rejected: !(await gradeProject01({ ...base, 'index.html': mutate(base['index.html']) })).checks.every(check => check.passed) });
         for (const css of ['h1{display:none}', 'select{visibility:hidden}', 'button{opacity:0}', '@media(min-width:768px){#topic{display:none}}', 'main{position:absolute;left:-9999px}', 'body{background-image:url(https://example.invalid/leak)}']) {
           results.push({ name: css, rejected: !(await gradeProject01({ ...base, 'styles.css': base['styles.css'] + css })).checks.every(check => check.passed) });
         }
+        for (const [name, html, css] of [
+          ['hidden-html-class', base['index.html'].replace('lang="ja"', 'lang="ja" class="hide"'), '.hide{display:none}'],
+          ['hidden-body-class', base['index.html'].replace('<body>', '<body class="hide">'), '.hide{display:none}'],
+          ['hidden-wrapper-css', base['index.html'].replace('<label', '<fieldset><label').replace('</main>', '</fieldset></main>'), 'fieldset{display:none}'],
+        ]) results.push({ name, rejected: !(await gradeProject01({ ...base, 'index.html': html, 'styles.css': base['styles.css'] + css })).checks.every(check => check.passed) });
+        const wrapped = base['index.html'].replace('<label', '<fieldset><legend>学習テーマ</legend><label').replace('</main>', '</fieldset></main>');
+        results.push({ name: 'usable-fieldset-equivalent', accepted: (await gradeProject01({ ...base, 'index.html': wrapped })).checks.every(check => check.passed) });
         const controller = new AbortController();
         const pending = gradeProject01(base, { signal: controller.signal }); controller.abort();
         let cancelled = false; try { await pending; } catch (error) { cancelled = error.name === 'AbortError'; }
         return { results, cancelled, frames: document.querySelectorAll('[data-project-parser]').length };
       });
-      assert.equal(grading.results.length, 27);
-      assert.ok(grading.results.every(result => result.rejected), JSON.stringify(grading));
+      assert.equal(grading.results.length, 37);
+      assert.ok(grading.results.every(result => result.name === 'usable-fieldset-equivalent' ? result.accepted : result.rejected), JSON.stringify(grading));
       assert.equal(grading.cancelled, true); assert.equal(grading.frames, 0);
-      assert.deepEqual(leaks, []); results.push({ case: '27-semantic-wrong-answers/cancel/no-network', ...grading, pass: true });
+      assert.deepEqual(leaks, []); results.push({ case: '36-semantic-wrong-answers/fieldset-equivalent/cancel/no-network', ...grading, pass: true });
     }
     await page.close();
   }
@@ -145,5 +158,5 @@ try {
     results.push({ case: `controlled-storage-fault/${fault}`, pass: true }); await page.close();
   }
   await writeFile(`${output}/results.json`, JSON.stringify({ browser: browser.version(), results }, null, 2) + '\n');
-  console.log(JSON.stringify({ result: 'PASS', browser: browser.version(), cases: results.length, negativeCases: 27 }));
+  console.log(JSON.stringify({ result: 'PASS', browser: browser.version(), cases: results.length, negativeCases: 36, equivalentCases: 1 }));
 } finally { await browser.close(); await new Promise(done => server.close(done)); }

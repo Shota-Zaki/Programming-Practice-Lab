@@ -12,6 +12,8 @@ project01の進捗は専用key `ppl.foundation.project01.progress.v1` に保存�
 
 新しいruntime/権限/通信transportを追加しない。既存sandbox、2秒期限、export snapshot/hash契約、旧21教材を維持する。Windows専用checkoutで局所テストと旧教材回帰を実施し、固定commitを独立レビューする。work反映には親の最新ポリシー再確認を必要とする。
 
+独立レビューで見つかった表示コピーの意味差を補正する。html/bodyのclass/idとhidden/inert/open等、fieldsetの実効無効化、閉じたdetails/dialogを保持して表示を測る。操作欄の明示tabindexは不合格。表示できない未対応wrapperをflattenした結果では合格させない。learner script/event/resourceは引き続きコピーしない。専用環境の権限や通信条件は変更しない。
+
 ## 状態
 
 `確定・継続改善中`
