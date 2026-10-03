@@ -1,0 +1,39 @@
+[
+  {
+    "name": "negative-margin",
+    "pass": false,
+    "failures": [
+      "css-overflow"
+    ]
+  },
+  {
+    "name": "negative-horizontal-margin",
+    "pass": false,
+    "failures": [
+      "css-overflow"
+    ]
+  },
+  {
+    "name": "fixed-card-no-padding-gap",
+    "pass": true,
+    "failures": []
+  },
+  {
+    "name": "invisible-font",
+    "pass": true,
+    "failures": []
+  },
+  {
+    "name": "no-focus",
+    "pass": true,
+    "failures": []
+  },
+  {
+    "name": "history-isolation",
+    "pass": true,
+    "before": null,
+    "after": null,
+    "breadcrumb": "Web開発基礎/第7章 / PROJECT01",
+    "courseProgress": "0 / 24"
+  }
+]

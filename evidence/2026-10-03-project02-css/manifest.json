@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 1,
+  "baseline": "d9307c29f7724f524f45979f4f7a49c5dfbfa7b7",
+  "productSha": "352fa9d476a571509fbfec568d681adbaf8c3445",
+  "node": "v24.19.0",
+  "playwright": "1.63.0",
+  "chromium": "153.0.8010.12",
+  "passed": {
+    "unit": 21,
+    "cssLessonCases": 7,
+    "cssWidths": 3,
+    "cssWrongAnswers": 32,
+    "cssEquivalentCases": 5,
+    "project01Cases": 7,
+    "project01WrongAnswers": 40,
+    "workspaceObservations": 35,
+    "actualDownloads": 30,
+    "legacyLessons": 21,
+    "legacyWidths": 3,
+    "verifyAgent": true
+  },
+  "nativeLearnerAcceptance": false,
+  "requiredCI": "none configured; not PASS",
+  "publication": "held for fresh parent policy/remote/trigger checks",
+  "productFiles": [
+    "100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391\tdocs/.nojekyll",
+    "100644 blob c03f07324d68fb1f29fbe448b65141e88a9efdd5\tdocs/404.html",
+    "100644 blob 839958fbcccefc028b607f043cb601513718fd07\tdocs/app.js",
+    "100644 blob 92e2a3416087a011605ca10761a33969a1522521\tdocs/css-grading.js",
+    "100644 blob 72b521866f71181bff4066dabcaf9f082aab82ae\tdocs/dom-execution.js",
+    "100644 blob 616cd22486ad01f2d49a07369b0ad2a0b0adefba\tdocs/dom-grading.js",
+    "100644 blob 8b23f17c606aa3c3f5e5e5f67f083c1f00fd400b\tdocs/foundation.css",
+    "100644 blob 4e53fad537159277ed39fcc58b534a77964c9c5c\tdocs/foundation.js",
+    "100644 blob ad49089b2a6cab7ddd7027abf58da7dac3e7eeb5\tdocs/grading.js",
+    "100644 blob c03f07324d68fb1f29fbe448b65141e88a9efdd5\tdocs/index.html",
+    "100644 blob 4249fa5eada194bd19d851f630a15fb6062f2cbd\tdocs/javascript-execution.js",
+    "100644 blob 70562e6105f18ee7f8ce4ff8e05e44cf8e153a71\tdocs/javascript-grading.js",
+    "100644 blob 30a31e8f02dad7903938730ff39b43dfaeece170\tdocs/javascript-host.js",
+    "100644 blob 76b5a1cca498181115b07dd6b43ef59cb83c83d7\tdocs/lessons.js",
+    "100644 blob eb5dfbd304f088c53d6b128e3d1d53ae66988be2\tdocs/progress.js",
+    "100644 blob f2442f32d64e8b36ebbb4e5f290a721de36b4d55\tdocs/project-css-values.js",
+    "100644 blob 3ff6a022e1163389c701f11297900361c6165f9a\tdocs/project-files.js",
+    "100644 blob 3dea4df5612537ecb2fc4d411c944ca8083813ce\tdocs/project-lessons.js",
+    "100644 blob ca1b33db9a1b1a5d1ed105ed6c429512878a27cf\tdocs/project-preview.html",
+    "100644 blob 20a52a9faa0ada36fba0e03cb1b6972684d1e1ca\tdocs/project-static.js",
+    "100644 blob 16288a7d2d1d6e6ff16f0a4853df72500310c12d\tdocs/project-workspace.js",
+    "100644 blob 99fd999e48adca36b19c00a98de006745e6e928a\tdocs/styles.css",
+    "100644 blob 23646a6d2c369c524c8e15d8ba9e7964727d7743\tpackage.json",
+    "100644 blob 585e842d81ddc6d796abeb6831243022cd49f69e\tscripts/build.mjs",
+    "100644 blob b97f1806b536b2f71e92b5ba74e085e73a3d98d3\tscripts/check-pages.mjs",
+    "100644 blob 839958fbcccefc028b607f043cb601513718fd07\tsrc/static/app.js",
+    "100644 blob 92e2a3416087a011605ca10761a33969a1522521\tsrc/static/css-grading.js",
+    "100644 blob 72b521866f71181bff4066dabcaf9f082aab82ae\tsrc/static/dom-execution.js",
+    "100644 blob 616cd22486ad01f2d49a07369b0ad2a0b0adefba\tsrc/static/dom-grading.js",
+    "100644 blob 8b23f17c606aa3c3f5e5e5f67f083c1f00fd400b\tsrc/static/foundation.css",
+    "100644 blob 4e53fad537159277ed39fcc58b534a77964c9c5c\tsrc/static/foundation.js",
+    "100644 blob ad49089b2a6cab7ddd7027abf58da7dac3e7eeb5\tsrc/static/grading.js",
+    "100644 blob c03f07324d68fb1f29fbe448b65141e88a9efdd5\tsrc/static/index.html",
+    "100644 blob 4249fa5eada194bd19d851f630a15fb6062f2cbd\tsrc/static/javascript-execution.js",
+    "100644 blob 70562e6105f18ee7f8ce4ff8e05e44cf8e153a71\tsrc/static/javascript-grading.js",
+    "100644 blob 30a31e8f02dad7903938730ff39b43dfaeece170\tsrc/static/javascript-host.js",
+    "100644 blob 76b5a1cca498181115b07dd6b43ef59cb83c83d7\tsrc/static/lessons.js",
+    "100644 blob eb5dfbd304f088c53d6b128e3d1d53ae66988be2\tsrc/static/progress.js",
+    "100644 blob f2442f32d64e8b36ebbb4e5f290a721de36b4d55\tsrc/static/project-css-values.js",
+    "100644 blob 3ff6a022e1163389c701f11297900361c6165f9a\tsrc/static/project-files.js",
+    "100644 blob 3dea4df5612537ecb2fc4d411c944ca8083813ce\tsrc/static/project-lessons.js",
+    "100644 blob ca1b33db9a1b1a5d1ed105ed6c429512878a27cf\tsrc/static/project-preview.html",
+    "100644 blob 20a52a9faa0ada36fba0e03cb1b6972684d1e1ca\tsrc/static/project-static.js",
+    "100644 blob 16288a7d2d1d6e6ff16f0a4853df72500310c12d\tsrc/static/project-workspace.js",
+    "100644 blob 99fd999e48adca36b19c00a98de006745e6e928a\tsrc/static/styles.css",
+    "100644 blob a26348a06bbbb82b1b45a86e348e583cffe62ce2\ttests/dom-browser.mjs",
+    "100644 blob 2a6df6824ace6d17ffd3acb466ada6cc31f1def2\ttests/dom-lesson-browser.mjs",
+    "100644 blob b7cf4f3f023521df21cedfce2d271fdb20261748\ttests/event-lesson-browser.mjs",
+    "100644 blob d389cc8f3f5e06ed4b9c9e0f5a1567585d78af67\ttests/foundation-browser.mjs",
+    "100644 blob 6c1d8b57cf348b34cd66e9a4bdc8aaaa0f7e0129\ttests/javascript-browser.mjs",
+    "100644 blob a31a850c70be8ab306e6698a3bf7603d5867af3a\ttests/javascript-execution.mjs",
+    "100644 blob cf2b9fbd599aa2c2697386a2d03abe9797d2ccb4\ttests/project-css-values.mjs",
+    "100644 blob bb0a82191e47558ad2fa237f9796dddd30793590\ttests/project-files.mjs",
+    "100644 blob 856b4a3184a2c28cb297dae03947c0125660e7ed\ttests/project-lesson-progress.mjs",
+    "100644 blob d23885da84b91d89a0f248ff7ce775c0b1dad874\ttests/project-workspace-browser.mjs",
+    "100644 blob 261e0de498f8eb8d433a4ed214fd6b1749f945a5\ttests/project01-browser.mjs",
+    "100644 blob 9edbf430bc6c83dc034fb8442edf8d7a71c3b8b5\ttests/project02-css-browser.mjs"
+  ],
+  "artifacts": [
+    {
+      "path": ".gitattributes",
+      "bytes": 72,
+      "sha256": "fd34f28fcd49f62b8ca86bdbda26483f6a155728641981c651dfd748ec2240bb"
+    },
+    {
+      "path": "browser/lesson-1280.png",
+      "bytes": 701112,
+      "sha256": "efbde3a1bd5c6cc27de0f5e315bbb6c2aa9f9bb40b15ce2c938be1dab0846036"
+    },
+    {
+      "path": "browser/lesson-375.png",
+      "bytes": 641447,
+      "sha256": "fc5effb1938da10e0cbd93c9f495f02257b0c7b0bf58eab9b4bd088535be6dba"
+    },
+    {
+      "path": "browser/lesson-768.png",
+      "bytes": 633021,
+      "sha256": "1531a5007638448439f7cab353f06a80a4058e0054bf691bbf07ba07421270be"
+    },
+    {
+      "path": "browser/preview-1280.png",
+      "bytes": 12491,
+      "sha256": "ee8b0a5d66f8bf94e9d2007eb2a7f3cf2115f650fc7a7b8490eead5b79859ddc"
+    },
+    {
+      "path": "browser/preview-375.png",
+      "bytes": 7442,
+      "sha256": "3f70bf21bd6f8fed1d4aa836b44e29d2968df05257a2ac8e20195689c345f9b1"
+    },
+    {
+      "path": "browser/preview-768.png",
+      "bytes": 14257,
+      "sha256": "ea44e39608221dc6b09912fb3d1dd14d317d79b90efc9be1dbcb321ca987f12b"
+    },
+    {
+      "path": "browser/results.json",
+      "bytes": 6022,
+      "sha256": "2b902b148fa5a704d2d1209f7de4dd1c5c9bd6779d21f92ae47c30b1bbebb4de"
+    },
+    {
+      "path": "css-browser.log",
+      "bytes": 94,
+      "sha256": "df69dfa658f896c0465adecea569151a84c193dd8ca585901ec41f7a6c8b30d8"
+    },
+    {
+      "path": "legacy-regression.log",
+      "bytes": 1783,
+      "sha256": "3fa373765f372f723e14894af6a8174e8e25cc7652f73f1cb6d311aeb4386acd"
+    },
+    {
+      "path": "project01-regression.log",
+      "bytes": 94,
+      "sha256": "95e5a205bab667d7dd30132b221679b0f648ab5a7e22e31bd7fc33e9ef7eaa82"
+    },
+    {
+      "path": "project01-regression/lesson-1280.png",
+      "bytes": 656667,
+      "sha256": "a2f7d30e6be9ce203b542b00e689a4e2625fbe1586392b49c6b110e5cb0d10a5"
+    },
+    {
+      "path": "project01-regression/lesson-375.png",
+      "bytes": 623983,
+      "sha256": "7ced94f8d4e37148d5ed833830c8edeb157736809a42c5dba6481d6993c6d061"
+    },
+    {
+      "path": "project01-regression/lesson-768.png",
+      "bytes": 616563,
+      "sha256": "88de441e074572b446b4a5a2dc8f8fab436e2ce0564beb0a039071b753c23d8e"
+    },
+    {
+      "path": "project01-regression/preview-1280.png",
+      "bytes": 17917,
+      "sha256": "4a2612c97a40cacc9997592757442098ea2f22070b0f5591709278826fc178ac"
+    },
+    {
+      "path": "project01-regression/preview-375.png",
+      "bytes": 10401,
+      "sha256": "3973f7552b6620467d80eefbd9089edc73d3004d1791ea16f79d3ac3c879c354"
+    },
+    {
+      "path": "project01-regression/preview-768.png",
+      "bytes": 19351,
+      "sha256": "86d70f30877a14cc9224b6d9f52279c5e86520de478755c9e631e39e28773bec"
+    },
+    {
+      "path": "project01-regression/results.json",
+      "bytes": 4402,
+      "sha256": "50ce1328045fafc10e93af9dcd425898c4c373cc8622ccc83f3253d6902ef6eb"
+    },
+    {
+      "path": "regression/lesson-1280.png",
+      "bytes": 289027,
+      "sha256": "f5b1fe84e1969c5c2385187d6681c492c4d620d8a2bc6b7d81390a808894d430"
+    },
+    {
+      "path": "regression/lesson-375.png",
+      "bytes": 227323,
+      "sha256": "54ef08916e4df0007b8c78b9a5cfb0defef90c755d644cbc8b04e16028bd3f6e"
+    },
+    {
+      "path": "regression/lesson-768.png",
+      "bytes": 240651,
+      "sha256": "b5bb3f876894c15849c430d1221a789b0f7ecc72a24eddd52ef43e97d8ed29d6"
+    },
+    {
+      "path": "regression/practice-1280-21.png",
+      "bytes": 176897,
+      "sha256": "f7be8dc2794f1ca64b500a9447cd6da4f473826c004abfe3c0ca622133116183"
+    },
+    {
+      "path": "regression/practice-375-21.png",
+      "bytes": 127065,
+      "sha256": "b414d0918e3915c698289e2640029221f951d2aee302c6ca2a8af031d8112163"
+    },
+    {
+      "path": "regression/practice-768-21.png",
+      "bytes": 145624,
+      "sha256": "2d60ea9b29c6d10738cd7f1cb3a9163061ff4eb6a0fa9ec87ae612080bacd67f"
+    },
+    {
+      "path": "regression/preview-1280.png",
+      "bytes": 11311,
+      "sha256": "d6a106c4eeda1dbe27b88bfaed2e35c906ed8fc91e29cdf52b1068e64dc53e9d"
+    },
+    {
+      "path": "regression/preview-375.png",
+      "bytes": 6892,
+      "sha256": "322b6fc61ad4f6af2eab5dfef30bbfa39fc73459e668fad8a4ece9d6f4d1e341"
+    },
+    {
+      "path": "regression/preview-768.png",
+      "bytes": 15967,
+      "sha256": "0d05d9a8538cc9d703f148262563987c1fdbfe41430e75db1200eac7e930c1db"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 3123,
+      "sha256": "e3feedf71883910c844739f67bf0ac011bf6a0a82a33f31813b56a2dcdcb15b6"
+    },
+    {
+      "path": "review/352fa9d-final-repro.json",
+      "bytes": 1146,
+      "sha256": "80b8ab937a8eab6e27cffb9e024e88b326a969133b8d12e3a5df90c7a8fdc631"
+    },
+    {
+      "path": "review/85665dc-geometry-extra.json",
+      "bytes": 248,
+      "sha256": "e22358c13df7fe870e4f1c3a6471c02eaf1ff56be01089f9f1c4e39757e0d526"
+    },
+    {
+      "path": "review/85665dc-review.json",
+      "bytes": 3201,
+      "sha256": "9afe1b3fb5867612f2d478bec898925ba39346a7eb3e895f77527062cf231d73"
+    },
+    {
+      "path": "review/c56028a-clipped-controls.png",
+      "bytes": 12530,
+      "sha256": "dc91b2f1d66272713d3b071e604c9ec2cdda5ee24ba56bf9fb0a1b7a96f0bacd"
+    },
+    {
+      "path": "review/c56028a-clipping.json",
+      "bytes": 689,
+      "sha256": "65ca57119982a895f669ebf92704c2f51da7041a7c926c448cdba83576b5743f"
+    },
+    {
+      "path": "review/c56028a-spacing-ui.json",
+      "bytes": 641,
+      "sha256": "90a6a75cd1fa7f745fea9656f7eb31b2f7a67ac30cb1349780f933c33a8b697a"
+    },
+    {
+      "path": "unit.log",
+      "bytes": 1857,
+      "sha256": "b5745f3d8423662758e666b183265fd78746f86bc9aeb7c70256be4d0332aa54"
+    },
+    {
+      "path": "verify.log",
+      "bytes": 1315,
+      "sha256": "dc026cfb61be46fbc8e6fc4d8d317b2e2060d87462b2090222b87e6b851144c3"
+    },
+    {
+      "path": "workspace-regression.log",
+      "bytes": 63,
+      "sha256": "8827d6569f0d95732500bd254ebc9146ed567f89ca0c1a1c4f334175f2470acf"
+    },
+    {
+      "path": "workspace-regression/export-1280-0-app.js",
+      "bytes": 87,
+      "sha256": "7d25901bb8562384c8b7ff928099b934d22007e458d77040207709919e963a8d"
+    },
+    {
+      "path": "workspace-regression/export-1280-0-index.html",
+      "bytes": 891,
+      "sha256": "4a1991bff21073c4191845889fd4372aaab7f445ed2e9cbc6e6ca030d35432b5"
+    },
+    {
+      "path": "workspace-regression/export-1280-0-manifest.json",
+      "bytes": 500,
+      "sha256": "f187b022f331c73a37a70a0ef61bef3310c4f31dd0ed073710bb4cf694d5066f"
+    },
+    {
+      "path": "workspace-regression/export-1280-0-README.txt",
+      "bytes": 796,
+      "sha256": "43bf97930ad7a710aaaa8d42e71d6139eb132c133573b3c9c77dd2c9ac5ad67e"
+    },
+    {
+      "path": "workspace-regression/export-1280-0-styles.css",
+      "bytes": 211,
+      "sha256": "69386f2cea25c19f9776c8cc9cb9c36ebb4a174d603972dd84248ab1fb344411"
+    },
+    {
+      "path": "workspace-regression/export-1280-1-app.js",
+      "bytes": 87,
+      "sha256": "7d25901bb8562384c8b7ff928099b934d22007e458d77040207709919e963a8d"
+    },
+    {
+      "path": "workspace-regression/export-1280-1-index.html",
+      "bytes": 891,
+      "sha256": "4a1991bff21073c4191845889fd4372aaab7f445ed2e9cbc6e6ca030d35432b5"
+    },
+    {
+      "path": "workspace-regression/export-1280-1-manifest.json",
+      "bytes": 500,
+      "sha256": "f187b022f331c73a37a70a0ef61bef3310c4f31dd0ed073710bb4cf694d5066f"
+    },
+    {
+      "path": "workspace-regression/export-1280-1-README.txt",
+      "bytes": 796,
+      "sha256": "43bf97930ad7a710aaaa8d42e71d6139eb132c133573b3c9c77dd2c9ac5ad67e"
+    },
+    {
+      "path": "workspace-regression/export-1280-1-styles.css",
+      "bytes": 211,
+      "sha256": "69386f2cea25c19f9776c8cc9cb9c36ebb4a174d603972dd84248ab1fb344411"
+    },
+    {
+      "path": "workspace-regression/export-375-0-app.js",
+      "bytes": 87,
+      "sha256": "7d25901bb8562384c8b7ff928099b934d22007e458d77040207709919e963a8d"
+    },
+    {
+      "path": "workspace-regression/export-375-0-index.html",
+      "bytes": 891,
+      "sha256": "4a1991bff21073c4191845889fd4372aaab7f445ed2e9cbc6e6ca030d35432b5"
+    },
+    {
+      "path": "workspace-regression/export-375-0-manifest.json",
+      "bytes": 500,
+      "sha256": "f187b022f331c73a37a70a0ef61bef3310c4f31dd0ed073710bb4cf694d5066f"
+    },
+    {
+      "path": "workspace-regression/export-375-0-README.txt",
+      "bytes": 796,
+      "sha256": "43bf97930ad7a710aaaa8d42e71d6139eb132c133573b3c9c77dd2c9ac5ad67e"
+    },
+    {
+      "path": "workspace-regression/export-375-0-styles.css",
+      "bytes": 211,
+      "sha256": "69386f2cea25c19f9776c8cc9cb9c36ebb4a174d603972dd84248ab1fb344411"
+    },
+    {
+      "path": "workspace-regression/export-375-1-app.js",
+      "bytes": 87,
+      "sha256": "7d25901bb8562384c8b7ff928099b934d22007e458d77040207709919e963a8d"
+    },
+    {
+      "path": "workspace-regression/export-375-1-index.html",
+      "bytes": 891,
+      "sha256": "4a1991bff21073c4191845889fd4372aaab7f445ed2e9cbc6e6ca030d35432b5"
+    },
+    {
+      "path": "workspace-regression/export-375-1-manifest.json",
+      "bytes": 500,
+      "sha256": "f187b022f331c73a37a70a0ef61bef3310c4f31dd0ed073710bb4cf694d5066f"
+    },
+    {
+      "path": "workspace-regression/export-375-1-README.txt",
+      "bytes": 796,
+      "sha256": "43bf97930ad7a710aaaa8d42e71d6139eb132c133573b3c9c77dd2c9ac5ad67e"
+    },
+    {
+      "path": "workspace-regression/export-375-1-styles.css",
+      "bytes": 211,
+      "sha256": "69386f2cea25c19f9776c8cc9cb9c36ebb4a174d603972dd84248ab1fb344411"
+    },
+    {
+      "path": "workspace-regression/export-768-0-app.js",
+      "bytes": 87,
+      "sha256": "7d25901bb8562384c8b7ff928099b934d22007e458d77040207709919e963a8d"
+    },
+    {
+      "path": "workspace-regression/export-768-0-index.html",
+      "bytes": 891,
+      "sha256": "4a1991bff21073c4191845889fd4372aaab7f445ed2e9cbc6e6ca030d35432b5"
+    },
+    {
+      "path": "workspace-regression/export-768-0-manifest.json",
+      "bytes": 500,
+      "sha256": "f187b022f331c73a37a70a0ef61bef3310c4f31dd0ed073710bb4cf694d5066f"
+    },
+    {
+      "path": "workspace-regression/export-768-0-README.txt",
+      "bytes": 796,
+      "sha256": "43bf97930ad7a710aaaa8d42e71d6139eb132c133573b3c9c77dd2c9ac5ad67e"
+    },
+    {
+      "path": "workspace-regression/export-768-0-styles.css",
+      "bytes": 211,
+      "sha256": "69386f2cea25c19f9776c8cc9cb9c36ebb4a174d603972dd84248ab1fb344411"
+    },
+    {
+      "path": "workspace-regression/export-768-1-app.js",
+      "bytes": 87,
+      "sha256": "7d25901bb8562384c8b7ff928099b934d22007e458d77040207709919e963a8d"
+    },
+    {
+      "path": "workspace-regression/export-768-1-index.html",
+      "bytes": 891,
+      "sha256": "4a1991bff21073c4191845889fd4372aaab7f445ed2e9cbc6e6ca030d35432b5"
+    },
+    {
+      "path": "workspace-regression/export-768-1-manifest.json",
+      "bytes": 500,
+      "sha256": "f187b022f331c73a37a70a0ef61bef3310c4f31dd0ed073710bb4cf694d5066f"
+    },
+    {
+      "path": "workspace-regression/export-768-1-README.txt",
+      "bytes": 796,
+      "sha256": "43bf97930ad7a710aaaa8d42e71d6139eb132c133573b3c9c77dd2c9ac5ad67e"
+    },
+    {
+      "path": "workspace-regression/export-768-1-styles.css",
+      "bytes": 211,
+      "sha256": "69386f2cea25c19f9776c8cc9cb9c36ebb4a174d603972dd84248ab1fb344411"
+    },
+    {
+      "path": "workspace-regression/results.json",
+      "bytes": 8554,
+      "sha256": "e32b35c193f3243e73989ce745de39e3ed24e977d8844ad19478de31e754c3d2"
+    },
+    {
+      "path": "workspace-regression/static-preview-1280.png",
+      "bytes": 18920,
+      "sha256": "09a789abf3bf8820ef96a78ebab40c68878580eebb376ae0e7f559d81761d739"
+    },
+    {
+      "path": "workspace-regression/static-preview-375.png",
+      "bytes": 13904,
+      "sha256": "e29975252a6fdcd35565eafcc5e1b808ee2ee7a9a6308cf6c2e24e86e51ee169"
+    },
+    {
+      "path": "workspace-regression/static-preview-768.png",
+      "bytes": 20315,
+      "sha256": "d6a34919b0f52476a0db5ad85553f235f087d6f3626982723ea127e0d92703c7"
+    },
+    {
+      "path": "workspace-regression/workspace-1280.png",
+      "bytes": 659581,
+      "sha256": "4090cbfa52e17ded2d65a934c8f07d6cd47ea356743e34d05e07ff26ab83d43c"
+    },
+    {
+      "path": "workspace-regression/workspace-375.png",
+      "bytes": 630334,
+      "sha256": "19ed3874108be07e5f869e24d628a1b74d26bd622420f621c25676708873f4b2"
+    },
+    {
+      "path": "workspace-regression/workspace-768.png",
+      "bytes": 607867,
+      "sha256": "933e161581d47005df4c09bc8a4e2c92a535f6cd03e17b40fff59fa4cd780e22"
+    }
+  ]
+}

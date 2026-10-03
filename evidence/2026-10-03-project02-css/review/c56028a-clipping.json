@@ -1,0 +1,40 @@
+{
+  "sha": "c56028a1001f7d1ecb6e6d9cf7817b294f656480",
+  "results": [
+    {
+      "name": "example",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "heading-clipped",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "heading-wrapper-clipped",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "controls-wrapper-clipped",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "intro-wrapper-clipped",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "all-clippath",
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "valid-rem",
+      "pass": true,
+      "failures": []
+    }
+  ]
+}

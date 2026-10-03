@@ -1,0 +1,62 @@
+{
+  "sha": "352fa9d476a571509fbfec568d681adbaf8c3445",
+  "results": [
+    {
+      "name": "offscreen-above",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-overflow"
+      ]
+    },
+    {
+      "name": "text-indent-negative",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-overflow"
+      ]
+    },
+    {
+      "name": "safe-relative",
+      "accepted": true,
+      "expected": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "long-vertical-page",
+      "accepted": true,
+      "expected": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "example",
+      "accepted": true,
+      "expected": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "clipped-wrapper",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-overflow"
+      ]
+    },
+    {
+      "name": "transparent-text",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-contrast"
+      ]
+    }
+  ]
+}

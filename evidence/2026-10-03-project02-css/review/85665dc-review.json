@@ -1,0 +1,168 @@
+{
+  "sha": "85665dc250cfec76cec4fcd6d1aba93b9f7aa268",
+  "results": [
+    {
+      "name": "example",
+      "accepted": true,
+      "expected": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "heading-clipped",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-overflow"
+      ]
+    },
+    {
+      "name": "heading-wrapper-clipped",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-overflow"
+      ]
+    },
+    {
+      "name": "controls-wrapper-clipped",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-overflow"
+      ]
+    },
+    {
+      "name": "intro-wrapper-clipped",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-overflow"
+      ]
+    },
+    {
+      "name": "all-clippath",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-overflow"
+      ]
+    },
+    {
+      "name": "no-outer-gap",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-spacing"
+      ]
+    },
+    {
+      "name": "transparent-text",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-contrast"
+      ]
+    },
+    {
+      "name": "text-fill-hidden",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-contrast"
+      ]
+    },
+    {
+      "name": "low-contrast",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-contrast"
+      ]
+    },
+    {
+      "name": "high-contrast",
+      "accepted": true,
+      "expected": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "alpha-readable",
+      "accepted": true,
+      "expected": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "name": "alpha-unreadable",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-contrast"
+      ]
+    },
+    {
+      "name": "option-low-contrast",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-contrast"
+      ]
+    },
+    {
+      "name": "ancestor-opacity",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-contrast"
+      ]
+    },
+    {
+      "name": "mask-clipped",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-overflow"
+      ]
+    },
+    {
+      "name": "gradient",
+      "accepted": false,
+      "expected": false,
+      "pass": true,
+      "failures": [
+        "css-contrast"
+      ]
+    }
+  ],
+  "race": {
+    "before": null,
+    "after": null,
+    "frames": 0,
+    "checks": 0,
+    "result": "未確認 — 現在の3ファイルで静的構造を確認してください。",
+    "learnerExecuted": false
+  },
+  "ui": {
+    "breadcrumb": "第7章 / PROJECT02 CSS",
+    "history": null,
+    "course": "0 / 24",
+    "nativeDisabled": true
+  },
+  "requests": [],
+  "errors": []
+}

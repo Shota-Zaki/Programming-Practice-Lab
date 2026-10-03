@@ -14,15 +14,17 @@
 
 ## 第7章 project02 CSS — 現在の独立実装単位
 
-状態: 作業中（0/5=0%）。全体22/24=92%を維持。
+状態: ローカル受入完了・公開候補保留（5/5=100%）。全体22/24=92%を維持。
 
-- [ ] CSSの説明・開始例・完成例・ヒントと入力を保持する教材切替を提供する。
-- [ ] 3幅の実寸で余白/カード/文字/操作欄/横溢れを静的確認する。
-- [ ] CSS確認はproject01履歴/旧21履歴を更新せず、nativeとproject02全体完了を無効に保つ。
-- [ ] 実UI3幅・意味誤答・同値CSS・取消/編集/切替/再読込/初期化・保存faultと影響範囲を検証する。
-- [ ] 生成物同期・固定候補の独立レビュー・証拠・管理文書を完了する。
+- [x] CSSの説明・開始例・完成例・ヒントと入力を保持する教材切替を提供する。
+- [x] 3幅の実寸で余白/カード/文字色・明暗比/操作欄/横溢れを静的確認する。
+- [x] CSS確認はproject01履歴/旧21履歴を更新せず、nativeとproject02全体完了を無効に保つ。
+- [x] 実UI3幅・意味誤答・同値CSS・取消/編集/切替/再読込/初期化・保存faultと影響範囲を検証する。
+- [x] 生成物同期・固定候補の独立レビュー・証拠・管理文書を完了する。
 
 project01通常work反映済み: remote SHA d9307c29f7724f524f45979f4f7a49c5dfbfa7b7、tree dd3991f621580128196b2053aa044ad3de0fed63。親policy revision8/selection6/applied6再確認とremote/trigger確認後に通常pushし読取一致。Pagesはmain/docs、work workflowなし、required CIなし（PASS扱いしない）。次候補の公開は親の再確認待ち。
+
+Product 352fa9d476a571509fbfec568d681adbaf8c3445: 21unit、CSS3幅/32誤答/5同値、project01回帰40誤答、workspace35/実download30、旧21×3幅、verify:agent PASS。初期/再レビュー指摘を解消し固定候補の独立再現に阻害なし。Evidence: evidence/2026-10-03-project02-css/REPORT.md。CSS条件のみの先行単位5/5=100%、project02全体/nativeは未完了。次は親の公開gate後に通常work反映し、nativeに依存しないproject03教材/成果物照合説明を独立実装できる。
 
 ## 第7章 project01 — 受入済みの独立実装単位（前工程記録）
 
