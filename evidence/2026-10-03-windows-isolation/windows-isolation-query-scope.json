@@ -1,0 +1,46 @@
+{
+  "capturedUtc": "2026-10-03T16:06:58.2459130Z",
+  "currentIdentityMatchesCheckoutOwner": true,
+  "exactFeatureQueries": [
+    {
+      "reported": false,
+      "name": "Microsoft-Hyper-V-All",
+      "values": []
+    },
+    {
+      "reported": false,
+      "name": "Microsoft-Hyper-V-Hypervisor",
+      "values": []
+    },
+    {
+      "reported": false,
+      "name": "Containers",
+      "values": []
+    },
+    {
+      "reported": false,
+      "name": "Containers-DisposableClientVM",
+      "values": []
+    },
+    {
+      "reported": true,
+      "name": "VirtualMachinePlatform",
+      "values": [
+        {
+          "Name": "VirtualMachinePlatform",
+          "InstallState": 1
+        }
+      ]
+    },
+    {
+      "reported": true,
+      "name": "Microsoft-Windows-Subsystem-Linux",
+      "values": [
+        {
+          "Name": "Microsoft-Windows-Subsystem-Linux",
+          "InstallState": 1
+        }
+      ]
+    }
+  ]
+}

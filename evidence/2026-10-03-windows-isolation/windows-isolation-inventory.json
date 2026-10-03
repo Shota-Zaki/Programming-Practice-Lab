@@ -1,0 +1,122 @@
+{
+  "capturedUtc": "2026-10-03T16:04:39.7745770Z",
+  "commands": [
+    {
+      "name": "docker.exe",
+      "available": false,
+      "type": null,
+      "source": null,
+      "version": null
+    },
+    {
+      "name": "podman.exe",
+      "available": false,
+      "type": null,
+      "source": null,
+      "version": null
+    },
+    {
+      "name": "wsl.exe",
+      "available": true,
+      "type": "Application",
+      "source": "C:\\WINDOWS\\system32\\wsl.exe",
+      "version": "10.0.26100.9278"
+    },
+    {
+      "name": "WindowsSandbox.exe",
+      "available": false,
+      "type": null,
+      "source": null,
+      "version": null
+    },
+    {
+      "name": "Get-VMHost",
+      "available": false,
+      "type": null,
+      "source": null,
+      "version": null
+    },
+    {
+      "name": "Get-VM",
+      "available": false,
+      "type": null,
+      "source": null,
+      "version": null
+    },
+    {
+      "name": "Get-HnsNetwork",
+      "available": true,
+      "type": "Function",
+      "source": "HostNetworkingService",
+      "version": "1.0"
+    },
+    {
+      "name": "Get-AppContainerProfile",
+      "available": false,
+      "type": null,
+      "source": null,
+      "version": null
+    }
+  ],
+  "os": {
+    "Caption": "Microsoft Windows 11 Home",
+    "Version": "10.0.26200",
+    "BuildNumber": "26200",
+    "OSArchitecture": "64 ビット"
+  },
+  "hardware": {
+    "system": {
+      "HypervisorPresent": true
+    },
+    "processors": [
+      {
+        "VirtualizationFirmwareEnabled": false,
+        "SecondLevelAddressTranslationExtensions": false,
+        "VMMonitorModeExtensions": false
+      }
+    ]
+  },
+  "features": [
+    {
+      "Name": "VirtualMachinePlatform",
+      "InstallState": 1
+    },
+    {
+      "Name": "Microsoft-Windows-Subsystem-Linux",
+      "InstallState": 1
+    }
+  ],
+  "services": [
+    {
+      "name": "vmms",
+      "found": false,
+      "status": null
+    },
+    {
+      "name": "vmcompute",
+      "found": true,
+      "status": "Stopped"
+    },
+    {
+      "name": "hns",
+      "found": true,
+      "status": "Running"
+    },
+    {
+      "name": "LxssManager",
+      "found": false,
+      "status": null
+    },
+    {
+      "name": "WslService",
+      "found": true,
+      "status": "Running"
+    },
+    {
+      "name": "com.docker.service",
+      "found": false,
+      "status": null
+    }
+  ],
+  "errors": []
+}

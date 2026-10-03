@@ -25,13 +25,17 @@
 
 固定Product382def60674d07900f944b72e5b515ff25200acc/tree5d663010a131ff8a5ef5e2b761025660993f104e。最終native DB25シナリオと旧21×3幅、verify:agent PASS。b739のadapter3幅/workspace35/download30/project03 9/download15/遅延6raceとde6bcの50既存unitは、その対象JSが最終候補から不変であることを確認した別証拠。新DBconsumerの検証はnative browserであり50unitをそのcoverageとしない。独立レビューの起動復元中pagehide後の遅延UI初期化をb739で修正し、pre-aborted/late open close/mobileも再確認。最終382はpending/errorの全幅行とbutton1行表示を独立確認。Evidence: evidence/2026-10-03-indexeddb/REPORT.md。初回失敗を保持し最終PASSと区別する。
 
-補足Product7acb4e424f9554e052a512cf3bbf76c73db17ba9/treef3083de4f345fc82c63929fb5be0abf36e09b9b7は、全教材・check IDが一致するcyclic/BigInt recordをJSON検証で採用・置換前に拒否する。破損DB/revision/旧rawを保持し、旧code/attempts/完了履歴を正しく読取専用復元する。修正版でnative DB26シナリオ、旧21×3幅、adapter3幅、verify:agent PASS。独立exactレビューでcyclic/BigIntの拒否・保存/reload・正常JSONの採用/保存を再確認し阻害なし。Evidence: evidence/2026-10-03-indexeddb-json-guard/REPORT.md（28artifact hashes/73productentries）。旧106証拠は変更しない。補足修正はレビュー済み・guarded work反映待ち。
+補足Product7acb4e424f9554e052a512cf3bbf76c73db17ba9/treef3083de4f345fc82c63929fb5be0abf36e09b9b7は、全教材・check IDが一致するcyclic/BigInt recordをJSON検証で採用・置換前に拒否する。破損DB/revision/旧rawを保持し、旧code/attempts/完了履歴を正しく読取専用復元する。修正版でnative DB26シナリオ、旧21×3幅、adapter3幅、verify:agent PASS。独立exactレビューでcyclic/BigIntの拒否・保存/reload・正常JSONの採用/保存を再確認し阻害なし。Evidence: evidence/2026-10-03-indexeddb-json-guard/REPORT.md（28artifact hashes/73productentries）。旧106証拠は変更しない。補足checkpointee6bd42ab1d80c7224b65fc4f4593d94bef3367f/treef40a25ab7797f57151c0f383a996028cc89c441fを通常work反映し2026-10-03 16:03:59 UTC connected GitHub readback一致。直前policy/remote/trigger再確認済み。必須verifyと独立28hash/73entry確認に阻害なし。
 
 この単位はFoundation21進捗だけ。旧localStorageを保持しDB正本/transaction complete/CAS/serial snapshots/readonly fallbackを実UIへ接続した。workspace入力/project01進捗は未移行で、全COREの保存移行checkboxは未完。native任意実行/transport、実quota容量試験/物理durability/実BFCache/Safari/Pages/読み上げも未受入。activeテストserver/profileは解放済み。
 
 独立確認済みcheckpoint5f685252115507fffdf96099e6f5e5550292488f/tree7addec4ccc156290aa0043490423935ac8907fc8をworkへ通常push、2026-10-03 15:32:35 UTC connected GitHub readbackでSHA/tree一致。直前policy GETは200/r8/selection6/applied6/applied/PPL対象内・除外変更なし。expected remote1a5c211、Pages legacy main/docs、webhook/rulesets/work workflow/実行hookなしを再確認した。親の継続公開許可内。required CIなしをPASS扱いしない。106committed artifact hashes/73productentries/9束27codeの独立確認済み。REPORT/manifestの公開前記録はcheckpoint作成時の履歴でgate解消済み。
 
-Active: Foundation。Ready: 補足修正のguarded work反映後、Windowsの既存隔離基盤をbounded read-only inventory。Planned: workspace/project01保存移行と残native動作/成果物。Blocked: native host/transport（Windows基盤は未確認、旧Mac観測から不在と断定しない）。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。
+Active: Foundation。Ready: workspace/project01のIndexedDB移行契約。Windows read-only inventoryは完了。Planned: workspace/project01保存移行と残native動作/成果物。Blocked: native host/transport（Windows OS primitiveは確認済み、必要制御を満たす既承認host未確認）。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。
+
+## Windows native隔離基盤 — 読み取り専用調査完了
+
+親指示でIndexedDB反映後に調査。Windows11 Home/build26200、WSL/VirtualMachinePlatform有効、HNS/WSL既稼働、Job/AppContainer/WFP API exportあり。調査PATH/標準設置先/既知pipeでDocker/Podman/Sandbox未確認、所有者Lxss登録metadata0件。未報告featureやprocessor booleanから機能不在を断定しない。design/windows-native-inventory.mdとevidence/2026-10-03-windows-isolationに実測・制御表・具体的な追加設定承認境界を固定した。VM/container/service/learner起動、install、OS/security変更、credential読取なし。native host/transportとOS拒否/resource/全process終了の受入は未完。講座92%、保存単位100%維持。
 
 ## CORE 共通教材形式 — 受入・work反映済み（前工程記録）
 

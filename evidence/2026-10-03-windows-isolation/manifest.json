@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "sourceSha": "ee6bd42ab1d80c7224b65fc4f4593d94bef3367f",
+  "readOnly": true,
+  "nativeAcceptance": false,
+  "artifacts": [
+    {
+      "path": ".gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "indexeddb-checkpoint-review.json",
+      "bytes": 803,
+      "sha256": "93aa4be2ecdf474e6daac368dfdada2b71df15f2b847b6c1b1ae781ac46f6945"
+    },
+    {
+      "path": "indexeddb-publication.json",
+      "bytes": 667,
+      "sha256": "3170d1c0ab4d76ac0cc81ca16f7350b78ee3f040aa2a78d236334d4e564f6d01"
+    },
+    {
+      "path": "windows-isolation-details.json",
+      "bytes": 2081,
+      "sha256": "08292d3ba616eedcb6dfadeee0143cb6b5c49ea141058406f612b2ca2c9f62c4"
+    },
+    {
+      "path": "windows-isolation-inventory.json",
+      "bytes": 2484,
+      "sha256": "2db961e51a688f5a542ef1b2a69c30ec2be57f06aa767304f3e532749073b7dc"
+    },
+    {
+      "path": "windows-isolation-query-scope.json",
+      "bytes": 976,
+      "sha256": "6a6e0cc438a686b59837a6440e38a90ed84714a91d244712118e83457f6092f2"
+    }
+  ]
+}
