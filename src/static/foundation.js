@@ -1,8 +1,7 @@
 import { lessons, chapters } from './lessons.js';
-import { gradeHtml } from './grading.js';
-import { gradeCss, lessonPreview } from './css-grading.js';
-import { gradeJavaScript } from './javascript-grading.js';
-import { gradeDomLesson, domLessonPreview } from './dom-grading.js';
+import { createGradingAdapter, acceptGradingOutcome } from './grading-adapter.js';
+import { lessonPreview } from './css-grading.js';
+import { domLessonPreview } from './dom-grading.js';
 import { javascriptHostBusy, javascriptHostReady } from './javascript-host.js';
 import { createProgressRepository } from './progress.js';
 import { initializeProjectWorkspace } from './project-workspace.js';
@@ -10,6 +9,8 @@ const $ = selector => document.querySelector(selector);
 const projectWorkspace = initializeProjectWorkspace($('#project-workspace'));
 const repository = createProgressRepository(() => window.localStorage, lessons);
 const state = repository.state;
+const gradingAdapter = createGradingAdapter(lessons);
+let gradingRunId = 0;
 const panels = [...document.querySelectorAll('[data-view-panel]')];
 const validViews = new Set(panels.map(p => p.dataset.viewPanel));
 const editor = $('#editor');
@@ -130,18 +131,20 @@ $('#check-code').addEventListener('click', async () => {
   cancelGrade();
   const record = entry(), lesson = current(), code = editor.value;
   const controller = new AbortController(); pendingGrade = controller;
+  const request = {lessonId:lesson.id,code,runId:++gradingRunId};
   record.code = code;
   if(lesson.executionMode==='dom'){record.result=null;record.checkedCode=null;renderResult();renderPreview();save();}
   syncExecutionButtons(); $('#stop-code').hidden = lesson.language !== 'javascript';
   $('#result-title').textContent = '完了条件を確認しています';
   try {
-    const result = lesson.executionMode==='dom' ? await gradeDomLesson(code,lesson,{signal:controller.signal}) : lesson.language === 'javascript' ? await gradeJavaScript(code, lesson, {signal:controller.signal}) : lesson.language === 'css' ? await gradeCss(code, lesson, {signal:controller.signal}) : gradeHtml(code, lesson.completionTests);
-    if (controller.signal.aborted || current().id !== lesson.id || record.code !== code) return;
+    const outcome = await gradingAdapter.grade(request,{signal:controller.signal});
+    if (pendingGrade !== controller || controller.signal.aborted || current().id !== lesson.id || record.code !== code) return;
+    const result = acceptGradingOutcome(outcome,request,lesson);
     record.result = result; record.checkedCode = code; record.attempts++;
     if (result.every(r => r.passed)) record.completed = true;
     progress(); renderResult(); renderPreview(); save();
   } catch (error) {
-    if(controller.signal.aborted||current().id!==lesson.id||record.code!==code)return;
+    if(pendingGrade!==controller||controller.signal.aborted||current().id!==lesson.id||record.code!==code)return;
     if (error.name !== 'AbortError') {
       record.result = null; record.checkedCode = null;
       renderResult(); renderPreview(); save();

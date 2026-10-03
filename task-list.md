@@ -12,9 +12,25 @@
 - selectedDesign: `foundation-first + project-based`
 - updatedAt: `2026-10-03`
 
-## 第7章 project03 ファイル照合 — 現在の独立実装単位
+## CORE 共通採点adapter — 現在の独立実装単位
 
-状態: ローカル受入完了・次公開gate保留（5/5=100%）。講座22/24=92%維持。project03全体/nativeの受入に加算しない。
+状態: 実装済み・検証/独立レビュー中。Foundationへ統合したPPL-CORE-001のinterface工程。講座22/24=92%維持、教材数/native受入へ加算しない。
+
+- [x] trusted登録/要求/envelope/行の共通契約を定義し、4方式を実UIへ接続する。
+- [x] 不正登録/要求/結果と取消/遅延/同コード再実行をunitで検証する。
+- [ ] 旧v1/単体入力/不整合result/破損/保存拒否、中断/繰返しを3幅の実UIで確認する。
+- [ ] 旧21教材/実行controller/workspace、生成物同期を検証する。
+- [ ] 固定候補の独立レビュー・証拠/正本管理文書を完了する。
+
+設計: design/common-grading-adapter.md。旧21の教材/判定grader/progress.jsを変更せず、登録をコピー/凍結し要求/結果を相関確認する。envelope/runIdはv1へ保存せず、保存形式/進捗は移行しない。IndexedDB/教材全体共通形式は別ACで未実装。Worker1枠/2秒/5秒予約、既存sandbox/network/storage境界、第7章native技術gateを維持する。
+
+前工程project03の独立レビュー済み89b1274b8c4583e97e2df91077e1d7f2694740f1/tree272044be0bbd4fa22051772aee36f84d0ddf9335は親policy13:06:41UTC r8/selection6/applied6と通常push許可後にremote親3f9fc9e/Pages legacy main/docs/work workflowなし/rulesetsなしを再確認してworkへ通常push。connected GitHubのSHA/tree読取一致。required CIなし（PASS扱いしない）。次候補公開は親の新policy/remote/trigger gate待ち。
+
+Active: Foundation/CORE adapter。Ready: 既存4方式の共通契約。Planned: 共通教材形式/IndexedDBと残native動作/成果物。Blocked: native専用環境/信頼できる結果transport。Deferred: 実Pages/Safari/手動読み上げ/実践UI。別Task未設定。
+
+## 第7章 project03 ファイル照合 — 受入・work反映済み（前工程記録）
+
+状態: 受入・work反映済み（5/5=100%）。講座22/24=92%維持。project03全体/nativeの受入に加算しない。
 
 - [x] 成果物/manifestの説明・例・手順・ヒントと第3教材への到達を提供する。
 - [x] 選択した固定ファイルのbounded UTF-8/schema/bytes/hash照合と現在の編集snapshot比較を読み取り専用で実装する。

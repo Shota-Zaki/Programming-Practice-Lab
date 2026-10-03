@@ -529,6 +529,10 @@ native書込済みrecordのreload/再open、別lesson/keyとprogressの不変、
 
 再レビューの画面上方への退避・負text-indentの誤合格も修正した。必須内容の下端がページ上端より下にあり、text-indentが非負であることを確認する。長い通常本文が900pxより下へ続くことは拒否しない。小さな正のrelative offsetも許容する。
 
+## CORE 共通採点adapter（2026-10-03）
+
+Foundationに統合した承認済みPPL-CORE-001のinterfaceを実装する。[共通採点adapter契約](design/common-grading-adapter.md)を正規設計とする。既存4方式を通常UIへ接続し、要求/run/教材/codeと結果行の一致を保存前に確認する。UI配置・教材採点条件・旧v1保存・Worker/sandboxは維持し、IndexedDB/教材全体共通形式/native実行は別工程とする。
+
 ## project03 ファイル照合先行教材（2026-10-03）
 
 案Aの「3ファイル同bytes・manifest一致・snapshot対応・持ち出し手順」から独立可能な単位を実装する。共有workspaceの第3教材として書き出し/保存/再選択/照合を学ぶ。選択したindex.html/styles.css/app.js/manifest.jsonをFile APIでデータとして読む。README.txtは任意、内容はhash照合対象外。未知名/重複/不足/余剰を拒否し、コード各32KiB/合計96KiB、manifest4KiB、README16KiBまで。UTF-8を検証し、厳密なversion1/projectId/profile-site/3固定rowのmanifest形を検証する。raw bytes/SHA-256と現在の編集snapshotのUTF-8 bytesを別々に比較し、変更/混在をfile別に示す。Fileの物理パスやsymlink/OS保存完了は観察できず、その検証とは説明しない。
