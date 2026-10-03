@@ -13,6 +13,12 @@ try {
     const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'}),page=await context.newPage(),errors=[],external=[];
     page.on('pageerror',e=>errors.push(e.message));await page.route('**/*',route=>{const url=route.request().url();if(url.startsWith(origin)||url.startsWith('data:'))return route.continue();external.push(url);return route.abort();});
     await page.goto(origin+'/Programming-Practice-Lab/');
+    const catalog=await page.evaluate(async()=>{
+      const {lessonCatalog,lessons}=await import('./lessons.js');const {toLegacyLesson}=await import('./lesson-format.js');
+      return {count:lessonCatalog.length,versions:lessonCatalog.every(l=>l.version===1),exactViews:JSON.stringify(lessonCatalog.map(toLegacyLesson))===JSON.stringify(lessons),modes:lessonCatalog.map(l=>l.exercise.mode)};
+    });
+    assert.equal(catalog.count,21);assert.equal(catalog.versions,true);assert.equal(catalog.exactViews,true);
+    assert.deepEqual(catalog.modes,[...Array(7).fill('html'),...Array(8).fill('css'),...Array(3).fill('javascript'),...Array(3).fill('dom')]);
     const seed=await page.evaluate(async()=>{
       const {lessons}=await import('./lessons.js');
       const records={};for(const id of ['html03','css01','js01','js04']){const lesson=lessons.find(l=>l.id===id);records[id]={code:lesson.example,checkedCode:id==='js04'?'stale old code':lesson.example,attempts:7,completed:true,result:lesson.completionTests.map(t=>({id:t.id,passed:true,...(id.startsWith('js')?{actual:String(t.expected),expected:String(t.expected)}:{})}))};}
@@ -73,7 +79,7 @@ try {
     assert.equal(await page.evaluate(()=>localStorage.getItem('ppl.profile.v1.topic')),'css');assert.equal(await page.evaluate(()=>localStorage.getItem('unrelated')),'keep');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
     await page.screenshot({path:resolve(evidence,`legacy-and-retry-${width}.png`),fullPage:true});
-    results.push({width,oldV1:true,staleSavedResultHidden:true,exactCssRows:true,sameCodeRetry:true,interruptions:['edit','reset','lesson','view','reload'],syntheticGraderMismatchRefused:true,domRetry:true,noEnvelopePersisted:true,nativeKeyUnchanged:true,noOverflow:true,errors,external});
+    results.push({width,commonCatalog:catalog,oldV1:true,staleSavedResultHidden:true,exactCssRows:true,sameCodeRetry:true,interruptions:['edit','reset','lesson','view','reload'],syntheticGraderMismatchRefused:true,domRetry:true,noEnvelopePersisted:true,nativeKeyUnchanged:true,noOverflow:true,errors,external});
     await context.close();
   }
   // Real numerical Worker stop/retry retains the existing host cleanup reservation.

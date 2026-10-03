@@ -1,4 +1,4 @@
-import { lessons, chapters } from './lessons.js';
+import { lessonCatalog, lessons, chapters } from './lessons.js';
 import { createGradingAdapter, acceptGradingOutcome } from './grading-adapter.js';
 import { lessonPreview } from './css-grading.js';
 import { domLessonPreview } from './dom-grading.js';
@@ -9,7 +9,7 @@ const $ = selector => document.querySelector(selector);
 const projectWorkspace = initializeProjectWorkspace($('#project-workspace'));
 const repository = createProgressRepository(() => window.localStorage, lessons);
 const state = repository.state;
-const gradingAdapter = createGradingAdapter(lessons);
+const gradingAdapter = createGradingAdapter(lessonCatalog);
 let gradingRunId = 0;
 const panels = [...document.querySelectorAll('[data-view-panel]')];
 const validViews = new Set(panels.map(p => p.dataset.viewPanel));

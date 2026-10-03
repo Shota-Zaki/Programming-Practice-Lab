@@ -1,3 +1,4 @@
+import { createLessonCatalog, toLegacyLesson } from './lesson-format.js';
 const documentCode = (body = '', title = '') => `<!doctype html>
 <html lang="ja">
 <head>
@@ -16,14 +17,14 @@ const common = [
 ];
 const learningImage = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80" viewBox="0 0 120 80"><rect x="25" y="8" width="70" height="64" rx="4" fill="#2563eb"/><path d="M40 28h40M40 40h40M40 52h25" stroke="white" stroke-width="4"/></svg>');
 const cssMarkup = '<main class="card"><h1>学習カード</h1><p class="intro">少しずつ学びます。</p><p id="note">今日の目標を決めましょう。</p></main><p class="plain">通常の段落です。</p>';
-const cssTest = (id, label, selector, property, expected, requiredSelector) => ({ id, label, selector, property, expected, requiredSelector });
+const cssTest = (id, label, selector, property, expected, requiredSelector) => ({ id, label, selector, property, expected, ...(requiredSelector===undefined?{}:{requiredSelector}) });
 const sides = (property, value) => ['top','right','bottom','left'].map(side => cssTest(`${property}-${side}`, `${property}の${{top:'上',right:'右',bottom:'下',left:'左'}[side]}を${value}にする`, '.card', `${property}-${side}`, value));
 const layoutMarkup = '<h1>学習メニュー</h1><div class="cards"><article class="tile"><h2>HTML</h2><p>構造を学ぶ</p></article><article class="tile"><h2>CSS</h2><p>見た目を整える</p></article><article class="tile"><h2>JavaScript</h2><p>動きを作る</p></article><article class="tile"><h2>復習</h2><p>繰り返し練習する</p></article></div>';
 const responsiveWidths = [375,599,600,768,1280];
 const combinedWidths = [375,599,600,768,899,900,1280];
 const viewportTest = (id,label,selector,property,widths,valueForWidth) => ({id,label,selector,property,byWidth:Object.fromEntries(widths.map(width=>[width,valueForWidth(width)]))});
 const layoutChecks = [cssTest('visible','すべてのカードを表示する','.cards','visible-items','true'),cssTest('equal','カードを等幅にする','.cards','equal-columns','true'),{id:'gap',label:'カードの縦横の間隔を16pxにする',checks:[cssTest('x','','.cards','column-gap','16px'),cssTest('y','','.cards','row-gap','16px')]}];
-export const lessons = [
+const lessonDefinitions = [
   {
     id: 'html01', title: 'HTMLの基本構造',
     objectives: ['headとbodyの役割を区別する', 'タイトル・主見出し・段落を入力する'],
@@ -303,6 +304,9 @@ export const lessons = [
     hints:['const value = event.target.value; で読み、if (value === "") で分けてmessage.textContentへ代入します。'],explanation:'入力と消去のたびに現在の値を読み、表示を更新できました。第6章が完了しました。第7章は準備中です。',
   },
 ].map((lesson, index, all) => ({ language: 'html', courseId: 'web-foundation', chapterId: 'html-chapter01', ...lesson, nextLessonId: all[index + 1]?.id ?? null }));
+export const lessonCatalog = createLessonCatalog(lessonDefinitions);
+// Compatibility views keep existing UI, graders and progress IDs/values unchanged.
+export const lessons = Object.freeze(lessonCatalog.map(toLegacyLesson));
 export const chapters = [
   { id: 'html-chapter01', title: 'HTML第1章', number: '01' },
   { id: 'html-chapter02', title: 'HTML第2章', number: '02' },

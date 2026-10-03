@@ -12,9 +12,25 @@
 - selectedDesign: `foundation-first + project-based`
 - updatedAt: `2026-10-03`
 
-## CORE 共通採点adapter — 現在の独立実装単位
+## CORE 共通教材形式 — 現在の独立実装単位
 
-状態: ローカル受入完了・次公開gate保留（5/5=100%）。Foundationへ統合したPPL-CORE-001のinterface工程。講座22/24=92%維持、教材数/native受入へ加算しない。
+状態: 実装済み・検証/独立レビュー中。既存Foundation21教材の共通形式v1。講座22/24=92%維持、教材数/native受入へ加算しない。
+
+- [x] 共通root/learning/exerciseとcatalog・legacy互換viewを定義し旧21データの等値を確認する。
+- [x] 実UIの採点adapterを共通catalogへ接続し、旧legacy adapter APIを維持する。
+- [x] schema/payload/graph不整合・JSON往復/コピー/凍結をunitで検証する。
+- [ ] 旧保存/途中実行/retry/reload/保存拒否・旧21×3幅/workspace/controller/同期を検証する。
+- [ ] 固定候補の独立レビュー・証拠/正本管理文書を完了する。
+
+設計: design/common-lesson-format.md。旧21ID・学習者code/result/attempts/completed/checkedCode・v1 keysを維持しprogress.js/4grader/実行境界は変更しない。教材定義の版は保存の版と異なる。IndexedDB/DB upgradeは未実装。第7章3ファイルprojectは独立namespaceとしこのsingle-code形式に移行しない。
+
+前工程CORE adapter b988b66cc5dc04a1e03591bb921feeee87628da1/tree918075789781e6b145974e50888cd405db5b4452は親policy13:39:42UTC r8selection6applied6許可後、expected parent89b/Pages legacy main/docs/work workflowなし/rulesetsなしを再確認して通常push、connected GitHub readback一致。required CIなし（PASS扱いしない）。次候補は親の最新policy/remote/trigger gate待ち。
+
+Active: Foundation/CORE共通形式。Ready: 既存4方式のcatalog接続。Planned: IndexedDBと残native動作/成果物。Blocked: native専用環境/信頼できるtransport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。
+
+## CORE 共通採点adapter — 受入・work反映済み（前工程記録）
+
+状態: 受入・work反映済み（5/5=100%）。Foundationへ統合したPPL-CORE-001のinterface工程。講座22/24=92%維持、教材数/native受入へ加算しない。
 
 - [x] trusted登録/要求/envelope/行の共通契約を定義し、4方式を実UIへ接続する。
 - [x] 不正登録/要求/結果と取消/遅延/同コード再実行をunitで検証する。
@@ -24,7 +40,7 @@
 
 検証Product ed50f3f8827ed353c87a64d5b7c49f6746b706ac: 38unit（adapter10）、adapter実UI3幅/不整合結果拒否/同コード遅延結果破棄、旧21×3幅/旧v1・単体入力・破損・保存拒否、workspace35/download30、project03 9/download15/遅延6race、verify:agent PASS。独立exactレビュー阻害なし。Evidence: evidence/2026-10-03-grading-adapter/REPORT.md。独立観測はmobile/CSS/保存拒否、全3幅と旧21回帰は実装agentによる別証拠。
 
-設計: design/common-grading-adapter.md。旧21の教材/判定grader/progress.jsを変更せず、登録をコピー/凍結し要求/結果を相関確認する。envelope/runIdはv1へ保存せず、保存形式/進捗は移行しない。IndexedDB/教材全体共通形式は別ACで未実装。Worker1枠/2秒/5秒予約、既存sandbox/network/storage境界、第7章native技術gateを維持する。
+設計: design/common-grading-adapter.md。旧21の教材/判定grader/progress.jsを変更せず、登録をコピー/凍結し要求/結果を相関確認する。envelope/runIdはv1へ保存せず、保存形式/進捗は移行しない。当時のIndexedDB/教材全体共通形式は別ACで未実装。後続共通形式の現状は冒頭節を参照。Worker1枠/2秒/5秒予約、既存sandbox/network/storage境界、第7章native技術gateを維持する。
 
 前工程project03の独立レビュー済み89b1274b8c4583e97e2df91077e1d7f2694740f1/tree272044be0bbd4fa22051772aee36f84d0ddf9335は親policy13:06:41UTC r8/selection6/applied6と通常push許可後にremote親3f9fc9e/Pages legacy main/docs/work workflowなし/rulesetsなしを再確認してworkへ通常push。connected GitHubのSHA/tree読取一致。required CIなし（PASS扱いしない）。次候補公開は親の新policy/remote/trigger gate待ち。
 

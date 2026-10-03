@@ -2,6 +2,7 @@ import { gradeHtml } from './grading.js';
 import { gradeCss } from './css-grading.js';
 import { gradeJavaScript } from './javascript-grading.js';
 import { gradeDomLesson } from './dom-grading.js';
+import { toLegacyLesson } from './lesson-format.js';
 
 const cancelError = () => new DOMException('Cancelled', 'AbortError');
 function freeze(value) {
@@ -31,6 +32,7 @@ function resultCopy(results, lesson) {
 }
 // Correlation guard at the UI/save boundary. Only result rows enter the legacy store.
 export function acceptGradingOutcome(outcome, request, lesson) {
+  if(Object.hasOwn(lesson,'version'))lesson=toLegacyLesson(lesson);
   const input=requestCopy(request);
   if (!outcome || Object.keys(outcome).length !== 6 || !['version','lessonId','code','runId','mode','results'].every(key=>Object.hasOwn(outcome,key)) || outcome.version !== 1
       || outcome.lessonId !== input.lessonId || lesson.id !== input.lessonId || outcome.code !== input.code
@@ -51,7 +53,7 @@ export function createGradingAdapter(lessons, {html=gradeHtml,css=gradeCss,javas
   if(!Array.isArray(lessons)||!lessons.length)throw new TypeError('Invalid grading registry');
   const registry=new Map();
   for(const source of lessons) {
-    const lesson=freeze(structuredClone(source));
+    const lesson=Object.hasOwn(source,'version')?toLegacyLesson(source):freeze(structuredClone(source));
     if(typeof lesson?.id!=='string'||!lesson.id||registry.has(lesson.id)
         || !Array.isArray(lesson.completionTests)||!lesson.completionTests.length
         ||Array.from(lesson.completionTests).some(test=>typeof test?.id!=='string'||!test.id)
