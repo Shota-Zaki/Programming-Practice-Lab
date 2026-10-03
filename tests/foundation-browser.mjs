@@ -69,7 +69,9 @@ try {
     await page.locator('#lesson-content [data-view="practice"]').click();
     await page.locator('#editor').fill('<p>changed</p>');
     assert.equal(await page.locator('#result-status').textContent(),'未確認');
+    await readFoundationState(page);
     await page.reload();
+    await readFoundationState(page);
     assert.equal(await page.locator('#result-status').textContent(),'未確認');
     await page.locator('#reset-code').click();
     assert.equal(await page.locator('#editor').inputValue(),lessons[0].starterCode);
@@ -128,6 +130,7 @@ try {
     history.replaceState(null, '', '#practice');
   });
   await grading.reload();
+  await readFoundationState(grading);
   assert.match(await grading.locator('#attempts').textContent(), /9回.*完了履歴あり/);
   await grading.goto(origin + '/#lesson');
   await grading.locator('#lesson-picker [data-lesson="html05"]').click();

@@ -9,11 +9,15 @@ const $ = selector => document.querySelector(selector);
 const restoringControls = [...document.querySelectorAll('button,input,textarea,select')].map(node => [node, node.disabled]);
 for (const [node] of restoringControls) node.disabled = true;
 $('#save-status').textContent = progressStatusText({ phase: 'loading' });
-const repository = await createIndexedProgressRepository(() => window.localStorage, lessons, () => window.indexedDB);
+$('#view-kicker').textContent = progressStatusText({ phase: 'loading' });
+const restoration = new AbortController();
+let repository;
+window.addEventListener('pagehide', () => { restoration.abort(); repository?.close(); });
+window.addEventListener('pageshow', event => { if (event.persisted) window.location.reload(); });
+repository = await createIndexedProgressRepository(() => window.localStorage, lessons, () => window.indexedDB, { signal: restoration.signal });
+if (!restoration.signal.aborted) {
 for (const [node, disabled] of restoringControls) node.disabled = disabled;
 repository.subscribe(status => { $('#save-status').textContent = progressStatusText(status); $('#save-status').dataset.state = status.phase; });
-window.addEventListener('pagehide', () => repository.close());
-window.addEventListener('pageshow', event => { if (event.persisted) window.location.reload(); });
 const projectWorkspace = initializeProjectWorkspace($('#project-workspace'));
 const state = repository.state;
 const gradingAdapter = createGradingAdapter(lessonCatalog);
@@ -173,3 +177,4 @@ projectWorkspace.subscribe(progress);
 renderLesson();
 showView(validViews.has(location.hash.slice(1)) ? location.hash.slice(1) : state.view, {history:false});
 window.addEventListener('hashchange', () => { if (validViews.has(location.hash.slice(1))) showView(location.hash.slice(1), {history:false}); });
+}

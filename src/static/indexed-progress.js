@@ -23,11 +23,14 @@ function validRecord(record, lessons) {
 }
 
 // version is trusted host configuration; the application uses version 1.
-export async function openProgressDatabase(factory, { lessons, timeoutMs = 4000, version = 1, onClosed = () => {} } = {}) {
+export async function openProgressDatabase(factory, { lessons, timeoutMs = 4000, version = 1, signal, onClosed = () => {} } = {}) {
+  if (signal?.aborted) throw problem('AbortError', 'Restore was interrupted');
   const db = await new Promise((resolve, reject) => {
     let request, settled = false;
-    const finish = (error, value) => { if (settled) return; settled = true; clearTimeout(timer); error ? reject(error) : resolve(value); };
+    const finish = (error, value) => { if (settled) return; settled = true; clearTimeout(timer); signal?.removeEventListener('abort', interrupted); error ? reject(error) : resolve(value); };
     const timer = setTimeout(() => finish(problem('TimeoutError', 'Database open timed out')), timeoutMs);
+    const interrupted = () => finish(problem('AbortError', 'Restore was interrupted'));
+    signal?.addEventListener('abort', interrupted, { once: true });
     try {
       request = factory().open(PROGRESS_DATABASE, version);
       request.onblocked = () => finish(problem('BlockedError', 'Another page is blocking the database'));
@@ -50,10 +53,14 @@ export async function openProgressDatabase(factory, { lessons, timeoutMs = 4000,
   function close() {
     if (closed) return;
     closed = true;
+    signal?.removeEventListener('abort', stopped);
     for (const transaction of active) { try { transaction.abort(); } catch { /* already committed */ } }
     db.close();
   }
   function changed() { if (closed) return; close(); onClosed(problem('VersionError', 'Database connection changed')); }
+  function stopped() { if (closed) return; close(); onClosed(problem('AbortError', 'Restore was interrupted')); }
+  signal?.addEventListener('abort', stopped, { once: true });
+  if (signal?.aborted) stopped();
   db.onversionchange = changed;
   db.onclose = changed;
   function transaction(operation) {
@@ -112,11 +119,12 @@ export function progressStatusText(status) {
     AbortError: '保存が中断されました',
     TimeoutError: '保存処理が時間内に完了しませんでした'
   };
-  return `保存できません。${reasons[status.reason] || '保存先を利用できません'}。この画面内のみ保持します。閉じる前に入力を控えてください`;
+  const restored = status.source === 'legacy' ? '旧保存から復元しました。' : '';
+  return `保存できません。${restored}${reasons[status.reason] || '保存先を利用できません'}。この画面内のみ保持します。閉じる前に入力を控えてください`;
 }
 
 export async function createIndexedProgressRepository(storage, lessons, indexedDB, options = {}) {
-  const legacy = new Map(); let migrationError = null;
+  const legacy = new Map(); let migrationError = null, restoredLegacy = false;
   try {
     const source = storage();
     if (!source) throw problem('SecurityError', 'Legacy storage unavailable');
@@ -125,13 +133,16 @@ export async function createIndexedProgressRepository(storage, lessons, indexedD
     if (raw !== null) {
       let parsed; try { parsed = JSON.parse(raw); } catch { throw problem('DataError', 'Legacy progress is invalid'); }
       if (!plain(parsed) || parsed.version !== 1 || !plain(parsed.lessons)) throw problem('DataError', 'Legacy progress is invalid');
+      restoredLegacy = true;
     }
+    if (typeof legacy.get('ppl.foundation.html01') === 'string') restoredLegacy = true;
   } catch (error) { migrationError = error; }
   const state = createProgressRepository(() => ({ getItem: key => legacy.get(key) ?? null }), lessons).state;
   const listeners = new Set();
-  let status = { phase: 'loading' }, database = null, revision = 0, generation = 0;
+  let source = restoredLegacy ? 'legacy' : 'memory';
+  let status = { phase: 'loading', source }, database = null, revision = 0, generation = 0;
   let queued = null, running = false, closed = false, locked = false, committed = null;
-  const publish = (phase, reason) => { status = { phase, ...(reason ? { reason } : {}) }; for (const listener of listeners) listener({ ...status }); };
+  const publish = (phase, reason) => { status = { phase, source, ...(reason ? { reason } : {}) }; for (const listener of listeners) listener({ ...status }); };
   const disconnect = error => {
     locked = true; generation++;
     if (queued) { queued.resolve(false); queued = null; }
@@ -140,8 +151,9 @@ export async function createIndexedProgressRepository(storage, lessons, indexedD
   try {
     database = await openProgressDatabase(indexedDB, { ...options, lessons, onClosed: disconnect });
     const record = await database.readOrMigrate(state, migrationError);
+    if (options.signal?.aborted) throw problem('AbortError', 'Restore was interrupted');
     if (locked) throw problem('VersionError', 'Connection changed during restore');
-    Object.assign(state, copy(record.state)); revision = record.revision; committed = JSON.stringify(state); publish('saved');
+    Object.assign(state, copy(record.state)); revision = record.revision; committed = JSON.stringify(state); source = 'indexeddb'; publish('saved');
   } catch (error) { locked = true; database?.close(); publish('error', error.name); }
   async function pump() {
     running = true;

@@ -16,7 +16,7 @@ const record=page=>page.evaluate(()=>new Promise((resolve,reject)=>{
   const request=indexedDB.open('ppl.foundation.progress',1);request.onerror=()=>reject(request.error);
   request.onsuccess=()=>{const db=request.result;db.onversionchange=()=>db.close();const tx=db.transaction('records'),read=tx.objectStore('records').get('foundation');tx.oncomplete=()=>{db.close();resolve(read.result??null)};tx.onabort=()=>{db.close();reject(tx.error)};};
 }));
-async function session({width=1280,fault='',single=false,corrupt=false}={}) {
+async function session({width=1280,fault='',single=false,corrupt=false,waitReady=true}={}) {
   const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});contexts.push(context);
   await context.addInitScript(({fault,single,corrupt})=>{
     if(window.top!==window)return;
@@ -26,7 +26,7 @@ async function session({width=1280,fault='',single=false,corrupt=false}={}) {
       else localStorage.setItem('ppl.foundation.progress.v1',corrupt?'{broken':JSON.stringify({version:1,lessonId:'html03',view:'practice',lessons:{html03:{code:'<h1>Preserved old input</h1>',attempts:9,completed:true,result:null,checkedCode:'old checked snapshot'},js04:{code:'old DOM draft',attempts:4,completed:true,result:null,checkedCode:null}}}));
     }
     fault=localStorage.getItem('qa-next-fault')||fault;
-    window.__dbFault=fault;window.__dbAcks=[];window.__holdDbAcks=false;
+    window.__dbFault=fault;window.__dbAcks=[];window.__holdDbAcks=fault==='startup-held';
     const put=IDBObjectStore.prototype.put, transaction=IDBDatabase.prototype.transaction;
     IDBObjectStore.prototype.put=function(...args){
       if(this.transaction.db.name==='ppl.foundation.progress') {
@@ -50,10 +50,20 @@ async function session({width=1280,fault='',single=false,corrupt=false}={}) {
   const page=await context.newPage(),errors=[],external=[];
   page.on('pageerror',error=>errors.push(error.message));
   await page.route('**/*',route=>{const target=route.request().url();if(target.startsWith(origin)||target.startsWith('data:'))return route.continue();external.push(target);return route.abort();});
-  await page.goto(url+'#practice');await page.locator('#editor').waitFor();await page.waitForFunction(()=>!document.querySelector('#editor').disabled);
+  await page.goto(url+'#practice');
+  try { if(waitReady){await page.locator('#editor').waitFor();await page.waitForFunction(()=>!document.querySelector('#editor').disabled);} }
+  catch (error) { await writeFile(`${evidence}/session-failure.json`,JSON.stringify({fault,width,errors,url:page.url(),status:await page.locator('#save-status').textContent(),body:await page.locator('body').innerText()},null,2));throw error; }
   return {context,page,errors,external};
 }
 try {
+  {
+    const {context,page}=await session({fault:'startup-held',waitReady:false});
+    await page.waitForFunction(()=>window.__dbAcks.length===1&&document.querySelector('#editor').disabled);
+    const before=await raw(page);assert.match(await page.locator('#view-kicker').textContent(),/復元/);
+    await page.evaluate(()=>{window.dispatchEvent(new PageTransitionEvent('pagehide'));window.__holdDbAcks=false;window.__dbAcks.shift()();});
+    await page.waitForTimeout(100);assert.equal(await page.locator('#editor').isDisabled(),true);assert.notEqual(await page.locator('#save-status').getAttribute('data-state'),'saved');assert.deepEqual(await raw(page),before);
+    results.push({case:'pagehide during initial migration rejects late bootstrap and saved indication',syntheticDelivery:true,passed:true});await context.close();
+  }
   for(const width of [375,768,1280]) {
     const {context,page,errors,external}=await session({width});await saved(page);
     const legacy=await raw(page), first=await record(page);
