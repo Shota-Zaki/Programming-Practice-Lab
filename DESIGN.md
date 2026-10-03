@@ -526,3 +526,5 @@ native書込済みrecordのreload/再open、別lesson/keyとprogressの不変、
 静的コピーを375/768/1280pxで測定する。project01構造の10条件に加え、body左右余白16px以上、main左右内余白24px以上・幅720px以下・中央配置、本文と操作欄16px以上・本文/ボタン行高1.5倍以上（native selectの行高/切抜きはブラウザー管理）、操作欄の外寸高さ44px以上、文書/カード/本文の横溢れと非表示切抜きを確認する。値は計算済み寸法で判定しCSS記法を指定しない。native動作やlocalStorageは実行しない。CSS結果をproject01履歴へ書かず、project02完了も作らない。22/24=92%維持。
 
 独立レビューの誤合格を受け、主見出しと必須内容の全親要素も測定する。外側余白はmainの実位置でも確認する。clip-path/legacy clip/mask/filterやoverflowによる切抜きを使わない条件を明示し、単色背景との文字の明暗比4.5以上を追加した（CSS6条件、構造と合わせ16条件）。標準CSSの計算済み色を1px swatchで読み、透明色を合成して明暗比を計算するだけで学習者HTMLをrasterize/実行しない。背景画像/gradient・opacity変更・blendはこの先行教材の採点外として拒否する。native selectの行高/overflowはブラウザー管理だが文字色・文字サイズ・外寸は確認する。長い本文の縦スクロールは許容する。Tab/labelの操作と完成例のfocus表示は実UIで確認し、任意CSSのfocus表示やアクセシビリティ全体の自動保証はしない。
+
+再レビューの画面上方への退避・負text-indentの誤合格も修正した。必須内容の下端がページ上端より下にあり、text-indentが非負であることを確認する。長い通常本文が900pxより下へ続くことは拒否しない。小さな正のrelative offsetも許容する。

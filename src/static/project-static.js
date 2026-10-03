@@ -163,7 +163,7 @@ function staticParser(hasResourceFunction) {
             { id: 'css-type', label: '主見出し・本文・操作欄16px以上、select以外の行高1.5倍以上', passed: text.length > 0 && text.every(node => { const c = getComputedStyle(node); return px(c.fontSize) >= 16 && (node.tagName === 'SELECT' || px(c.lineHeight) + .1 >= px(c.fontSize) * 1.5); }) },
             { id: 'css-controls', label: '選択欄とボタンの高さ44px以上', passed: controls.every(selector => document.querySelector(selector)?.getBoundingClientRect().height >= 44) },
             { id: 'css-contrast', label: '必須文字と選択肢を単色背景で読みやすく（明暗比4.5以上）', passed: readable },
-            { id: 'css-overflow', label: '横溢れ・必須内容と親要素の切抜き/マスク/フィルターなし', passed: Boolean(card && [...layout].every(node => { const c = getComputedStyle(node); return (node.tagName === 'SELECT' || (!['hidden','clip'].includes(c.overflowX) && !['hidden','clip'].includes(c.overflowY))) && c.clipPath === 'none' && c.clip === 'auto' && c.maskImage === 'none' && c.filter === 'none' && (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth + 1); })) }
+            { id: 'css-overflow', label: '横溢れ・必須内容の画面上方への退避・切抜き/マスク/フィルターなし', passed: Boolean(card && text.every(node => node.getBoundingClientRect().bottom > 0 && px(getComputedStyle(node).textIndent) >= 0) && [...layout].every(node => { const c = getComputedStyle(node); return (node.tagName === 'SELECT' || (!['hidden','clip'].includes(c.overflowX) && !['hidden','clip'].includes(c.overflowY))) && c.clipPath === 'none' && c.clip === 'auto' && c.maskImage === 'none' && c.filter === 'none' && (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth + 1); })) }
           );
         }
         measureStyle.remove();

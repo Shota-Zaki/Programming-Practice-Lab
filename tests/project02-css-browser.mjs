@@ -104,6 +104,7 @@ try {
           ['transparent-text', 'main{color:transparent}'], ['same-color', 'main{color:white;background:white}'], ['text-fill', 'main{-webkit-text-fill-color:transparent}'],
           ['transparent-ancestor', 'main{opacity:.01}'], ['fixed-edge', 'main{position:fixed;top:0;left:0;right:0}'], ['option-ink', 'option{color:transparent}'],
           ['low-contrast', 'main{color:#777}'],
+          ['above-page', 'main{position:relative;top:-9999px}'], ['negative-indent', 'main p,main h1,main li,main label{text-indent:-9999px}'],
         ]) { const checks = (await gradeProject02Css({ ...base, 'styles.css': base['styles.css'] + css })).checks; results.push({ name, rejected: !checks.every(check => check.passed), failed: checks.filter(check => !check.passed).map(check => check.id) }); }
         for (const [name, pattern] of [['heading-wrapper', /<h1>.*?<\/h1>/], ['intro-wrapper', /<p>.*?<\/p>/], ['controls-wrapper', /<label[\s\S]*?<\/button>/]]) {
           const html = base['index.html'].replace(pattern, value => '<div class="crop">' + value + '</div>');
@@ -114,11 +115,11 @@ try {
         results.push({ name: 'rem-equivalent', accepted: (await gradeProject02Css({ ...base, 'styles.css': equivalent })).checks.every(check => check.passed) });
         const long = base['index.html'].replace('HTML', '長い文章と単語'.repeat(40));
         results.push({ name: 'long-wrap', accepted: (await gradeProject02Css({ ...base, 'index.html': long })).checks.every(check => check.passed) });
-        for (const [name, css] of [['contrast-boundary-valid', 'main{color:#767676}'], ['composited-ink', 'main{color:rgba(0,0,0,.85)}']]) results.push({ name, accepted: (await gradeProject02Css({ ...base, 'styles.css': base['styles.css'] + css })).checks.every(check => check.passed) });
+        for (const [name, css] of [['contrast-boundary-valid', 'main{color:#767676}'], ['composited-ink', 'main{color:rgba(0,0,0,.85)}'], ['small-offset', 'main{position:relative;top:8px}']]) results.push({ name, accepted: (await gradeProject02Css({ ...base, 'styles.css': base['styles.css'] + css })).checks.every(check => check.passed) });
         return results;
       });
       assert.ok(grading.every(row => row.accepted ?? row.rejected), JSON.stringify(grading));
-      assert.deepEqual(leaks, []); results.push({ case: '30-wrong-CSS/4-equivalent-content/no-network', grading, pass: true });
+      assert.deepEqual(leaks, []); results.push({ case: '32-wrong-CSS/5-equivalent-content/no-network', grading, pass: true });
     }
     await page.close();
   }
@@ -140,5 +141,5 @@ try {
     results.push({ case: `controlled-storage-fault/${fault}`, pass: true }); await page.close();
   }
   await writeFile(`${output}/results.json`, JSON.stringify({ browser: browser.version(), results }, null, 2) + '\n');
-  console.log(JSON.stringify({ result: 'PASS', browser: browser.version(), cases: results.length, negativeCases: 30, equivalentCases: 4 }));
+  console.log(JSON.stringify({ result: 'PASS', browser: browser.version(), cases: results.length, negativeCases: 32, equivalentCases: 5 }));
 } finally { await browser.close(); await new Promise(done => server.close(done)); }
