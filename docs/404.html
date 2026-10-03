@@ -23,10 +23,10 @@
         <button type="button" data-view="practice"><span>&gt;_</span>入力演習</button>
       </nav>
       <section class="current-course">
-        <div><span>最初の講座</span><strong>0%</strong></div>
+        <div><span data-chapter-title>HTML第1章</span><strong data-chapter-percent>0%</strong></div>
         <h2>Web開発基礎</h2>
-        <p>HTML 01 / 基本構造</p>
-        <div class="progress"><i style="width:0%"></i></div>
+        <p id="current-lesson-label">HTML第1章</p>
+        <div class="progress"><i data-progress-bar style="width:0%"></i></div>
         <button type="button" data-view="lesson">レッスンを始める</button>
       </section>
       <a class="project-preview-link" href="./project-preview.html">
@@ -69,7 +69,7 @@
                   <div class="browser-bar"><i></i><i></i><i></i><b>my-page.html</b></div>
                   <div class="browser-body"><small>HELLO, WEB</small><strong>はじめてのWebページ</strong><p>自分で入力したHTMLがここに表示されます。</p></div>
                 </div>
-                <dl><div><dt>現在</dt><dd>0 / 24</dd></div><div><dt>目安</dt><dd>12時間</dd></div><div><dt>方式</dt><dd>Browser</dd></div></dl>
+                <dl><div><dt>現在</dt><dd data-course-progress>0 / 24</dd></div><div><dt>目安</dt><dd>12時間</dd></div><div><dt>方式</dt><dd>Browser</dd></div></dl>
               </article>
             </section>
 
@@ -107,22 +107,22 @@
         <section class="view" data-view-panel="course" aria-labelledby="course-title" hidden>
           <div class="page">
             <div class="breadcrumb"><button type="button" data-view="courses">基礎講座</button><span>/</span><span>Web開発基礎</span></div>
-            <header class="course-hero"><div><p class="eyebrow">COURSE 01</p><h1 id="course-title">Web開発基礎</h1><p class="lead">HTMLで意味のある構造を作り、CSSで配置を整え、JavaScriptで操作に反応する画面を完成させます。</p><div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Browser</span></div><div class="actions"><button class="primary" type="button" data-view="lesson">最初のレッスンへ</button><button class="secondary" type="button" data-view="courses">一覧へ戻る</button></div></div><aside><span>最終成果物</span><strong>操作できる自己紹介サイト</strong><ul><li>意味のあるHTML構造</li><li>レスポンシブなレイアウト</li><li>入力と表示のJavaScript</li><li>ブラウザ保存</li></ul></aside></header>
+            <header class="course-hero"><div><p class="eyebrow">COURSE 01</p><h1 id="course-title">Web開発基礎</h1><p class="lead">HTMLで意味のある構造を作り、CSSで配置を整え、JavaScriptで操作に反応する画面を完成させます。</p><div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Browser</span></div><div class="actions"><button class="primary" type="button" data-lesson="html01">最初のレッスンへ</button><button class="secondary" type="button" data-view="courses">一覧へ戻る</button></div></div><aside><span>最終成果物</span><strong>操作できる自己紹介サイト</strong><ul><li>意味のあるHTML構造</li><li>レスポンシブなレイアウト</li><li>入力と表示のJavaScript</li><li>ブラウザ保存</li></ul></aside></header>
             <div class="course-layout">
               <main>
                 <header class="section-head"><div><p class="eyebrow">CURRICULUM</p><h2>カリキュラム</h2></div><p>7章・24レッスン</p></header>
                 <ol class="curriculum">
-                  <li class="current"><span>01</span><div><small>HTML / 4 LESSONS</small><h3>Webページの構造</h3><p>タグ、属性、head、body、見出し、文章。</p></div><button type="button" data-view="lesson">開始</button></li>
-                  <li><span>02</span><div><small>HTML / 3 LESSONS</small><h3>意味のあるHTML</h3><p>セクション、リスト、リンク、画像、フォーム。</p></div><b>未着手</b></li>
-                  <li><span>03</span><div><small>CSS / 4 LESSONS</small><h3>見た目を整える</h3><p>選択子、色、文字、余白、ボックスモデル。</p></div><b>未着手</b></li>
-                  <li><span>04</span><div><small>CSS / 4 LESSONS</small><h3>レイアウトとレスポンシブ</h3><p>Flexbox、Grid、画面幅への対応。</p></div><b>未着手</b></li>
-                  <li><span>05</span><div><small>JAVASCRIPT / 3 LESSONS</small><h3>値と処理の基本</h3><p>変数、条件分岐、繰り返し、関数。</p></div><b>未着手</b></li>
-                  <li><span>06</span><div><small>JAVASCRIPT / 3 LESSONS</small><h3>画面を操作する</h3><p>DOM、イベント、入力値、状態保存。</p></div><b>未着手</b></li>
-                  <li><span>07</span><div><small>MINI PROJECT / 3 LESSONS</small><h3>自己紹介サイトを完成させる</h3><p>設計、実装、確認、公開用ビルド。</p></div><b>未着手</b></li>
+                  <li class="current"><span>01</span><div><small>HTML / 4 LESSONS</small><h3>Webページの構造</h3><p>タグ、属性、head、body、見出し、文章。</p></div><button type="button" data-lesson="html01">開始</button></li>
+                  <li><span>02</span><div><small>HTML / 3 LESSONS</small><h3>意味のあるHTML</h3><p>セクション、リスト、リンク、画像、フォーム。</p></div><button type="button" data-lesson="html05">開始</button></li>
+                  <li><span>03</span><div><small>CSS / 4 LESSONS</small><h3>見た目を整える</h3><p>選択子、色、文字、余白、ボックスモデル。</p></div><button type="button" data-lesson="css01">開始</button></li>
+                  <li><span>04</span><div><small>CSS / 4 LESSONS</small><h3>レイアウトとレスポンシブ</h3><p>Flexbox、Grid、画面幅への対応。</p></div><button type="button" data-lesson="css05">開始</button></li>
+                  <li><span>05</span><div><small>JAVASCRIPT / 3 LESSONS</small><h3>値と処理の基本</h3><p>変数、条件分岐、繰り返し、関数。</p></div><b>受講可能</b></li>
+                  <li><span>06</span><div><small>JAVASCRIPT / 3 LESSONS</small><h3>画面を操作する</h3><p>DOM更新・クリック・入力値の3教材を受講可能。</p></div><button type="button" data-lesson="js04">開始</button></li>
+                  <li><span>07</span><div><small>MINI PROJECT / 3 LESSONS</small><h3>自己紹介サイトを完成させる</h3><p>project01でHTMLの設計と構造を学びます。project02の動作・保存とproject03の成果物実行は準備中です。</p></div><button type="button" data-view="project" data-project-open="project01">project01を学ぶ</button></li>
                 </ol>
               </main>
               <aside class="course-side">
-                <section><p class="eyebrow">COURSE STATUS</p><h2>開始前</h2><div class="progress"><i style="width:0%"></i></div><dl><div><dt>完了</dt><dd>0 / 24</dd></div><div><dt>演習</dt><dd>0 / 18</dd></div><div><dt>目安</dt><dd>12〜16時間</dd></div></dl></section>
+                <section><p class="eyebrow">COURSE STATUS</p><h2><span data-chapter-title>HTML第1章</span>の進捗</h2><div class="progress"><i data-progress-bar style="width:0%"></i></div><dl><div><dt>完了</dt><dd data-course-progress>0 / 24</dd></div><div><dt>選択中の章</dt><dd data-chapter-progress>0 / 4</dd></div><div><dt>目安</dt><dd>12〜16時間</dd></div></dl></section>
                 <section><p class="eyebrow">REQUIREMENTS</p><h2>前提条件</h2><ul><li>ブラウザを操作できる</li><li>日本語入力ができる</li><li>プログラミング経験は不要</li></ul></section>
               </aside>
             </div>
@@ -133,44 +133,46 @@
           <div class="page">
             <div class="breadcrumb"><button type="button" data-view="course">Web開発基礎</button><span>/</span><span>HTML 01</span></div>
             <div class="lesson-layout">
-              <aside class="toc"><p class="eyebrow">LESSON 01</p><h2>HTMLの基本構造</h2><nav><a href="#goal">今回の目標</a><a href="#structure">基本構造</a><a href="#tags">タグの役割</a><a href="#check">理解確認</a></nav><div><span>章の進捗</span><strong>1 / 4</strong><div class="progress"><i style="width:25%"></i></div></div></aside>
-              <article class="lesson">
-                <header><p class="eyebrow">HTML / CHAPTER 01</p><h1 id="lesson-title">HTMLの基本構造を理解する</h1><p class="lead">HTMLは、ブラウザへ「これは見出し」「これは文章」と内容の意味を伝えるための言語です。</p></header>
-                <section id="goal"><h2>今回の目標</h2><ul class="goals"><li>HTML文書の最小構造を説明できる</li><li>headとbodyの役割を区別できる</li><li>見出しと文章を自分で入力できる</li></ul></section>
-                <section id="structure"><h2>HTML文書の最小構造</h2><p>最初は暗記せず、各行の役割を確認してください。</p><div class="code"><header><span>index.html</span><button type="button" data-copy-code>コピー</button></header><pre><code>&lt;!doctype html&gt;
-&lt;html lang="ja"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;title&gt;はじめてのページ&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;はじめてのWebページ&lt;/h1&gt;
-    &lt;p&gt;HTMLを入力して表示しています。&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre></div><div class="concepts"><article><span>1</span><h3>doctype</h3><p>HTML文書であることを宣言。</p></article><article><span>2</span><h3>head</h3><p>ページの設定やタイトル。</p></article><article><span>3</span><h3>body</h3><p>画面に表示する内容。</p></article></div></section>
-                <section id="tags"><h2>タグは内容の意味を表す</h2><div class="tag-list"><article><code>&lt;h1&gt;</code><div><h3>ページの主見出し</h3><p>ページ全体の内容を代表します。</p></div></article><article><code>&lt;p&gt;</code><div><h3>文章の段落</h3><p>複数の文を一つの段落にします。</p></div></article><article><code>&lt;title&gt;</code><div><h3>タブの名前</h3><p>本文ではなくブラウザのタブに表示されます。</p></div></article></div></section>
-                <section id="check" class="knowledge"><p class="eyebrow">QUICK CHECK</p><h2>理解確認</h2><p>ブラウザ画面に表示する見出しと文章は、どこへ書きますか。</p><label><input type="radio" name="knowledge" value="head" /> headの中</label><label><input type="radio" name="knowledge" value="body" /> bodyの中</label><label><input type="radio" name="knowledge" value="doctype" /> doctypeの中</label><button id="check-knowledge" type="button">回答を確認</button><p id="knowledge-result" role="status" aria-live="polite"></p></section>
-                <footer class="lesson-next"><div><span>次の操作</span><strong>自分でHTMLを入力して表示を確認する</strong></div><button class="primary" type="button" data-view="practice">入力演習へ進む</button></footer>
-              </article>
+              <aside class="toc"><h2 data-chapter-title>HTML第1章</h2><div id="lesson-picker" aria-label="教材一覧"></div><div><span>章の進捗</span><strong data-chapter-progress>0 / 4</strong></div></aside>
+              <article class="lesson" id="lesson-content"></article>
             </div>
           </div>
         </section>
 
         <section class="view practice-view" data-view-panel="practice" aria-labelledby="practice-title" hidden>
-          <header class="practice-head"><button type="button" data-view="lesson">← 教材へ戻る</button><div><small>WEB基礎 / HTML 01 / PRACTICE</small><h1 id="practice-title">HTMLの基本構造を入力する</h1></div><span id="save-status">自動保存</span></header>
+          <header class="practice-head"><button type="button" data-view="lesson">← 教材へ戻る</button><div><small>WEB基礎 / HTML 01 / PRACTICE</small><h1 id="practice-title">HTMLの基本構造を入力する</h1></div><span id="save-status" role="status" aria-live="polite">自動保存</span></header>
           <div class="practice-grid">
-            <section class="task-panel"><p class="eyebrow">TASK</p><h2>見出しと文章を持つページを完成させる</h2><p>空欄を埋め、ブラウザプレビューへ自己紹介ページを表示してください。</p><h3>完了条件</h3><ul class="conditions"><li data-test="doctype"><span>○</span>HTML文書として宣言</li><li data-test="title"><span>○</span>titleに文字がある</li><li data-test="heading"><span>○</span>h1見出しがある</li><li data-test="paragraph"><span>○</span>p段落がある</li></ul><details><summary>ヒントを見る</summary><p>画面に表示する内容はbodyの中へ書きます。</p></details></section>
-            <section class="editor-panel"><header><div><span>index.html</span><b>HTML</b></div><button id="reset-code" type="button">初期状態へ戻す</button></header><textarea id="editor" spellcheck="false" aria-label="HTMLコード入力欄">&lt;!doctype html&gt;
-&lt;html lang="ja"&gt;
-  &lt;head&gt;
-    &lt;meta charset="UTF-8" /&gt;
-    &lt;title&gt;&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    
-  &lt;/body&gt;
-&lt;/html&gt;</textarea><footer><button class="secondary" id="run-preview" type="button">プレビュー更新</button><button class="primary" id="check-code" type="button">完了条件を確認</button></footer></section>
-            <section class="preview-panel"><header><span>ブラウザプレビュー</span><b id="result-status">未確認</b></header><iframe id="preview" title="HTMLプレビュー" sandbox></iframe><div class="result-message"><strong id="result-title">コードを入力してください</strong><p id="result-message" aria-live="polite">プレビュー更新後、完了条件を確認できます。</p></div></section>
+            <section class="task-panel"><p class="eyebrow">TASK</p><h2 id="task-title"></h2><p>教材を参考に入力して、表示と完了条件を確認してください。</p><h3>完了条件</h3><ul class="conditions" id="conditions"></ul><details><summary>ヒントを見る</summary><p id="practice-hint"></p></details><p id="attempts" role="status"></p><button class="primary" id="next-lesson" type="button" hidden>次のレッスンへ</button></section>
+            <section class="editor-panel"><header><div><span>index.html</span><b>HTML</b></div><button id="reset-code" type="button">初期状態へ戻す</button></header><textarea id="editor" spellcheck="false" aria-label="HTMLコード入力欄"></textarea><footer><button class="secondary" id="run-preview" type="button">プレビュー更新</button><button class="secondary" id="stop-code" type="button" hidden>停止</button><button class="primary" id="check-code" type="button">完了条件を確認</button></footer></section>
+            <section class="preview-panel"><header><span>ブラウザプレビュー</span><b id="result-status">未確認</b></header><div id="preview-controls" class="preview-controls" hidden><label for="preview-width">プレビュー幅</label><select id="preview-width"><option value="fit">表示領域に合わせる</option></select><p id="preview-width-note"></p></div><div class="preview-viewport" tabindex="0" aria-label="プレビュー表示領域。幅が大きい場合は横にスクロールできます"><iframe id="preview" title="HTMLプレビュー" sandbox></iframe><p id="execution-state" role="status" hidden>停止処理を待っています。数秒後に再実行できます。</p><pre id="execution-output" aria-label="JavaScript実行結果" hidden></pre></div><div class="result-message"><strong id="result-title">コードを入力してください</strong><p id="result-message" aria-live="polite">プレビュー更新後、完了条件を確認できます。</p></div></section>
+          </div>
+        </section>
+        <section class="view" data-view-panel="project" aria-labelledby="project-title" hidden>
+          <div class="page" id="project-workspace">
+            <div class="breadcrumb"><button type="button" data-view="course">Web開発基礎</button><span>/</span><span id="project-breadcrumb">第7章 / PROJECT01</span></div>
+            <header class="page-head"><div><p class="eyebrow" id="project-kicker">MINI PROJECT / PROJECT01</p><h1 id="project-title">自己紹介サイトの設計と構造</h1><p id="project-description">HTML構造を完成させ、同じ3ファイルを持ち出せます。静的採点でproject01を完了できます。</p></div></header>
+            <div class="project-actions" role="group" aria-label="成果物の教材"><button type="button" data-project-lesson="project01" aria-pressed="true">project01 構造</button><button type="button" data-project-lesson="project02-css" aria-pressed="false">project02 CSS先行教材</button><button type="button" data-project-lesson="project03-export" aria-pressed="false">project03 ファイル照合</button></div>
+            <p id="project-lesson-note">教材の切替は入力を保持します。</p>
+            <section id="project-lesson-content" class="project-guide" aria-label="project01の教材"></section>
+            <section id="project-examples" class="project-guide"></section>
+            <section class="project-guide"><h2>演習のヒントと結果</h2><p id="project-hint"></p><p id="project-result" role="status"></p><p id="project-history"></p><p id="project-progress-save" role="status"></p><button id="project-reset-history" type="button">project01の履歴を初期化</button></section>
+            <p id="project-save-status" role="status"></p>
+            <section class="project-guide"><h2>この後に学ぶこと</h2><p>project02では見た目・選択・標準localStorage、project03では同じ成果物の実行と復帰を確認します。この画面では動作・保存の採点は使えません。</p><button id="project-native" type="button" disabled aria-describedby="project-native-note">native動作確認（準備中）</button><p id="project-native-note">専用の隔離実行環境と結果連携は未対応です。通常ブラウザーへ直接開くfallbackや、完了結果の自己申告はありません。</p></section>
+            <div class="project-grid">
+              <section class="project-editor">
+                <div class="project-tabs" role="tablist" aria-label="成果物のファイル">
+                  <button type="button" role="tab" id="project-tab-0" data-project-file="index.html" aria-controls="project-file-panel" aria-selected="true">index.html</button>
+                  <button type="button" role="tab" id="project-tab-1" data-project-file="styles.css" aria-controls="project-file-panel" aria-selected="false" tabindex="-1">styles.css</button>
+                  <button type="button" role="tab" id="project-tab-2" data-project-file="app.js" aria-controls="project-file-panel" aria-selected="false" tabindex="-1">app.js</button>
+                </div>
+                <div id="project-file-panel" role="tabpanel" aria-labelledby="project-tab-0"><label id="project-editor-label" for="project-editor">index.html 入力欄</label><textarea id="project-editor" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></div>
+                <div class="project-actions"><button type="button" class="secondary" id="project-inspect">静的構造を確認</button><button type="button" class="primary" id="project-export">ファイルを書き出す</button><button type="button" id="project-cancel" hidden>確認・書き出しを取消</button><button type="button" id="project-reset">project01の3ファイルを初期化</button></div>
+                <p>Ctrl / Command + Enterで静的確認。Tabは次の操作へ移動します。各ファイル32KiB、合計96KiBまで書き出せます。</p>
+              </section>
+              <section class="project-display"><h2>静的プレビュー</h2><p>表示用コピーからscript・イベント属性・外部resourceを除きます。入力と書き出すファイルは変更しません。動作や保存の確認ではありません。</p><iframe id="project-preview" title="自己紹介サイトの静的プレビュー（スクリプトなし）" sandbox></iframe><ul id="project-checks" aria-label="静的構造の確認結果"></ul></section>
+            </div>
+            <section class="project-export"><h2>成果物のファイル</h2><p id="project-action-status" role="status">静的確認または書き出しを選んでください。</p><div id="project-downloads" aria-label="書き出すファイル"></div><p>5ファイルを同じ空フォルダに保存してください。manifest.jsonに3ファイルのサイズとSHA-256を記録します。編集後は全ファイルを取り直してください。保存値や講座の履歴は含めません。</p></section>
+            <section id="project-bundle-panel" class="project-guide" hidden><h2>保存したファイルを照合</h2><p id="project-bundle-note">3コードファイルとmanifest.jsonを選びます。README.txtは任意で照合対象外です。ファイルを実行/上書きせず、内容を読み取って比較します。照合は動作や保存の受入ではありません。</p><label for="project-bundle-files">照合するファイル（複数選択）</label><input id="project-bundle-files" type="file" multiple accept=".html,.css,.js,.json,.txt" aria-describedby="project-bundle-note"><div class="project-actions"><button id="project-verify-bundle" type="button">選択したファイルを照合</button></div><p id="project-bundle-result" role="status">未照合 — 保存したファイルを選んでください。</p><ul id="project-bundle-checks" aria-label="ファイルごとの内容照合結果"></ul></section>
           </div>
         </section>
       </main>

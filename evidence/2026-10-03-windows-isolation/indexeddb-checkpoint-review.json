@@ -1,0 +1,22 @@
+{
+  "sha": "ee6bd42ab1d80c7224b65fc4f4593d94bef3367f",
+  "tree": "f40a25ab7797f57151c0f383a996028cc89c441f",
+  "unchangedReviewedProduct": "7acb4e424f9554e052a512cf3bbf76c73db17ba9",
+  "committedArtifactHashes": 28,
+  "allBytesHashesMatch": true,
+  "productGitEntries": 73,
+  "exactProductGitEntries": true,
+  "oldPublished5fEvidenceUnchanged": true,
+  "verification": {
+    "dbCases": 26,
+    "legacyLessons": 21,
+    "legacyWidths": 3,
+    "adapterWidths": 3,
+    "verifyAgent": true
+  },
+  "canonicalClaims": "Foundation21 original unit6/6=100%; course92%; supplemental fix publication pending; workspace migration/native/durability/quota/Safari/Pages not accepted; Windows read-only inventory pending",
+  "blockingFindings": [],
+  "suitesRerun": false,
+  "publication": false,
+  "OSChanges": false
+}

@@ -1,0 +1,121 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "case": "pagehide during initial migration rejects late bootstrap and saved indication",
+      "syntheticDelivery": true,
+      "passed": true
+    },
+    {
+      "case": "migration/repeat/authority/real grade/reload/late ack/abort/retry",
+      "width": 375,
+      "passed": true
+    },
+    {
+      "case": "migration/repeat/authority/real grade/reload/late ack/abort/retry",
+      "width": 768,
+      "passed": true
+    },
+    {
+      "case": "migration/repeat/authority/real grade/reload/late ack/abort/retry",
+      "width": 1280,
+      "passed": true
+    },
+    {
+      "case": "single legacy migration",
+      "passed": true
+    },
+    {
+      "case": "first migration failure: unavailable",
+      "synthetic": true,
+      "passed": true
+    },
+    {
+      "case": "first migration failure: open-refusal",
+      "synthetic": true,
+      "passed": true
+    },
+    {
+      "case": "first migration failure: legacy-refusal",
+      "synthetic": true,
+      "passed": true
+    },
+    {
+      "case": "first migration failure: quota",
+      "synthetic": true,
+      "passed": true
+    },
+    {
+      "case": "first migration failure: refusal",
+      "synthetic": true,
+      "passed": true
+    },
+    {
+      "case": "first migration failure: transaction",
+      "synthetic": true,
+      "passed": true
+    },
+    {
+      "case": "first migration failure: abort",
+      "synthetic": true,
+      "passed": true
+    },
+    {
+      "case": "corrupt legacy retained",
+      "passed": true
+    },
+    {
+      "case": "save failure/retry: quota",
+      "synthetic": true,
+      "passed": true
+    },
+    {
+      "case": "save failure/retry: refusal",
+      "synthetic": true,
+      "passed": true
+    },
+    {
+      "case": "save failure/retry: transaction",
+      "synthetic": true,
+      "passed": true
+    },
+    {
+      "case": "two native tabs / CAS conflict / reload",
+      "passed": true
+    },
+    {
+      "case": "simultaneous first native migration is idempotent",
+      "passed": true
+    },
+    {
+      "case": "valid DB remains authoritative when legacy getter is refused",
+      "synthetic": true,
+      "passed": true
+    },
+    {
+      "case": "native transaction kept active / deadline abort / retry",
+      "syntheticKeepAlive": true,
+      "passed": true
+    },
+    {
+      "case": "invalid/unknown DB record retained on save and reload",
+      "passed": true
+    },
+    {
+      "case": "native queued open deadline behind blocked foreign upgrade / late result ignored",
+      "passed": true
+    },
+    {
+      "case": "native blocked upgrade / late open abort / versionchange close",
+      "passed": true
+    },
+    {
+      "case": "unknown newer DB version retained",
+      "passed": true
+    },
+    {
+      "case": "pagehide invalidates stale ack / reload reads actual commit",
+      "passed": true
+    }
+  ]
+}

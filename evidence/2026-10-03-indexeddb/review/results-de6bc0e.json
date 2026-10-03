@@ -1,0 +1,47 @@
+{
+  "sha": "de6bc0e7be4394190d8a774398445dae55582ad7",
+  "immutableGitServing": true,
+  "width": 375,
+  "observations": [
+    {
+      "migration": true,
+      "legacyHistory": true,
+      "staleResultHidden": true
+    },
+    {
+      "reloadUsesDB": true,
+      "legacyRawUnchanged": true
+    },
+    {
+      "commitAcknowledgementRequired": true,
+      "staleAckDoesNotMarkLatestSaved": true,
+      "latestQueueCommitted": true
+    },
+    {
+      "nativeTransactionAbortKeepsDB": true,
+      "errorRetainsEditor": true,
+      "retrySaved": true
+    },
+    {
+      "nativeTwoTabConflictPreservesWinner": true,
+      "conflictRetainsDraft": true,
+      "conflictReloadUsesWinner": true
+    },
+    {
+      "pagehideIgnoresStaleAck": true,
+      "reloadReadsActualCommit": true
+    },
+    {
+      "initialRestoreHideSynthetic": true,
+      "statusAfterHeldInitialAck": "saved",
+      "unexpectedSavedAfterHide": true
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "pass": false,
+  "blockingFindings": [
+    "pagehide during initial restore does not invalidate delayed migration acknowledgement; UI initializes and reports saved after hide"
+  ],
+  "completedReviewChecks": true
+}

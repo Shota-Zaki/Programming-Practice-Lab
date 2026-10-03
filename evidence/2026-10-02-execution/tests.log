@@ -1,0 +1,19 @@
+
+> programming-practice-lab@0.0.0 test:execution
+> node --test tests/javascript-execution.mjs
+
+✔ correlated result terminates worker; unrelated message ignored (0.55225ms)
+✔ timeout terminates and allows retry (12.151416ms)
+✔ replacement cancels; stale callback ignored; stop idempotent (0.111875ms)
+✔ error, decode error, malformed reply release worker (0.106666ms)
+✔ creation and send errors resolve and release resources (0.092459ms)
+✔ invalid arguments never cancel active job (0.176375ms)
+✔ real worker: infinite loop terminates, UI thread remains responsive, retry succeeds (156.489125ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 241.442875

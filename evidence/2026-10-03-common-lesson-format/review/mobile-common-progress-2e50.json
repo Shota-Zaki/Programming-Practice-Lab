@@ -1,0 +1,13 @@
+{
+  "sha": "2e50c53c666a5d44cdfa8a4e5715f3270e7cb616",
+  "immutableGitServing": true,
+  "width": 375,
+  "observations": [],
+  "errors": [],
+  "external": [],
+  "pass": false,
+  "failure": {
+    "name": "Error",
+    "message": "page.goto: Download is starting\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:55398/\", waiting until \"load\"\u001b[22m\n"
+  }
+}

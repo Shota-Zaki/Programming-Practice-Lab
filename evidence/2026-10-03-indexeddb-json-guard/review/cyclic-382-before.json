@@ -1,0 +1,9 @@
+{
+  "status": {
+    "phase": "error",
+    "source": "legacy",
+    "reason": "TypeError"
+  },
+  "restoredCode": "corrupt DB code",
+  "legacyRawUnchanged": true
+}

@@ -1,0 +1,2 @@
+# Preserve the exact captured/downloaded bytes across Windows checkouts.
+* -text

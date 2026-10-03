@@ -1,0 +1,11 @@
+{
+  "sha": "382def60674d07900f944b72e5b515ff25200acc",
+  "tree": "5d663010a131ff8a5ef5e2b761025660993f104e",
+  "reviewedBehaviorBaseline": "b739eb067a37e2fc7c6cf82f7783974b15502915",
+  "allProductJSIdentical": true,
+  "sourceDocsCssIdentical": true,
+  "onlyThreeExpectedFilesChanged": true,
+  "diffCheck": true,
+  "blockingFindings": [],
+  "verificationLimits": "Independent375px saved/pending/error layout plus exactdiff; prior b739DB behavior is inherited without duplicate browser suite; quota error synthetic."
+}

@@ -1,0 +1,94 @@
+{
+  "capturedUtc": "2026-10-03T16:06:00.7662427Z",
+  "fixedPaths": [
+    {
+      "exists": false,
+      "path": "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe",
+      "version": null
+    },
+    {
+      "exists": false,
+      "path": "C:\\Program Files\\RedHat\\Podman\\podman.exe",
+      "version": null
+    },
+    {
+      "exists": false,
+      "path": "C:\\WINDOWS\\System32\\WindowsSandbox.exe",
+      "version": null
+    }
+  ],
+  "wslRegistrations": [],
+  "knownPipe": [
+    {
+      "present": false,
+      "name": "docker_engine"
+    },
+    {
+      "present": false,
+      "name": "dockerDesktopLinuxEngine"
+    }
+  ],
+  "apiExports": [
+    {
+      "present": true,
+      "export": "CreateJobObjectW",
+      "library": "kernel32.dll"
+    },
+    {
+      "present": true,
+      "export": "AssignProcessToJobObject",
+      "library": "kernel32.dll"
+    },
+    {
+      "present": true,
+      "export": "SetInformationJobObject",
+      "library": "kernel32.dll"
+    },
+    {
+      "present": true,
+      "export": "QueryInformationJobObject",
+      "library": "kernel32.dll"
+    },
+    {
+      "present": true,
+      "export": "TerminateJobObject",
+      "library": "kernel32.dll"
+    },
+    {
+      "present": true,
+      "export": "IsProcessInJob",
+      "library": "kernel32.dll"
+    },
+    {
+      "present": true,
+      "export": "CreateProcessW",
+      "library": "kernel32.dll"
+    },
+    {
+      "present": true,
+      "export": "UpdateProcThreadAttribute",
+      "library": "kernel32.dll"
+    },
+    {
+      "present": true,
+      "export": "CreateAppContainerProfile",
+      "library": "userenv.dll"
+    },
+    {
+      "present": true,
+      "export": "DeriveAppContainerSidFromAppContainerName",
+      "library": "userenv.dll"
+    },
+    {
+      "present": true,
+      "export": "FwpmEngineOpen0",
+      "library": "fwpuclnt.dll"
+    },
+    {
+      "present": true,
+      "export": "FwpmFilterAdd0",
+      "library": "fwpuclnt.dll"
+    }
+  ],
+  "errors": []
+}

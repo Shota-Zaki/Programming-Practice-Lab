@@ -1,0 +1,31 @@
+{
+  "results": [
+    {
+      "width": 375,
+      "lessons": 4,
+      "reload": true,
+      "reset": true,
+      "noOverflow": true,
+      "errors": []
+    },
+    {
+      "width": 768,
+      "lessons": 4,
+      "reload": true,
+      "reset": true,
+      "noOverflow": true,
+      "errors": []
+    },
+    {
+      "width": 1280,
+      "lessons": 4,
+      "reload": true,
+      "reset": true,
+      "noOverflow": true,
+      "errors": []
+    }
+  ],
+  "legacyMigration": true,
+  "corruptStorage": true,
+  "deniedStorage": true
+}

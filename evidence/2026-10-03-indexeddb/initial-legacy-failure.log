@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+'4 / 4 蜷域ｼ' !== '譛ｪ遒ｺ隱・
+
+    at file:///C:/Users/shota/Documents/Codex/2026-10-03/task-2/ppl/tests/foundation-browser.mjs:73:12 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '4 / 4 蜷域ｼ',
+  expected: '譛ｪ遒ｺ隱・,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

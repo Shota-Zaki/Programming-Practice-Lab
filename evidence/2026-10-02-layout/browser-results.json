@@ -1,0 +1,106 @@
+{
+  "results": [
+    {
+      "width": 375,
+      "lessons": 15,
+      "reload": true,
+      "reset": true,
+      "noOverflow": true,
+      "errors": []
+    },
+    {
+      "width": 768,
+      "lessons": 15,
+      "reload": true,
+      "reset": true,
+      "noOverflow": true,
+      "errors": []
+    },
+    {
+      "width": 1280,
+      "lessons": 15,
+      "reload": true,
+      "reset": true,
+      "noOverflow": true,
+      "errors": []
+    }
+  ],
+  "layoutChecks": {
+    "examples": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "starters": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "wrong": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "equivalent": true,
+    "widthsReported": true,
+    "aggregateFailed": true,
+    "cancelled": true,
+    "framesStarted": 2,
+    "framesLeft": 0
+  },
+  "cssChecks": {
+    "examples": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "starters": [
+      false,
+      false,
+      false,
+      false
+    ],
+    "wrong": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "equivalent": true,
+    "important": true,
+    "cancelled": true,
+    "timedOut": true,
+    "noEscape": true,
+    "frames": 0
+  },
+  "cssExternalRequests": [],
+  "cssUiCancellation": true,
+  "cssUiTimeoutRetry": true,
+  "gradingRegressions": 22,
+  "oldV1Upgrade": true,
+  "inlineImage": true,
+  "legacyMigration": true,
+  "corruptStorage": true,
+  "deniedStorage": true
+}

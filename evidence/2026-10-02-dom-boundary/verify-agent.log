@@ -1,0 +1,18 @@
+
+> programming-practice-lab@0.0.0 verify:agent
+> npm run verify
+
+
+> programming-practice-lab@0.0.0 verify
+> npm run build && npm run check:pages && git diff --exit-code -- docs
+
+
+> programming-practice-lab@0.0.0 build
+> node scripts/build.mjs
+
+Generated GitHub Pages files in /docs
+
+> programming-practice-lab@0.0.0 check:pages
+> node scripts/check-pages.mjs
+
+GitHub Pages output is valid

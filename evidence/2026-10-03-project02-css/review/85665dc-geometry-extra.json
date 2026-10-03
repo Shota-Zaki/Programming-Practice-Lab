@@ -1,0 +1,17 @@
+[
+  {
+    "name": "offscreen-above",
+    "accepted": true,
+    "failures": []
+  },
+  {
+    "name": "text-indent-negative",
+    "accepted": true,
+    "failures": []
+  },
+  {
+    "name": "safe-relative",
+    "accepted": true,
+    "failures": []
+  }
+]

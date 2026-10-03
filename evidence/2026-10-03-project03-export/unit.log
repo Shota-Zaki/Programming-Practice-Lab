@@ -1,0 +1,36 @@
+笨・correlated result terminates worker; unrelated message ignored (1.0482ms)
+笨・timeout terminates and allows retry (10.2552ms)
+笨・replacement cancels; stale callback ignored; stop idempotent (0.2288ms)
+笨・error, decode error, malformed reply release worker (0.2311ms)
+笨・creation and send errors resolve and release resources (0.2786ms)
+笨・invalid arguments never cancel active job (0.3662ms)
+笨・real worker: infinite loop terminates, UI thread remains responsive, retry succeeds (169.512ms)
+笨・cancel during worker creation terminates the returned host before sending (0.1952ms)
+笨・exported Unicode/raw HTML-like code matches manifest and current snapshot without execution (7.2195ms)
+笨・manifest mismatch and stale current code are separate observations (1.4956ms)
+笨・strict filenames, cardinality and manifest semantics reject before claiming integrity (1.6499ms)
+笨・caps reject unread bytes; exact UTF-8 boundaries and empty code remain valid content checks (3.4471ms)
+笨・invalid UTF-8, read failure, inconsistent metadata and digest failure have no positive result (2.1608ms)
+笨・abort releases pending read/hash and rejects late outcomes; current strings are snapshotted (1.9967ms)
+笨・hung reads time out within bounded diagnostic deadline (5000.6005ms)
+笨・resource function tokens include string image URLs and CSS escapes (0.7975ms)
+笨・ordinary colors/layout/variables and quoted text remain available (0.1242ms)
+笨・snapshot copies exactly three complete files (1.1698ms)
+笨・UTF-8 limits reject overflow and unpaired surrogate without truncation (0.3557ms)
+笨・restore and reset affect only project key, preserving old progress (1.0485ms)
+笨・corrupt raw survives load and editing until explicit reset (0.3041ms)
+笨・storage failures and oversized edits preserve in-memory work (0.2142ms)
+笨・repeated export preserves bytes and matching real SHA-256 hashes (3.95ms)
+笨・async digest snapshots edits and cancellation/error never returns a bundle (0.7857ms)
+笨・new lesson starter is incomplete; existing workspace bytes survive registration (1.3319ms)
+笨・attempts and historical completion survive reload; reset changes only project01 history (0.5731ms)
+笨・corrupt history is retained until explicit reset (0.1726ms)
+笨・get/set failures keep the in-memory result without claiming persistence (0.1227ms)
+邃ｹ tests 28
+邃ｹ suites 0
+邃ｹ pass 28
+邃ｹ fail 0
+邃ｹ cancelled 0
+邃ｹ skipped 0
+邃ｹ todo 0
+邃ｹ duration_ms 5081.3338

@@ -1,0 +1,288 @@
+{
+  "browser": "153.0.8010.12",
+  "results": [
+    {
+      "width": 375,
+      "case": "shared-input/15-checks/unchanged-progress/no-JS/Tab/reload/reset/cancel/switch/move",
+      "pass": true
+    },
+    {
+      "case": "32-wrong-CSS/5-equivalent-content/no-network",
+      "grading": [
+        {
+          "name": "outer-margin",
+          "rejected": true,
+          "failed": [
+            "css-spacing"
+          ]
+        },
+        {
+          "name": "card-padding",
+          "rejected": true,
+          "failed": [
+            "css-spacing"
+          ]
+        },
+        {
+          "name": "oversize",
+          "rejected": true,
+          "failed": [
+            "visible",
+            "css-spacing",
+            "css-card",
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "not-centered",
+          "rejected": true,
+          "failed": [
+            "css-card"
+          ]
+        },
+        {
+          "name": "small-copy",
+          "rejected": true,
+          "failed": [
+            "css-type"
+          ]
+        },
+        {
+          "name": "tight-lines",
+          "rejected": true,
+          "failed": [
+            "css-type"
+          ]
+        },
+        {
+          "name": "small-control",
+          "rejected": true,
+          "failed": [
+            "css-type",
+            "css-controls"
+          ]
+        },
+        {
+          "name": "small-select",
+          "rejected": true,
+          "failed": [
+            "css-controls"
+          ]
+        },
+        {
+          "name": "hidden-overflow",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "clipped-height",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "nowrap",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "tablet-only",
+          "rejected": true,
+          "failed": [
+            "css-spacing"
+          ]
+        },
+        {
+          "name": "desktop-only",
+          "rejected": true,
+          "failed": [
+            "css-type"
+          ]
+        },
+        {
+          "name": "hidden-content",
+          "rejected": true,
+          "failed": [
+            "visible",
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "resource",
+          "rejected": true,
+          "failed": [
+            "resources"
+          ]
+        },
+        {
+          "name": "clipped-heading",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "clip-path",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "mask",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "filter",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "negative-margin",
+          "rejected": true,
+          "failed": [
+            "css-spacing",
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "transparent-text",
+          "rejected": true,
+          "failed": [
+            "css-contrast"
+          ]
+        },
+        {
+          "name": "same-color",
+          "rejected": true,
+          "failed": [
+            "css-contrast"
+          ]
+        },
+        {
+          "name": "text-fill",
+          "rejected": true,
+          "failed": [
+            "css-contrast"
+          ]
+        },
+        {
+          "name": "transparent-ancestor",
+          "rejected": true,
+          "failed": [
+            "css-contrast"
+          ]
+        },
+        {
+          "name": "fixed-edge",
+          "rejected": true,
+          "failed": [
+            "css-spacing"
+          ]
+        },
+        {
+          "name": "option-ink",
+          "rejected": true,
+          "failed": [
+            "css-contrast"
+          ]
+        },
+        {
+          "name": "low-contrast",
+          "rejected": true,
+          "failed": [
+            "css-contrast"
+          ]
+        },
+        {
+          "name": "above-page",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "negative-indent",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "heading-wrapper",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "intro-wrapper",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "controls-wrapper",
+          "rejected": true,
+          "failed": [
+            "css-overflow"
+          ]
+        },
+        {
+          "name": "rem-equivalent",
+          "accepted": true
+        },
+        {
+          "name": "long-wrap",
+          "accepted": true
+        },
+        {
+          "name": "contrast-boundary-valid",
+          "accepted": true
+        },
+        {
+          "name": "composited-ink",
+          "accepted": true
+        },
+        {
+          "name": "small-offset",
+          "accepted": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "shared-input/15-checks/unchanged-progress/no-JS/Tab/reload/reset/cancel/switch/move",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "shared-input/15-checks/unchanged-progress/no-JS/Tab/reload/reset/cancel/switch/move",
+      "pass": true
+    },
+    {
+      "case": "controlled-storage-fault/denied",
+      "pass": true
+    },
+    {
+      "case": "controlled-storage-fault/quota",
+      "pass": true
+    },
+    {
+      "case": "controlled-storage-fault/corrupt",
+      "pass": true
+    }
+  ]
+}

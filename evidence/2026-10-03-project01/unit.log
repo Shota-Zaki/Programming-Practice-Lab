@@ -1,0 +1,136 @@
+TAP version 13
+# Subtest: correlated result terminates worker; unrelated message ignored
+ok 1 - correlated result terminates worker; unrelated message ignored
+  ---
+  duration_ms: 1.0922
+  type: 'test'
+  ...
+# Subtest: timeout terminates and allows retry
+ok 2 - timeout terminates and allows retry
+  ---
+  duration_ms: 10.764
+  type: 'test'
+  ...
+# Subtest: replacement cancels; stale callback ignored; stop idempotent
+ok 3 - replacement cancels; stale callback ignored; stop idempotent
+  ---
+  duration_ms: 0.2479
+  type: 'test'
+  ...
+# Subtest: error, decode error, malformed reply release worker
+ok 4 - error, decode error, malformed reply release worker
+  ---
+  duration_ms: 0.2991
+  type: 'test'
+  ...
+# Subtest: creation and send errors resolve and release resources
+ok 5 - creation and send errors resolve and release resources
+  ---
+  duration_ms: 0.2759
+  type: 'test'
+  ...
+# Subtest: invalid arguments never cancel active job
+ok 6 - invalid arguments never cancel active job
+  ---
+  duration_ms: 0.364
+  type: 'test'
+  ...
+# Subtest: real worker: infinite loop terminates, UI thread remains responsive, retry succeeds
+ok 7 - real worker: infinite loop terminates, UI thread remains responsive, retry succeeds
+  ---
+  duration_ms: 170.1683
+  type: 'test'
+  ...
+# Subtest: cancel during worker creation terminates the returned host before sending
+ok 8 - cancel during worker creation terminates the returned host before sending
+  ---
+  duration_ms: 0.209
+  type: 'test'
+  ...
+# Subtest: resource function tokens include string image URLs and CSS escapes
+ok 9 - resource function tokens include string image URLs and CSS escapes
+  ---
+  duration_ms: 0.775
+  type: 'test'
+  ...
+# Subtest: ordinary colors/layout/variables and quoted text remain available
+ok 10 - ordinary colors/layout/variables and quoted text remain available
+  ---
+  duration_ms: 0.138
+  type: 'test'
+  ...
+# Subtest: snapshot copies exactly three complete files
+ok 11 - snapshot copies exactly three complete files
+  ---
+  duration_ms: 1.194
+  type: 'test'
+  ...
+# Subtest: UTF-8 limits reject overflow and unpaired surrogate without truncation
+ok 12 - UTF-8 limits reject overflow and unpaired surrogate without truncation
+  ---
+  duration_ms: 0.2918
+  type: 'test'
+  ...
+# Subtest: restore and reset affect only project key, preserving old progress
+ok 13 - restore and reset affect only project key, preserving old progress
+  ---
+  duration_ms: 0.8333
+  type: 'test'
+  ...
+# Subtest: corrupt raw survives load and editing until explicit reset
+ok 14 - corrupt raw survives load and editing until explicit reset
+  ---
+  duration_ms: 0.272
+  type: 'test'
+  ...
+# Subtest: storage failures and oversized edits preserve in-memory work
+ok 15 - storage failures and oversized edits preserve in-memory work
+  ---
+  duration_ms: 0.2056
+  type: 'test'
+  ...
+# Subtest: repeated export preserves bytes and matching real SHA-256 hashes
+ok 16 - repeated export preserves bytes and matching real SHA-256 hashes
+  ---
+  duration_ms: 4.313
+  type: 'test'
+  ...
+# Subtest: async digest snapshots edits and cancellation/error never returns a bundle
+ok 17 - async digest snapshots edits and cancellation/error never returns a bundle
+  ---
+  duration_ms: 0.7481
+  type: 'test'
+  ...
+# Subtest: new lesson starter is incomplete; existing workspace bytes survive registration
+ok 18 - new lesson starter is incomplete; existing workspace bytes survive registration
+  ---
+  duration_ms: 0.9489
+  type: 'test'
+  ...
+# Subtest: attempts and historical completion survive reload; reset changes only project01 history
+ok 19 - attempts and historical completion survive reload; reset changes only project01 history
+  ---
+  duration_ms: 0.7225
+  type: 'test'
+  ...
+# Subtest: corrupt history is retained until explicit reset
+ok 20 - corrupt history is retained until explicit reset
+  ---
+  duration_ms: 0.1973
+  type: 'test'
+  ...
+# Subtest: get/set failures keep the in-memory result without claiming persistence
+ok 21 - get/set failures keep the in-memory result without claiming persistence
+  ---
+  duration_ms: 0.1316
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 248.6686

@@ -1,0 +1,27 @@
+{
+  "sha": "b739eb067a37e2fc7c6cf82f7783974b15502915",
+  "tree": "78912f24f5b4a3c7c0f32935fd31a9ae4c8e4499",
+  "baseline": "1a5c211c36d202aa202c5dfcc28a931d6954cd3f",
+  "unchangedProtectedPaths": [
+    "src/static/progress.js",
+    "src/static/grading.js",
+    "src/static/css-grading.js",
+    "src/static/javascript-grading.js",
+    "src/static/dom-grading.js",
+    "src/static/javascript-host.js",
+    "src/static/javascript-execution.js",
+    "src/static/dom-execution.js",
+    "src/static/project-workspace.js",
+    "src/static/project-files.js",
+    "src/static/project-bundle.js",
+    "src/static/project-static.js",
+    "src/static/lessons.js",
+    "src/static/lesson-format.js",
+    "src/static/grading-adapter.js",
+    "package.json"
+  ],
+  "sourceDocsMatch": true,
+  "diffCheck": true,
+  "review": "transaction commit-only acknowledgement; one queued latest snapshot; CAS revision; read-only legacy fallback; abort at open/migration/startup and post-init hide; no additional blocking findings",
+  "limits": "Independent native Chromium375px synthetic faults and two tabs only; no physical disk flush, real quota exhaustion, user profile, Safari or Pages/native learner acceptance tested"
+}

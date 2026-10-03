@@ -1,0 +1,9 @@
+{
+  "sha": "7acb4e424f9554e052a512cf3bbf76c73db17ba9",
+  "tree": "f3083de4f345fc82c63929fb5be0abf36e09b9b7",
+  "onlyExpectedThreeFiles": true,
+  "sourceDocsMatch": true,
+  "validationBeforeAdoptionAndPut": true,
+  "blockingFindings": [],
+  "limits": "Independent native Chromium375px matching-ID cyclic/BigInt corruption, readonly legacy fallback, record retention, valid JSON adoption and save; prior full suites not rerun, no native isolation inventory performed."
+}

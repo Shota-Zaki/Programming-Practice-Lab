@@ -1,0 +1,29 @@
+笨・correlated result terminates worker; unrelated message ignored (1.9075ms)
+笨・timeout terminates and allows retry (11.197ms)
+笨・replacement cancels; stale callback ignored; stop idempotent (0.4147ms)
+笨・error, decode error, malformed reply release worker (0.4441ms)
+笨・creation and send errors resolve and release resources (0.427ms)
+笨・invalid arguments never cancel active job (0.4271ms)
+笨・real worker: infinite loop terminates, UI thread remains responsive, retry succeeds (174.5374ms)
+笨・cancel during worker creation terminates the returned host before sending (0.2824ms)
+笨・resource function tokens include string image URLs and CSS escapes (0.8149ms)
+笨・ordinary colors/layout/variables and quoted text remain available (0.1519ms)
+笨・snapshot copies exactly three complete files (1.1861ms)
+笨・UTF-8 limits reject overflow and unpaired surrogate without truncation (0.3359ms)
+笨・restore and reset affect only project key, preserving old progress (0.9145ms)
+笨・corrupt raw survives load and editing until explicit reset (0.2843ms)
+笨・storage failures and oversized edits preserve in-memory work (0.3926ms)
+笨・repeated export preserves bytes and matching real SHA-256 hashes (3.7893ms)
+笨・async digest snapshots edits and cancellation/error never returns a bundle (0.7944ms)
+笨・new lesson starter is incomplete; existing workspace bytes survive registration (1.4751ms)
+笨・attempts and historical completion survive reload; reset changes only project01 history (0.987ms)
+笨・corrupt history is retained until explicit reset (0.3218ms)
+笨・get/set failures keep the in-memory result without claiming persistence (0.1558ms)
+邃ｹ tests 21
+邃ｹ suites 0
+邃ｹ pass 21
+邃ｹ fail 0
+邃ｹ cancelled 0
+邃ｹ skipped 0
+邃ｹ todo 0
+邃ｹ duration_ms 257.8212

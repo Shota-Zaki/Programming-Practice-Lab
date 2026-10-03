@@ -1,0 +1,69 @@
+{
+  "sha": "ed50f3f8827ed353c87a64d5b7c49f6746b706ac",
+  "legacyDeepEqual": true,
+  "seed": {
+    "code": "h1 { font-size: 32px; }\n.intro { font-size: 20px; }\n#note { font-weight: 700; }",
+    "checkedCode": "h1 { font-size: 32px; }\n.intro { font-size: 20px; }\n#note { font-weight: 700; }",
+    "attempts": 5,
+    "completed": true,
+    "result": [
+      {
+        "id": "heading-size",
+        "passed": true,
+        "actual": "legacy",
+        "expected": "legacy"
+      },
+      {
+        "id": "intro-size",
+        "passed": true,
+        "actual": "legacy",
+        "expected": "legacy"
+      },
+      {
+        "id": "note-weight",
+        "passed": true,
+        "actual": "legacy",
+        "expected": "legacy"
+      },
+      {
+        "id": "plain-size",
+        "passed": true,
+        "actual": "legacy",
+        "expected": "legacy"
+      }
+    ]
+  },
+  "restored": {
+    "code": "h1 { font-size: 32px; }\n.intro { font-size: 20px; }\n#note { font-weight: 700; }",
+    "attempts": 5,
+    "completed": true,
+    "result": [
+      {
+        "id": "heading-size",
+        "passed": true,
+        "actual": "legacy",
+        "expected": "legacy"
+      },
+      {
+        "id": "intro-size",
+        "passed": true,
+        "actual": "legacy",
+        "expected": "legacy"
+      },
+      {
+        "id": "note-weight",
+        "passed": true,
+        "actual": "legacy",
+        "expected": "legacy"
+      },
+      {
+        "id": "plain-size",
+        "passed": true,
+        "actual": "legacy",
+        "expected": "legacy"
+      }
+    ],
+    "checkedCode": "h1 { font-size: 32px; }\n.intro { font-size: 20px; }\n#note { font-weight: 700; }"
+  },
+  "note": "Earlier JSON.stringify comparison false was key ordering only; deep comparison confirms unchanged values."
+}

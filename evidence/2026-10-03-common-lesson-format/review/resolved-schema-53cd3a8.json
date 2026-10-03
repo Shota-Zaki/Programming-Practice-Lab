@@ -1,0 +1,65 @@
+{
+  "sha": "53cd3a8f5afbd9120e886278c544cdcf35d8f9e6",
+  "baseline": "b988b66cc5dc04a1e03591bb921feeee87628da1",
+  "baselineMatchesGit": true,
+  "all21Equivalent": true,
+  "jsonRoundtrip": true,
+  "originalFindingsResolved": true,
+  "initialHarnessFailure": "Root MIME was application/octet-stream; reviewer harness corrected without product changes. Initial failure retained separately.",
+  "probes": [
+    {
+      "name": "legacy CSS hidden unknown condition field",
+      "accepted": false,
+      "calls": 0,
+      "error": "TypeError"
+    },
+    {
+      "name": "legacy CSS extra completion array field",
+      "accepted": false,
+      "calls": 0,
+      "error": "TypeError"
+    },
+    {
+      "name": "legacy CSS getter selector",
+      "accepted": false,
+      "calls": 0,
+      "error": "TypeError"
+    },
+    {
+      "name": "common exercise mode getter",
+      "accepted": false,
+      "calls": 0,
+      "error": "TypeError"
+    },
+    {
+      "name": "common condition id getter",
+      "accepted": false,
+      "calls": 0,
+      "error": "TypeError"
+    },
+    {
+      "name": "legacy aggregate CSS hidden nested field",
+      "accepted": false,
+      "calls": 0,
+      "error": "TypeError"
+    },
+    {
+      "name": "legacy aggregate CSS getter expected",
+      "accepted": false,
+      "calls": 0,
+      "error": "TypeError"
+    },
+    {
+      "name": "legacy aggregate extra checks array field",
+      "accepted": false,
+      "calls": 0,
+      "error": "TypeError"
+    },
+    {
+      "name": "legacy completion sparse array",
+      "accepted": false,
+      "calls": 0,
+      "error": "TypeError"
+    }
+  ]
+}

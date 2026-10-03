@@ -1,0 +1,39 @@
+{
+  "sha": "53cd3a8f5afbd9120e886278c544cdcf35d8f9e6",
+  "immutableGitServing": true,
+  "width": 375,
+  "observations": [
+    {
+      "catalog": {
+        "count": 21,
+        "frozen": true,
+        "versions": true,
+        "legacyViews": true
+      }
+    },
+    {
+      "legacySavedCodeHistory": true,
+      "staleResultHidden": true
+    },
+    {
+      "sameCodeCancelledOldResultRefused": true,
+      "currentRetryAccepted": true
+    },
+    {
+      "quotaRefusalKeptStoredBytes": true,
+      "reloadRestoredPriorCode": true
+    },
+    {
+      "store": {
+        "version": 1,
+        "noEnvelope": true,
+        "nativeKey": "css",
+        "unrelated": "keep",
+        "horizontalOverflow": false
+      }
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "pass": true
+}

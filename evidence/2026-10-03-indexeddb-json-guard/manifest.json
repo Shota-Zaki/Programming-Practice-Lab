@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "productSha": "7acb4e424f9554e052a512cf3bbf76c73db17ba9",
+  "productTree": "f3083de4f345fc82c63929fb5be0abf36e09b9b7",
+  "verification": {
+    "dbCases": 26,
+    "legacyLessons": 21,
+    "legacyWidths": 3,
+    "adapterWidths": 3,
+    "verifyAgent": true
+  },
+  "nativeLearnerAcceptance": false,
+  "physicalDurabilityTest": false,
+  "realQuotaExhaustionTest": false,
+  "courseCompletion": "92%",
+  "productFiles": [
+    "100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391\tdocs/.nojekyll",
+    "100644 blob 2a97b4991684c2609493258af1bb69f8351acd3f\tdocs/404.html",
+    "100644 blob 839958fbcccefc028b607f043cb601513718fd07\tdocs/app.js",
+    "100644 blob 92e2a3416087a011605ca10761a33969a1522521\tdocs/css-grading.js",
+    "100644 blob 72b521866f71181bff4066dabcaf9f082aab82ae\tdocs/dom-execution.js",
+    "100644 blob 616cd22486ad01f2d49a07369b0ad2a0b0adefba\tdocs/dom-grading.js",
+    "100644 blob 508d70d7f9d77f727bf3cbca7a2dd0b36af0ee28\tdocs/foundation.css",
+    "100644 blob 9d08532b7862361e035aec201b856fadaa6d8283\tdocs/foundation.js",
+    "100644 blob 8b90a5e86b56d9b6450e9476daccab7f6e9f8e10\tdocs/grading-adapter.js",
+    "100644 blob ad49089b2a6cab7ddd7027abf58da7dac3e7eeb5\tdocs/grading.js",
+    "100644 blob 2a97b4991684c2609493258af1bb69f8351acd3f\tdocs/index.html",
+    "100644 blob 9e6ff2ce3f9e32a9ecf4d77c400a07027cb84ebd\tdocs/indexed-progress.js",
+    "100644 blob 4249fa5eada194bd19d851f630a15fb6062f2cbd\tdocs/javascript-execution.js",
+    "100644 blob 70562e6105f18ee7f8ce4ff8e05e44cf8e153a71\tdocs/javascript-grading.js",
+    "100644 blob 30a31e8f02dad7903938730ff39b43dfaeece170\tdocs/javascript-host.js",
+    "100644 blob 130ede43401fabf5f49c94b5695adecaf57e48f2\tdocs/lesson-format.js",
+    "100644 blob 1098204f42e4e7c578224971636a8758064757ba\tdocs/lessons.js",
+    "100644 blob eb5dfbd304f088c53d6b128e3d1d53ae66988be2\tdocs/progress.js",
+    "100644 blob adc59d33b9b0407bd37012b81dce6efabeca87eb\tdocs/project-bundle.js",
+    "100644 blob f2442f32d64e8b36ebbb4e5f290a721de36b4d55\tdocs/project-css-values.js",
+    "100644 blob 3ff6a022e1163389c701f11297900361c6165f9a\tdocs/project-files.js",
+    "100644 blob 2d2a13d137bc83767bb790841f13ec9202f2bf6b\tdocs/project-lessons.js",
+    "100644 blob ca1b33db9a1b1a5d1ed105ed6c429512878a27cf\tdocs/project-preview.html",
+    "100644 blob 20a52a9faa0ada36fba0e03cb1b6972684d1e1ca\tdocs/project-static.js",
+    "100644 blob ba9b706b86731e75811534f65915da13bf70fa9d\tdocs/project-workspace.js",
+    "100644 blob 99fd999e48adca36b19c00a98de006745e6e928a\tdocs/styles.css",
+    "100644 blob 23646a6d2c369c524c8e15d8ba9e7964727d7743\tpackage.json",
+    "100644 blob 585e842d81ddc6d796abeb6831243022cd49f69e\tscripts/build.mjs",
+    "100644 blob b97f1806b536b2f71e92b5ba74e085e73a3d98d3\tscripts/check-pages.mjs",
+    "100644 blob 839958fbcccefc028b607f043cb601513718fd07\tsrc/static/app.js",
+    "100644 blob 92e2a3416087a011605ca10761a33969a1522521\tsrc/static/css-grading.js",
+    "100644 blob 72b521866f71181bff4066dabcaf9f082aab82ae\tsrc/static/dom-execution.js",
+    "100644 blob 616cd22486ad01f2d49a07369b0ad2a0b0adefba\tsrc/static/dom-grading.js",
+    "100644 blob 508d70d7f9d77f727bf3cbca7a2dd0b36af0ee28\tsrc/static/foundation.css",
+    "100644 blob 9d08532b7862361e035aec201b856fadaa6d8283\tsrc/static/foundation.js",
+    "100644 blob 8b90a5e86b56d9b6450e9476daccab7f6e9f8e10\tsrc/static/grading-adapter.js",
+    "100644 blob ad49089b2a6cab7ddd7027abf58da7dac3e7eeb5\tsrc/static/grading.js",
+    "100644 blob 2a97b4991684c2609493258af1bb69f8351acd3f\tsrc/static/index.html",
+    "100644 blob 9e6ff2ce3f9e32a9ecf4d77c400a07027cb84ebd\tsrc/static/indexed-progress.js",
+    "100644 blob 4249fa5eada194bd19d851f630a15fb6062f2cbd\tsrc/static/javascript-execution.js",
+    "100644 blob 70562e6105f18ee7f8ce4ff8e05e44cf8e153a71\tsrc/static/javascript-grading.js",
+    "100644 blob 30a31e8f02dad7903938730ff39b43dfaeece170\tsrc/static/javascript-host.js",
+    "100644 blob 130ede43401fabf5f49c94b5695adecaf57e48f2\tsrc/static/lesson-format.js",
+    "100644 blob 1098204f42e4e7c578224971636a8758064757ba\tsrc/static/lessons.js",
+    "100644 blob eb5dfbd304f088c53d6b128e3d1d53ae66988be2\tsrc/static/progress.js",
+    "100644 blob adc59d33b9b0407bd37012b81dce6efabeca87eb\tsrc/static/project-bundle.js",
+    "100644 blob f2442f32d64e8b36ebbb4e5f290a721de36b4d55\tsrc/static/project-css-values.js",
+    "100644 blob 3ff6a022e1163389c701f11297900361c6165f9a\tsrc/static/project-files.js",
+    "100644 blob 2d2a13d137bc83767bb790841f13ec9202f2bf6b\tsrc/static/project-lessons.js",
+    "100644 blob ca1b33db9a1b1a5d1ed105ed6c429512878a27cf\tsrc/static/project-preview.html",
+    "100644 blob 20a52a9faa0ada36fba0e03cb1b6972684d1e1ca\tsrc/static/project-static.js",
+    "100644 blob ba9b706b86731e75811534f65915da13bf70fa9d\tsrc/static/project-workspace.js",
+    "100644 blob 99fd999e48adca36b19c00a98de006745e6e928a\tsrc/static/styles.css",
+    "100644 blob a26348a06bbbb82b1b45a86e348e583cffe62ce2\ttests/dom-browser.mjs",
+    "100644 blob 75d7463d89f054d47528bf7deec5712c365ee362\ttests/dom-lesson-browser.mjs",
+    "100644 blob 7731d163895aab6301e4bc54917211f886a1fc2a\ttests/event-lesson-browser.mjs",
+    "100644 blob f90c4a91d0e9c4c80cc739c19485ad840dba6536\ttests/fixtures/foundation-legacy.json",
+    "100644 blob c4cd13188abf8e211ad64bd472e31a8fbb29ed60\ttests/foundation-browser.mjs",
+    "100644 blob 8f50b1f7fb5654e261790ff2351a659510a16dd4\ttests/grading-adapter-browser.mjs",
+    "100644 blob cf7f4f6841ae26c6721a37a69b4c3fd77cb94fb0\ttests/grading-adapter.mjs",
+    "100644 blob 45e409c4d3a17fbfd511474e188894e7e5d421bd\ttests/indexed-progress-browser.mjs",
+    "100644 blob 6c1d8b57cf348b34cd66e9a4bdc8aaaa0f7e0129\ttests/javascript-browser.mjs",
+    "100644 blob a31a850c70be8ab306e6698a3bf7603d5867af3a\ttests/javascript-execution.mjs",
+    "100644 blob eee801942e3006c38768f301baf7e46d122f5f19\ttests/lesson-format.mjs",
+    "100644 blob f9dd84cf4dff392d58dbfa2bdb91af7eb2f6baa9\ttests/progress-browser-tools.mjs",
+    "100644 blob 6dd6ed10a0c6de516343d5fef0ec7be5f687b6d3\ttests/project-bundle.mjs",
+    "100644 blob cf2b9fbd599aa2c2697386a2d03abe9797d2ccb4\ttests/project-css-values.mjs",
+    "100644 blob bb0a82191e47558ad2fa237f9796dddd30793590\ttests/project-files.mjs",
+    "100644 blob 856b4a3184a2c28cb297dae03947c0125660e7ed\ttests/project-lesson-progress.mjs",
+    "100644 blob 44339c55a8779438210fd93e72e4c13846d5370f\ttests/project-workspace-browser.mjs",
+    "100644 blob 9a93298811d9d3b8ac4923cd0eb5fbe57054109e\ttests/project01-browser.mjs",
+    "100644 blob 29492cd7b2062486f354eedb4c3e72e24919f1b4\ttests/project02-css-browser.mjs",
+    "100644 blob db3d35590245be124e731295df2912e516c498fb\ttests/project03-export-browser.mjs"
+  ],
+  "artifacts": [
+    {
+      "path": ".gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "adapter/legacy-and-retry-1280.png",
+      "bytes": 142633,
+      "sha256": "2f26728b273a2bb9dd315b982f7b8c33531e1e4a8072403f83011c59b1b97ce2"
+    },
+    {
+      "path": "adapter/legacy-and-retry-375.png",
+      "bytes": 103573,
+      "sha256": "a1a65f0046b19ec7a091271c030eb9efc00c409ade791066bb5c2939a94e548a"
+    },
+    {
+      "path": "adapter/legacy-and-retry-768.png",
+      "bytes": 115266,
+      "sha256": "d90415373a7f18be1f1f71abec118aacf5ad4dcd55b06bc9625c6424786f3150"
+    },
+    {
+      "path": "adapter/results.json",
+      "bytes": 3036,
+      "sha256": "5d4be1f6876c542faef3cfeb817a9507174723f0fc9f4e6d8ec02370128c98f4"
+    },
+    {
+      "path": "adapter.log",
+      "bytes": 1642,
+      "sha256": "6a9d2e738ef037b01532ec5ef8bbb3377a78b30f005e336ed153503c9cc520ab"
+    },
+    {
+      "path": "browser/error-abort.png",
+      "bytes": 84313,
+      "sha256": "b07ad64831b82c5c0e8f01488d6ed73e15119879b8c3b859c8ac795fae922259"
+    },
+    {
+      "path": "browser/error-legacy-refusal.png",
+      "bytes": 82652,
+      "sha256": "cb6cbe5e4071798f6685b722bcdbc1891801958717538aa4cc95128ee240d3b0"
+    },
+    {
+      "path": "browser/error-open-refusal.png",
+      "bytes": 84617,
+      "sha256": "373b1f93cff6299c5bd48c0a928d30300bc561f6eed6edcd3143d8c8f3ca68d5"
+    },
+    {
+      "path": "browser/error-quota.png",
+      "bytes": 84622,
+      "sha256": "2eb36693a84b4f23da764f27b2fdd7aa65a6858d67258222beea4b4d97af984f"
+    },
+    {
+      "path": "browser/error-refusal.png",
+      "bytes": 84617,
+      "sha256": "373b1f93cff6299c5bd48c0a928d30300bc561f6eed6edcd3143d8c8f3ca68d5"
+    },
+    {
+      "path": "browser/error-transaction.png",
+      "bytes": 84617,
+      "sha256": "373b1f93cff6299c5bd48c0a928d30300bc561f6eed6edcd3143d8c8f3ca68d5"
+    },
+    {
+      "path": "browser/error-unavailable.png",
+      "bytes": 84617,
+      "sha256": "373b1f93cff6299c5bd48c0a928d30300bc561f6eed6edcd3143d8c8f3ca68d5"
+    },
+    {
+      "path": "browser/results.json",
+      "bytes": 3020,
+      "sha256": "d92a2fffaff319d6de4108fa982d95a3a35619692330a3650da84ab2ac7f235c"
+    },
+    {
+      "path": "browser/saved-1280.png",
+      "bytes": 119987,
+      "sha256": "c1aa545eb4f1641f647cbaf419a5ce23c3b271d35cebd59c89b58f08cceb2702"
+    },
+    {
+      "path": "browser/saved-375.png",
+      "bytes": 75944,
+      "sha256": "f1f7d1936f5a6a133d2599a3041ddd6950fea99c3f8ed1ca4c4b2bfe2c687e73"
+    },
+    {
+      "path": "browser/saved-768.png",
+      "bytes": 87684,
+      "sha256": "2c8d8481d803a42490e9185638200c837e754d688b84fe554009dcfae6378703"
+    },
+    {
+      "path": "browser.log",
+      "bytes": 3146,
+      "sha256": "eb2141fdc080c87d1a4d27448f12e957e0b533dfcd6a5607726379ce268d2061"
+    },
+    {
+      "path": "legacy.log",
+      "bytes": 1783,
+      "sha256": "3fa373765f372f723e14894af6a8174e8e25cc7652f73f1cb6d311aeb4386acd"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 2816,
+      "sha256": "3f6d713adb13a8d25b231b51e7892197ef827047147d2a1aba63276ac564f14b"
+    },
+    {
+      "path": "review/cyclic-382-before.json",
+      "bytes": 160,
+      "sha256": "0d53c1b8e8471c71214a945dc381684a959380a4bc9ef3f261437bb3e3cd2500"
+    },
+    {
+      "path": "review/cyclic-7ac-after.json",
+      "bytes": 165,
+      "sha256": "2d3ddf40b6c3386f3971de83ea254888a53930bf1af682e37dbb24e7d66f2d30"
+    },
+    {
+      "path": "review/cyclic-fallback-7acb4e4.png",
+      "bytes": 66724,
+      "sha256": "a2f4021f1a14d56a7c797e21f4eb5c3815944afd45f2eaf56674eed8c08e2c41"
+    },
+    {
+      "path": "review/cyclic-review-7ac.json",
+      "bytes": 875,
+      "sha256": "bd65d557c369782e4b8c1a07cc39cdd86d0fa0017583f79e59fdd4d232360e72"
+    },
+    {
+      "path": "review/cyclic-review.mjs",
+      "bytes": 6969,
+      "sha256": "d522922d4663baa5f9e4088e510366ac3a2ff29ac9ef7051f54e95e887d66441"
+    },
+    {
+      "path": "review/cyclic-source-review-7ac.json",
+      "bytes": 468,
+      "sha256": "47cd2c4cbc4e0ecd2658ce8ee10d571fea6c9a75c501d562b86a6d5770e501cf"
+    },
+    {
+      "path": "review/implementer-probe.mjs",
+      "bytes": 2701,
+      "sha256": "d9d4134c8509d2b9f2522a4ee6a9bf9b434f9146aee97935ef90cf659c153788"
+    },
+    {
+      "path": "verify.log",
+      "bytes": 1890,
+      "sha256": "54f3e1b1bf8bab795b82e231c44d1b23caa1401e314453ead128dbb0932e2ac5"
+    }
+  ]
+}

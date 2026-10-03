@@ -1,0 +1,26 @@
+
+> programming-practice-lab@0.0.0 verify:agent
+> npm run verify
+
+
+> programming-practice-lab@0.0.0 verify
+> npm run build && npm run check:pages && git diff --exit-code -- docs
+
+
+> programming-practice-lab@0.0.0 build
+> node scripts/build.mjs
+
+Generated GitHub Pages files in /docs
+
+> programming-practice-lab@0.0.0 check:pages
+> node scripts/check-pages.mjs
+
+GitHub Pages output is valid
+warning: in the working copy of 'docs/404.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/foundation.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/foundation.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/project-files.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/project-lessons.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/project-static.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/project-workspace.js', LF will be replaced by CRLF the next time Git touches it

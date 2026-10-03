@@ -1,0 +1,205 @@
+{
+  "browser": "153.0.8010.12",
+  "observations": 35,
+  "results": [
+    {
+      "width": 375,
+      "case": "keyboard/restoration/static/native-disabled/real-downloads/repeat",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "image-set-string-url/prefixed/escaped-function",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "hostile-markup/css/no-network/no-code-evaluation",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "node-limit/utf8-limit/retain-errors",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "parser-immediate-abort/cleanup",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "controlled-digest-interruption/edit",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "controlled-digest-interruption/cancel",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "controlled-digest-interruption/move",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "controlled-digest-interruption/reset",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "reset-confirmation/prepared-cancel/old-progress/cleanup",
+      "pass": true,
+      "consoleErrors": [
+        "Setting the document's base URI to 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"base-uri 'none'\". The action has been blocked.",
+        "Loading the stylesheet 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"style-src 'nonce-40e5f1bdf3b54fc795c8c2bd116357e0'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.",
+        "Setting the document's base URI to 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"base-uri 'none'\". The action has been blocked.",
+        "Loading the stylesheet 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"style-src 'nonce-946bf68e9b094b7496895729c2119894'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.",
+        "Setting the document's base URI to 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"base-uri 'none'\". The action has been blocked.",
+        "Loading the stylesheet 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"style-src 'nonce-239f40dfbc4a42899684610732807211'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked."
+      ]
+    },
+    {
+      "width": 768,
+      "case": "keyboard/restoration/static/native-disabled/real-downloads/repeat",
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "image-set-string-url/prefixed/escaped-function",
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "hostile-markup/css/no-network/no-code-evaluation",
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "node-limit/utf8-limit/retain-errors",
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "parser-immediate-abort/cleanup",
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "controlled-digest-interruption/edit",
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "controlled-digest-interruption/cancel",
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "controlled-digest-interruption/move",
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "controlled-digest-interruption/reset",
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "reset-confirmation/prepared-cancel/old-progress/cleanup",
+      "pass": true,
+      "consoleErrors": [
+        "Setting the document's base URI to 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"base-uri 'none'\". The action has been blocked.",
+        "Loading the stylesheet 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"style-src 'nonce-8039fcb3933d4459b4e97ebb749e0d09'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.",
+        "Setting the document's base URI to 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"base-uri 'none'\". The action has been blocked.",
+        "Loading the stylesheet 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"style-src 'nonce-e0a0f477929645258aaee33ddd3276d7'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.",
+        "Setting the document's base URI to 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"base-uri 'none'\". The action has been blocked.",
+        "Loading the stylesheet 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"style-src 'nonce-b6d92fb844d842d4a6dc1802a776fe40'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked."
+      ]
+    },
+    {
+      "width": 1280,
+      "case": "keyboard/restoration/static/native-disabled/real-downloads/repeat",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "image-set-string-url/prefixed/escaped-function",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "hostile-markup/css/no-network/no-code-evaluation",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "node-limit/utf8-limit/retain-errors",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "parser-immediate-abort/cleanup",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "controlled-digest-interruption/edit",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "controlled-digest-interruption/cancel",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "controlled-digest-interruption/move",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "controlled-digest-interruption/reset",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "reset-confirmation/prepared-cancel/old-progress/cleanup",
+      "pass": true,
+      "consoleErrors": [
+        "Setting the document's base URI to 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"base-uri 'none'\". The action has been blocked.",
+        "Loading the stylesheet 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"style-src 'nonce-5b9e9b23c59d4bfbb9cb6be6d5ccb4c5'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.",
+        "Setting the document's base URI to 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"base-uri 'none'\". The action has been blocked.",
+        "Loading the stylesheet 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"style-src 'nonce-43b226db67554add81b36d6d7d31ca61'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.",
+        "Setting the document's base URI to 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"base-uri 'none'\". The action has been blocked.",
+        "Loading the stylesheet 'https://malicious.example.invalid/leak' violates the following Content Security Policy directive: \"style-src 'nonce-e5da100120044228a13f7c51c87cc38b'\". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked."
+      ]
+    },
+    {
+      "width": 375,
+      "case": "controlled-fault/denied",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "controlled-fault/quota",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "controlled-fault/corrupt",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "controlled-fault/digest",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "editor-native-storage/browser-process-restart",
+      "pass": true
+    }
+  ]
+}

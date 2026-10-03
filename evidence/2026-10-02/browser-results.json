@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "width": 375,
+      "lessons": 7,
+      "reload": true,
+      "reset": true,
+      "noOverflow": true,
+      "errors": []
+    },
+    {
+      "width": 768,
+      "lessons": 7,
+      "reload": true,
+      "reset": true,
+      "noOverflow": true,
+      "errors": []
+    },
+    {
+      "width": 1280,
+      "lessons": 7,
+      "reload": true,
+      "reset": true,
+      "noOverflow": true,
+      "errors": []
+    }
+  ],
+  "gradingRegressions": 22,
+  "oldV1Upgrade": true,
+  "inlineImage": true,
+  "legacyMigration": true,
+  "corruptStorage": true,
+  "deniedStorage": true
+}

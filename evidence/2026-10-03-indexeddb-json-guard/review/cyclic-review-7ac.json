@@ -1,0 +1,34 @@
+{
+  "sha": "7acb4e424f9554e052a512cf3bbf76c73db17ba9",
+  "immutableGitServing": true,
+  "width": 375,
+  "cases": [
+    {
+      "kind": "cycle",
+      "matchingIDs": true,
+      "nativeStructuredClone": true,
+      "saveRefusedBeforePut": true,
+      "recordRetainedBeforeAndAfterReload": true,
+      "legacyFallbackCodeHistoryTruthful": true,
+      "legacyRawUnchanged": true
+    },
+    {
+      "kind": "bigint",
+      "matchingIDs": true,
+      "nativeStructuredClone": true,
+      "saveRefusedBeforePut": true,
+      "recordRetainedBeforeAndAfterReload": true,
+      "legacyFallbackCodeHistoryTruthful": true,
+      "legacyRawUnchanged": true
+    },
+    {
+      "kind": "valid-json",
+      "DBCodeAndResultsAdopted": true,
+      "validJSONHistoryPreserved": true,
+      "nextSaveCommitted": true,
+      "legacyRawUnchanged": true
+    }
+  ],
+  "errors": [],
+  "pass": true
+}

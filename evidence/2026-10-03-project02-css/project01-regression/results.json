@@ -1,0 +1,204 @@
+{
+  "browser": "153.0.8010.12",
+  "results": [
+    {
+      "width": 375,
+      "case": "starter/example/native-disabled/Tab/label/reload/history/edit/move/reset/legacy",
+      "pass": true
+    },
+    {
+      "case": "40-semantic-wrong-answers/fieldset-equivalent/cancel/no-network",
+      "results": [
+        {
+          "name": "title",
+          "rejected": true
+        },
+        {
+          "name": "language",
+          "rejected": true
+        },
+        {
+          "name": "main",
+          "rejected": true
+        },
+        {
+          "name": "intro",
+          "rejected": true
+        },
+        {
+          "name": "list",
+          "rejected": true
+        },
+        {
+          "name": "label",
+          "rejected": true
+        },
+        {
+          "name": "duplicate",
+          "rejected": true
+        },
+        {
+          "name": "disabled",
+          "rejected": true
+        },
+        {
+          "name": "negative-tab",
+          "rejected": true
+        },
+        {
+          "name": "positive-tab",
+          "rejected": true
+        },
+        {
+          "name": "inert",
+          "rejected": true
+        },
+        {
+          "name": "fieldset-disabled",
+          "rejected": true
+        },
+        {
+          "name": "details-closed",
+          "rejected": true
+        },
+        {
+          "name": "unsupported-wrapper",
+          "rejected": true
+        },
+        {
+          "name": "option",
+          "rejected": true
+        },
+        {
+          "name": "option-disabled",
+          "rejected": true
+        },
+        {
+          "name": "message",
+          "rejected": true
+        },
+        {
+          "name": "initial-message",
+          "rejected": true
+        },
+        {
+          "name": "hidden-second-list-item",
+          "rejected": true
+        },
+        {
+          "name": "forget",
+          "rejected": true
+        },
+        {
+          "name": "css-ref",
+          "rejected": true
+        },
+        {
+          "name": "js-ref",
+          "rejected": true
+        },
+        {
+          "name": "async",
+          "rejected": true
+        },
+        {
+          "name": "inline-js",
+          "rejected": true
+        },
+        {
+          "name": "resource",
+          "rejected": true
+        },
+        {
+          "name": "metadata-refresh",
+          "rejected": true
+        },
+        {
+          "name": "disabled-stylesheet",
+          "rejected": true
+        },
+        {
+          "name": "unsupported-attribute",
+          "rejected": true
+        },
+        {
+          "name": "h1{display:none}",
+          "rejected": true
+        },
+        {
+          "name": "select{visibility:hidden}",
+          "rejected": true
+        },
+        {
+          "name": "button{opacity:0}",
+          "rejected": true
+        },
+        {
+          "name": "@media(min-width:768px){#topic{display:none}}",
+          "rejected": true
+        },
+        {
+          "name": "main{position:absolute;left:-9999px}",
+          "rejected": true
+        },
+        {
+          "name": "body{background-image:url(https://example.invalid/leak)}",
+          "rejected": true
+        },
+        {
+          "name": "hidden-html-class",
+          "rejected": true
+        },
+        {
+          "name": "hidden-body-class",
+          "rejected": true
+        },
+        {
+          "name": "hidden-wrapper-css",
+          "rejected": true
+        },
+        {
+          "name": "hidden-main-data",
+          "rejected": true
+        },
+        {
+          "name": "hidden-body-data",
+          "rejected": true
+        },
+        {
+          "name": "hidden-dir",
+          "rejected": true
+        },
+        {
+          "name": "usable-fieldset-equivalent",
+          "accepted": true
+        }
+      ],
+      "cancelled": true,
+      "frames": 0,
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "starter/example/native-disabled/Tab/label/reload/history/edit/move/reset/legacy",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "starter/example/native-disabled/Tab/label/reload/history/edit/move/reset/legacy",
+      "pass": true
+    },
+    {
+      "case": "controlled-storage-fault/denied",
+      "pass": true
+    },
+    {
+      "case": "controlled-storage-fault/quota",
+      "pass": true
+    },
+    {
+      "case": "controlled-storage-fault/corrupt",
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "sha": "ed50f3f8827ed353c87a64d5b7c49f6746b706ac",
+  "results": [
+    {
+      "name": "legacy-saved-result",
+      "identical": false,
+      "title": "演習を完了しました"
+    },
+    {
+      "name": "same-code-stale-first",
+      "attempts": 5,
+      "title": "完了条件を確認しています",
+      "busy": true
+    },
+    {
+      "name": "new-run-result",
+      "record": {
+        "code": "h1 { font-size: 32px; }\n.intro { font-size: 20px; }\n#note { font-weight: 700; }",
+        "attempts": 6,
+        "completed": true,
+        "result": [
+          {
+            "id": "heading-size",
+            "passed": true,
+            "actual": "800px: 32px",
+            "expected": "800px: 32px"
+          },
+          {
+            "id": "intro-size",
+            "passed": true,
+            "actual": "800px: 20px",
+            "expected": "800px: 20px"
+          },
+          {
+            "id": "note-weight",
+            "passed": true,
+            "actual": "800px: 700",
+            "expected": "800px: 700"
+          },
+          {
+            "id": "plain-size",
+            "passed": true,
+            "actual": "800px: 16px",
+            "expected": "800px: 16px"
+          }
+        ],
+        "checkedCode": "h1 { font-size: 32px; }\n.intro { font-size: 20px; }\n#note { font-weight: 700; }"
+      }
+    },
+    {
+      "name": "mismatch-refused",
+      "attempts": 6,
+      "result": null,
+      "completed": true
+    },
+    {
+      "name": "save-refusal",
+      "status": "保存できません。この画面内のみ保持します",
+      "memoryAttempts": "確認回数: 7回 / 完了履歴あり",
+      "persistedUnchanged": true
+    }
+  ],
+  "legacyVersion": 1,
+  "envelopePersisted": false,
+  "nativeKey": "css",
+  "unrelatedKey": "keep",
+  "errors": [],
+  "external": []
+}

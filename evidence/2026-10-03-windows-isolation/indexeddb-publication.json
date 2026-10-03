@@ -1,0 +1,22 @@
+{
+  "sha": "ee6bd42ab1d80c7224b65fc4f4593d94bef3367f",
+  "tree": "f40a25ab7797f57151c0f383a996028cc89c441f",
+  "readbackUtc": "2026-10-03 16:03:59 UTC",
+  "policy": {
+    "status": 200,
+    "revision": 8,
+    "selection": 6,
+    "applied": 6,
+    "pplExcluded": false,
+    "exclusionsChanged": false
+  },
+  "expectedRemote": "5f685252115507fffdf96099e6f5e5550292488f",
+  "pages": "legacy main/docs",
+  "webhooks": 0,
+  "rulesets": 0,
+  "workflows": 0,
+  "executableLocalHooks": 0,
+  "requiredCI": "none/N/A",
+  "review": "exact checkpoint ee6bd42: 28 hashes/73 entries, source equals reviewed7ac; no blockers",
+  "verifyAgent": "exit0; generated docs synchronized"
+}
