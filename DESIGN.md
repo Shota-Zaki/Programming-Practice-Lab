@@ -531,6 +531,8 @@ native書込済みrecordのreload/再open、別lesson/keyとprogressの不変、
 
 ## CORE 共通採点adapter（2026-10-03）
 
+Foundation進捗の後続移行は[IndexedDB進捗契約](design/indexeddb-progress.md)に従う。旧保存を残し、transaction完了で保存済みを表示する。workspace/native学習APIの保存と分離する。
+
 後続の共通教材形式v1を[共通教材形式契約](design/common-lesson-format.md)で定義し、旧21教材のcompiled catalogをadapterへ接続する。UI/progress/graderの互換ビューは同じデータから生成し、保存移行やnative実行を追加しない。第7章3ファイル教材の入力形式は独立系を維持する。
 
 Foundationに統合した承認済みPPL-CORE-001のinterfaceを実装する。[共通採点adapter契約](design/common-grading-adapter.md)を正規設計とする。既存4方式を通常UIへ接続し、要求/run/教材/codeと結果行の一致を保存前に確認する。UI配置・教材採点条件・旧v1保存・Worker/sandboxは維持し、IndexedDB/教材全体共通形式/native実行は別工程とする。

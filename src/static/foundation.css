@@ -14,3 +14,5 @@
 .project-actions button,.project-tabs button,#project-downloads button{min-height:44px}.project-actions button:not(.primary){color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px}#project-downloads button{padding:10px 12px;border:1px solid var(--strong);border-radius:6px;color:var(--ink);background:var(--surface)}
 /* Chapter 7 content uses the existing workspace and reading rhythm. */
 .project-guide section+section{margin-top:24px}.project-guide details{border-top:1px solid var(--line);padding:12px 0}.project-guide summary{min-height:44px;display:flex;align-items:center;font-weight:750;cursor:pointer}.project-guide pre{max-width:100%;overflow:auto;padding:16px;border-radius:8px;background:var(--code);color:#eff5ef;line-height:1.7}.project-guide p{line-height:1.85}.project-guide button{min-height:44px;padding:8px 14px;border:1px solid var(--strong);border-radius:8px;background:var(--surface)}
+#save-status { max-width: 36ch; min-width: 0; overflow-wrap: anywhere; font-size: .75rem; }
+@media (max-width: 600px) { .practice-head { flex-wrap: wrap; } #save-status { flex-basis: 100%; max-width: none; } }

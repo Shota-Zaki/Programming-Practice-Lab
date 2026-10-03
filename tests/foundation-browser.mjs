@@ -1,3 +1,4 @@
+import { readFoundationState, discardTestProgress } from './progress-browser-tools.mjs';
 import { createServer } from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
@@ -28,6 +29,7 @@ try {
       await page.locator('#check-code').click();
       await page.getByText('演習を完了しました', {exact:true}).waitFor();
       assert.match(await page.locator('#attempts').textContent(),/2回/);
+      await readFoundationState(page);
       await page.reload();
       assert.equal(await page.locator('#editor').inputValue(),lessons[i].example);
       await page.getByText('演習を完了しました', {exact:true}).waitFor();
@@ -119,6 +121,7 @@ try {
   assert.equal(await grading.locator('#preview').getAttribute('sandbox'), '');
   assert.match(await grading.locator('#preview').getAttribute('srcdoc'), /form-action 'none'/);
   // Old v1 records remain intact when newly added lesson IDs are initialized.
+  await discardTestProgress(grading);
   await grading.evaluate(async () => {
     const {lessons} = await import('/lessons.js'); const {STATE_KEY} = await import('/progress.js');
     localStorage.setItem(STATE_KEY, JSON.stringify({version:1, lessonId:'html03', view:'practice', lessons:{html03:{code:lessons[2].example, attempts:9, completed:true}}}));
@@ -247,6 +250,7 @@ try {
   assert.equal(layoutChecks.framesStarted,2); assert.equal(layoutChecks.framesLeft,0);
   await layoutPage.close();
   const legacy=await browser.newPage();await legacy.goto(origin);
+  await discardTestProgress(legacy);
   await legacy.evaluate(()=>{localStorage.clear();localStorage.setItem('ppl.foundation.html01','<p>legacy</p>');localStorage.setItem('ppl.foundation.view','practice');});
   await legacy.reload(); assert.equal(await legacy.locator('#editor').inputValue(),'<p>legacy</p>'); await legacy.close();
   for (const mode of ['corrupt','denied']) {

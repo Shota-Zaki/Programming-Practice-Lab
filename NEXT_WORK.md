@@ -1,7 +1,8 @@
 # NEXT_WORK.md
 
 - Active Task: PPL-FOUNDATION-001 — Web開発基礎講座 / 統合CORE。
-- Status: 共通形式v1先行単位5/5=100%を受入・work反映済み。旧21教材をJSON可能なversion/learning/exercise/catalogへ整理し、実UI採点adapterへ接続した。
+- Current Unit: IndexedDB進捗移行0/6=0%、契約design/indexeddb-progress.mdから実consumerへ実装中。
+- Previous Status: 共通形式v1先行単位5/5=100%を受入・work反映済み。旧21教材をJSON可能なversion/learning/exercise/catalogへ整理し、実UI採点adapterへ接続した。
 - Completion: 講座92%（22/24）。今回ACはtask-list.md参照。教材数/native受入へ加算しない。
 - Branch: work、Windowsタスク専用checkout task-2/ppl。
 - Last Publication: 共通形式checkpoint a5e29c7168d6deaed6f2c926f90488cfbb714917/tree ded29222692b1a4e58df826e94497e39c001f8c8。2026-10-03 14:36:48 UTC connected GitHub readback一致。直前の指定policy GETは200、r8/selection6/applied6/applied、PPL対象内・除外変更なし。expected remote b988b66/Pages legacy main/docs/work workflowなし/rulesetsなし/hookなしを再確認し、親の継続公開許可の範囲で通常push。required CIなし（PASS扱いしない）。

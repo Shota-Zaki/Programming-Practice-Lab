@@ -12,7 +12,20 @@
 - selectedDesign: `foundation-first + project-based`
 - updatedAt: `2026-10-03`
 
-## CORE 共通教材形式 — 現在の独立実装単位
+## CORE IndexedDB進捗移行 — 現在の独立実装単位
+
+状態: 実装中（0/6=0%）。既存Foundation21の進捗consumerを対象とし旧rawを残す。講座92%維持。設計: design/indexeddb-progress.md。
+
+- [ ] authority/移行/復帰/非同期表示を実consumerへ接続する。
+- [ ] 初回/繰返し/単体legacy/reload/旧raw不変を確認する。
+- [ ] abort/refusal/quota/破損/期限を検証する。
+- [ ] blocked upgrade/複数tab/競合/versionchange/遅延snapshot/closeを検証する。
+- [ ] 旧21×3幅/adapter/controller/workspace/export/同期を回帰する。
+- [ ] 固定候補の独立レビュー・証拠・管理文書・guarded work反映を完了する。
+
+Active: Foundation/IndexedDB。Ready: 契約に従う実consumer接続。Planned: 残native動作/成果物。Blocked: native専用環境/transport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。
+
+## CORE 共通教材形式 — 受入・work反映済み（前工程記録）
 
 状態: 受入・work反映済み（5/5=100%）。既存Foundation21教材の共通形式v1。講座22/24=92%維持、教材数/native受入へ加算しない。
 

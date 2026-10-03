@@ -32,7 +32,7 @@ try {
     const files = await page.evaluate(async () => (await import('./project-lessons.js')).project02Css.exampleFiles);
     for (const [name, source] of Object.entries(files)) await setFile(page, name, source);
     await setFile(page, 'app.js', 'window.CSS_LEARNER_RAN=true;while(true){}');
-    const baseline = await page.evaluate(() => ({ old: JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons, project01: localStorage.getItem('ppl.foundation.project01.progress.v1'), files: JSON.parse(localStorage.getItem('ppl.foundation.project.v1.profile')) }));
+    const baseline = await page.evaluate(() => ({ old: localStorage.getItem('ppl.foundation.progress.v1'), project01: localStorage.getItem('ppl.foundation.project01.progress.v1'), files: JSON.parse(localStorage.getItem('ppl.foundation.project.v1.profile')) }));
     await select(page);
     assert.equal(await page.locator('[data-project-lesson="project02-css"]').getAttribute('aria-pressed'), 'true');
     assert.equal(await page.locator('#project-title').textContent(), '読みやすいレスポンシブCSS');
@@ -54,7 +54,7 @@ try {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
     await page.screenshot({ path: `${output}/lesson-${width}.png`, fullPage: true });
     await page.locator('#project-preview').screenshot({ path: `${output}/preview-${width}.png` });
-    const after = await page.evaluate(() => ({ old: JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons, project01: localStorage.getItem('ppl.foundation.project01.progress.v1'), files: JSON.parse(localStorage.getItem('ppl.foundation.project.v1.profile')) }));
+    const after = await page.evaluate(() => ({ old: localStorage.getItem('ppl.foundation.progress.v1'), project01: localStorage.getItem('ppl.foundation.project01.progress.v1'), files: JSON.parse(localStorage.getItem('ppl.foundation.project.v1.profile')) }));
     assert.deepEqual(after, baseline);
     await page.locator('#project-export').click(); await page.locator('#project-downloads button').first().waitFor();
     assert.equal(await page.locator('#project-downloads button').count(), 5);

@@ -1,3 +1,4 @@
+import { readFoundationState, discardTestProgress } from './progress-browser-tools.mjs';
 import {createServer} from 'node:http';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {resolve,extname,sep} from 'node:path';
@@ -19,13 +20,14 @@ try {
     });
     assert.equal(catalog.count,21);assert.equal(catalog.versions,true);assert.equal(catalog.exactViews,true);
     assert.deepEqual(catalog.modes,[...Array(7).fill('html'),...Array(8).fill('css'),...Array(3).fill('javascript'),...Array(3).fill('dom')]);
+    await discardTestProgress(page);
     const seed=await page.evaluate(async()=>{
       const {lessons}=await import('./lessons.js');
       const records={};for(const id of ['html03','css01','js01','js04']){const lesson=lessons.find(l=>l.id===id);records[id]={code:lesson.example,checkedCode:id==='js04'?'stale old code':lesson.example,attempts:7,completed:true,result:lesson.completionTests.map(t=>({id:t.id,passed:true,...(id.startsWith('js')?{actual:String(t.expected),expected:String(t.expected)}:{})}))};}
       localStorage.setItem('ppl.foundation.progress.v1',JSON.stringify({version:1,lessonId:'css01',view:'practice',lessons:records}));localStorage.setItem('ppl.profile.v1.topic','css');localStorage.setItem('unrelated','keep');history.replaceState(null,'','#practice');return records;
     });
     await page.reload();
-    const record=id=>page.evaluate(id=>JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons[id],id);
+    const record=async id=>(await readFoundationState(page)).lessons[id];
     assert.deepEqual(await record('css01'),seed.css01);assert.deepEqual(await record('html03'),seed.html03);assert.deepEqual(await record('js04'),seed.js04);
     assert.equal(await page.locator('#result-title').textContent(),'演習を完了しました');
     await page.locator('#check-code').click();await page.getByText('演習を完了しました',{exact:true}).waitFor();
@@ -73,7 +75,7 @@ try {
     await page.evaluate(()=>document.querySelector('[data-lesson="js04"]').click());await page.locator('#lesson-content [data-view="practice"]').click();
     assert.equal(await page.locator('#result-status').textContent(),'未確認');assert.equal((await record('js04')).completed,true);
     await page.locator('#run-preview').click();await page.getByText('演習を完了しました',{exact:true}).waitFor();assert.equal((await record('js04')).attempts,8);
-    const persisted=await page.evaluate(()=>JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')));
+    const persisted=await readFoundationState(page);
     assert.equal(persisted.version,1);assert.equal(Object.values(persisted.lessons).some(row=>'runId' in row||'mode' in row||'version' in row),false);
     assert.deepEqual(persisted.lessons.html03,seed.html03);assert.deepEqual(persisted.lessons.js01,seed.js01);
     assert.equal(await page.evaluate(()=>localStorage.getItem('ppl.profile.v1.topic')),'css');assert.equal(await page.evaluate(()=>localStorage.getItem('unrelated')),'keep');

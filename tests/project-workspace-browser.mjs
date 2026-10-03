@@ -45,7 +45,7 @@ try {
       await setFile(page, 'index.html', starter['index.html'].replace('学習者の自己紹介', '日本語🙂の自己紹介'));
       await setFile(page, 'styles.css', starter['styles.css'] + 'p::after { content: "日本語🙂"; }\n');
       const expected = await page.evaluate(() => JSON.parse(localStorage.getItem('ppl.foundation.project.v1.profile')).files);
-      const oldProgress = await page.evaluate(() => JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons);
+      const oldProgress = await page.evaluate(() => localStorage.getItem('ppl.foundation.progress.v1'));
       await page.reload(); assert.equal(await page.locator('#project-editor').inputValue(), expected['styles.css']);
       await page.locator('#project-editor').press('Control+Enter'); await page.getByText(/静的確認を更新しました。JavaScript/).waitFor();
       await page.locator('#project-editor').press('Meta+Enter'); await page.getByText(/静的確認を更新しました。JavaScript/).waitFor();
@@ -153,7 +153,7 @@ try {
       await page.locator('#project-export').click(); await expectDownloads(page);
       await page.evaluate(() => { location.hash = 'course'; }); await page.locator('#course-title').waitFor();
       await page.locator('.curriculum [data-view="project"]').click(); assert.equal(await page.locator('#project-downloads button').count(), 0);
-      assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons), oldProgress);
+      assert.deepEqual(await page.evaluate(() => localStorage.getItem('ppl.foundation.progress.v1')), oldProgress);
       assert.equal(await page.locator('#lesson-picker [data-lesson]').count(), 21);
       assert.equal(await page.locator('[data-project-parser]').count(), 0);
       assert.deepEqual(errors, []); assert.deepEqual(leaks, []);

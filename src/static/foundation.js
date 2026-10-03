@@ -3,11 +3,18 @@ import { createGradingAdapter, acceptGradingOutcome } from './grading-adapter.js
 import { lessonPreview } from './css-grading.js';
 import { domLessonPreview } from './dom-grading.js';
 import { javascriptHostBusy, javascriptHostReady } from './javascript-host.js';
-import { createProgressRepository } from './progress.js';
+import { createIndexedProgressRepository, progressStatusText } from './indexed-progress.js';
 import { initializeProjectWorkspace } from './project-workspace.js';
 const $ = selector => document.querySelector(selector);
+const restoringControls = [...document.querySelectorAll('button,input,textarea,select')].map(node => [node, node.disabled]);
+for (const [node] of restoringControls) node.disabled = true;
+$('#save-status').textContent = progressStatusText({ phase: 'loading' });
+const repository = await createIndexedProgressRepository(() => window.localStorage, lessons, () => window.indexedDB);
+for (const [node, disabled] of restoringControls) node.disabled = disabled;
+repository.subscribe(status => { $('#save-status').textContent = progressStatusText(status); $('#save-status').dataset.state = status.phase; });
+window.addEventListener('pagehide', () => repository.close());
+window.addEventListener('pageshow', event => { if (event.persisted) window.location.reload(); });
 const projectWorkspace = initializeProjectWorkspace($('#project-workspace'));
-const repository = createProgressRepository(() => window.localStorage, lessons);
 const state = repository.state;
 const gradingAdapter = createGradingAdapter(lessonCatalog);
 let gradingRunId = 0;
@@ -27,7 +34,7 @@ function waitForHost() { syncExecutionButtons(); void javascriptHostReady().then
 function cancelGrade() { const pending = pendingGrade; pendingGrade = null; pending?.abort(); $('#stop-code').hidden = true; if (pending) renderResult(); waitForHost(); }
 const current = () => lessons.find(l => l.id === state.lessonId);
 const entry = () => state.lessons[state.lessonId];
-function save() { $('#save-status').textContent = repository.save() ? '保存済み' : '保存できません。この画面内のみ保持します'; }
+function save() { void repository.save(); }
 function closeMenu() { $('#sidebar').classList.remove('open'); $('.menu-button').setAttribute('aria-expanded', 'false'); }
 function showView(name, { focus = false, history = true } = {}) {
   projectWorkspace.leave();

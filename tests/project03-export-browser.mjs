@@ -32,7 +32,7 @@ try {
     const files = await page.evaluate(async()=>({... (await import('./project-lessons.js')).project02Css.exampleFiles,'app.js':'window.PROJECT03_RAN=true;fetch("https://example.invalid/leak");while(true){}\n// </script> 🦉\n'}));
     for (const [name,code] of Object.entries(files)) await setFile(page,name,code);
     await page.evaluate(()=>localStorage.setItem('ppl.profile.v1.topic','css'));
-    const baseline = await page.evaluate(()=>({old:JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons,project01:localStorage.getItem('ppl.foundation.project01.progress.v1'),native:localStorage.getItem('ppl.profile.v1.topic')}));
+    const baseline = await page.evaluate(()=>({old:localStorage.getItem('ppl.foundation.progress.v1'),project01:localStorage.getItem('ppl.foundation.project01.progress.v1'),native:localStorage.getItem('ppl.profile.v1.topic')}));
     await page.locator('#project-inspect').click();await page.getByText(/静的確認を更新しました。JavaScript/).waitFor();
     assert.match(await page.locator('#project-result').textContent(),/静的CSS条件を確認できました.*project03全体は未完了/);
     assert.equal(await page.locator('[data-course-progress]').first().textContent(),'0 / 24');
@@ -51,7 +51,7 @@ try {
     assert.equal(await page.locator('[data-course-progress]').first().textContent(),'0 / 24');
     assert.equal(await page.locator('#project-native').isDisabled(),true);
     assert.equal(await page.evaluate(()=>window.PROJECT03_RAN),undefined);
-    assert.deepEqual(await page.evaluate(()=>({old:JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons,project01:localStorage.getItem('ppl.foundation.project01.progress.v1'),native:localStorage.getItem('ppl.profile.v1.topic')})),baseline);
+    assert.deepEqual(await page.evaluate(()=>({old:localStorage.getItem('ppl.foundation.progress.v1'),project01:localStorage.getItem('ppl.foundation.project01.progress.v1'),native:localStorage.getItem('ppl.profile.v1.topic')})),baseline);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     await page.screenshot({path:join(output,`lesson-${width}.png`),fullPage:true});
     await page.locator('#project-bundle-panel').screenshot({path:join(output,`comparison-${width}.png`)});
@@ -91,7 +91,7 @@ try {
     await page.reload();await page.locator('#project-title').waitFor();await select(page);
     assert.equal(await page.locator('#project-bundle-files').evaluate(node=>node.files.length),0);
     assert.match(await page.locator('#project-bundle-result').textContent(),/未照合/);
-    assert.deepEqual(await page.evaluate(()=>({old:JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons,project01:localStorage.getItem('ppl.foundation.project01.progress.v1'),native:localStorage.getItem('ppl.profile.v1.topic')})),baseline);
+    assert.deepEqual(await page.evaluate(()=>({old:localStorage.getItem('ppl.foundation.progress.v1'),project01:localStorage.getItem('ppl.foundation.project01.progress.v1'),native:localStorage.getItem('ppl.profile.v1.topic')})),baseline);
     assert.deepEqual(errors,[]);assert.deepEqual(leaks,[]);
     results.push({width,case:'actual5downloads/reselect/bytes+manifest+current/read-only/mismatch/reload/no-execution',pass:true});await page.close();
   }

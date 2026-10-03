@@ -38,7 +38,7 @@ try {
     assert.match(await page.locator('#project-result').textContent(), /未達成/);
     assert.match(await page.locator('#project-history').textContent(), /1回.*未完了.*0 \/ 3/);
     const example = await page.evaluate(async () => (await import('./project-lessons.js')).project01.exampleFiles);
-    const old = await page.evaluate(() => JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons);
+    const old = await page.evaluate(() => localStorage.getItem('ppl.foundation.progress.v1'));
     for (const name of Object.keys(example)) await setFile(page, name, example[name]);
     await setFile(page, 'app.js', 'window.PROJECT01_LEARNER_RAN=true; while(true){}');
     await inspect(page);
@@ -74,7 +74,7 @@ try {
     page.once('dialog', dialog => dialog.accept()); await page.locator('#project-reset-history').click();
     assert.match(await page.locator('#project-history').textContent(), /0回.*未完了/);
     assert.match(await page.locator('#project-editor').inputValue(), /<h1 hidden>/);
-    assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('ppl.foundation.progress.v1')).lessons), old);
+    assert.deepEqual(await page.evaluate(() => localStorage.getItem('ppl.foundation.progress.v1')), old);
     assert.equal(await page.locator('#lesson-picker [data-lesson]').count(), 21);
     assert.deepEqual(errors, []); assert.deepEqual(leaks, []);
     results.push({ width, case: 'starter/example/native-disabled/Tab/label/reload/history/edit/move/reset/legacy', pass: true });
