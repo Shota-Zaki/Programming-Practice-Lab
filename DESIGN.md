@@ -518,3 +518,9 @@ native書込済みrecordのreload/再open、別lesson/keyとprogressの不変、
 4. task-list/NEXT/evidenceを更新し、講座88%を維持する。
 
 実native persistence、codec、facade/run取消/partialwrite、UI、教材、ミニ成果物/公開用ビルドの受入は未実装・未検証。今回native挙動の根拠は上記規格であり、新しいbrowser実測は行わない。
+
+## project02 CSS先行教材（2026-10-03）
+
+承認済み案Aの見た目を独立教材として提供する。workspace内の通常ボタンでproject01/project02 CSSを選び、入力は共有・切替時不変。選択は画面内のみで再読込時project01へ戻る。3ファイル初期化は常にproject01開始コードで、確認文にも明記する。例は手動でコピーできるコードとして表示する。
+
+静的コピーを375/768/1280pxで測定する。project01構造の10条件に加え、body左右余白16px以上、main左右内余白24px以上・幅720px以下・中央配置、本文と操作欄16px以上・本文/ボタン行高1.5倍以上（native selectの行高/切抜きはブラウザー管理）、操作欄の外寸高さ44px以上、文書/カード/本文の横溢れと非表示切抜きを確認する。値は計算済み寸法で判定しCSS記法を指定しない。native動作やlocalStorageは実行しない。CSS結果をproject01履歴へ書かず、project02完了も作らない。22/24=92%維持。

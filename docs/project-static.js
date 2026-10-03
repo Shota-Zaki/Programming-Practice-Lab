@@ -75,7 +75,7 @@ function staticParser(hasResourceFunction) {
       policy.content = "default-src 'none'; script-src 'none'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'";
       output.head.prepend(policy); output.documentElement.lang = 'ja';
       const viewport = output.createElement('meta'); viewport.name = 'viewport'; viewport.content = 'width=device-width, initial-scale=1'; output.head.append(viewport);
-      if (lessonId === 'project01') {
+      if (lessonId === 'project01' || lessonId === 'project02-css') {
         const permittedSetup = node => {
           if (node.tagName === 'SCRIPT') return expectedReference(node);
           if (node.tagName === 'LINK') return expectedReference(node) && [...node.attributes].every(attr => ['rel', 'href'].includes(attr.name));
@@ -124,6 +124,19 @@ function staticParser(hasResourceFunction) {
             !original.closest('[hidden],[inert],[aria-hidden="true"]') && visible(copies[index]));
         }) && controls.every(selector => reachable(doc.querySelector(selector)));
         checks.push({ id: 'visible', label: '必須の内容を表示し、選択欄とボタンを操作できる', passed: usable });
+        if (lessonId === 'project02-css') {
+          const card = document.querySelector('body > main'), body = document.body;
+          const px = value => Number.parseFloat(value) || 0;
+          const b = getComputedStyle(body), m = card && getComputedStyle(card), rect = card?.getBoundingClientRect();
+          const text = [...document.querySelectorAll('main p,main li,main label,select#topic,button#forget')];
+          checks.push(
+            { id: 'css-spacing', label: 'body左右16px・main内左右24px以上の余白', passed: Boolean(m && px(b.paddingLeft) >= 16 && px(b.paddingRight) >= 16 && px(m.paddingLeft) >= 24 && px(m.paddingRight) >= 24) },
+            { id: 'css-card', label: 'mainを最大720px以内で中央へ配置', passed: Boolean(rect && rect.width > 0 && rect.width <= 721 && Math.abs(rect.left - (innerWidth - rect.right)) <= 2) },
+            { id: 'css-type', label: '本文・操作欄16px以上、本文とボタンの行高1.5倍以上', passed: text.length > 0 && text.every(node => { const c = getComputedStyle(node); return px(c.fontSize) >= 16 && (node.tagName === 'SELECT' || px(c.lineHeight) + .1 >= px(c.fontSize) * 1.5); }) },
+            { id: 'css-controls', label: '選択欄とボタンの高さ44px以上', passed: controls.every(selector => document.querySelector(selector)?.getBoundingClientRect().height >= 44) },
+            { id: 'css-overflow', label: '横溢れ・本文の切抜きなし', passed: Boolean(card && [document.documentElement, body, card, ...text].every(node => { const c = getComputedStyle(node); return (node.tagName === 'SELECT' || (!['hidden','clip'].includes(c.overflowX) && !['hidden','clip'].includes(c.overflowY))) && (node.clientWidth === 0 || node.scrollWidth <= node.clientWidth + 1); })) }
+          );
+        }
         measureStyle.remove();
       }
       port.postMessage({ checks, preview: '<!doctype html>' + output.documentElement.outerHTML });
@@ -133,7 +146,7 @@ function staticParser(hasResourceFunction) {
 }
 
 export function inspectProjectFiles(files, { signal, lessonId = null, width = 375 } = {}) {
-  if (lessonId !== null && lessonId !== 'project01') throw new TypeError('未対応の教材です');
+  if (lessonId !== null && lessonId !== 'project01' && lessonId !== 'project02-css') throw new TypeError('未対応の教材です');
   if (![375, 768, 1280].includes(width)) throw new TypeError('未対応の確認幅です');
   const snapshot = createProjectSnapshot(files);
   if (signal?.aborted) return Promise.reject(new DOMException('取り消しました', 'AbortError'));
@@ -165,10 +178,12 @@ export function inspectProjectFiles(files, { signal, lessonId = null, width = 37
   });
 }
 
-export async function gradeProject01(files, { signal } = {}) {
+export const gradeProject01 = (files, options) => gradeProject(files, 'project01', options);
+export const gradeProject02Css = (files, options) => gradeProject(files, 'project02-css', options);
+async function gradeProject(files, lessonId, { signal } = {}) {
   const snapshot = createProjectSnapshot(files), widths = [375, 768, 1280];
   const observations = [];
-  for (const width of widths) observations.push(await inspectProjectFiles(snapshot, { signal, lessonId: 'project01', width }));
+  for (const width of widths) observations.push(await inspectProjectFiles(snapshot, { signal, lessonId, width }));
   return {
     preview: observations[0].preview,
     checks: observations[0].checks.map((check, index) => ({ ...check,

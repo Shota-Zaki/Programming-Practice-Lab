@@ -118,7 +118,7 @@
                   <li><span>04</span><div><small>CSS / 4 LESSONS</small><h3>レイアウトとレスポンシブ</h3><p>Flexbox、Grid、画面幅への対応。</p></div><button type="button" data-lesson="css05">開始</button></li>
                   <li><span>05</span><div><small>JAVASCRIPT / 3 LESSONS</small><h3>値と処理の基本</h3><p>変数、条件分岐、繰り返し、関数。</p></div><b>受講可能</b></li>
                   <li><span>06</span><div><small>JAVASCRIPT / 3 LESSONS</small><h3>画面を操作する</h3><p>DOM更新・クリック・入力値の3教材を受講可能。</p></div><button type="button" data-lesson="js04">開始</button></li>
-                  <li><span>07</span><div><small>MINI PROJECT / 3 LESSONS</small><h3>自己紹介サイトを完成させる</h3><p>project01でHTMLの設計と構造を学びます。project02の動作・保存とproject03の成果物実行は準備中です。</p></div><button type="button" data-view="project">project01を学ぶ</button></li>
+                  <li><span>07</span><div><small>MINI PROJECT / 3 LESSONS</small><h3>自己紹介サイトを完成させる</h3><p>project01でHTMLの設計と構造を学びます。project02の動作・保存とproject03の成果物実行は準備中です。</p></div><button type="button" data-view="project" data-project-open="project01">project01を学ぶ</button></li>
                 </ol>
               </main>
               <aside class="course-side">
@@ -150,9 +150,11 @@
         <section class="view" data-view-panel="project" aria-labelledby="project-title" hidden>
           <div class="page" id="project-workspace">
             <div class="breadcrumb"><button type="button" data-view="course">Web開発基礎</button><span>/</span><span>第7章 / PROJECT01</span></div>
-            <header class="page-head"><div><p class="eyebrow">MINI PROJECT / PROJECT01</p><h1 id="project-title">自己紹介サイトの設計と構造</h1><p>HTML構造を完成させ、同じ3ファイルを持ち出せます。静的採点でproject01を完了できます。</p></div></header>
+            <header class="page-head"><div><p class="eyebrow" id="project-kicker">MINI PROJECT / PROJECT01</p><h1 id="project-title">自己紹介サイトの設計と構造</h1><p id="project-description">HTML構造を完成させ、同じ3ファイルを持ち出せます。静的採点でproject01を完了できます。</p></div></header>
+            <div class="project-actions" role="group" aria-label="成果物の教材"><button type="button" data-project-lesson="project01" aria-pressed="true">project01 構造</button><button type="button" data-project-lesson="project02-css" aria-pressed="false">project02 CSS先行教材</button></div>
+            <p id="project-lesson-note">教材の切替は入力を保持します。</p>
             <section id="project-lesson-content" class="project-guide" aria-label="project01の教材"></section>
-            <section id="project-examples" class="project-guide"><h2>構造の完成例</h2><p>HTML構造の完成例です。CSSは表示用、JSの動作は次の教材で追加します。入力は自動で置き換えません。</p></section>
+            <section id="project-examples" class="project-guide"></section>
             <section class="project-guide"><h2>演習のヒントと結果</h2><p id="project-hint"></p><p id="project-result" role="status"></p><p id="project-history"></p><p id="project-progress-save" role="status"></p><button id="project-reset-history" type="button">project01の履歴を初期化</button></section>
             <p id="project-save-status" role="status"></p>
             <section class="project-guide"><h2>この後に学ぶこと</h2><p>project02では見た目・選択・標準localStorage、project03では同じ成果物の実行と復帰を確認します。この画面では動作・保存の採点は使えません。</p><button id="project-native" type="button" disabled aria-describedby="project-native-note">native動作確認（準備中）</button><p id="project-native-note">専用の隔離実行環境と結果連携は未対応です。通常ブラウザーへ直接開くfallbackや、完了結果の自己申告はありません。</p></section>
@@ -164,7 +166,7 @@
                   <button type="button" role="tab" id="project-tab-2" data-project-file="app.js" aria-controls="project-file-panel" aria-selected="false" tabindex="-1">app.js</button>
                 </div>
                 <div id="project-file-panel" role="tabpanel" aria-labelledby="project-tab-0"><label id="project-editor-label" for="project-editor">index.html 入力欄</label><textarea id="project-editor" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea></div>
-                <div class="project-actions"><button type="button" class="secondary" id="project-inspect">静的構造を確認</button><button type="button" class="primary" id="project-export">ファイルを書き出す</button><button type="button" id="project-cancel" hidden>確認・書き出しを取消</button><button type="button" id="project-reset">3ファイルを初期化</button></div>
+                <div class="project-actions"><button type="button" class="secondary" id="project-inspect">静的構造を確認</button><button type="button" class="primary" id="project-export">ファイルを書き出す</button><button type="button" id="project-cancel" hidden>確認・書き出しを取消</button><button type="button" id="project-reset">project01の3ファイルを初期化</button></div>
                 <p>Ctrl / Command + Enterで静的確認。Tabは次の操作へ移動します。各ファイル32KiB、合計96KiBまで書き出せます。</p>
               </section>
               <section class="project-display"><h2>静的プレビュー</h2><p>表示用コピーからscript・イベント属性・外部resourceを除きます。入力と書き出すファイルは変更しません。動作や保存の確認ではありません。</p><iframe id="project-preview" title="自己紹介サイトの静的プレビュー（スクリプトなし）" sandbox></iframe><ul id="project-checks" aria-label="静的構造の確認結果"></ul></section>

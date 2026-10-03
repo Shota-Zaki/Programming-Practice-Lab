@@ -12,7 +12,19 @@
 - selectedDesign: `foundation-first + project-based`
 - updatedAt: `2026-10-03`
 
-## 第7章 project01 — 今回の独立実装単位
+## 第7章 project02 CSS — 現在の独立実装単位
+
+状態: 作業中（0/5=0%）。全体22/24=92%を維持。
+
+- [ ] CSSの説明・開始例・完成例・ヒントと入力を保持する教材切替を提供する。
+- [ ] 3幅の実寸で余白/カード/文字/操作欄/横溢れを静的確認する。
+- [ ] CSS確認はproject01履歴/旧21履歴を更新せず、nativeとproject02全体完了を無効に保つ。
+- [ ] 実UI3幅・意味誤答・同値CSS・取消/編集/切替/再読込/初期化・保存faultと影響範囲を検証する。
+- [ ] 生成物同期・固定候補の独立レビュー・証拠・管理文書を完了する。
+
+project01通常work反映済み: remote SHA d9307c29f7724f524f45979f4f7a49c5dfbfa7b7、tree dd3991f621580128196b2053aa044ad3de0fed63。親policy revision8/selection6/applied6再確認とremote/trigger確認後に通常pushし読取一致。Pagesはmain/docs、work workflowなし、required CIなし（PASS扱いしない）。次候補の公開は親の再確認待ち。
+
+## 第7章 project01 — 受入済みの独立実装単位（前工程記録）
 
 状態: `ローカル受入完了・親への候補受渡し`（7/7=`100%`）。承認済み案Aに沿い、自己紹介サイトの設計と構造だけを登録・受入した。project02/03のnative動作/保存/結果transportは無効のまま。既存workspace入力は保持し、新規/明示初期化時に未完成HTMLを使う。
 
@@ -24,7 +36,7 @@
 - [x] 旧21教材、実行controller、生成物同期、npm run verify:agentを確認し、証拠を保存する。
 - [x] 固定SHA独立レビュー・指摘解消・管理文書を完了し、候補を親へ渡す。guarded work反映は親のポリシー再確認後の別工程。
 
-講座実装受入は22/24（92%）。検証/独立レビュー対象productは`7fa8c0a1af448328c4178204142ee5d460945e02`。21unit/controller、project01 3幅/40意味誤答/同値fieldset、workspace35観測/実download30、旧21教材×3幅、verify:agent PASS。独立レビューの親要素非表示/fieldset実効無効化/閉じたdetails/Tab順/属性消失の指摘を解消し、修正SHAの独立再現は阻害なし。Evidence: `evidence/2026-10-03-project01/REPORT.md`、`review.md`、hash manifest。最終証拠checkpointではsrc/docs/testsを変更しない。Windowsタスク専用checkoutのworkにローカルcommit済み。リポジトリ内`.agents/skills`は存在せず、AGENTS.md/VERIFY_AGENT.mdを適用した。main merge/公開/サービス再起動/設定変更/永続アクセス追加なし。親の最新policy/remote/trigger確認待ちのためpush保留。remote workの最新読取はe674abdで不変。Active: PPL-FOUNDATION-001。Ready: レビュー済み候補の親受渡し/guarded work反映。Planned: project02/03、共通形式/adapter/IndexedDB。Blocked: native実行専用環境・結果transport。Deferred: 実Pages/Safari/読み上げ/基礎講座後実践UI。別Task未設定。
+講座実装受入は22/24（92%）。検証/独立レビュー対象productは`7fa8c0a1af448328c4178204142ee5d460945e02`。21unit/controller、project01 3幅/40意味誤答/同値fieldset、workspace35観測/実download30、旧21教材×3幅、verify:agent PASS。独立レビューの親要素非表示/fieldset実効無効化/閉じたdetails/Tab順/属性消失の指摘を解消し、修正SHAの独立再現は阻害なし。Evidence: `evidence/2026-10-03-project01/REPORT.md`、`review.md`、hash manifest。最終証拠checkpointではsrc/docs/testsを変更しない。Windowsタスク専用checkoutのworkにローカルcommit済み。リポジトリ内`.agents/skills`は存在せず、AGENTS.md/VERIFY_AGENT.mdを適用した。main merge/公開/サービス再起動/設定変更/永続アクセス追加なし。この前工程の保留は解消し、親の最新policy/remote/trigger確認後にd9307c29を通常push・remote照合済み。Active: PPL-FOUNDATION-001。Ready: レビュー済み候補の親受渡し/guarded work反映。Planned: project02/03、共通形式/adapter/IndexedDB。Blocked: native実行専用環境・結果transport。Deferred: 実Pages/Safari/読み上げ/基礎講座後実践UI。別Task未設定。
 
 ## PPL-INIT-001 GitHub Pages公開基盤
 
@@ -195,7 +207,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は本書冒頭のproject01節。親が候補のpolicy/remote/triggerを再確認した後だけwork反映する。次は承認済み案Aのproject02/03に必要な教材/CSS確認を独立工程として進め、native実行は専用環境/transportの受入前には接続しない。第7章のミニ成果物3教材を維持する。別Task未設定。
+`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は本書冒頭のproject02 CSS節。project01 work反映済み。今回は承認済み案Aのproject02に必要な教材/CSS確認を独立工程として進め、native実行は専用環境/transportの受入前には接続しない。第7章のミニ成果物3教材を維持する。別Task未設定。
 
 ### 第7章案A — 今回の設計受入条件
 

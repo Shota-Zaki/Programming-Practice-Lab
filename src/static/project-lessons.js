@@ -48,3 +48,17 @@ export function createProjectLessonProgress(storage) {
     return save();
   }, reset() { state.completed = false; state.attempts = 0; corrupt = false; return save(); } };
 }
+
+export const project02Css = Object.freeze({
+  id: 'project02-css', title: '読みやすいレスポンシブCSS',
+  objectives: ['375・768・1280pxで横溢れなく表示する', '余白・文字・操作欄の寸法を整える'],
+  contentBlocks: [
+    { title: '共有ファイルから続ける', text: 'project01のHTML構造を完成させてからstyles.cssを編集します。教材の切替は3ファイルを置き換えません。CSS開始例を手動でコピーして余白や寸法を追加しましょう。再読込後はproject01教材を表示し、入力は保存から復元します。' },
+    { title: '外側とカード内の余白', text: 'bodyの左右paddingを16px以上、mainの左右paddingを24px以上にします。mainはmax-width: 720pxとmargin: 0 autoで中央へ。box-sizing: border-boxを使い、狭い幅で固定widthを指定しないようにします。' },
+    { title: '文字と操作欄', text: '本文・リスト・label・select・buttonを16px以上、本文とボタンの行高を文字サイズの1.5倍以上にします。font: inheritで操作欄にも反映し、selectとbuttonの高さを44px以上にします。native selectの行高・選択肢の表示はブラウザーが管理します。Tabキーで選択欄とボタンへ移動し、既定のフォーカス表示を残しましょう。' },
+    { title: '3幅で確かめる', text: '長い文章はoverflow-wrapで折り返せます。文字や操作欄を隠したりoverflowで切り抜いたりせず、横スクロール不要な配置を作ります。確認結果は3幅を集約します。プレビューにはJSがなく、テーマ選択・表示更新・標準localStorageの動作確認は専用native環境の受入待ちです。CSS確認だけではproject02全体を完了にしません。' },
+  ],
+  hints: ['mainを固定幅にせず最大幅と自動marginで整えます。', 'bodyとmainのpaddingは別々です。select・buttonにも文字サイズと行高を継承します。'],
+  starterCss: 'body { font-family: sans-serif; }\n/* 余白・文字・カード・操作欄の寸法を追加します */\n',
+  exampleFiles: Object.freeze({ ...STARTER_FILES, 'styles.css': "* { box-sizing: border-box; }\nbody { margin: 0; padding: 16px; font-family: sans-serif; font-size: 16px; line-height: 1.7; color: #25334a; background: #edf2f8; }\nmain { max-width: 720px; margin: 0 auto; padding: 24px; background: white; border-radius: 16px; }\nh1 { font-size: clamp(24px, 5vw, 36px); line-height: 1.5; overflow-wrap: anywhere; }\np, li, label { overflow-wrap: anywhere; }\nlabel { display: block; margin-top: 24px; }\nselect, button { display: block; max-width: 100%; min-height: 44px; padding: 8px 12px; font: inherit; }\nbutton { margin-top: 16px; }\n" }),
+});

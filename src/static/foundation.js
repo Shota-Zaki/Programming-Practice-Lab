@@ -57,8 +57,8 @@ function progress() {
   document.querySelectorAll('[data-course-progress]').forEach(n => n.textContent = `${total} / 24`);
   document.querySelectorAll('[data-chapter-percent]').forEach(n => n.textContent = `${percent}%`);
   document.querySelectorAll('[data-progress-bar]').forEach(n => n.style.width = `${percent}%`);
-  $('#current-lesson-label').textContent = `${chapter.title} / ${isProject ? '自己紹介サイトの設計と構造' : current().title}`;
-  $('#lesson-picker').innerHTML = chapters.map(c => `<section><h3>${escapeHtml(c.title)}</h3>${lessons.filter(l => l.chapterId === c.id).map((l, i) => `<button type="button" data-lesson="${l.id}" ${l.id === state.lessonId ? 'aria-current="step"' : ''}>${i + 1}. ${escapeHtml(l.title)}${state.lessons[l.id].completed ? ' ✓ 完了' : ''}</button>`).join('')}</section>`).join('') + `<section><h3>ミニ成果物第7章</h3><button type="button" data-view="project">1. 自己紹介サイトの設計と構造${projectWorkspace.completed ? ' ✓ 完了' : ''}</button><p>2. 見た目と動作（準備中）</p><p>3. 確認と成果物（準備中）</p></section>`;
+  $('#current-lesson-label').textContent = `${chapter.title} / ${isProject ? projectWorkspace.title : current().title}`;
+  $('#lesson-picker').innerHTML = chapters.map(c => `<section><h3>${escapeHtml(c.title)}</h3>${lessons.filter(l => l.chapterId === c.id).map((l, i) => `<button type="button" data-lesson="${l.id}" ${l.id === state.lessonId ? 'aria-current="step"' : ''}>${i + 1}. ${escapeHtml(l.title)}${state.lessons[l.id].completed ? ' ✓ 完了' : ''}</button>`).join('')}</section>`).join('') + `<section><h3>ミニ成果物第7章</h3><button type="button" data-view="project" data-project-open="project01">1. 自己紹介サイトの設計と構造${projectWorkspace.completed ? ' ✓ 完了' : ''}</button><button type="button" data-project-open="project02-css">2. 見た目と動作（CSS先行教材・動作は準備中）</button><p>3. 確認と成果物（準備中）</p></section>`;
 }
 function renderPreview() {
   if (current().executionMode === 'dom') { const record=entry();$('#preview').style.width='100%';$('#preview').srcdoc=domLessonPreview(current(),record.checkedCode===record.code?record.result:null);return; }
@@ -108,13 +108,13 @@ function renderLesson() {
   progress(); renderResult(); renderPreview();
 }
 document.addEventListener('click', async event => {
-  const button = event.target.closest('[data-view],[data-view-link],[data-lesson],[data-copy-code]');
+  const button = event.target.closest('[data-view],[data-view-link],[data-lesson],[data-copy-code],[data-project-open]');
   if (!button) return;
   if (button.hasAttribute('data-copy-code')) {
     try { await navigator.clipboard.writeText(current().example); button.textContent = 'コピー済み'; } catch { button.textContent = '選択してコピー'; }
   } else if (button.dataset.lesson) {
     state.lessonId = button.dataset.lesson; renderLesson(); showView('lesson', {focus:true});
-  } else { event.preventDefault(); showView(button.dataset.view || 'home', {focus:true}); }
+  } else { event.preventDefault(); if (button.dataset.projectOpen) projectWorkspace.selectLesson(button.dataset.projectOpen); showView(button.dataset.projectOpen ? 'project' : button.dataset.view || 'home', {focus:true}); }
 });
 $('.menu-button').addEventListener('click', () => { const open = $('#sidebar').classList.toggle('open'); $('.menu-button').setAttribute('aria-expanded', String(open)); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
