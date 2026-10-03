@@ -1,0 +1,68 @@
+{
+  "results": [
+    {
+      "width": 375,
+      "oldV1": true,
+      "staleSavedResultHidden": true,
+      "exactCssRows": true,
+      "sameCodeRetry": true,
+      "interruptions": [
+        "edit",
+        "reset",
+        "lesson",
+        "view",
+        "reload"
+      ],
+      "syntheticGraderMismatchRefused": true,
+      "domRetry": true,
+      "noEnvelopePersisted": true,
+      "nativeKeyUnchanged": true,
+      "noOverflow": true,
+      "errors": [],
+      "external": []
+    },
+    {
+      "width": 768,
+      "oldV1": true,
+      "staleSavedResultHidden": true,
+      "exactCssRows": true,
+      "sameCodeRetry": true,
+      "interruptions": [
+        "edit",
+        "reset",
+        "lesson",
+        "view",
+        "reload"
+      ],
+      "syntheticGraderMismatchRefused": true,
+      "domRetry": true,
+      "noEnvelopePersisted": true,
+      "nativeKeyUnchanged": true,
+      "noOverflow": true,
+      "errors": [],
+      "external": []
+    },
+    {
+      "width": 1280,
+      "oldV1": true,
+      "staleSavedResultHidden": true,
+      "exactCssRows": true,
+      "sameCodeRetry": true,
+      "interruptions": [
+        "edit",
+        "reset",
+        "lesson",
+        "view",
+        "reload"
+      ],
+      "syntheticGraderMismatchRefused": true,
+      "domRetry": true,
+      "noEnvelopePersisted": true,
+      "nativeKeyUnchanged": true,
+      "noOverflow": true,
+      "errors": [],
+      "external": []
+    }
+  ],
+  "numericStopRetry": true
+}

@@ -14,13 +14,15 @@
 
 ## CORE 共通採点adapter — 現在の独立実装単位
 
-状態: 実装済み・検証/独立レビュー中。Foundationへ統合したPPL-CORE-001のinterface工程。講座22/24=92%維持、教材数/native受入へ加算しない。
+状態: ローカル受入完了・次公開gate保留（5/5=100%）。Foundationへ統合したPPL-CORE-001のinterface工程。講座22/24=92%維持、教材数/native受入へ加算しない。
 
 - [x] trusted登録/要求/envelope/行の共通契約を定義し、4方式を実UIへ接続する。
 - [x] 不正登録/要求/結果と取消/遅延/同コード再実行をunitで検証する。
-- [ ] 旧v1/単体入力/不整合result/破損/保存拒否、中断/繰返しを3幅の実UIで確認する。
-- [ ] 旧21教材/実行controller/workspace、生成物同期を検証する。
-- [ ] 固定候補の独立レビュー・証拠/正本管理文書を完了する。
+- [x] 旧v1/単体入力/不整合result/破損/保存拒否、中断/繰返しを3幅の実UIで確認する。
+- [x] 旧21教材/実行controller/workspace、生成物同期を検証する。
+- [x] 固定候補の独立レビュー・証拠/正本管理文書を完了する。
+
+検証Product ed50f3f8827ed353c87a64d5b7c49f6746b706ac: 38unit（adapter10）、adapter実UI3幅/不整合結果拒否/同コード遅延結果破棄、旧21×3幅/旧v1・単体入力・破損・保存拒否、workspace35/download30、project03 9/download15/遅延6race、verify:agent PASS。独立exactレビュー阻害なし。Evidence: evidence/2026-10-03-grading-adapter/REPORT.md。独立観測はmobile/CSS/保存拒否、全3幅と旧21回帰は実装agentによる別証拠。
 
 設計: design/common-grading-adapter.md。旧21の教材/判定grader/progress.jsを変更せず、登録をコピー/凍結し要求/結果を相関確認する。envelope/runIdはv1へ保存せず、保存形式/進捗は移行しない。IndexedDB/教材全体共通形式は別ACで未実装。Worker1枠/2秒/5秒予約、既存sandbox/network/storage境界、第7章native技術gateを維持する。
 
@@ -38,11 +40,11 @@ Active: Foundation/CORE adapter。Ready: 既存4方式の共通契約。Planned:
 - [x] Unitの意味誤答・実ダウンロード再選択照合・3幅の実UI・旧教材/workspace保存/境界の影響を検証する。
 - [x] 固定候補の独立レビュー・生成物同期・証拠/管理文書を完了する。
 
-前工程CSS候補3f9fc9e22a0cfa323899eefed0652e4424a84544/tree b6c584b390951ea8f2e5440b0e32ec4c29d5e11dは親policy12:28:18UTC revision8/selection6/applied6と公開許可後に、remote親d930/Pages main/docs/work workflowなし/rulesetsなしを再確認し通常push。connected GitHub読取一致、required CIなし（PASS扱いしない）。今回の次候補は親の再確認前にはpushしない。
+前工程CSS候補3f9fc9e22a0cfa323899eefed0652e4424a84544/tree b6c584b390951ea8f2e5440b0e32ec4c29d5e11dは親policy12:28:18UTC revision8/selection6/applied6と公開許可後に、remote親d930/Pages main/docs/work workflowなし/rulesetsなしを再確認し通常push。connected GitHub読取一致、required CIなし（PASS扱いしない）。この前工程の公開gateは解消し89b1274bを通常work反映済み。現在の次候補は冒頭CORE節を参照。
 
 Product 9150c6db9a91cd14b558833917df3bbea8003ff7: 28unit、project03 3幅/実download15/9ケース/遅延6race、CSS32誤答、project01 40誤答、workspace35/download30、旧21×3幅、verify:agent PASS。独立exactレビュー阻害なし。Evidence: evidence/2026-10-03-project03-export/REPORT.md。ファイル内容照合はproject03全体の受入ではない。native技術gateはREPORT/DESIGN記載のOS級隔離・資源停止・専用origin/profile・信頼できる結果transport。
 
-後続の承認済みCORE共通adapter interfaceを確認: 4既存graderを統一dispatchし未知/native modeを実行前拒否する独立単位は権限追加なしで実装可能。今回はread-only調査のみ。Active: Foundation。Ready: 現候補のguarded通常work反映/共通adapter契約。Planned: 残りnative動作・成果物実行、共通形式、IndexedDB。Blocked: 専用native環境/transport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。
+後続の承認済みCORE共通adapter interfaceを確認: 4既存graderを統一dispatchし未知/native modeを実行前拒否する独立単位は権限追加なしで実装可能。当時はread-only調査のみ。後続adapter実装受入は冒頭のCORE節を参照。Active: Foundation。Ready: 現CORE候補のguarded通常work反映。Planned: 残りnative動作・成果物実行、共通形式、IndexedDB。Blocked: 専用native環境/transport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。
 
 ## 第7章 project02 CSS — 受入・work反映済み（前工程記録）
 
@@ -232,7 +234,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 ### 完了条件
 
 - [ ] 教材データの共通形式を定義する。
-- [ ] 実行アダプターの共通インターフェースを定義する。
+- [x] 実行アダプターの共通インターフェースを定義する。（既存21教材のHTML/CSS/数値JavaScript/限定DOM共通採点adapter。nativeは未対応/開始前拒否）
 - [x] JavaScript実行をWeb Workerへ分離する。（第5章数値処理と第6章限定DOM/event演習）
 - [x] 実行時間上限と停止処理を実装する。（結果期限/停止要求とnative終了遅延を区別）
 - [x] テスト結果を期待値、実際値、修正案に分けて表示する。
@@ -241,7 +243,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は本書冒頭のproject03ファイル照合節。project01とCSS work反映済み。現在の照合候補は親の公開gate待ち。後続は承認済みCORE共通adapter契約を独立工程として進められ、native実行は専用環境/transportの受入前には接続しない。第7章のミニ成果物3教材を維持する。別Task未設定。
+`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は冒頭のCORE共通採点adapter節（5/5=100%）。project01/CSS/project03照合はwork反映済み。CORE候補は親の次公開gate待ち。共通教材形式/IndexedDBは後続ACとして残り、native実行は専用環境/transport受入前には接続しない。第7章ミニ成果物3教材を維持する。別Task未設定。
 
 ### 第7章案A — 今回の設計受入条件
 
