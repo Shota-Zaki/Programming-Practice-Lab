@@ -1,0 +1,9 @@
+{
+  "status": {
+    "phase": "error",
+    "source": "legacy",
+    "reason": "DataError"
+  },
+  "restoredCode": "legacy retained code",
+  "legacyRawUnchanged": true
+}

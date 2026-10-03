@@ -5,6 +5,7 @@
 ## 保存・移行契約
 
 - DB名`ppl.foundation.progress`、schema version1、store `records`、key `foundation`。値は`{version:1,revision,state}`。stateは既存v1と同じ教材ID/code/checkedCode/result/attempts/completed/位置/view。revisionはtransaction内の競合検出用で教材定義の版とは異なる。
+- 旧v1と同じJSONで表せるrecordだけを採用・書込する。native structured cloneで保存可能な循環参照/BigIntも、root/教材/check IDが一致していても採用・置換前にDataErrorとする。破損recordを修復・削除せず旧rawの読取専用復元を表示する。
 - 起動時は復元中表示・操作を一時無効にし、復元完了後にUIを接続する。DBに有効なrecordがあればDBだけを正本とする。legacyの後からの変更でDBを上書きしない。
 - recordが未作成の場合のみ、旧`ppl.foundation.progress.v1`、旧単体HTML/viewから既存の復元規則でsnapshotを作る。同じreadwrite transactionでrecordを再読込し、まだ無ければrevision1を保存する。recordの存在が移行完了印であり別marker/partial migrationはない。競合する初回移行は最初にcommitしたrecordを採用する。
 - この工程は旧localStorageを変更/削除しない。native topic、project、無関係なkeyも変更しない。旧rawが壊れている/読取拒否の場合は無断で正常データへ置換せず、メモリ状態のみで開始し理由を表示する。

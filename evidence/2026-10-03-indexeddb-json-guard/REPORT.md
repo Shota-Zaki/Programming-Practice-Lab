@@ -1,0 +1,15 @@
+# IndexedDB破損recordの採用前JSON確認
+
+前工程checkpoint5f685252115507fffdf96099e6f5e5550292488fは2026-10-03 15:32:35 UTC workへ通常push、tree7addec4ccc156290aa0043490423935ac8907fc8をconnected GitHub readbackで確認済み。旧evidence/2026-10-03-indexeddbはその工程の固定履歴で書き換えない。
+
+後続のnative DB破損確認で、正しいroot/教材ID/条件IDを持つcyclic result.actualはstructured cloneで保存でき、元validRecordを通るとstateを採用した後JSON.stringifyが失敗することを再現した。statusはerror/sourcelegacyだがcodeは壊れたDBから取り込まれ、旧保存復元という表示と一致しなかった。before rawを保持した。
+
+固定修正Product7acb4e424f9554e052a512cf3bbf76c73db17ba9/treef3083de4f345fc82c63929fb5be0abf36e09b9b7はvalidRecordの入口でJSON化できない値を拒否し、readOrMigrate/write双方で採用・置換前にDataErrorとする。旧legacyはJSONデータなので新たな保存形式を作らない。既存DB値の削除/修復/上書きや保存先fallbackは追加しない。
+
+最終7acのDB26シナリオ（前25+matching-ID cyclic保持/readonly fallback）、旧21教材×375/768/1280、adapter通常UI3幅/取消/数値停止retry、verify:agent PASS。前工程b739のworkspace35/download30・project03 9/download15/遅延6raceはその対象module/tests/該当UIが不変の別証拠、de6の50既存unitも対象不変。今回新DBの検証を既存unit coverageと称しない。loopback/task-owned一時Playwright contextだけを使い、server/profileは終了時解放。
+
+独立exact7acではcyclic/BigInt両方、全条件ID一致のnative DB値に対するsave拒否+record/revision保持+reloadで旧legacy code/attempts12/completed履歴/正確なerror表示、native/unrelated/legacy raw不変を確認。正常JSON recordの採用/次save/revision更新も確認。src/docs一致、期待3files差分のみ。実装側probeと独立証拠を区別する。
+
+この工程は保存破損時の復帰表示のcorrectness修正。native learner実行/OS隔離/transport/実quota容量/物理durability/Safari/Pages/BFCache受入を追加しない。講座22/24=92%、Foundation21保存単位の機能scopeを維持。workspace/project01保存移行は未完。main merge/deploy/サービス/権限/新dependency変更なし。
+
+この補足は修正公開前checkpoint。guarded workは指定policy GET/expected remote5f68525/no-deploy-trigger/親継続許可の範囲確認後。main mergeには直前のユーザー明示承認が必要。次は親指示のWindows既存隔離基盤のbounded read-only inventory。旧Macの不足をWindowsの不足と断定せず、VM/container/service/learnerを起動せずinstall/firewall/security変更もしない。
