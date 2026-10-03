@@ -1,0 +1,44 @@
+{
+  "browser": "153.0.8010.12",
+  "results": [
+    {
+      "case": "late-digest/cancel",
+      "pass": true
+    },
+    {
+      "case": "late-digest/edit",
+      "pass": true
+    },
+    {
+      "case": "late-digest/switch",
+      "pass": true
+    },
+    {
+      "case": "late-digest/move",
+      "pass": true
+    },
+    {
+      "case": "late-digest/reset",
+      "pass": true
+    },
+    {
+      "case": "late-digest/reselect",
+      "pass": true
+    },
+    {
+      "width": 375,
+      "case": "actual5downloads/reselect/bytes+manifest+current/read-only/mismatch/reload/no-execution",
+      "pass": true
+    },
+    {
+      "width": 768,
+      "case": "actual5downloads/reselect/bytes+manifest+current/read-only/mismatch/reload/no-execution",
+      "pass": true
+    },
+    {
+      "width": 1280,
+      "case": "actual5downloads/reselect/bytes+manifest+current/read-only/mismatch/reload/no-execution",
+      "pass": true
+    }
+  ]
+}

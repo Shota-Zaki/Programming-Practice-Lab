@@ -1,0 +1,60 @@
+{
+  "sha": "9150c6db9a91cd14b558833917df3bbea8003ff7",
+  "results": [
+    {
+      "name": "valid",
+      "message": "選んだ3コードはmanifestと現在の編集内容に一致しました。動作・保存は未確認でproject03全体は未完了です。",
+      "rows": [
+        "index.html: 887 bytes / manifest一致 / 現編集一致",
+        "styles.css: 564 bytes / manifest一致 / 現編集一致",
+        "app.js: 62 bytes / manifest一致 / 現編集一致"
+      ]
+    },
+    {
+      "name": "mobile-bottom-access",
+      "rowTop": 678.03125,
+      "rowBottom": 726.03125,
+      "navTop": 838,
+      "visible": true,
+      "hit": true
+    },
+    {
+      "name": "changed-code",
+      "message": "manifestまたは現在の編集内容に不一致があります。同じ書き出しのひと組を選び直してください。入力は保持しています。",
+      "rows": [
+        "index.html: 887 bytes / manifest一致 / 現編集一致",
+        "styles.css: 564 bytes / manifest一致 / 現編集一致",
+        "app.js: 71 bytes / manifest不一致 / 現編集不一致"
+      ]
+    },
+    {
+      "name": "extra-row-field",
+      "message": "照合できませんでした: manifest.jsonの形式が違います。この画面から書き出したmanifestを選んでください。入力は保持しています。",
+      "rows": []
+    },
+    {
+      "name": "missing-manifest",
+      "message": "照合できませんでした: 3コードファイルとmanifest.jsonの4ファイルを選んでください。README.txtは任意です。入力は保持しています。",
+      "rows": []
+    },
+    {
+      "name": "unhashed-readme",
+      "message": "選んだ3コードはmanifestと現在の編集内容に一致しました。動作・保存は未確認でproject03全体は未完了です。",
+      "rows": [
+        "index.html: 887 bytes / manifest一致 / 現編集一致",
+        "styles.css: 564 bytes / manifest一致 / 現編集一致",
+        "app.js: 62 bytes / manifest一致 / 現編集一致"
+      ]
+    },
+    {
+      "name": "late-switch",
+      "result": "未照合 — 保存したファイルを選んで照合してください。",
+      "rows": 0,
+      "buttonEnabled": true
+    }
+  ],
+  "unchanged": true,
+  "learnerRan": false,
+  "errors": [],
+  "requests": []
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "projectId": "profile-site",
+  "files": [
+    {
+      "name": "index.html",
+      "bytes": 887,
+      "sha256": "dce005776a66637da3c89888ca3c99a1b9978f52c738d5628df62803e9afd6f0"
+    },
+    {
+      "name": "styles.css",
+      "bytes": 564,
+      "sha256": "bc11087b9fc46f3e04a009059d6de430d0b92191e24a9d527fe425ae554d4294"
+    },
+    {
+      "name": "app.js",
+      "bytes": 96,
+      "sha256": "0dfcb0cc911c5996efab2c054a5136ae27edfbd4c01e377177a756d8f4e14a2f"
+    }
+  ]
+}

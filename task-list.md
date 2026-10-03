@@ -14,19 +14,23 @@
 
 ## 第7章 project03 ファイル照合 — 現在の独立実装単位
 
-状態: 作業中（0/5=0%）。講座22/24=92%維持。project03全体/nativeの受入に加算しない。
+状態: ローカル受入完了・次公開gate保留（5/5=100%）。講座22/24=92%維持。project03全体/nativeの受入に加算しない。
 
-- [ ] 成果物/manifestの説明・例・手順・ヒントと第3教材への到達を提供する。
-- [ ] 選択した固定ファイルのbounded UTF-8/schema/bytes/hash照合と現在の編集snapshot比較を読み取り専用で実装する。
-- [ ] 編集/再選択/取消/切替/移動/初期化/期限/例外で現結果と遅延完了を破棄し、入力/履歴を保持する。
-- [ ] Unitの意味誤答・実ダウンロード再選択照合・3幅の実UI・旧教材/workspace保存/境界の影響を検証する。
-- [ ] 固定候補の独立レビュー・生成物同期・証拠/管理文書を完了する。
+- [x] 成果物/manifestの説明・例・手順・ヒントと第3教材への到達を提供する。
+- [x] 選択した固定ファイルのbounded UTF-8/schema/bytes/hash照合と現在の編集snapshot比較を読み取り専用で実装する。
+- [x] 編集/再選択/取消/切替/移動/初期化/期限/例外で現結果と遅延完了を破棄し、入力/履歴を保持する。
+- [x] Unitの意味誤答・実ダウンロード再選択照合・3幅の実UI・旧教材/workspace保存/境界の影響を検証する。
+- [x] 固定候補の独立レビュー・生成物同期・証拠/管理文書を完了する。
 
 前工程CSS候補3f9fc9e22a0cfa323899eefed0652e4424a84544/tree b6c584b390951ea8f2e5440b0e32ec4c29d5e11dは親policy12:28:18UTC revision8/selection6/applied6と公開許可後に、remote親d930/Pages main/docs/work workflowなし/rulesetsなしを再確認し通常push。connected GitHub読取一致、required CIなし（PASS扱いしない）。今回の次候補は親の再確認前にはpushしない。
 
-## 第7章 project02 CSS — 現在の独立実装単位
+Product 9150c6db9a91cd14b558833917df3bbea8003ff7: 28unit、project03 3幅/実download15/9ケース/遅延6race、CSS32誤答、project01 40誤答、workspace35/download30、旧21×3幅、verify:agent PASS。独立exactレビュー阻害なし。Evidence: evidence/2026-10-03-project03-export/REPORT.md。ファイル内容照合はproject03全体の受入ではない。native技術gateはREPORT/DESIGN記載のOS級隔離・資源停止・専用origin/profile・信頼できる結果transport。
 
-状態: ローカル受入完了・公開候補保留（5/5=100%）。全体22/24=92%を維持。
+後続の承認済みCORE共通adapter interfaceを確認: 4既存graderを統一dispatchし未知/native modeを実行前拒否する独立単位は権限追加なしで実装可能。今回はread-only調査のみ。Active: Foundation。Ready: 現候補のguarded通常work反映/共通adapter契約。Planned: 残りnative動作・成果物実行、共通形式、IndexedDB。Blocked: 専用native環境/transport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。
+
+## 第7章 project02 CSS — 受入・work反映済み（前工程記録）
+
+状態: 受入・work反映済み（5/5=100%）。全体22/24=92%を維持。
 
 - [x] CSSの説明・開始例・完成例・ヒントと入力を保持する教材切替を提供する。
 - [x] 3幅の実寸で余白/カード/文字色・明暗比/操作欄/横溢れを静的確認する。
@@ -36,7 +40,7 @@
 
 project01通常work反映済み: remote SHA d9307c29f7724f524f45979f4f7a49c5dfbfa7b7、tree dd3991f621580128196b2053aa044ad3de0fed63。親policy revision8/selection6/applied6再確認とremote/trigger確認後に通常pushし読取一致。Pagesはmain/docs、work workflowなし、required CIなし（PASS扱いしない）。次候補の公開は親の再確認待ち。
 
-Product 352fa9d476a571509fbfec568d681adbaf8c3445: 21unit、CSS3幅/32誤答/5同値、project01回帰40誤答、workspace35/実download30、旧21×3幅、verify:agent PASS。初期/再レビュー指摘を解消し固定候補の独立再現に阻害なし。Evidence: evidence/2026-10-03-project02-css/REPORT.md。CSS条件のみの先行単位5/5=100%、project02全体/nativeは未完了。次は親の公開gate後に通常work反映し、nativeに依存しないproject03教材/成果物照合説明を独立実装できる。
+Product 352fa9d476a571509fbfec568d681adbaf8c3445: 21unit、CSS3幅/32誤答/5同値、project01回帰40誤答、workspace35/実download30、旧21×3幅、verify:agent PASS。初期/再レビュー指摘を解消し固定候補の独立再現に阻害なし。Evidence: evidence/2026-10-03-project02-css/REPORT.md。CSS条件のみの先行単位5/5=100%、project02全体/nativeは未完了。この前工程の公開gateは解消し3f9fc9eを通常work反映済み。現在工程は上のproject03節。
 
 ## 第7章 project01 — 受入済みの独立実装単位（前工程記録）
 
@@ -221,7 +225,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は本書冒頭のproject02 CSS節。project01 work反映済み。今回は承認済み案Aのproject02に必要な教材/CSS確認を独立工程として進め、native実行は専用環境/transportの受入前には接続しない。第7章のミニ成果物3教材を維持する。別Task未設定。
+`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は本書冒頭のproject03ファイル照合節。project01とCSS work反映済み。現在の照合候補は親の公開gate待ち。後続は承認済みCORE共通adapter契約を独立工程として進められ、native実行は専用環境/transportの受入前には接続しない。第7章のミニ成果物3教材を維持する。別Task未設定。
 
 ### 第7章案A — 今回の設計受入条件
 
