@@ -1,11 +1,11 @@
 import { createServer } from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
-import { resolve, extname } from 'node:path';
+import { resolve, extname, sep } from 'node:path';
 import assert from 'node:assert/strict';
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const root = resolve('docs');
 const server = createServer(async (req,res) => {
-  try { const path = resolve(root, '.' + (req.url === '/' ? '/index.html' : req.url)); if (!path.startsWith(root + '/')) throw Error(); const body = await readFile(path); res.setHeader('Content-Type', {'.js':'text/javascript','.html':'text/html','.css':'text/css'}[extname(path)] || 'text/plain'); res.end(body); } catch {res.writeHead(404);res.end();}
+  try { const path = resolve(root, '.' + (req.url === '/' ? '/index.html' : req.url)); if (!path.startsWith(root + sep)) throw Error(); const body = await readFile(path); res.setHeader('Content-Type', {'.js':'text/javascript','.html':'text/html','.css':'text/css'}[extname(path)] || 'text/plain'); res.end(body); } catch {res.writeHead(404);res.end();}
 });
 await new Promise(r => server.listen(0,'127.0.0.1',r));
 const browser = await chromium.launch({headless:true});

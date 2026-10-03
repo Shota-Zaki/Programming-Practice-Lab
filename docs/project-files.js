@@ -24,8 +24,9 @@ export function createProjectSnapshot(files) {
   if (total > 98304) throw new RangeError('全ファイルは96KiB以内にしてください');
   return Object.freeze(snapshot);
 }
-export function createProjectRepository(storage) {
-  const state = { files: { ...STARTER_FILES }, activeFile: FILE_NAMES[0] };
+export function createProjectRepository(storage, { starterFiles = STARTER_FILES } = {}) {
+  const starter = createProjectSnapshot(starterFiles);
+  const state = { files: { ...starter }, activeFile: FILE_NAMES[0] };
   let status = 'fresh', corrupt = false;
   let raw;
   try { raw = storage()?.getItem(PROJECT_KEY); } catch { status = 'unavailable'; }
@@ -52,7 +53,7 @@ export function createProjectRepository(storage) {
     } catch { status = 'unavailable'; return false; }
   };
   return { state, save, get status() { return status; }, reset() {
-    state.files = { ...STARTER_FILES }; state.activeFile = FILE_NAMES[0]; corrupt = false; return save();
+    state.files = { ...starter }; state.activeFile = FILE_NAMES[0]; corrupt = false; return save();
   } };
 }
 const checkAbort = signal => { if (signal?.aborted) throw new DOMException('取り消しました', 'AbortError'); };

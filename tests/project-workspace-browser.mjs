@@ -1,6 +1,7 @@
 import { createServer } from 'node:http';
 import { readFile, mkdir, writeFile, mkdtemp, rm } from 'node:fs/promises';
-import { resolve, extname } from 'node:path';
+import { resolve, extname, sep, join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
@@ -10,7 +11,7 @@ const server = createServer(async (req, res) => {
   try {
     const path = new URL(req.url, 'http://local').pathname.replace(/^\/Programming-Practice-Lab\//, '/');
     const file = resolve(root, '.' + (path === '/' ? '/index.html' : path));
-    if (!file.startsWith(root + '/')) throw Error('path');
+    if (!file.startsWith(root + sep)) throw Error('path');
     res.setHeader('Content-Type', { '.js': 'text/javascript', '.html': 'text/html', '.css': 'text/css' }[extname(file)] || 'text/plain');
     res.end(await readFile(file));
   } catch { res.writeHead(404); res.end(); }
@@ -33,7 +34,7 @@ try {
         return route.continue();
       });
       await open(page);
-      const starter = await page.evaluate(async () => (await import('./project-files.js')).STARTER_FILES);
+      const starter = await page.evaluate(async () => (await import('./project-lessons.js')).project01.exampleFiles);
       assert.equal(await page.getByRole('tab', { name: 'index.html', exact: true }).getAttribute('aria-selected'), 'true');
       await page.getByRole('tab', { name: 'index.html', exact: true }).focus(); await page.keyboard.press('ArrowRight');
       assert.equal(await page.getByRole('tab', { name: 'styles.css', exact: true }).evaluate(node => node === document.activeElement), true);
@@ -48,7 +49,7 @@ try {
       await page.reload(); assert.equal(await page.locator('#project-editor').inputValue(), expected['styles.css']);
       await page.locator('#project-editor').press('Control+Enter'); await page.getByText(/静的確認を更新しました。JavaScript/).waitFor();
       await page.locator('#project-editor').press('Meta+Enter'); await page.getByText(/静的確認を更新しました。JavaScript/).waitFor();
-      assert.equal(await page.locator('#project-checks li').count(), 6);
+      assert.equal(await page.locator('#project-checks li').count(), 10);
       assert.equal(await page.locator('#project-checks').textContent().then(text => text.includes('見直してください')), false);
       assert.equal(await page.locator('#project-preview').getAttribute('sandbox'), '');
       assert.equal(await page.locator('#project-native').isDisabled(), true);
@@ -97,7 +98,7 @@ try {
         const variable = expression.startsWith('var(') ? '--image:i\\6d age-set("https://malicious.example.invalid/leak" 1x);' : '';
         await setFile(page, 'styles.css', `body{${variable}background-image:${expression}}`);
         await page.locator('#project-inspect').click(); await page.getByText(/静的確認を更新しました。JavaScript/).waitFor();
-        assert.match(await page.locator('#project-checks li').last().textContent(), /見直してください/);
+        assert.match(await page.locator('#project-checks li').nth(8).textContent(), /見直してください/);
         assert.equal(await page.frameLocator('#project-preview').locator('body').evaluate(node => getComputedStyle(node).backgroundImage), 'none');
       }
       results.push({ width, case: 'image-set-string-url/prefixed/escaped-function', pass: true });
@@ -147,7 +148,8 @@ try {
       page.once('dialog', dialog => dialog.dismiss()); await page.locator('#project-reset').click();
       assert.equal(await page.locator('#project-editor').inputValue(), '// retain on cancelled reset\n');
       page.once('dialog', dialog => dialog.accept()); await page.locator('#project-reset').click();
-      for (const name of Object.keys(starter)) { await page.getByRole('tab', { name, exact: true }).click(); assert.equal(await page.locator('#project-editor').inputValue(), starter[name]); }
+      const resetFiles = await page.evaluate(async () => (await import('./project-lessons.js')).project01.starterFiles);
+      for (const name of Object.keys(resetFiles)) { await page.getByRole('tab', { name, exact: true }).click(); assert.equal(await page.locator('#project-editor').inputValue(), resetFiles[name]); }
       await page.locator('#project-export').click(); await expectDownloads(page);
       await page.evaluate(() => { location.hash = 'course'; }); await page.locator('#course-title').waitFor();
       await page.locator('.curriculum [data-view="project"]').click(); assert.equal(await page.locator('#project-downloads button').count(), 0);
@@ -189,7 +191,7 @@ try {
   }
   // A dedicated disposable persistent profile proves editor restore across real browser processes.
   await browser.close();
-  const profile = await mkdtemp('/tmp/ppl-project-editor-profile-');
+  const profile = await mkdtemp(join(tmpdir(), 'ppl-project-editor-profile-'));
   try {
     let saved;
     for (let restart = 0; restart < 2; restart++) {
@@ -207,7 +209,10 @@ try {
       } finally { await context.close(); }
     }
     results.push({ width: 375, case: 'editor-native-storage/browser-process-restart', pass: true });
-  } finally { await rm(profile, { recursive: true, force: true }); }
+  } finally {
+    if (!resolve(profile).startsWith(resolve(tmpdir()) + sep) || !profile.includes('ppl-project-editor-profile-')) throw Error('unsafe profile path');
+    await rm(profile, { recursive: true, force: true });
+  }
   await writeFile(`${output}/results.json`, JSON.stringify({ browser: browser.version(), observations: results.length, results }, null, 2) + '\n');
   console.log(JSON.stringify({ result: 'PASS', browser: browser.version(), observations: results.length }));
 } finally { await browser.close(); await new Promise(resolve => server.close(resolve)); }

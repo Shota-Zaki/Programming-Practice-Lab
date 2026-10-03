@@ -1,17 +1,17 @@
 # NEXT_WORK.md
 
 - Active Task: `PPL-FOUNDATION-001 — Web開発基礎講座`
-- Status: `in_progress`（第6章まで21教材受入済み。第7章mini-project3教材は未実装）
-- Completion: `88%`（21/24教材）。案A具体設計6/6=100%は教材数へ加算しない。
-- Branch: `work`
-- Next Action: 静的workspaceは6/6=100%受入済み。親の保留解除後、レビュー済み5d2a52dをcanonical workへfast-forward/通常pushしremote readback一致を確認。次は第7章3教材の正式登録・受入を独立単位として進める。native実行の接続は環境・transportの受入待ち。
-- Ready: 第7章3教材の教材設計・正式受入準備。静的workspaceはworkへ反映済み。
-- Planned: 第7章mini-project3教材、正式共通形式/adapter、IndexedDB、実Pages/Safari/手動読み上げ。
-- Blocking: native任意実行向け専用環境の通信拒否/ファイル・プロセス/資源分離の実受入、合否連携transportは別Blocked。A/B選択は案A承認により解消。
-- Deferred: native実行接続（環境受入前）、基礎講座後の実践UI。旧案B codec/facadeは不採用の履歴。別の次Task: 未設定。
-- Evidence: 新しいローカル静的workspace `evidence/2026-10-03-project-workspace/`（product95f8604、QA f42971f、17unit/35native/30実download/旧21教材×3幅/verify PASS）。最新設計・旧比較設計/Chapter5/js04/js05/js06証拠は保持。新workspaceを第7章3教材の実受入として扱わない。
-- Verification: `npm run verify:agent`。この設計作業でnative storage/facade/codec/UIの受入を行ったとは扱わない。
-- Native/resource boundary: native localStorageはWindow同期API。現Worker/opaque frameへsame-origin保存権限を渡さない。既存共有枠1/公開2秒期限/5秒予約を維持。native Worker終了遅延/硬いmemory quotaなし/Safari未確認は継続。
-- Approval boundary: main merge/公開未実施。main mergeは実行直前のユーザー明示承認が必要。
+- Status: `in_progress`。project01の教材・静的構造採点を実装し、固定候補の独立レビュー待ち。
+- Completion: `88%`（既存21/24受入済み）。project01はレビュー完了後に22/24=`92%`へ更新する。native未受入を加算しない。
+- Branch: `work`。Windowsのタスク専用checkout `task-2/ppl`。公開は親指示により保留。
+- Next Action: 固定候補の独立レビューと最終局所チェック。親の最新policy、remote-head、push trigger確認前にはpushしない。
+- Ready: project01のレビュー・候補受渡し。案Aは承認済みで再選択不要。
+- Planned: project02の見た目/動作、project03の確認/成果物、正式共通形式/adapter、IndexedDB。
+- Blocked: 任意native実行の専用環境（通信拒否/ファイル・プロセス分離/資源上限）と信頼できる結果transport。通常UIのnative実行・保存採点は無効。
+- Deferred: 実Pages/Safari/手動読み上げ、基礎講座後の実践UI。別Task未設定。案B codec/facadeは不採用履歴。
+- Evidence: `evidence/2026-10-03-project01/`。21 unit、project01 3幅/27意味誤答/Tab-label/履歴/保存fault、workspace35観測、旧21教材×3幅。最終SHAとレビュー結果はtask-listの最新節を参照。
+- Verification: `npm run verify:agent`と局所ブラウザー検証。Windowsの既存Chromiumを使用。Playwrightをタスク専用test-toolsに取得し、browser sandbox無効化flagや設定変更なし。
+- Boundary: learner JS未評価。既存scriptなしpreview/opaque parser、旧21ID/v1、既存Worker1枠/2秒結果期限/5秒予約、同一snapshot export契約を維持。native localStorage動作をfixtureで代用しない。
+- Approval: main merge/公開は未実施。main mergeには実行直前のユーザー明示承認が必要。
 
-詳細は`task-list.md`/`DESIGN.md`。GitHub Actionsは使用しない。
+正本は`task-list.md`。設計は`DESIGN.md`と`design/chapter7-native-export.md`。GitHub Actionsは使用しない。

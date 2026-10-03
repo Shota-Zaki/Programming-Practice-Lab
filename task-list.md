@@ -10,7 +10,21 @@
 - workBranch: `work`
 - pagesSource: `main/docs`
 - selectedDesign: `foundation-first + project-based`
-- updatedAt: `2026-10-02`
+- updatedAt: `2026-10-03`
+
+## 第7章 project01 — 今回の独立実装単位
+
+状態: `実装・検証中`。承認済み案Aに沿い、自己紹介サイトの設計と構造だけを登録・受入する。project02/03のnative動作/保存/結果transportを有効にしない。既存workspace入力は保持し、新規/明示初期化時に未完成HTMLを使う。
+
+- [x] 教材の目標・説明・3ファイル開始例/構造完成例・ヒントを登録し、講座から到達可能にする。
+- [x] 静的HTML構造・操作欄・相対参照をopaque trusted parserで採点し、375/768/1280の表示を集約する。
+- [x] 専用進捗key、完了履歴と現snapshotの結果の区別、24/3の分母、旧21ID/v1不変を実装する。
+- [ ] 開始例不合格/完成例合格/意味誤答、3幅の実UI・Tab/label・編集/移動/初期化/取消/保存復元/保存拒否を検証する。
+- [ ] learner JS未評価、scriptなしsandbox、禁止resource/通信、export同一bytes/hashと取消、旧workspaceの復元を回帰確認する。
+- [ ] 旧21教材、実行controller、生成物同期、npm run verify:agentを確認し、証拠を保存する。
+- [ ] 固定SHA独立レビュー・指摘解消・管理文書を完了し、候補を親へ渡す。guarded work反映は親のポリシー再確認後の別工程。
+
+講座実装受入はこの7条件のレビュー完了後だけ22/24（92%）へ進める。現段階は既存21/24（88%）。Windowsのタスク専用checkoutで作業。リポジトリ内`.agents/skills`は存在せず、AGENTS.md/VERIFY_AGENT.mdの規約を適用する。main merge/公開/サービス再起動/設定変更/永続アクセス追加なし。Active: PPL-FOUNDATION-001。Ready: project01の検証・レビュー。Planned: project02/03、共通形式/adapter/IndexedDB。Blocked: native実行の専用環境・結果transport。Deferred: 実Pages/Safari/読み上げ/基礎講座後実践UI。別Task未設定。
 
 ## PPL-INIT-001 GitHub Pages公開基盤
 

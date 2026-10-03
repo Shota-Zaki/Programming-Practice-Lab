@@ -1,5 +1,17 @@
 # DESIGN.md
 
+## 2026-10-03 project01 — 設計と構造の教材接続
+
+案Aと既存3ファイルworkspaceを使う。project01だけ教材・開始例・完成例・ヒントを正式登録し、scriptなしの静的構造採点で完了履歴を得る。project02/03は予定として表示し、native動作・保存・成果物実行の合格を有効にしない。
+
+既存workspaceの入力は保持する。新規・明示初期化時だけproject01の未完成HTMLを使い、CSS/JSも同じ3ファイルとして編集/exportする。教材表示と編集を同じ画面に置き、コード例は折りたたみで参照する。教材の主見出し、説明、条件、ヒント、現在結果、完了履歴を区別する。
+
+project01の進捗は専用key `ppl.foundation.project01.progress.v1` に保存し、旧21教材のv1 schemaへ3ファイルを詰め込まない。構造結果は現在snapshotにだけ表示し、編集/初期化/取消/移動で未確認へ戻す。完了履歴は維持するが現コードの合格を装わない。破損進捗は自動上書きせず、確認付き当該教材履歴初期化で回復可能。講座分母24・第7章分母3を維持する。
+
+採点はtrusted parserのopaque iframeで文書・main内の構造・ID一意性・labelとselect・option・表示p・button type・相対CSS/JS参照・禁止resourceを確認する。学習者JSを評価しない。静的表示コピーを使い、375/768/1280の各幅で必須要素の表示、選択欄/ボタンへのTab到達を確認する。これをnativeイベント/localStorage動作の証拠にしない。採点/保存の失敗は入力を保持し、現結果は未確認にする。
+
+新しいruntime/権限/通信transportを追加しない。既存sandbox、2秒期限、export snapshot/hash契約、旧21教材を維持する。Windows専用checkoutで局所テストと旧教材回帰を実施し、固定commitを独立レビューする。work反映には親の最新ポリシー再確認を必要とする。
+
 ## 状態
 
 `確定・継続改善中`

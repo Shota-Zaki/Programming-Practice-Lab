@@ -32,6 +32,7 @@ function showView(name, { focus = false, history = true } = {}) {
   projectWorkspace.leave();
   cancelGrade();
   state.view = validViews.has(name) ? name : 'home';
+  progress();
   panels.forEach(p => { p.hidden = p.dataset.viewPanel !== state.view; p.classList.toggle('active', !p.hidden); });
   $('#view-title').textContent = {home:'ホーム',courses:'基礎講座',course:'Web開発基礎',lesson:'教材',practice:'入力演習',project:'ミニ成果物の編集'}[state.view];
   $('#view-kicker').textContent = 'FOUNDATION LEARNING';
@@ -44,10 +45,11 @@ function showView(name, { focus = false, history = true } = {}) {
   if (focus) { const heading = $(`[data-view-panel="${state.view}"] h1`); if (heading) { heading.tabIndex = -1; heading.focus({preventScroll:true}); } }
 }
 function progress() {
-  const chapter = chapters.find(c => c.id === current().chapterId);
+  const isProject = state.view === 'project';
+  const chapter = isProject ? { id: 'project-chapter07', title: 'ミニ成果物第7章', plannedLessons: 3 } : chapters.find(c => c.id === current().chapterId);
   const chapterLessons = lessons.filter(l => l.chapterId === chapter.id);
-  const count = chapterLessons.filter(l => state.lessons[l.id].completed).length;
-  const total = lessons.filter(l => state.lessons[l.id].completed).length;
+  const count = isProject ? Number(projectWorkspace.completed) : chapterLessons.filter(l => state.lessons[l.id].completed).length;
+  const total = lessons.filter(l => state.lessons[l.id].completed).length + Number(projectWorkspace.completed);
   const chapterTotal=chapter.plannedLessons ?? chapterLessons.length;
   const percent = Math.round(count / chapterTotal * 100);
   document.querySelectorAll('[data-chapter-title]').forEach(n => n.textContent = chapter.title);
@@ -55,8 +57,8 @@ function progress() {
   document.querySelectorAll('[data-course-progress]').forEach(n => n.textContent = `${total} / 24`);
   document.querySelectorAll('[data-chapter-percent]').forEach(n => n.textContent = `${percent}%`);
   document.querySelectorAll('[data-progress-bar]').forEach(n => n.style.width = `${percent}%`);
-  $('#current-lesson-label').textContent = `${chapter.title} / ${current().title}`;
-  $('#lesson-picker').innerHTML = chapters.map(c => `<section><h3>${escapeHtml(c.title)}</h3>${lessons.filter(l => l.chapterId === c.id).map((l, i) => `<button type="button" data-lesson="${l.id}" ${l.id === state.lessonId ? 'aria-current="step"' : ''}>${i + 1}. ${escapeHtml(l.title)}${state.lessons[l.id].completed ? ' ✓ 完了' : ''}</button>`).join('')}</section>`).join('');
+  $('#current-lesson-label').textContent = `${chapter.title} / ${isProject ? '自己紹介サイトの設計と構造' : current().title}`;
+  $('#lesson-picker').innerHTML = chapters.map(c => `<section><h3>${escapeHtml(c.title)}</h3>${lessons.filter(l => l.chapterId === c.id).map((l, i) => `<button type="button" data-lesson="${l.id}" ${l.id === state.lessonId ? 'aria-current="step"' : ''}>${i + 1}. ${escapeHtml(l.title)}${state.lessons[l.id].completed ? ' ✓ 完了' : ''}</button>`).join('')}</section>`).join('') + `<section><h3>ミニ成果物第7章</h3><button type="button" data-view="project">1. 自己紹介サイトの設計と構造${projectWorkspace.completed ? ' ✓ 完了' : ''}</button><p>2. 見た目と動作（準備中）</p><p>3. 確認と成果物（準備中）</p></section>`;
 }
 function renderPreview() {
   if (current().executionMode === 'dom') { const record=entry();$('#preview').style.width='100%';$('#preview').srcdoc=domLessonPreview(current(),record.checkedCode===record.code?record.result:null);return; }
@@ -157,6 +159,7 @@ $('#next-lesson').addEventListener('click', () => {
   if (current().nextLessonId) { state.lessonId = current().nextLessonId; renderLesson(); showView('lesson', {focus:true}); }
   else showView('course', {focus:true});
 });
+projectWorkspace.subscribe(progress);
 renderLesson();
 showView(validViews.has(location.hash.slice(1)) ? location.hash.slice(1) : state.view, {history:false});
 window.addEventListener('hashchange', () => { if (validViews.has(location.hash.slice(1))) showView(location.hash.slice(1), {history:false}); });
