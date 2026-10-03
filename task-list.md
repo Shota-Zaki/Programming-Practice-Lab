@@ -5,7 +5,7 @@
 - currentTask: `PPL-FOUNDATION-001`
 - currentPhase: `Web開発基礎講座`
 - currentStatus: `in_progress`
-- completionPercentage: `88%`（講座全体24レッスン中21レッスン実装・検証済み。初期17/17、第2〜5章各7/7、第6章js04/js05/js06各7/7受入完了）
+- completionPercentage: `92%`（講座全体24レッスン中22レッスン実装・検証済み。旧21教材と第7章project01の静的構造受入完了。project02/03のnative受入は未完了）
 - baseBranch: `main`
 - workBranch: `work`
 - pagesSource: `main/docs`
@@ -14,17 +14,17 @@
 
 ## 第7章 project01 — 今回の独立実装単位
 
-状態: `実装・検証中`。承認済み案Aに沿い、自己紹介サイトの設計と構造だけを登録・受入する。project02/03のnative動作/保存/結果transportを有効にしない。既存workspace入力は保持し、新規/明示初期化時に未完成HTMLを使う。
+状態: `ローカル受入完了・親への候補受渡し`（7/7=`100%`）。承認済み案Aに沿い、自己紹介サイトの設計と構造だけを登録・受入した。project02/03のnative動作/保存/結果transportは無効のまま。既存workspace入力は保持し、新規/明示初期化時に未完成HTMLを使う。
 
 - [x] 教材の目標・説明・3ファイル開始例/構造完成例・ヒントを登録し、講座から到達可能にする。
 - [x] 静的HTML構造・操作欄・相対参照をopaque trusted parserで採点し、375/768/1280の表示を集約する。
 - [x] 専用進捗key、完了履歴と現snapshotの結果の区別、24/3の分母、旧21ID/v1不変を実装する。
-- [ ] 開始例不合格/完成例合格/意味誤答、3幅の実UI・Tab/label・編集/移動/初期化/取消/保存復元/保存拒否を検証する。
-- [ ] learner JS未評価、scriptなしsandbox、禁止resource/通信、export同一bytes/hashと取消、旧workspaceの復元を回帰確認する。
-- [ ] 旧21教材、実行controller、生成物同期、npm run verify:agentを確認し、証拠を保存する。
-- [ ] 固定SHA独立レビュー・指摘解消・管理文書を完了し、候補を親へ渡す。guarded work反映は親のポリシー再確認後の別工程。
+- [x] 開始例不合格/完成例合格/意味誤答、3幅の実UI・Tab/label・編集/移動/初期化/取消/保存復元/保存拒否を検証する。
+- [x] learner JS未評価、scriptなしsandbox、禁止resource/通信、export同一bytes/hashと取消、旧workspaceの復元を回帰確認する。
+- [x] 旧21教材、実行controller、生成物同期、npm run verify:agentを確認し、証拠を保存する。
+- [x] 固定SHA独立レビュー・指摘解消・管理文書を完了し、候補を親へ渡す。guarded work反映は親のポリシー再確認後の別工程。
 
-講座実装受入はこの7条件のレビュー完了後だけ22/24（92%）へ進める。現段階は既存21/24（88%）。Windowsのタスク専用checkoutで作業。リポジトリ内`.agents/skills`は存在せず、AGENTS.md/VERIFY_AGENT.mdの規約を適用する。main merge/公開/サービス再起動/設定変更/永続アクセス追加なし。Active: PPL-FOUNDATION-001。Ready: project01の検証・レビュー。Planned: project02/03、共通形式/adapter/IndexedDB。Blocked: native実行の専用環境・結果transport。Deferred: 実Pages/Safari/読み上げ/基礎講座後実践UI。別Task未設定。
+講座実装受入は22/24（92%）。検証/独立レビュー対象productは`7fa8c0a1af448328c4178204142ee5d460945e02`。21unit/controller、project01 3幅/40意味誤答/同値fieldset、workspace35観測/実download30、旧21教材×3幅、verify:agent PASS。独立レビューの親要素非表示/fieldset実効無効化/閉じたdetails/Tab順/属性消失の指摘を解消し、修正SHAの独立再現は阻害なし。Evidence: `evidence/2026-10-03-project01/REPORT.md`、`review.md`、hash manifest。最終証拠checkpointではsrc/docs/testsを変更しない。Windowsタスク専用checkoutのworkにローカルcommit済み。リポジトリ内`.agents/skills`は存在せず、AGENTS.md/VERIFY_AGENT.mdを適用した。main merge/公開/サービス再起動/設定変更/永続アクセス追加なし。親の最新policy/remote/trigger確認待ちのためpush保留。remote workの最新読取はe674abdで不変。Active: PPL-FOUNDATION-001。Ready: レビュー済み候補の親受渡し/guarded work反映。Planned: project02/03、共通形式/adapter/IndexedDB。Blocked: native実行専用環境・結果transport。Deferred: 実Pages/Safari/読み上げ/基礎講座後実践UI。別Task未設定。
 
 ## PPL-INIT-001 GitHub Pages公開基盤
 
@@ -195,7 +195,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`は第6章まで21/24教材受入済み（88%）。第7章は既存ミニ成果物3教材を維持する。ownerは標準localStorageと同じコードの成果物持ち出しを使う案Aを承認した。今回のscopeはnative/export/local実行の具体的設計と独立レビューまで。設計受入後、権限を追加しない編集・静的確認・exportから実装可能とし、任意native実行は分離環境の検証条件を満たすまで接続しない。別の次Taskは未設定。
+`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は本書冒頭のproject01節。親が候補のpolicy/remote/triggerを再確認した後だけwork反映する。次は承認済み案Aのproject02/03に必要な教材/CSS確認を独立工程として進め、native実行は専用環境/transportの受入前には接続しない。第7章のミニ成果物3教材を維持する。別Task未設定。
 
 ### 第7章案A — 今回の設計受入条件
 
@@ -212,9 +212,9 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 固定設計`e9ee4ae862102d6189f6bd4b5370df22d220df9e`を独立レビューし阻害指摘なし。Evidence: `evidence/2026-10-03-native-export-design/`。Active: PPL-FOUNDATION-001。Ready: 権限追加のない編集/静的確認/export。Planned: 残り3教材/正式共通形式/adapter/IndexedDB。Blocked: 任意native実行向け専用環境と信頼できる結果連携の受入。Deferred: 実Pages/Safari/読み上げ、基礎講座後の実践UI。別Task未設定。A/B選択は解消済みで再確認不要。native実装/受入は未実施。main merge/公開未実施。
 
-### 第7章案A — 後続実装の受入条件（全て未受入）
+### 第7章案A — 3教材全体の後続実装受入条件（project01単位の受入は冒頭）
 
-今回の実装scopeは3ファイル編集workspace・静的確認・exportまで。project01/02/03の教材登録/合格連携はしない。native実行・結果transport/進捗の新教材完了を有効にしない。
+以前の静的workspace工程のscopeは3ファイル編集・静的確認・exportまでで、当時project01/02/03の登録/合格連携は行わなかった。最新工程でproject01の静的構造だけを受入済み。以下は3教材全体の条件であり、project02/03/native実行・結果transportの未受入を引き続き示す。
 
 #### 今回の静的workspace受入（作業前登録）
 
