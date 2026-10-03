@@ -83,7 +83,7 @@ try {
     const beforeAbort=await record(page);await page.evaluate(()=>window.__dbFault='abort');await page.locator('#editor').fill('interrupted write');await failed(page);
     assert.deepEqual(await record(page),beforeAbort);assert.match(await page.locator('#save-status').textContent(),/中断/);assert.equal(await page.locator('#editor').inputValue(),'interrupted write');
     await page.evaluate(()=>window.__dbFault='');await page.locator('#editor').fill('recovered input');await saved(page);assert.equal((await record(page)).state.lessons.html03.code,'recovered input');
-    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);await page.screenshot({path:`${evidence}/saved-${width}.png`,fullPage:true});
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await page.screenshot({path:`${evidence}/saved-${width}.png`,fullPage:true});
     assert.deepEqual(errors,[]);assert.deepEqual(external,[]);results.push({case:'migration/repeat/authority/real grade/reload/late ack/abort/retry',width,passed:true});await context.close();
   }
   {
@@ -92,7 +92,9 @@ try {
   for(const fault of ['unavailable','open-refusal','legacy-refusal','quota','refusal','transaction','abort']) {
     const {context,page,errors}=await session({fault,width:375});await failed(page);assert.match(await page.locator('#save-status').textContent(),/保存できません/);
     if(fault!=='legacy-refusal'){const before=await raw(page);assert.equal(await page.locator('#editor').inputValue(),'<h1>Preserved old input</h1>');await page.locator('#editor').fill('memory only edit');assert.deepEqual(await raw(page),before);await page.reload();await failed(page);assert.equal(await page.locator('#editor').inputValue(),'<h1>Preserved old input</h1>');if(['quota','refusal','transaction','abort'].includes(fault))assert.equal(await record(page),null);}
-    assert.deepEqual(errors,[]);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);await page.screenshot({path:`${evidence}/error-${fault}.png`,fullPage:true});results.push({case:'first migration failure: '+fault,synthetic:true,passed:true});await context.close();
+    assert.deepEqual(errors,[]);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+    const layout=await page.locator('.practice-head').evaluate(head=>{const back=head.querySelector('button').getBoundingClientRect(),status=head.querySelector('#save-status').getBoundingClientRect();return {backHeight:back.height,backWidth:back.width,separateRow:status.top>=back.bottom};});assert.ok(layout.backHeight<=50&&layout.backWidth>=100&&layout.separateRow,JSON.stringify(layout));
+    await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await page.screenshot({path:`${evidence}/error-${fault}.png`,fullPage:true});results.push({case:'first migration failure: '+fault,synthetic:true,passed:true});await context.close();
   }
   {
     const {context,page}=await session({corrupt:true});await failed(page);await page.locator('#editor').fill('memory input');assert.equal((await raw(page)).legacy,'{broken');assert.equal(await record(page),null);results.push({case:'corrupt legacy retained',passed:true});await context.close();
