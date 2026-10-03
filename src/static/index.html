@@ -151,7 +151,7 @@
           <div class="page" id="project-workspace">
             <div class="breadcrumb"><button type="button" data-view="course">Web開発基礎</button><span>/</span><span id="project-breadcrumb">第7章 / PROJECT01</span></div>
             <header class="page-head"><div><p class="eyebrow" id="project-kicker">MINI PROJECT / PROJECT01</p><h1 id="project-title">自己紹介サイトの設計と構造</h1><p id="project-description">HTML構造を完成させ、同じ3ファイルを持ち出せます。静的採点でproject01を完了できます。</p></div></header>
-            <div class="project-actions" role="group" aria-label="成果物の教材"><button type="button" data-project-lesson="project01" aria-pressed="true">project01 構造</button><button type="button" data-project-lesson="project02-css" aria-pressed="false">project02 CSS先行教材</button></div>
+            <div class="project-actions" role="group" aria-label="成果物の教材"><button type="button" data-project-lesson="project01" aria-pressed="true">project01 構造</button><button type="button" data-project-lesson="project02-css" aria-pressed="false">project02 CSS先行教材</button><button type="button" data-project-lesson="project03-export" aria-pressed="false">project03 ファイル照合</button></div>
             <p id="project-lesson-note">教材の切替は入力を保持します。</p>
             <section id="project-lesson-content" class="project-guide" aria-label="project01の教材"></section>
             <section id="project-examples" class="project-guide"></section>
@@ -172,6 +172,7 @@
               <section class="project-display"><h2>静的プレビュー</h2><p>表示用コピーからscript・イベント属性・外部resourceを除きます。入力と書き出すファイルは変更しません。動作や保存の確認ではありません。</p><iframe id="project-preview" title="自己紹介サイトの静的プレビュー（スクリプトなし）" sandbox></iframe><ul id="project-checks" aria-label="静的構造の確認結果"></ul></section>
             </div>
             <section class="project-export"><h2>成果物のファイル</h2><p id="project-action-status" role="status">静的確認または書き出しを選んでください。</p><div id="project-downloads" aria-label="書き出すファイル"></div><p>5ファイルを同じ空フォルダに保存してください。manifest.jsonに3ファイルのサイズとSHA-256を記録します。編集後は全ファイルを取り直してください。保存値や講座の履歴は含めません。</p></section>
+            <section id="project-bundle-panel" class="project-guide" hidden><h2>保存したファイルを照合</h2><p id="project-bundle-note">3コードファイルとmanifest.jsonを選びます。README.txtは任意で照合対象外です。ファイルを実行/上書きせず、内容を読み取って比較します。照合は動作や保存の受入ではありません。</p><label for="project-bundle-files">照合するファイル（複数選択）</label><input id="project-bundle-files" type="file" multiple accept=".html,.css,.js,.json,.txt" aria-describedby="project-bundle-note"><div class="project-actions"><button id="project-verify-bundle" type="button">選択したファイルを照合</button></div><p id="project-bundle-result" role="status">未照合 — 保存したファイルを選んでください。</p><ul id="project-bundle-checks" aria-label="ファイルごとの内容照合結果"></ul></section>
           </div>
         </section>
       </main>

@@ -12,6 +12,18 @@
 - selectedDesign: `foundation-first + project-based`
 - updatedAt: `2026-10-03`
 
+## 第7章 project03 ファイル照合 — 現在の独立実装単位
+
+状態: 作業中（0/5=0%）。講座22/24=92%維持。project03全体/nativeの受入に加算しない。
+
+- [ ] 成果物/manifestの説明・例・手順・ヒントと第3教材への到達を提供する。
+- [ ] 選択した固定ファイルのbounded UTF-8/schema/bytes/hash照合と現在の編集snapshot比較を読み取り専用で実装する。
+- [ ] 編集/再選択/取消/切替/移動/初期化/期限/例外で現結果と遅延完了を破棄し、入力/履歴を保持する。
+- [ ] Unitの意味誤答・実ダウンロード再選択照合・3幅の実UI・旧教材/workspace保存/境界の影響を検証する。
+- [ ] 固定候補の独立レビュー・生成物同期・証拠/管理文書を完了する。
+
+前工程CSS候補3f9fc9e22a0cfa323899eefed0652e4424a84544/tree b6c584b390951ea8f2e5440b0e32ec4c29d5e11dは親policy12:28:18UTC revision8/selection6/applied6と公開許可後に、remote親d930/Pages main/docs/work workflowなし/rulesetsなしを再確認し通常push。connected GitHub読取一致、required CIなし（PASS扱いしない）。今回の次候補は親の再確認前にはpushしない。
+
 ## 第7章 project02 CSS — 現在の独立実装単位
 
 状態: ローカル受入完了・公開候補保留（5/5=100%）。全体22/24=92%を維持。

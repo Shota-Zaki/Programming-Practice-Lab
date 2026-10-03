@@ -63,3 +63,17 @@ export const project02Css = Object.freeze({
   starterCss: 'body { font-family: sans-serif; }\n/* 余白・文字・カード・操作欄の寸法を追加します */\n',
   exampleFiles: Object.freeze({ ...STARTER_FILES, 'styles.css': "* { box-sizing: border-box; }\nbody { margin: 0; padding: 16px; font-family: sans-serif; font-size: 16px; line-height: 1.7; color: #25334a; background: #edf2f8; }\nmain { max-width: 720px; margin: 0 auto; padding: 24px; background: white; border-radius: 16px; }\nh1 { font-size: clamp(24px, 5vw, 36px); line-height: 1.5; overflow-wrap: anywhere; }\np, li, label { overflow-wrap: anywhere; }\nlabel { display: block; margin-top: 24px; }\nselect, button { display: block; max-width: 100%; min-height: 44px; padding: 8px 12px; font: inherit; }\nbutton { margin-top: 16px; }\n" }),
 });
+
+export const project03Export = Object.freeze({
+  id: 'project03-export', title: '書き出したファイルを照合する',
+  objectives: ['同じsnapshotから3ファイルを持ち出す', 'manifestと現在の編集内容への一致を区別する'],
+  contentBlocks: [
+    { title: 'ひと組として保存する', text: '「ファイルを書き出す」からindex.html・styles.css・app.js・manifest.json・README.txtを同じ空フォルダーに保存します。再書き出しでは全ファイルを取り直します。「ダウンロード開始」はOSの保存完了ではありません。まず取得したファイル名を確かめましょう。' },
+    { title: 'manifestを読む', text: 'manifestは各コードのUTF-8 byte数とSHA-256を記録します。byte数は文字数と異なり、日本語や絵文字で増えます。照合対象は3コードのみでREADMEの内容は照合しません。manifestは署名や動作結果ではなく、同じ内容かを確かめる記録です。' },
+    { title: '保存したファイルを選んで照合する', text: '下の選択欄で3コードとmanifestの4ファイルを選びます。READMEは一緒に選んでも構いません。固定名だけを重複せず選び、コード各32KiB・manifest4KiB・README16KiB以内にしてください。選択したコードを実行したり、入力へ上書きしたり、保存/外部送信したりはしません。物理フォルダーやsymlink、OS保存完了の検証ではなく、選択したbytesの照合です。' },
+    { title: '二つの一致を見比べる', text: '「manifest一致」はそのmanifestに記録したサイズ/hashへの一致、「現編集一致」は現在の入力snapshotと同じbytesかです。manifestとコードを一緒に変更すれば前者だけは一致するため、正しさや出所の証明にはなりません。混在したファイルなら全ファイルを取り直し、現編集だけと異なる場合は古い書き出しを選んでいないか確かめます。' },
+    { title: '照合の後に残る確認', text: '初回・選択変更・再読込・閉じて再open・忘れる・保存失敗は、専用native環境と信頼できる結果連携の受入後に確認します。この画面の内容照合や静的確認はproject03全体の完了になりません。取得ファイルを通常ブラウザーへ開く操作を隔離実行として案内せず、公開/deployは別の承認工程です。' },
+  ],
+  hints: ['不一致のファイルだけを新旧混在で取り替えず、同じ書き出しのひと組を選び直します。', '編集・教材移動・取消・再選択で照合結果は未確認に戻り、再読込後はファイルの選択もやり直します。'],
+  examples: [['manifestの形式例（値は参考用）', '{\n  "schemaVersion": 1,\n  "projectId": "profile-site",\n  "files": [\n    { "name": "index.html", "bytes": 1234, "sha256": "実際の64桁のhash" },\n    { "name": "styles.css", "bytes": 567, "sha256": "実際の64桁のhash" },\n    { "name": "app.js", "bytes": 890, "sha256": "実際の64桁のhash" }\n  ]\n}\n'], ['照合結果の読み方', 'manifest一致 / 現編集一致 → 選んだ3コードが現在の書き出しと同じ内容\nmanifest一致 / 現編集不一致 → 別のsnapshot（古い書き出しなど）\nmanifest不一致 → 変更・混在・破損などを確認\nどの結果でもnative動作・保存・project03全体は未確認\n']],
+});

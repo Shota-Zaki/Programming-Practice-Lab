@@ -528,3 +528,9 @@ native書込済みrecordのreload/再open、別lesson/keyとprogressの不変、
 独立レビューの誤合格を受け、主見出しと必須内容の全親要素も測定する。外側余白はmainの実位置でも確認する。clip-path/legacy clip/mask/filterやoverflowによる切抜きを使わない条件を明示し、単色背景との文字の明暗比4.5以上を追加した（CSS6条件、構造と合わせ16条件）。標準CSSの計算済み色を1px swatchで読み、透明色を合成して明暗比を計算するだけで学習者HTMLをrasterize/実行しない。背景画像/gradient・opacity変更・blendはこの先行教材の採点外として拒否する。native selectの行高/overflowはブラウザー管理だが文字色・文字サイズ・外寸は確認する。長い本文の縦スクロールは許容する。Tab/labelの操作と完成例のfocus表示は実UIで確認し、任意CSSのfocus表示やアクセシビリティ全体の自動保証はしない。
 
 再レビューの画面上方への退避・負text-indentの誤合格も修正した。必須内容の下端がページ上端より下にあり、text-indentが非負であることを確認する。長い通常本文が900pxより下へ続くことは拒否しない。小さな正のrelative offsetも許容する。
+
+## project03 ファイル照合先行教材（2026-10-03）
+
+案Aの「3ファイル同bytes・manifest一致・snapshot対応・持ち出し手順」から独立可能な単位を実装する。共有workspaceの第3教材として書き出し/保存/再選択/照合を学ぶ。選択したindex.html/styles.css/app.js/manifest.jsonをFile APIでデータとして読む。README.txtは任意、内容はhash照合対象外。未知名/重複/不足/余剰を拒否し、コード各32KiB/合計96KiB、manifest4KiB、README16KiBまで。UTF-8を検証し、厳密なversion1/projectId/profile-site/3固定rowのmanifest形を検証する。raw bytes/SHA-256と現在の編集snapshotのUTF-8 bytesを別々に比較し、変更/混在をfile別に示す。Fileの物理パスやsymlink/OS保存完了は観察できず、その検証とは説明しない。
+
+取り込みは読み取りと内容照合のみ。learnerコード/READMEは実行/表示/保存/親DOM挿入/外部送信しない。manifestは内容の一致を示すだけで署名や信頼できる動作結果ではない。結果JSON importは作らず、進捗やproject03完了に接続しない。5秒の読み取り/hash全体期限と途中取消、編集/教材切替/画面移動/初期化/ファイル再選択で結果と遅延完了を破棄する。選択ファイルは編集へ自動反映しない。講座22/24=92%、native実行/Storage/結果transportはBlocked。教材切替・再読込・resetの既存契約とWorker隔離は維持する。
