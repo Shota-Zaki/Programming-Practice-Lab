@@ -1,0 +1,46 @@
+笨・four legacy modes dispatch with copied trusted contracts and unchanged result shape (2.6562ms)
+笨・all canonical lessons register without mutation; registry snapshot ignores later caller changes (1.1205ms)
+笨・unknown and native modes, duplicate IDs and malformed conditions reject before dispatch (0.4145ms)
+笨・invalid requests and pre-aborted requests never invoke any grader (0.4112ms)
+笨・mismatched, sparse, nonboolean and nonstring result rows cannot become success (1.22ms)
+笨・outcome mismatch guard rejects other run, lesson, code, mode, schema and row ordering (0.2841ms)
+笨・request and result snapshots resist mutation after async dispatch and completion (0.1659ms)
+笨・cancelled slow success never revives; identical-code retry retains new run identity (0.2108ms)
+笨・late errors after cancel are consumed, and synchronous/asynchronous failures permit retry (0.2458ms)
+笨・legacy v1, single input, stale/mismatched result and save denial preserve repository semantics (1.4194ms)
+笨・correlated result terminates worker; unrelated message ignored (1.6334ms)
+笨・timeout terminates and allows retry (10.4517ms)
+笨・replacement cancels; stale callback ignored; stop idempotent (0.2332ms)
+笨・error, decode error, malformed reply release worker (0.2139ms)
+笨・creation and send errors resolve and release resources (0.414ms)
+笨・invalid arguments never cancel active job (0.3783ms)
+笨・real worker: infinite loop terminates, UI thread remains responsive, retry succeeds (170.1699ms)
+笨・cancel during worker creation terminates the returned host before sending (0.1981ms)
+笨・exported Unicode/raw HTML-like code matches manifest and current snapshot without execution (7.916ms)
+笨・manifest mismatch and stale current code are separate observations (2.7967ms)
+笨・strict filenames, cardinality and manifest semantics reject before claiming integrity (1.9114ms)
+笨・caps reject unread bytes; exact UTF-8 boundaries and empty code remain valid content checks (4.3613ms)
+笨・invalid UTF-8, read failure, inconsistent metadata and digest failure have no positive result (1.5231ms)
+笨・abort releases pending read/hash and rejects late outcomes; current strings are snapshotted (1.254ms)
+笨・hung reads time out within bounded diagnostic deadline (4998.9771ms)
+笨・resource function tokens include string image URLs and CSS escapes (0.6835ms)
+笨・ordinary colors/layout/variables and quoted text remain available (0.1188ms)
+笨・snapshot copies exactly three complete files (1.0811ms)
+笨・UTF-8 limits reject overflow and unpaired surrogate without truncation (0.2784ms)
+笨・restore and reset affect only project key, preserving old progress (0.8668ms)
+笨・corrupt raw survives load and editing until explicit reset (0.3571ms)
+笨・storage failures and oversized edits preserve in-memory work (0.2048ms)
+笨・repeated export preserves bytes and matching real SHA-256 hashes (3.6249ms)
+笨・async digest snapshots edits and cancellation/error never returns a bundle (0.7332ms)
+笨・new lesson starter is incomplete; existing workspace bytes survive registration (1.2464ms)
+笨・attempts and historical completion survive reload; reset changes only project01 history (0.5713ms)
+笨・corrupt history is retained until explicit reset (0.161ms)
+笨・get/set failures keep the in-memory result without claiming persistence (0.1268ms)
+邃ｹ tests 38
+邃ｹ suites 0
+邃ｹ pass 38
+邃ｹ fail 0
+邃ｹ cancelled 0
+邃ｹ skipped 0
+邃ｹ todo 0
+邃ｹ duration_ms 5089.6482
