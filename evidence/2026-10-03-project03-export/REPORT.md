@@ -18,7 +18,7 @@ Baseline: 3f9fc9e22a0cfa323899eefed0652e4424a84544（work反映済みCSS教材�
 
 ## 独立レビュー
 
-exact9150c6db9a91cd14b558833917df3bbea8003ff7を別agentがレビューし阻害指摘なし。7モデルtest/期限を独立実行し、mobileで正bundle・変更JS・不正rowfield/不足manifest・任意READMEが対象外であること・遅延hash後の切替取消・旧進捗/workspace/nativekey不変・コード未実行/通信なしを確認。最下行はmobile navより112px上でhit-test可能。review/のJSONとbottomPNGが証拠。実装agentの3幅/15download/6raceは別証拠。
+exact9150c6db9a91cd14b558833917df3bbea8003ff7を別agentがレビューし阻害指摘なし。7モデルtest/期限を独立実行し、mobileで正bundle・変更JS・不正rowfield/不足manifest・任意READMEが対象外であること・遅延hash後の切替取消・旧進捗/workspace不変・コード未実行/通信なしを確認。nativekey不変は実装agentの3幅テストによる別の観測で、独立browserチェックの確認項目へ含めない。最下行はmobile navより112px上でhit-test可能。review/のJSONとbottomPNGが証拠。実装agentの3幅/15download/6raceは別証拠。
 
 ## 未受入の境界と次の独立工程
 
