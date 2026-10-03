@@ -14,7 +14,7 @@
 
 ## CORE 共通教材形式 — 現在の独立実装単位
 
-状態: ローカル受入完了・次公開gate保留（5/5=100%）。既存Foundation21教材の共通形式v1。講座22/24=92%維持、教材数/native受入へ加算しない。
+状態: 受入・work反映済み（5/5=100%）。既存Foundation21教材の共通形式v1。講座22/24=92%維持、教材数/native受入へ加算しない。
 
 - [x] 共通root/learning/exerciseとcatalog・legacy互換viewを定義し旧21データの等値を確認する。
 - [x] 実UIの採点adapterを共通catalogへ接続し、旧legacy adapter APIを維持する。
@@ -26,9 +26,9 @@
 
 設計: design/common-lesson-format.md。旧21ID・学習者code/result/attempts/completed/checkedCode・v1 keysを維持しprogress.js/4grader/実行境界は変更しない。教材定義の版は保存の版と異なる。IndexedDB/DB upgradeは未実装。第7章3ファイルprojectは独立namespaceとしこのsingle-code形式に移行しない。
 
-前工程CORE adapter b988b66cc5dc04a1e03591bb921feeee87628da1/tree918075789781e6b145974e50888cd405db5b4452は親policy13:39:42UTC r8selection6applied6許可後、expected parent89b/Pages legacy main/docs/work workflowなし/rulesetsなしを再確認して通常push、connected GitHub readback一致。required CIなし（PASS扱いしない）。次候補は親の最新policy/remote/trigger gate待ち。
+独立レビュー済み証拠checkpoint a5e29c7168d6deaed6f2c926f90488cfbb714917/tree ded29222692b1a4e58df826e94497e39c001f8c8をworkへ通常pushし、2026-10-03 14:36:48 UTCのconnected GitHub readbackでSHA/tree一致を確認した。直前の指定policy GETは200、r8/selection6/applied6/applied、PPL対象内・除外変更なし。expected remote b988b66、Pages legacy main/docs、work workflowなし・rulesetsなし・実行hookなしを再確認した。親の継続公開許可の範囲内。required CIなし（PASS扱いしない）。Evidence REPORTの公開保留はcheckpoint作成時の履歴で、このgateは解消済み。
 
-Active: Foundation/CORE共通形式。Ready: 既存4方式のcatalog接続。Planned: IndexedDBと残native動作/成果物。Blocked: native専用環境/信頼できるtransport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。
+Active: Foundation。Ready: 既存CORE IndexedDB工程の移行/復帰契約の具体化。Planned: IndexedDBと残native動作/成果物。Blocked: native専用環境/信頼できるtransport。Deferred: 実Pages/Safari/読み上げ/実践UI。別Task未設定。
 
 ## CORE 共通採点adapter — 受入・work反映済み（前工程記録）
 
@@ -261,7 +261,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は冒頭のCORE共通教材形式節（5/5=100%）。前工程adapterまでwork反映済み。現在候補は親の次公開gate待ち。IndexedDBは後続の移行/復帰契約から進め、nativeは専用環境/transport受入前には接続しない。第7章ミニ成果物3教材を維持する。別Task未設定。
+`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は冒頭のCORE共通教材形式節（5/5=100%）、固定候補a5e29c7をwork反映・remote照合済み。次は既存CORE IndexedDB工程の移行/復帰契約を具体化する。現在progress repositoryは同期save/booleanであり、非同期transactionの完了前に保存成功を表示してはならない。authority・旧v1保持・途中upgrade/失敗/reloadの挙動を定義した後に実consumerへ接続する。nativeは専用環境/transport受入前には接続しない。第7章ミニ成果物3教材を維持する。別Task未設定。
 
 ### 第7章案A — 今回の設計受入条件
 
