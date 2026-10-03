@@ -7,6 +7,9 @@ const problem = (name, message) => new DOMException(message, name);
 const copy = value => structuredClone(value);
 const plain = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 function validRecord(record, lessons) {
+  // Legacy v1 progress is JSON data. Native structured cloning also accepts
+  // cycles/BigInt; reject these before adopting or replacing an invalid record.
+  try { JSON.stringify(record); } catch { return false; }
   const state = record?.state;
   return plain(record) && Object.keys(record).length === 3 && record.version === 1 &&
     Number.isSafeInteger(record.revision) && record.revision > 0 && record.revision < Number.MAX_SAFE_INTEGER &&
