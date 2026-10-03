@@ -1,0 +1,35 @@
+{
+  "sha": "2e50c53c666a5d44cdfa8a4e5715f3270e7cb616",
+  "baseline": "b988b66cc5dc04a1e03591bb921feeee87628da1",
+  "baselineMatchesGit": true,
+  "all21Equivalent": true,
+  "probes": [
+    {
+      "name": "legacy CSS hidden unknown condition field",
+      "accepted": true,
+      "calls": 0
+    },
+    {
+      "name": "legacy CSS extra completion array field",
+      "accepted": true,
+      "calls": 0
+    },
+    {
+      "name": "legacy CSS getter selector",
+      "accepted": true,
+      "calls": 1
+    },
+    {
+      "name": "common exercise mode getter",
+      "accepted": false,
+      "calls": 1,
+      "error": "TypeError"
+    },
+    {
+      "name": "common condition id getter",
+      "accepted": false,
+      "calls": 1,
+      "error": "TypeError"
+    }
+  ]
+}

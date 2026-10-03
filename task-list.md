@@ -14,13 +14,15 @@
 
 ## CORE 共通教材形式 — 現在の独立実装単位
 
-状態: 実装済み・検証/独立レビュー中。既存Foundation21教材の共通形式v1。講座22/24=92%維持、教材数/native受入へ加算しない。
+状態: ローカル受入完了・次公開gate保留（5/5=100%）。既存Foundation21教材の共通形式v1。講座22/24=92%維持、教材数/native受入へ加算しない。
 
 - [x] 共通root/learning/exerciseとcatalog・legacy互換viewを定義し旧21データの等値を確認する。
 - [x] 実UIの採点adapterを共通catalogへ接続し、旧legacy adapter APIを維持する。
 - [x] schema/payload/graph不整合・JSON往復/コピー/凍結をunitで検証する。
-- [ ] 旧保存/途中実行/retry/reload/保存拒否・旧21×3幅/workspace/controller/同期を検証する。
-- [ ] 固定候補の独立レビュー・証拠/正本管理文書を完了する。
+- [x] 旧保存/途中実行/retry/reload/保存拒否・旧21×3幅/workspace/controller/同期を検証する。
+- [x] 固定候補の独立レビュー・証拠/正本管理文書を完了する。
+
+検証Product 53cd3a8f5afbd9120e886278c544cdcf35d8f9e6: 50unit（format12）、実UI3幅のcatalog/旧v1/中断/retry/不整合結果拒否、旧21×3幅、workspace35/download30、project03 9/download15/6race、verify:agent PASS。初回schemaレビュー指摘を元定義検証順の修正で解消し、固定候補の独立再確認に阻害なし。Evidence: evidence/2026-10-03-common-lesson-format/REPORT.md。独立schema/Git baseline/mobileと実装agentの3幅/full21は別証拠。
 
 設計: design/common-lesson-format.md。旧21ID・学習者code/result/attempts/completed/checkedCode・v1 keysを維持しprogress.js/4grader/実行境界は変更しない。教材定義の版は保存の版と異なる。IndexedDB/DB upgradeは未実装。第7章3ファイルprojectは独立namespaceとしこのsingle-code形式に移行しない。
 
@@ -249,7 +251,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ### 完了条件
 
-- [ ] 教材データの共通形式を定義する。
+- [x] 教材データの共通形式を定義する。（既存Foundation21のversion1/catalog/4方式とlegacy互換view。第7章3ファイルprojectは独立namespace）
 - [x] 実行アダプターの共通インターフェースを定義する。（既存21教材のHTML/CSS/数値JavaScript/限定DOM共通採点adapter。nativeは未対応/開始前拒否）
 - [x] JavaScript実行をWeb Workerへ分離する。（第5章数値処理と第6章限定DOM/event演習）
 - [x] 実行時間上限と停止処理を実装する。（結果期限/停止要求とnative終了遅延を区別）
@@ -259,7 +261,7 @@ HTML・CSS・JavaScriptを、教材を読むだけでなく実際に入力・表
 
 ## 次の行動
 
-`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は冒頭のCORE共通採点adapter節（5/5=100%）。project01/CSS/project03照合はwork反映済み。CORE候補は親の次公開gate待ち。共通教材形式/IndexedDBは後続ACとして残り、native実行は専用環境/transport受入前には接続しない。第7章ミニ成果物3教材を維持する。別Task未設定。
+`PPL-FOUNDATION-001`は旧21教材とproject01静的構造の22/24教材受入済み（92%）。最新工程は冒頭のCORE共通教材形式節（5/5=100%）。前工程adapterまでwork反映済み。現在候補は親の次公開gate待ち。IndexedDBは後続の移行/復帰契約から進め、nativeは専用環境/transport受入前には接続しない。第7章ミニ成果物3教材を維持する。別Task未設定。
 
 ### 第7章案A — 今回の設計受入条件
 
